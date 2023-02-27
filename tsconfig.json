@@ -20,8 +20,9 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
+      "@static/*": ["./src/static/*"],
+      "@common": [
+        "./src/modules/common/index.ts"
       ]
     },
     "plugins": [
