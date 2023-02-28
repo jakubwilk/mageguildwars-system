@@ -1,5 +1,5 @@
 import { ReactNode, useState } from 'react'
-import { AppLogo, BottomBar, TopBar } from '@common'
+import { AppLogo, BottomBar, Navigation, TopBar } from '@common'
 import { AppShell, Footer, Navbar, Text } from '@mantine/core'
 
 interface IProps {
@@ -11,13 +11,9 @@ function AppLayout({ children }: IProps) {
 
   return (
     <AppShell
-      navbarOffsetBreakpoint={'sm'}
+      navbarOffsetBreakpoint={'md'}
       header={<TopBar logo={<AppLogo />} setIsOpen={setIsOpen} isOpen={isOpen} />}
-      navbar={
-        <Navbar hiddenBreakpoint={'sm'} hidden={!isOpen} p={'md'} width={{ sm: 300 }}>
-          <Text>{'Navbar'}</Text>
-        </Navbar>
-      }
+      navbar={<Navigation isHidden={!isOpen} />}
       footer={<BottomBar />}
     >
       {children}
