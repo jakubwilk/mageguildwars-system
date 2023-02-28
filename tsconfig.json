@@ -23,7 +23,8 @@
       "@static/*": ["./src/static/*"],
       "@common": [
         "./src/modules/common/index.ts"
-      ]
+      ],
+      "@user": ["./src/modules/user/index.ts"]
     },
     "plugins": [
       {
