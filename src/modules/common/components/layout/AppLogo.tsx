@@ -8,15 +8,15 @@ const useStyles = createStyles((theme) => ({
     width: 140,
     [`@media screen and (min-width: ${theme.breakpoints.sm}px)`]: {
       height: 49,
-      width: 224,
+      width: 210,
     },
     [`@media screen and (min-width: ${theme.breakpoints.md}px)`]: {
       height: 56,
-      width: 256,
+      width: 240,
     },
     [`@media screen and (min-width: ${theme.breakpoints.lg}px`]: {
       height: 70,
-      width: 320,
+      width: 300,
     },
   },
 }))

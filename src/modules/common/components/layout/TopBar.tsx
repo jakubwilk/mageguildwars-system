@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 import { Burger, clsx, createStyles, Header, MediaQuery } from '@mantine/core'
+import { UserDesktopNavigation } from '@user'
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -38,6 +39,7 @@ function TopBar({ logo, setIsOpen, isOpen }: IProps) {
     <Header height={{ base: 'initial' }} className={classes.header}>
       <div className={clsx('flex items-center justify-between min-w-full', 'px-4', classes.headerWrapper)}>
         {logo}
+        <UserDesktopNavigation />
         <MediaQuery largerThan={'sm'} styles={{ display: 'none' }}>
           <Burger
             opened={isOpen}
