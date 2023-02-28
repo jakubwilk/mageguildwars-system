@@ -1,6 +1,6 @@
 import { ReactNode, useState } from 'react'
 import { AppLogo, TopBar } from '@common'
-import { AppShell, Aside, Burger, Footer, Header, MediaQuery, Navbar, Text, useMantineTheme } from '@mantine/core'
+import { AppShell, Footer, Navbar, Text } from '@mantine/core'
 
 interface IProps {
   children: ReactNode
