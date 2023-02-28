@@ -1,5 +1,5 @@
 import { ReactNode, useState } from 'react'
-import { AppLogo, TopBar } from '@common'
+import { AppLogo, BottomBar, TopBar } from '@common'
 import { AppShell, Footer, Navbar, Text } from '@mantine/core'
 
 interface IProps {
@@ -18,11 +18,7 @@ function AppLayout({ children }: IProps) {
           <Text>{'Navbar'}</Text>
         </Navbar>
       }
-      footer={
-        <Footer height={60} p={'md'}>
-          <Text>{'Footer'}</Text>
-        </Footer>
-      }
+      footer={<BottomBar />}
     >
       {children}
     </AppShell>
