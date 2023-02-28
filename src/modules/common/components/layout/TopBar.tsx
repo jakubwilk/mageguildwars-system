@@ -33,7 +33,7 @@ function TopBar({ logo, setIsOpen, isOpen }: IProps) {
       <div className={clsx('flex items-center justify-between min-w-full', 'px-4', classes.headerWrapper)}>
         {logo}
         <UserDesktopNavigation />
-        <MediaQuery largerThan={'sm'} styles={{ display: 'none' }}>
+        <MediaQuery largerThan={'md'} styles={{ display: 'none' }}>
           <Burger
             opened={isOpen}
             onClick={() => setIsOpen(!isOpen)}
