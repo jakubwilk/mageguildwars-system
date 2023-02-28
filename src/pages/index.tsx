@@ -1,14 +1,10 @@
-import { useState } from 'react'
 import { Poppins } from 'next/font/google'
 import Head from 'next/head'
 import Image from 'next/image'
-import { AppLogo, TopBar } from '@common'
 
 const poppins = Poppins({ weight: '300', subsets: ['latin-ext'] })
 
 export default function Home() {
-  const [isOpen, setIsOpen] = useState(false)
-
   return (
     <>
       <Head>
@@ -18,7 +14,6 @@ export default function Home() {
         <link rel={'icon'} href={'/favicon.ico'} />
       </Head>
       <main>
-        <TopBar logo={<AppLogo />} setIsOpen={setIsOpen} isOpen={isOpen} />
         <div>
           <p>
             {'Get started by editing'}&nbsp;
