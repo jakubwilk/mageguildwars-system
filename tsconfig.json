@@ -20,6 +20,7 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
+      "@styles/*": ["./src/styles/*"],
       "@static/*": ["./src/static/*"],
       "@common": [
         "./src/modules/common/index.ts"
