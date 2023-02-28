@@ -1,3 +1,5 @@
 export const important = (value: string | number): string => {
-  return `${value} !important`
+  const fixedValue = typeof value === 'number' && `${value}px`
+
+  return `${fixedValue || value} !important`
 }

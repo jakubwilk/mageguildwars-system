@@ -2,16 +2,9 @@ import { ReactNode } from 'react'
 import { Burger, clsx, createStyles, Header, MediaQuery } from '@mantine/core'
 import { UserDesktopNavigation } from '@user'
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles(() => ({
   header: {
     backgroundColor: '#100011',
-    height: 70,
-    [`@media screen and (min-width: ${theme.breakpoints.md}px)`]: {
-      height: 90,
-    },
-    [`@media screen and (min-width: ${theme.breakpoints.lg}px)`]: {
-      height: 110,
-    },
   },
   headerWrapper: {
     height: 'inherit',
@@ -36,7 +29,7 @@ function TopBar({ logo, setIsOpen, isOpen }: IProps) {
   const { classes } = useStyles()
 
   return (
-    <Header height={{ base: 'initial' }} className={classes.header}>
+    <Header height={{ base: 70, md: 90, lg: 110 }} className={classes.header}>
       <div className={clsx('flex items-center justify-between min-w-full', 'px-4', classes.headerWrapper)}>
         {logo}
         <UserDesktopNavigation />
