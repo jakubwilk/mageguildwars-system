@@ -22,6 +22,7 @@
     "paths": {
       "@styles/*": ["./src/styles/*"],
       "@static/*": ["./src/static/*"],
+      "@theme": ["./src/modules/common/theme/index.ts"],
       "@common": [
         "./src/modules/common/index.ts"
       ],
