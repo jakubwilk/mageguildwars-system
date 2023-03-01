@@ -20,9 +20,13 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@styles/*": ["./src/styles/*"],
+      "@static/*": ["./src/static/*"],
+      "@theme": ["./src/modules/common/theme/index.ts"],
+      "@common": [
+        "./src/modules/common/index.ts"
+      ],
+      "@user": ["./src/modules/user/index.ts"]
     },
     "plugins": [
       {
