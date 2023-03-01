@@ -1,15 +1,18 @@
 import Link from 'next/link'
-import { important } from '@common'
-import { ActionIcon, createStyles, MediaQuery, Navbar, ScrollArea, Text } from '@mantine/core'
+import { important, SITE_NAVIGATION } from '@common'
+import { ActionIcon, clsx, createStyles, MediaQuery, Navbar, ScrollArea, Text } from '@mantine/core'
 import { UserMobileNavigation } from '@user'
 import { Bookmarks, Books, Home, Planet, Users } from 'tabler-icons-react'
 
 const useStyles = createStyles((theme) => ({
   link: {
-    display: 'block',
+    display: 'flex',
+    alignItems: 'center',
     '&:hover, &:focus': {
       backgroundColor: 'rgba(48, 30, 56, 0.1)',
+      transition: 'all .1s ease-in-out',
       '& > button': {
+        transition: 'all .1s ease-in-out',
         backgroundColor: important('transparent'),
       },
     },
@@ -17,6 +20,9 @@ const useStyles = createStyles((theme) => ({
   icon: {
     backgroundColor: important('rgba(48, 30, 56, 0.1)'),
     color: theme.colors['brand-color'][9],
+  },
+  text: {
+    fontSize: '0.9rem',
   },
 }))
 
@@ -29,37 +35,15 @@ function Navigation({ isHidden }: IProps) {
 
   return (
     <Navbar hiddenBreakpoint={'md'} hidden={isHidden} width={{ md: 300 }}>
-      <Navbar.Section component={ScrollArea} grow>
-        <Link href={'/'} className={classes.link}>
-          <ActionIcon variant={'light'} className={classes.icon}>
-            <Home size={20} strokeWidth={1.5} />
-          </ActionIcon>
-          <Text>{'Strona główna'}</Text>
-        </Link>
-        <Link href={'/users'} className={classes.link}>
-          <ActionIcon variant={'light'} className={classes.icon}>
-            <Users size={20} strokeWidth={1.5} />
-          </ActionIcon>
-          <Text>{'Lista magów'}</Text>
-        </Link>
-        <Link href={'/database'} className={classes.link}>
-          <ActionIcon variant={'light'} className={classes.icon}>
-            <Bookmarks size={20} strokeWidth={1.5} />
-          </ActionIcon>
-          <Text>{'Spis zdolności'}</Text>
-        </Link>
-        <Link href={'/world-database'} className={classes.link}>
-          <ActionIcon variant={'light'} className={classes.icon}>
-            <Books size={20} strokeWidth={1.5} />
-          </ActionIcon>
-          <Text>{'Encyklopedia'}</Text>
-        </Link>
-        <Link href={'/world-map'} className={classes.link}>
-          <ActionIcon variant={'light'} className={classes.icon}>
-            <Planet size={20} strokeWidth={1.5} />
-          </ActionIcon>
-          <Text>{'Mapa świata'}</Text>
-        </Link>
+      <Navbar.Section component={ScrollArea} className={'my-4'} grow>
+        {SITE_NAVIGATION.map(({ label, href, icon }) => (
+          <Link key={label} href={href} className={clsx('mx-4 mb-2 p-2 rounded-md', classes.link)}>
+            <ActionIcon variant={'light'} className={classes.icon}>
+              {icon}
+            </ActionIcon>
+            <Text className={clsx('ml-3', classes.text)}>{label}</Text>
+          </Link>
+        ))}
       </Navbar.Section>
       <MediaQuery largerThan={'md'} styles={{ display: 'none' }}>
         <Navbar.Section>
