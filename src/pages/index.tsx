@@ -47,11 +47,11 @@ export default function Home() {
             target={'_blank'}
             rel={'noopener noreferrer'}
           >
-            <h2>
+            <h2 className={poppins.className}>
               {'Docs '}
               <span>{'-&gt;'}</span>
             </h2>
-            <p>{'Find in-depth information about Next.js features and&nbsp;API.'}</p>
+            <p className={poppins.className}>{'Find in-depth information about Next.js features and&nbsp;API.'}</p>
           </a>
 
           <a
@@ -61,11 +61,11 @@ export default function Home() {
             target={'_blank'}
             rel={'noopener noreferrer'}
           >
-            <h2>
+            <h2 className={poppins.className}>
               {'Learn '}
               <span>{'-&gt;'}</span>
             </h2>
-            <p>{'Learn about Next.js in an interactive course with&nbsp;quizzes!'}</p>
+            <p className={poppins.className}>{'Learn about Next.js in an interactive course with&nbsp;quizzes!'}</p>
           </a>
 
           <a
@@ -75,11 +75,11 @@ export default function Home() {
             target={'_blank'}
             rel={'noopener noreferrer'}
           >
-            <h2>
+            <h2 className={poppins.className}>
               {'Templates '}
               <span>{'-&gt;'}</span>
             </h2>
-            <p>{'Discover and deploy boilerplate example Next.js&nbsp;projects.'}</p>
+            <p className={poppins.className}>{'Discover and deploy boilerplate example Next.js&nbsp;projects.'}</p>
           </a>
 
           <a
@@ -89,11 +89,13 @@ export default function Home() {
             target={'_blank'}
             rel={'noopener noreferrer'}
           >
-            <h2>
+            <h2 className={poppins.className}>
               {'Deploy '}
               <span>{'-&gt;'}</span>
             </h2>
-            <p>{'Instantly deploy your Next.js site to a shareable URL with&nbsp;Vercel.'}</p>
+            <p className={poppins.className}>
+              {'Instantly deploy your Next.js site to a shareable URL with&nbsp;Vercel.'}
+            </p>
           </a>
         </div>
       </main>
