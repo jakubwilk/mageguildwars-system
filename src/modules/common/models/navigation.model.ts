@@ -3,3 +3,10 @@ export interface ISiteNavigation {
   href: string
   icon: JSX.Element
 }
+
+export interface IUserNavigation {
+  isTitle: boolean
+  label?: string
+  href?: string
+  icon?: JSX.Element
+}

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { important, SITE_NAVIGATION } from '@common'
-import { ActionIcon, clsx, createStyles, MediaQuery, Navbar, ScrollArea, Text } from '@mantine/core'
+import { ActionIcon, clsx, createStyles, Divider, MediaQuery, Navbar, ScrollArea, Text } from '@mantine/core'
 import { UserMobileNavigation } from '@user'
 import { Bookmarks, Books, Home, Planet, Users } from 'tabler-icons-react'
 
@@ -45,6 +45,9 @@ function Navigation({ isHidden }: IProps) {
           </Link>
         ))}
       </Navbar.Section>
+      <MediaQuery largerThan={'md'} styles={{ display: 'none' }}>
+        <Divider my={'sm'} />
+      </MediaQuery>
       <MediaQuery largerThan={'md'} styles={{ display: 'none' }}>
         <Navbar.Section>
           <UserMobileNavigation />

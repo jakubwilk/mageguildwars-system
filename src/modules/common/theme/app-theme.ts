@@ -2,7 +2,7 @@ import { Merriweather, Poppins } from 'next/font/google'
 import { MantineThemeOverride } from '@mantine/core'
 
 const poppins = Poppins({ weight: '400', subsets: ['latin-ext'] })
-const merriweather = Merriweather({ weight: '700', subsets: ['latin-ext'] })
+const merriweather = Merriweather({ weight: ['400', '700'], subsets: ['latin-ext'] })
 
 export const APP_THEME: MantineThemeOverride = {
   fontFamily: poppins.style.fontFamily,
