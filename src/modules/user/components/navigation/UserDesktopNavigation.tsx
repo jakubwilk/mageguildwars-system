@@ -1,20 +1,8 @@
+import { Fragment } from 'react'
 import { Poppins } from 'next/font/google'
-import { important } from '@common'
+import { important, USER_NAVIGATION } from '@common'
 import { ActionIcon, Avatar, Button, clsx, createStyles, Group, Indicator, Menu, Text, Tooltip } from '@mantine/core'
-import {
-  Ad2,
-  Bell,
-  BrandGmail,
-  ChevronDown,
-  HomeCog,
-  Id,
-  Lock,
-  Message,
-  Pencil,
-  ServerCog,
-  Tag,
-  User,
-} from 'tabler-icons-react'
+import { Bell, ChevronDown, Message } from 'tabler-icons-react'
 
 const poppins = Poppins({ weight: '400', subsets: ['latin-ext'] })
 
@@ -65,36 +53,17 @@ function UserDesktopNavigation() {
             </button>
           </Menu.Target>
           <Menu.Dropdown>
-            <Menu.Label>{'Panele'}</Menu.Label>
-            <Menu.Item component={'a'} href={'/'} icon={<User size={14} />}>
-              {'Panel użytkownika'}
-            </Menu.Item>
-            <Menu.Item component={'a'} href={'/'} icon={<Pencil size={14} />}>
-              {'Panel mistrza gry'}
-            </Menu.Item>
-            <Menu.Item component={'a'} href={'/'} icon={<HomeCog size={14} />}>
-              {'Panel opiekuna'}
-            </Menu.Item>
-            <Menu.Item component={'a'} href={'/'} icon={<ServerCog size={14} />}>
-              {'Panel administratora'}
-            </Menu.Item>
-            <Menu.Divider />
-            <Menu.Label>{'Ustawienia'}</Menu.Label>
-            <Menu.Item component={'a'} href={'/'} icon={<Tag size={14} />}>
-              {'Zmień login'}
-            </Menu.Item>
-            <Menu.Item component={'a'} href={'/'} icon={<Lock size={14} />}>
-              {'Zmień hasło'}
-            </Menu.Item>
-            <Menu.Item component={'a'} href={'/'} icon={<BrandGmail size={14} />}>
-              {'Zmień adres email'}
-            </Menu.Item>
-            <Menu.Item component={'a'} href={'/'} icon={<Ad2 size={14} />}>
-              {'Zmień avatar'}
-            </Menu.Item>
-            <Menu.Item component={'a'} href={'/'} icon={<Id size={14} />}>
-              {'Zmień sygnaturę'}
-            </Menu.Item>
+            {USER_NAVIGATION.map(({ isTitle, label, href, icon }) => (
+              <Fragment key={label}>
+                {isTitle ? (
+                  <Menu.Label>{label}</Menu.Label>
+                ) : (
+                  <Menu.Item component={'a'} href={href} icon={icon}>
+                    {label}
+                  </Menu.Item>
+                )}
+              </Fragment>
+            ))}
           </Menu.Dropdown>
         </Menu>
         <Button className={clsx('ease-linear duration-100', poppins.className, classes.logoutButton)}>
