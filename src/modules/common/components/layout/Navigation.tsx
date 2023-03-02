@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { important, SITE_NAVIGATION } from '@common'
+import { important, IUser, SITE_NAVIGATION } from '@common'
 import { ActionIcon, clsx, createStyles, Divider, MediaQuery, Navbar, ScrollArea, Text } from '@mantine/core'
 import { UserMobileNavigation } from '@user'
 import { Bookmarks, Books, Home, Planet, Users } from 'tabler-icons-react'
@@ -27,10 +27,12 @@ const useStyles = createStyles((theme) => ({
 }))
 
 interface IProps {
+  userDetails: IUser | null
   isHidden: boolean
+  isLoading: boolean
 }
 
-function Navigation({ isHidden }: IProps) {
+function Navigation({ userDetails, isHidden, isLoading }: IProps) {
   const { classes } = useStyles()
 
   return (
@@ -50,7 +52,7 @@ function Navigation({ isHidden }: IProps) {
       </MediaQuery>
       <MediaQuery largerThan={'md'} styles={{ display: 'none' }}>
         <Navbar.Section>
-          <UserMobileNavigation />
+          <UserMobileNavigation userDetails={userDetails} isLoading={isLoading} />
         </Navbar.Section>
       </MediaQuery>
     </Navbar>

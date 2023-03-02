@@ -14,6 +14,7 @@ import {
   Tag,
   User,
   Users,
+  Wand,
 } from 'tabler-icons-react'
 
 export const SITE_NAVIGATION: Array<ISiteNavigation> = [
@@ -54,6 +55,12 @@ export const USER_NAVIGATION: Array<IUserNavigation> = [
     label: 'Panel użytkownika',
     href: '/usercp',
     icon: <User size={14} />,
+  },
+  {
+    isTitle: false,
+    label: 'Panel kart postaci',
+    href: '/magecp',
+    icon: <Wand size={14} />,
   },
   {
     isTitle: false,
