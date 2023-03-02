@@ -2,6 +2,8 @@ import { ReactNode } from 'react'
 import { Burger, clsx, createStyles, Header, MediaQuery } from '@mantine/core'
 import { UserDesktopNavigation } from '@user'
 
+import { IUser } from '../../models'
+
 const useStyles = createStyles(() => ({
   header: {
     backgroundColor: '#100011',
@@ -21,8 +23,10 @@ const useStyles = createStyles(() => ({
 
 interface IProps {
   logo: ReactNode
+  userDetails: IUser | null
   setIsOpen: (value: boolean) => void
   isOpen: boolean
+  isLoading: boolean
 }
 
 function TopBar({ logo, setIsOpen, isOpen }: IProps) {

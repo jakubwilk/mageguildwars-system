@@ -1,6 +1,6 @@
 import { Fragment, useMemo, useState } from 'react'
-import { USER_NAVIGATION } from '@common'
-import { Avatar, Box, createStyles, Group, Menu, Modal, Text, UnstyledButton } from '@mantine/core'
+import { IUser, USER_NAVIGATION } from '@common'
+import { Avatar, Box, createStyles, Group, Menu, Modal, Skeleton, Text, UnstyledButton } from '@mantine/core'
 import clsx from 'clsx'
 import { ChevronRight, DoorExit } from 'tabler-icons-react'
 
@@ -21,7 +21,12 @@ const useStyles = createStyles((theme) => ({
   },
 }))
 
-function UserMobileNavigation() {
+interface IProps {
+  userDetails: IUser | null
+  isLoading: boolean
+}
+
+function UserMobileNavigation({ userDetails, isLoading }: IProps) {
   const { classes } = useStyles()
   const [isOpen, setIsOpen] = useState(false)
 
@@ -31,6 +36,8 @@ function UserMobileNavigation() {
       { isTitle: false, label: 'Wyloguj się', href: '/', icon: <DoorExit size={14} /> },
     ])
   }, [])
+
+  const isDataNotReady = useMemo(() => !Boolean(userDetails) && isLoading, [userDetails, isLoading])
 
   return (
     <Fragment>
@@ -49,13 +56,26 @@ function UserMobileNavigation() {
           ))}
         </Menu>
       </Modal>
-      <UnstyledButton className={clsx('my-4 mx-4', classes.button)} onClick={() => setIsOpen(true)}>
+      <UnstyledButton
+        className={clsx('my-4 mx-4', classes.button)}
+        onClick={() => setIsOpen(true)}
+        disabled={isDataNotReady}
+      >
         <Group className={'justify-between'}>
           <Box className={'flex items-center'}>
-            <Avatar radius={'xl'} size={40} />
+            {isDataNotReady ? <Skeleton height={40} circle /> : <Avatar radius={'xl'} size={40} />}
             <Box className={'ml-4'}>
-              <Text className={classes.name}>{'Ryu'}</Text>
-              <Text className={classes.title}>{'Administrator'}</Text>
+              {isDataNotReady ? (
+                <Fragment>
+                  <Skeleton height={8} radius={'xl'} />
+                  <Skeleton height={8} radius={'xl'} />
+                </Fragment>
+              ) : (
+                <Fragment>
+                  <Text className={classes.name}>{userDetails?.username}</Text>
+                  <Text className={classes.title}>{userDetails?.title}</Text>
+                </Fragment>
+              )}
             </Box>
           </Box>
           <ChevronRight size={18} />
