@@ -27,12 +27,11 @@ const useStyles = createStyles((theme) => ({
 }))
 
 interface IProps {
-  userDetails: IUser | null
   isHidden: boolean
   isLoading: boolean
 }
 
-function Navigation({ userDetails, isHidden, isLoading }: IProps) {
+function Navigation({ isHidden, isLoading }: IProps) {
   const { classes } = useStyles()
 
   return (
@@ -52,7 +51,7 @@ function Navigation({ userDetails, isHidden, isLoading }: IProps) {
       </MediaQuery>
       <MediaQuery largerThan={'md'} styles={{ display: 'none' }}>
         <Navbar.Section>
-          <UserMobileNavigation userDetails={userDetails} isLoading={isLoading} />
+          <UserMobileNavigation isLoading={isLoading} />
         </Navbar.Section>
       </MediaQuery>
     </Navbar>
