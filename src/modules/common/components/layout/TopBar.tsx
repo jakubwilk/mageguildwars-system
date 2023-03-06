@@ -23,20 +23,19 @@ const useStyles = createStyles(() => ({
 
 interface IProps {
   logo: ReactNode
-  userDetails: IUser | null
   setIsOpen: (value: boolean) => void
   isOpen: boolean
   isLoading: boolean
 }
 
-function TopBar({ logo, setIsOpen, isOpen }: IProps) {
+function TopBar({ logo, setIsOpen, isOpen, isLoading }: IProps) {
   const { classes } = useStyles()
 
   return (
     <Header height={{ base: 70, md: 90, lg: 110 }} className={classes.header}>
       <div className={clsx('flex items-center justify-between min-w-full', 'px-4', classes.headerWrapper)}>
         {logo}
-        <UserDesktopNavigation />
+        <UserDesktopNavigation isLoading={isLoading} />
         <MediaQuery largerThan={'md'} styles={{ display: 'none' }}>
           <Burger
             opened={isOpen}

@@ -1,6 +1,7 @@
 import { Fragment, useMemo, useState } from 'react'
 import { IUser, USER_NAVIGATION } from '@common'
 import { Avatar, Box, createStyles, Group, Menu, Modal, Skeleton, Text, UnstyledButton } from '@mantine/core'
+import { useUserContext } from '@user'
 import clsx from 'clsx'
 import { ChevronRight, DoorExit } from 'tabler-icons-react'
 
@@ -22,11 +23,11 @@ const useStyles = createStyles((theme) => ({
 }))
 
 interface IProps {
-  userDetails: IUser | null
   isLoading: boolean
 }
 
-function UserMobileNavigation({ userDetails, isLoading }: IProps) {
+function UserMobileNavigation({ isLoading }: IProps) {
+  const { user } = useUserContext()
   const { classes } = useStyles()
   const [isOpen, setIsOpen] = useState(false)
 
@@ -37,7 +38,7 @@ function UserMobileNavigation({ userDetails, isLoading }: IProps) {
     ])
   }, [])
 
-  const isDataNotReady = useMemo(() => !Boolean(userDetails) && isLoading, [userDetails, isLoading])
+  const isDataNotReady = useMemo(() => !Boolean(user) && isLoading, [user, isLoading])
 
   return (
     <Fragment>
@@ -72,8 +73,8 @@ function UserMobileNavigation({ userDetails, isLoading }: IProps) {
                 </Fragment>
               ) : (
                 <Fragment>
-                  <Text className={classes.name}>{userDetails?.username}</Text>
-                  <Text className={classes.title}>{userDetails?.title}</Text>
+                  <Text className={classes.name}>{user.username}</Text>
+                  <Text className={classes.title}>{user.title}</Text>
                 </Fragment>
               )}
             </Box>
