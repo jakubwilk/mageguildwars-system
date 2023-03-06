@@ -5,6 +5,8 @@ interface IUser {
   slug: string
   username: string
   title: string
+  messagesCount: number
+  notificationsCount: number
 }
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -13,6 +15,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     slug: 'ryu',
     username: 'Ryu',
     title: 'Grimoire Heart',
+    messagesCount: 0,
+    notificationsCount: 0,
   }
 
   res.status(200).json(data)
