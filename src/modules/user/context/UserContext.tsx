@@ -1,5 +1,14 @@
 import { createContext, ReactNode, useCallback, useState } from 'react'
-import { DEFAULT_CONTEXT_USER, IUserContext, IUserContextData } from '@user'
+import { IUserContext, IUserContextData } from '@user'
+
+export const DEFAULT_CONTEXT_USER: IUserContextData = {
+  id: '',
+  slug: '',
+  username: '',
+  title: '',
+  messagesCount: 0,
+  notificationsCount: 0,
+}
 
 export const UserContext = createContext<IUserContext>({
   user: DEFAULT_CONTEXT_USER,
