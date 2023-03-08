@@ -94,7 +94,7 @@ function UserDesktopNavigation({ isLoading }: IProps) {
                 {isTitle ? (
                   <Menu.Label>{label}</Menu.Label>
                 ) : (
-                  <Menu.Item component={'a'} href={href} icon={icon}>
+                  <Menu.Item component={'a'} href={href === '/magecp' ? `${href}/${user.id}` : href} icon={icon}>
                     {label}
                   </Menu.Item>
                 )}
