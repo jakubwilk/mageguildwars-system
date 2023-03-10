@@ -26,6 +26,7 @@
       "@common": [
         "./src/modules/common/index.ts"
       ],
+      "@profile-mage": ["./src/modules/profile-mage/index.ts"],
       "@user": ["./src/modules/user/index.ts"]
     },
     "plugins": [
