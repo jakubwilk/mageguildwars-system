@@ -7,13 +7,19 @@ import { useUserContext } from '@user'
 
 const useStyles = createStyles(() => ({
   grid: {
-    display: 'flex',
-    alignItems: 'center',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(4, 185px)',
+    columnGap: '1rem',
   },
   createButton: {
-    display: 'flex',
     minHeight: '100%',
     height: important('100%'),
+    '& .mantine-Button-label': {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      height: important('100%'),
+    },
   },
 }))
 
@@ -53,7 +59,8 @@ function ProfileMagePage() {
                 <img src={mage.avatarUrl} alt={mage.username} />
               </div>
             ))}
-            <Button className={classes.createButton} radius={0} leftIcon={<IconUserPlus />}>
+            <Button className={classes.createButton} radius={0}>
+              <IconUserPlus />
               {'Dodaj nową postać'}
             </Button>
           </div>
