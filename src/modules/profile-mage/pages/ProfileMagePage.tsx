@@ -1,24 +1,37 @@
 import { useEffect, useState } from 'react'
 import { important } from '@common'
-import { Button, createStyles } from '@mantine/core'
+import { Button, createStyles, Text } from '@mantine/core'
 import { IMage } from '@profile-mage'
 import { IconUserPlus } from '@tabler/icons'
 import { useUserContext } from '@user'
+import clsx from 'clsx'
 
-const useStyles = createStyles(() => ({
+const useStyles = createStyles((theme) => ({
   grid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(4, 185px)',
     columnGap: '1rem',
   },
   createButton: {
+    backgroundColor: important(theme.colors.dark[0]),
+    color: important(theme.colors.dark[3]),
     minHeight: '100%',
     height: important('100%'),
+    '&:hover, &:focus': {
+      backgroundColor: important(theme.colors['brand-color'][9]),
+      color: important(theme.white),
+      outline: 'none',
+    },
     '& .mantine-Button-label': {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
       height: important('100%'),
+      '& > svg': {
+        width: '40px',
+        height: 'auto',
+        marginBottom: '1rem',
+      },
     },
   },
 }))
@@ -56,12 +69,13 @@ function ProfileMagePage() {
           <div className={classes.grid}>
             {mages.map((mage) => (
               <div key={mage.id}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={mage.avatarUrl} alt={mage.username} />
               </div>
             ))}
-            <Button className={classes.createButton} radius={0}>
+            <Button className={clsx(classes.createButton, 'duration-100 ease-linear')} radius={0}>
               <IconUserPlus />
-              {'Dodaj nową postać'}
+              <Text>{'Dodaj nową postać'}</Text>
             </Button>
           </div>
         </section>
