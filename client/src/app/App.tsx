@@ -1,4 +1,5 @@
 import React from 'react'
+import { ForumPage } from '@app/pages'
 import { MantineProvider } from '@mantine/core'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
@@ -8,7 +9,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <MantineProvider withGlobalStyles withNormalizeCSS>
-        <p>{'App.tsx'}</p>
+        <ForumPage />
       </MantineProvider>
     </QueryClientProvider>
   )
