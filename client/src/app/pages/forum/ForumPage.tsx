@@ -1,4 +1,4 @@
-import { ForumPage as ModuleForumPage } from '@forum'
+import { ForumPage as ModuleForumPage } from './../../../modules/forum'
 
 function ForumPage() {
   return <ModuleForumPage />
