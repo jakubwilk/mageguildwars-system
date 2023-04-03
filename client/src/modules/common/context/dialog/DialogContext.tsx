@@ -1,7 +1,6 @@
 import { createContext, ReactNode, useCallback, useMemo } from 'react'
+import { DialogContextType } from '@common'
 import { useDisclosure } from '@mantine/hooks'
-
-import { DialogContextType } from '../../model'
 
 export const DialogContext = createContext<DialogContextType>({
   isOpen: false,

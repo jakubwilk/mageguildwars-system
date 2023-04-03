@@ -1,9 +1,7 @@
 import { useState } from 'react'
+import { Dialog, useDialog } from '@common'
 import { Anchor, Button, Input, Text } from '@mantine/core'
 import { useId } from '@mantine/hooks'
-
-import { useDialog } from '../../hooks'
-import { Dialog } from '../dialog'
 
 function AppNavigation() {
   const id = useId()

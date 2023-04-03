@@ -1,4 +1,4 @@
-import { AppNavigation } from '../../common'
+import { AppNavigation } from '@common'
 
 function ForumPage() {
   return (
