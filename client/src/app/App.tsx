@@ -1,5 +1,6 @@
 import React from 'react'
 import { ForumPage } from '@app/pages'
+import { AuthContextProvider } from '@auth'
 import { DialogContextProvider } from '@common'
 import { MantineProvider } from '@mantine/core'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -10,9 +11,11 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <MantineProvider withGlobalStyles withNormalizeCSS>
-        <DialogContextProvider>
-          <ForumPage />
-        </DialogContextProvider>
+        <AuthContextProvider>
+          <DialogContextProvider>
+            <ForumPage />
+          </DialogContextProvider>
+        </AuthContextProvider>
       </MantineProvider>
     </QueryClientProvider>
   )
