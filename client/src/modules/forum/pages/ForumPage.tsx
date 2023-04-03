@@ -1,5 +1,12 @@
+import { AppNavigation } from '../../common'
+
 function ForumPage() {
-  return <p>{'Forum Page'}</p>
+  return (
+    <div>
+      <AppNavigation />
+      <p>{'Forum Page'}</p>
+    </div>
+  )
 }
 
 export default ForumPage

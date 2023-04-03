@@ -1,7 +1,8 @@
 import React from 'react'
-import { ForumPage } from '@app/pages'
 import { MantineProvider } from '@mantine/core'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+import { ForumPage } from './pages/forum'
 
 const queryClient = new QueryClient()
 
