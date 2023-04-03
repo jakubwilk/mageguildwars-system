@@ -3,6 +3,7 @@
     "baseUrl": "./",
     "paths": {
       "@app/pages": ["./src/app/pages/index.ts"],
+      "@auth": ["./src/modules/auth/index.ts"],
       "@common": ["./src/modules/common/index.ts"],
       "@forum": ["./src/modules/forum/index.ts"]
     },
