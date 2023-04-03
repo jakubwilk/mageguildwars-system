@@ -1,11 +1,13 @@
 import { useState } from 'react'
-import { Anchor, Button, Dialog, Input, Text } from '@mantine/core'
+import { Anchor, Button, Input, Text } from '@mantine/core'
 import { useId } from '@mantine/hooks'
-import { useDisclosure } from '@mantine/hooks'
+
+import { useDialog } from '../../hooks'
+import { Dialog } from '../dialog'
 
 function AppNavigation() {
   const id = useId()
-  const [opened, { toggle, close }] = useDisclosure(false)
+  const { isOpen, handleOpenDialog, handleCloseDialog } = useDialog()
   const [isUserLogged, setIsUserLogged] = useState(false)
 
   return (
@@ -21,26 +23,27 @@ function AppNavigation() {
             </Button>
           </div>
         ) : (
-          <Button onClick={toggle}>{'Zaloguj się'}</Button>
+          <Button onClick={handleOpenDialog}>{'Zaloguj się'}</Button>
         )}
       </div>
-      <Dialog opened={opened} onClose={close} withCloseButton>
-        <Text>{'Logowanie'}</Text>
-        <Input.Wrapper id={id} label={'Nazwa użytkownika'} required maw={320} mx={'auto'}>
-          <Input id={id} placeholder={'Login używany na forum'} />
-        </Input.Wrapper>
-        <Input.Wrapper id={id} label={'Hasło'} required maw={320} mx={'auto'}>
-          <Input id={id} type={'password'} />
-        </Input.Wrapper>
-        <Button
-          onClick={() => {
-            close()
-            setIsUserLogged(true)
-          }}
-        >
-          {'Zaloguj się\r'}
-        </Button>
-      </Dialog>
+      {isOpen && (
+        <Dialog title={'Logowanie'}>
+          <Input.Wrapper id={id} label={'Nazwa użytkownika'} required maw={320} mx={'auto'}>
+            <Input id={id} placeholder={'Login używany na forum'} />
+          </Input.Wrapper>
+          <Input.Wrapper id={id} label={'Hasło'} required maw={320} mx={'auto'}>
+            <Input id={id} type={'password'} />
+          </Input.Wrapper>
+          <Button
+            onClick={() => {
+              handleCloseDialog()
+              setIsUserLogged(true)
+            }}
+          >
+            {'Zaloguj się'}
+          </Button>
+        </Dialog>
+      )}
     </>
   )
 }
