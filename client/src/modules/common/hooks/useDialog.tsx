@@ -1,7 +1,5 @@
 import { useContext } from 'react'
-
-import { DialogContext } from '../context'
-import { DialogContextType } from '../model'
+import { DialogContext, DialogContextType } from '@common'
 
 function useDialog() {
   const { isOpen, handleOpenDialog, handleCloseDialog } = useContext<DialogContextType>(DialogContext)

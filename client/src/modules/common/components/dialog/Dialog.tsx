@@ -1,7 +1,6 @@
 import { ReactNode } from 'react'
+import { useDialog } from '@common'
 import { Modal } from '@mantine/core'
-
-import { useDialog } from '../../hooks'
 
 interface IProps {
   children: ReactNode
