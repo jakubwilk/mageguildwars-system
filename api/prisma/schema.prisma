@@ -1,0 +1,61 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  login     String @unique
+  email     String @unique
+  password  String
+  group     Group @default(USER)
+  isActive  Boolean @default(false)
+  isLocked  Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+}
+
+model Profile {
+  id              String @id @default(auto()) @map("_id") @db.ObjectId
+  name            String @unique
+  alias           String
+  role            Role[]
+  title           BaseTitle @default(MAGE)
+  additionalTitle String
+  avatarUrl       String
+  signature       String
+  createdAt       DateTime
+  updatedAt       DateTime
+}
+
+enum Group {
+  BANNED
+  USER
+  MODERATOR
+  OPERATOR
+}
+
+enum Role {
+  FAIRY_TAIL
+  LAMIA_SCALE
+  BLUE_PEGASUS
+  GRIMOIRE_HEART
+  RAVEN_TAIL
+  ORACION_SEIS
+  MAGIC_COUNCIL
+}
+
+enum BaseTitle {
+  MAGE
+  MAGE_S_CLASS
+  MAGE_SS_CLASS
+  MASTER
+  MEMBER_OF_MAGIC_COUNCIL
+}
