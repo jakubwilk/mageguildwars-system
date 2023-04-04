@@ -5,12 +5,13 @@ import * as cookieParser from 'cookie-parser'
 import { AppModule } from './app.module'
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true })
+  const app = await NestFactory.create(AppModule)
+  app.enableCors({ origin: 'http://localhost:3000', credentials: true })
   const config = new DocumentBuilder()
+    .addBearerAuth()
     .setTitle('Mage Guild Wars API')
     .setDescription('API description for MGW server')
     .setVersion('1.0')
-    .addTag('mgw')
     .build()
   const document = SwaggerModule.createDocument(app, config)
 
