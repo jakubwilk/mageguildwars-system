@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "paths": {
+      "@auth/*": ["src/auth/*"],
+      "@prisma/*": ["src/prisma/*"]
+    },
     "module": "commonjs",
     "declaration": true,
     "removeComments": true,
