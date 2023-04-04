@@ -1,7 +1,11 @@
+import { API } from '@auth'
 import { useMutation } from '@tanstack/react-query'
+import axios from 'axios'
 
 const createAccount = async () => {
-  return {}
+  const { data } = await axios.post<{ isUser: boolean; user: object }>(API.createAccount, {}, { withCredentials: true })
+
+  return { data }
 }
 
 function useCreateAccountMutation() {
