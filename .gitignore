@@ -1,1 +1,6 @@
 node_modules/
+
+# ENV files
+*/.env
+*/.env.local
+*/.env.development
