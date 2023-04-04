@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useCreateAccountMutation } from '@auth'
 import { Dialog, useDialog } from '@common'
 import { Anchor, Button, Input, Text } from '@mantine/core'
 import { useId } from '@mantine/hooks'
@@ -7,6 +8,9 @@ function AppNavigation() {
   const id = useId()
   const { isOpen, handleOpenDialog, handleCloseDialog } = useDialog()
   const [isUserLogged, setIsUserLogged] = useState(false)
+  const { mutate: createAccount, isLoading } = useCreateAccountMutation()
+
+  console.log('isLoading', isLoading)
 
   return (
     <>
@@ -34,6 +38,7 @@ function AppNavigation() {
           </Input.Wrapper>
           <Button
             onClick={() => {
+              createAccount()
               handleCloseDialog()
               setIsUserLogged(true)
             }}
