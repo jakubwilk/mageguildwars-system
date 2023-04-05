@@ -1,5 +1,5 @@
 import { CreateAccountRequestParams } from '@auth/models'
-import { Controller, Get, HttpStatus, Param, Post } from '@nestjs/common'
+import { Body, Controller, Get, HttpException, HttpStatus, Param, Post } from '@nestjs/common'
 import { ApiBearerAuth, ApiBody, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger'
 
 import { AuthService } from './auth.service'
@@ -16,7 +16,7 @@ export class AuthController {
   @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Missing permissions, no access to endpoint' })
   @ApiResponse({ status: HttpStatus.INTERNAL_SERVER_ERROR, description: 'Issue with API server' })
   @ApiBody({ type: CreateAccountRequestParams })
-  async createAccount(userData: CreateAccountRequestParams) {
+  async createAccount(@Body() userData: CreateAccountRequestParams) {
     return await this.authService.createAccount(userData)
   }
 
