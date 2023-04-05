@@ -12,15 +12,19 @@ export class AuthService {
       return await argon2.hash(password)
     } catch (err) {
       console.log('err', err)
-      return new HttpException('Wystąpił błąd przy tworzeniu konta użytkownika. Kod błędu: LDAP_USERx001', HttpStatus.REQUEST_TIMEOUT)
+      throw new HttpException('Wystąpił błąd przy tworzeniu konta użytkownika. Kod błędu: LDE_USERx001a', HttpStatus.REQUEST_TIMEOUT)
     }
   }
 
   async createAccount({ login, email, password }: CreateAccountRequestParams) {
-    console.log('login', login)
-    console.log('email', email)
-    await this.createPasswordHash(password)
-    return { user: 'Vincent', role: 'OPERATOR' }
+    try {
+      console.log('login', login)
+      console.log('email', email)
+      await this.createPasswordHash(password)
+      return { user: 'Vincent', role: 'OPERATOR' }
+    } catch {
+      throw new HttpException('Wystąpił błąd przy tworzeniu konta użytkownika. Kod błędu: LDE_USERx001', HttpStatus.BAD_REQUEST)
+    }
   }
 
   async endSession(userId: string) {
