@@ -1,53 +1,46 @@
 import { useState } from 'react'
-import { useCreateAccountMutation } from '@auth'
-import { Dialog, useDialog } from '@common'
+import { CreateAccountMenuButton, useCreateAccountMutation } from '@auth'
+// eslint-disable-next-line no-unused-vars
 import { Anchor, Button, Input, Text } from '@mantine/core'
-import { useId } from '@mantine/hooks'
 
 function AppNavigation() {
-  const id = useId()
-  const { isOpen, handleOpenDialog, handleCloseDialog } = useDialog()
   const [isUserLogged, setIsUserLogged] = useState(false)
+  // eslint-disable-next-line no-unused-vars
   const { mutate: createAccount, isLoading } = useCreateAccountMutation()
 
-  console.log('isLoading', isLoading)
+  // <Dialog title={'Logowanie'}>
+  //           <Input.Wrapper id={id} label={'Nazwa użytkownika'} required maw={320} mx={'auto'}>
+  //             <Input id={id} placeholder={'Login używany na forum'} />
+  //           </Input.Wrapper>
+  //           <Input.Wrapper id={id} label={'Hasło'} required maw={320} mx={'auto'}>
+  //             <Input id={id} type={'password'} />
+  //           </Input.Wrapper>
+  //           <Button
+  //             onClick={() => {
+  //               createAccount()
+  //               handleCloseDialog()
+  //               setIsUserLogged(true)
+  //             }}
+  //           >
+  //             {'Zaloguj się'}
+  //           </Button>
+  //         </Dialog>
 
   return (
-    <>
-      <div className={'flex items-center w-full'}>
-        <img src={'https://mageguildwars.pl/images/revolution/logo.png'} alt={'Logo MGW'} />
-        {isUserLogged ? (
-          <div className={'flex items-center'}>
-            <Text>{'Witaj użytkowniku'}</Text>
-            <Anchor href={'#'}>{'Profil'}</Anchor>
-            <Button color={'red'} onClick={() => setIsUserLogged(false)}>
-              {'Wyloguj'}
-            </Button>
-          </div>
-        ) : (
-          <Button onClick={handleOpenDialog}>{'Zaloguj się'}</Button>
-        )}
-      </div>
-      {isOpen && (
-        <Dialog title={'Logowanie'}>
-          <Input.Wrapper id={id} label={'Nazwa użytkownika'} required maw={320} mx={'auto'}>
-            <Input id={id} placeholder={'Login używany na forum'} />
-          </Input.Wrapper>
-          <Input.Wrapper id={id} label={'Hasło'} required maw={320} mx={'auto'}>
-            <Input id={id} type={'password'} />
-          </Input.Wrapper>
-          <Button
-            onClick={() => {
-              createAccount()
-              handleCloseDialog()
-              setIsUserLogged(true)
-            }}
-          >
-            {'Zaloguj się'}
+    <div className={'flex items-center w-full'}>
+      <img src={'https://mageguildwars.pl/images/revolution/logo.png'} alt={'Logo MGW'} />
+      {isUserLogged ? (
+        <div className={'flex items-center'}>
+          <Text>{'Witaj użytkowniku'}</Text>
+          <Anchor href={'#'}>{'Profil'}</Anchor>
+          <Button color={'red'} onClick={() => setIsUserLogged(false)}>
+            {'Wyloguj'}
           </Button>
-        </Dialog>
+        </div>
+      ) : (
+        <CreateAccountMenuButton />
       )}
-    </>
+    </div>
   )
 }
 
