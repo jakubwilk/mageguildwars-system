@@ -1,13 +1,14 @@
 import { CreateAccountRequestParams } from '@auth/models'
+import { User } from '@auth/schemas/user.schema'
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
-import { Prisma, User } from '@prisma/client'
-import { PrismaService } from '@prisma/prisma.service'
+import { InjectModel } from '@nestjs/mongoose'
 import * as argon2 from 'argon2'
+import { Model } from 'mongoose'
 
 @Injectable()
 export class AuthService {
-  constructor(private jwtService: JwtService, private prismaService: PrismaService) {}
+  constructor(private jwtService: JwtService, @InjectModel(User.name) private userModel: Model<User>) {}
 
   async createPasswordHash(password: string) {
     try {
@@ -20,14 +21,13 @@ export class AuthService {
   async createAccount({ login, email, password }: CreateAccountRequestParams) {
     try {
       const hashedPassword = await this.createPasswordHash(password)
-      const dataToCreate: Prisma.UserCreateInput = {
+      const dataToCreate = {
         login,
         email,
         password: hashedPassword,
       }
-      const user: User = await this.prismaService.user.create({
-        data: { ...dataToCreate },
-      })
+      const user = new this.userModel(dataToCreate)
+      await user.save()
       console.log('user', user)
       return { user: 'Vincent', role: 'OPERATOR' }
     } catch {
