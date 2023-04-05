@@ -1,14 +1,17 @@
 import { Injectable } from '@nestjs/common'
+import { JwtService } from '@nestjs/jwt'
 
 @Injectable()
 export class AuthService {
-  createAccount(userData) {
+  constructor(private jwtService: JwtService) {}
+
+  async createAccount(userData) {
     console.log('userData', userData)
 
     return { user: 'Vincent', role: 'OPERATOR' }
   }
 
-  endSession(userId: string) {
+  async endSession(userId: string) {
     console.log('userId', userId)
 
     return { status: 200 }
