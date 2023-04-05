@@ -1,5 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { MantineProvider } from '@mantine/core'
+
+import './app/configs/i18n.config'
 
 import App from './app/App'
 import reportWebVitals from './reportWebVitals'
@@ -9,7 +12,9 @@ import './styles/index.css'
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
-    <App />
+    <MantineProvider withGlobalStyles withNormalizeCSS>
+      <App />
+    </MantineProvider>
   </React.StrictMode>
 )
 
