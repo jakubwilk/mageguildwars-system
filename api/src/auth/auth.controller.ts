@@ -1,5 +1,6 @@
+import { CreateAccountRequestParams } from '@auth/models'
 import { Controller, Get, HttpStatus, Param, Post } from '@nestjs/common'
-import { ApiBearerAuth, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger'
+import { ApiBearerAuth, ApiBody, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger'
 
 import { AuthService } from './auth.service'
 
@@ -14,8 +15,9 @@ export class AuthController {
   @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: 'Validation error' })
   @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Missing permissions, no access to endpoint' })
   @ApiResponse({ status: HttpStatus.INTERNAL_SERVER_ERROR, description: 'Issue with API server' })
-  createAccount(userData) {
-    return this.authService.createAccount(userData)
+  @ApiBody({ type: CreateAccountRequestParams })
+  async createAccount(userData: CreateAccountRequestParams) {
+    return await this.authService.createAccount(userData)
   }
 
   @Get(':userId')
@@ -23,7 +25,7 @@ export class AuthController {
   @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Missing permissions, no access to endpoint' })
   @ApiResponse({ status: HttpStatus.INTERNAL_SERVER_ERROR, description: 'Issue with API server' })
   @ApiParam({ name: 'userId', type: String, description: 'Logged user ID' })
-  logoutUser(@Param('userId') userId: string) {
+  async logoutUser(@Param('userId') userId: string) {
     return this.authService.endSession(userId)
   }
 }
