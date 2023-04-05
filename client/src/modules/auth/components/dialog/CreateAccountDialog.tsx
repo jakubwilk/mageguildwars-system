@@ -1,52 +1,75 @@
 import { useCallback } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import { Dialog, TextField } from '@common'
+import { useTranslation } from 'react-i18next'
+import { CREATE_ACCOUNT_INITIAL_VALUES, CreateAccountForm, useCreateAccountMutation } from '@auth'
+import { Dialog, MIN_PASSWORD_LENGTH, TextField, typedFieldName } from '@common'
 import { joiResolver } from '@hookform/resolvers/joi'
 import { Button } from '@mantine/core'
 import Joi from 'joi'
 
 function CreateAccountDialog() {
+  const { t } = useTranslation()
+  const { mutate: createAccount, isLoading } = useCreateAccountMutation()
+
   const form = useForm({
     mode: 'onBlur',
-    defaultValues: {
-      login: '',
-      email: '',
-      password: '',
-      repeatPassword: '',
-    },
+    defaultValues: CREATE_ACCOUNT_INITIAL_VALUES,
     resolver: joiResolver(
       Joi.object({
-        login: Joi.string().required().messages({ 'string.empty': 'Pole jest wymagane' }),
+        login: Joi.string()
+          .required()
+          .messages({ 'string.empty': t('validation:fieldIsRequired') }),
         email: Joi.string()
           .email({ tlds: false })
-          .messages({ 'string.empty': 'Pole jest wymagane', 'string.email': 'Adres email jest niepoprawny' }),
+          .messages({ 'string.empty': t('validation:fieldIsRequired'), 'string.email': t('validation:wrongEmailAddress') }),
         password: Joi.string()
-          .min(12)
-          .messages({ 'string.empty': 'Pole jest wymagane', 'string.min': 'Hasło powinno zawierać minimum 12 znaków' }),
+          .min(MIN_PASSWORD_LENGTH)
+          .messages({
+            'string.empty': t('validation:fieldIsRequired'),
+            'string.min': t('validation:fieldShouldContainAtLeastCharacters', {
+              field: t('auth:field.password'),
+              characters: MIN_PASSWORD_LENGTH,
+            }),
+          }),
         repeatPassword: Joi.string()
           .valid(Joi.ref('password'))
           .required()
-          .messages({ 'string.empty': 'Pole jest wymagane', 'any.only': 'Hasła nie są identyczne' }),
+          .messages({ 'string.empty': t('validation:fieldIsRequired'), 'any.only': t('validation:passwordAreNotTheSame') }),
       })
     ),
   })
 
-  const handleCreateAccount = useCallback((data: any) => console.log('data', data), [])
+  const handleCreateAccount = useCallback(
+    (data: any) => {
+      console.log('data', data)
+      createAccount(data)
+    },
+    [createAccount]
+  )
 
   return (
     <FormProvider {...form}>
       <Dialog title={'Zakładanie konta'}>
         <form onSubmit={form.handleSubmit(handleCreateAccount)}>
+          <TextField label={t('auth:field.login')} name={typedFieldName<CreateAccountForm>('login')} isRequired />
+          <TextField label={t('auth:field.email')} name={typedFieldName<CreateAccountForm>('email')} isRequired />
           <TextField
-            label={'Nazwa użytkownika'}
-            name={'login'}
-            placeholder={'Podaj nazwę użytkownka, która posłuży również za imię postaci'}
+            label={t('auth:field.password')}
+            name={typedFieldName<CreateAccountForm>('password')}
+            type={'password'}
             isRequired
+            isPasswordInput
           />
-          <TextField label={'Email'} name={'email'} placeholder={'Podaj swój adres email'} isRequired />
-          <TextField label={'Hasło'} name={'password'} type={'password'} isRequired isPasswordInput />
-          <TextField label={'Potwierdź hasło'} name={'repeatPassword'} type={'password'} isRequired isPasswordInput />
-          <Button type={'submit'}>{'Utwórz konto'}</Button>
+          <TextField
+            label={t('auth:field.repeatPassword')}
+            name={typedFieldName<CreateAccountForm>('repeatPassword')}
+            type={'password'}
+            isRequired
+            isPasswordInput
+          />
+          <Button type={'submit'} loading={isLoading}>
+            {t('common:action.register')}
+          </Button>
         </form>
       </Dialog>
     </FormProvider>
