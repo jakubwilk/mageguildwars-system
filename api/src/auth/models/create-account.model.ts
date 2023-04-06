@@ -1,10 +1,5 @@
-import { ApiProperty } from '@nestjs/swagger'
-
-export class CreateAccountRequestParams {
-  @ApiProperty()
+export interface CreateAccountRequestParams {
   login: string
-  @ApiProperty()
   email: string
-  @ApiProperty()
   password: string
 }

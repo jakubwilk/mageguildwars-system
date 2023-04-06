@@ -1,7 +1,9 @@
-import { CreateAccountRequestParams } from '@auth/models'
+import { MapModelToUser } from '@auth/mappers'
+import { CreateAccountRequestParams, CreateSessionUserData, CreateSessionUserSnapshot } from '@auth/models'
 import { HttpStatus, Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { InjectModel } from '@nestjs/mongoose'
+import { UserAccountSnapshot } from '@user/models'
 import { User } from '@user/schemas'
 import { UserService } from '@user/user.service'
 import { ERROR_MESSAGES, HttpError } from '@utils/error.helper'
@@ -16,13 +18,14 @@ export class AuthService {
     try {
       return await argon2.hash(password)
     } catch (err) {
-      throw HttpError(HttpStatus.BAD_REQUEST, ERROR_MESSAGES.LDE_USER_2)
+      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.LDE_USER_2)
     }
   }
 
-  async createAccount({ login, email, password }: CreateAccountRequestParams) {
+  async createAccount({ login, email, password }: CreateAccountRequestParams): Promise<CreateSessionUserSnapshot> {
     try {
-      await this.userService.isUser(login)
+      await this.userService.isUserLoginUsed(login)
+      await this.userService.isUserEmailUsed(email)
       const hashedPassword = await this.createPasswordHash(password)
       const dataToCreate = {
         login,
@@ -30,10 +33,20 @@ export class AuthService {
         password: hashedPassword,
       }
       const user = new this.userModel(dataToCreate)
-      await user.save()
-      return { user: 'Vincent', role: 'OPERATOR' }
+      const data = await user.save()
+      return await this.createSession(MapModelToUser(data))
     } catch (err) {
-      throw HttpError(HttpStatus.BAD_REQUEST, err || ERROR_MESSAGES.LDE_USER_1)
+      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.LDE_USER_1)
+    }
+  }
+
+  async createSession(data: UserAccountSnapshot): Promise<CreateSessionUserSnapshot> {
+    try {
+      const payload: CreateSessionUserData = { id: data.id, login: data.login }
+      const token = await this.jwtService.signAsync(payload, { expiresIn: '24h' })
+      return { token, user: data }
+    } catch (err) {
+      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.LDE_USER_3)
     }
   }
 

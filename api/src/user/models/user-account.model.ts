@@ -1,6 +1,7 @@
 import { Group } from '@user/models'
 
 export interface UserAccountSnapshot {
+  id?: string
   login: string
   slug: string
   email: string
