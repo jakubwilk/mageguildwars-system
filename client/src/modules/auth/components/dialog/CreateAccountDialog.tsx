@@ -5,6 +5,7 @@ import { CREATE_ACCOUNT_INITIAL_VALUES, CreateAccountForm, useCreateAccountMutat
 import { Dialog, MIN_PASSWORD_LENGTH, TextField, typedFieldName } from '@common'
 import { joiResolver } from '@hookform/resolvers/joi'
 import { Button } from '@mantine/core'
+import { notifications } from '@mantine/notifications'
 import Joi from 'joi'
 
 function CreateAccountDialog() {
@@ -42,7 +43,15 @@ function CreateAccountDialog() {
   const handleCreateAccount = useCallback(
     (data: any) => {
       console.log('data', data)
-      createAccount(data)
+      createAccount(data, {
+        onSuccess: () =>
+          notifications.show({
+            message: t('auth:message.accountCreatedSuccessfully'),
+            color: 'green',
+            autoClose: 5000,
+            withCloseButton: true,
+          }),
+      })
     },
     [createAccount]
   )
