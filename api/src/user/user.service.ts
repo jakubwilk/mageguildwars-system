@@ -8,7 +8,7 @@ import { Model } from 'mongoose'
 @Injectable()
 export class UserService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
-  async isUser(login: string): Promise<boolean> {
+  async isUserLoginUsed(login: string): Promise<boolean> {
     try {
       const user: User = await this.userModel.findOne({ login }).exec()
 
@@ -19,6 +19,20 @@ export class UserService {
       return false
     } catch (err) {
       throw HttpError(HttpStatus.BAD_REQUEST, ERROR_MESSAGES.USER_EXIST)
+    }
+  }
+
+  async isUserEmailUsed(email: string): Promise<boolean> {
+    try {
+      const user: User = await this.userModel.findOne({ email }).exec()
+
+      if (user) {
+        throw HttpError(HttpStatus.BAD_REQUEST)
+      }
+
+      return false
+    } catch (err) {
+      throw HttpError(HttpStatus.BAD_REQUEST, ERROR_MESSAGES.EMAIL_EXIST)
     }
   }
 
