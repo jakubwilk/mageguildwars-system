@@ -1,7 +1,8 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
+import { HttpStatus, Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Group, UserAccountSnapshot } from '@user/models'
 import { User } from '@user/schemas'
+import { ERROR_MESSAGES, HttpError } from '@utils/error.helper'
 import { Model } from 'mongoose'
 
 @Injectable()
@@ -12,12 +13,12 @@ export class UserService {
       const user: User = await this.userModel.findOne({ login }).exec()
 
       if (user) {
-        throw new HttpException(null, HttpStatus.BAD_REQUEST)
+        throw HttpError(HttpStatus.BAD_REQUEST)
       }
 
       return false
     } catch (err) {
-      throw new HttpException('Wystąpił błąd przy tworzeniu konta użytkownika. Kod błędu: LDE_USERx001b', HttpStatus.BAD_REQUEST)
+      throw HttpError(HttpStatus.BAD_REQUEST, ERROR_MESSAGES.USER_EXIST)
     }
   }
 

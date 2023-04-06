@@ -3,6 +3,7 @@
     "paths": {
       "@auth/*": ["src/auth/*"],
       "@user/*": ["src/user/*"],
+      "@utils/*": ["src/utils/*"],
       "@prisma/*": ["src/prisma/*"]
     },
     "module": "commonjs",
