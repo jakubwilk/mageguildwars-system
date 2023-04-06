@@ -2,6 +2,7 @@
   "compilerOptions": {
     "paths": {
       "@auth/*": ["src/auth/*"],
+      "@user/*": ["src/user/*"],
       "@prisma/*": ["src/prisma/*"]
     },
     "module": "commonjs",

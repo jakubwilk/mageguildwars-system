@@ -1,8 +1,11 @@
-import { User, UserSchema } from '@auth/schemas/user.schema'
 import { Module } from '@nestjs/common'
 import { JwtModule } from '@nestjs/jwt'
 import { MongooseModule } from '@nestjs/mongoose'
+import { User, UserSchema } from '@user/schemas'
+import { UserModule } from '@user/user.module'
+import { UserService } from '@user/user.service'
 
+// TODO: Prisma is currently no use in project
 // import { PrismaService } from '@prisma/prisma.service'
 import { AuthController } from './auth.controller'
 import { AuthService } from './auth.service'
@@ -16,7 +19,7 @@ import { AuthService } from './auth.service'
     }),
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
   ],
-  providers: [AuthService],
+  providers: [AuthService, UserService],
   controllers: [AuthController],
 })
 export class AuthModule {}
