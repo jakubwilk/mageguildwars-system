@@ -1,9 +1,10 @@
 import { CreateAccountRequestParams } from '@auth/models'
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
+import { HttpStatus, Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { InjectModel } from '@nestjs/mongoose'
 import { User } from '@user/schemas'
 import { UserService } from '@user/user.service'
+import { ERROR_MESSAGES, HttpError } from '@utils/error.helper'
 import * as argon2 from 'argon2'
 import { Model } from 'mongoose'
 
@@ -15,7 +16,7 @@ export class AuthService {
     try {
       return await argon2.hash(password)
     } catch (err) {
-      throw new HttpException('Wystąpił błąd przy tworzeniu konta użytkownika. Kod błędu: LDE_USERx001a', HttpStatus.BAD_REQUEST)
+      throw HttpError(HttpStatus.BAD_REQUEST, ERROR_MESSAGES.LDE_USER_2)
     }
   }
 
@@ -30,11 +31,9 @@ export class AuthService {
       }
       const user = new this.userModel(dataToCreate)
       await user.save()
-      console.log('user', user)
       return { user: 'Vincent', role: 'OPERATOR' }
     } catch (err) {
-      console.log('err', err)
-      throw new HttpException(err || 'Wystąpił błąd przy tworzeniu konta użytkownika. Kod błędu: LDE_USERx001', HttpStatus.BAD_REQUEST)
+      throw HttpError(HttpStatus.BAD_REQUEST, err || ERROR_MESSAGES.LDE_USER_1)
     }
   }
 

@@ -1,5 +1,5 @@
 import { CreateAccountRequestParams } from '@auth/models'
-import { Body, Controller, Get, HttpException, HttpStatus, Param, Post } from '@nestjs/common'
+import { Body, Controller, Get, HttpStatus, Param, Post } from '@nestjs/common'
 import { ApiBearerAuth, ApiBody, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger'
 
 import { AuthService } from './auth.service'

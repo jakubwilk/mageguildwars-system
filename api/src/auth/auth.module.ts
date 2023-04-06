@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common'
 import { JwtModule } from '@nestjs/jwt'
 import { MongooseModule } from '@nestjs/mongoose'
 import { User, UserSchema } from '@user/schemas'
-import { UserModule } from '@user/user.module'
 import { UserService } from '@user/user.service'
 
 // TODO: Prisma is currently no use in project
