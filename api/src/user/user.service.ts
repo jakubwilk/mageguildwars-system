@@ -1,16 +1,15 @@
 import { HttpStatus, Injectable } from '@nestjs/common'
-import { InjectModel } from '@nestjs/mongoose'
+import { User } from '@prisma/client'
+import { PrismaService } from '@prisma/prisma.service'
 import { Group, UserAccountSnapshot } from '@user/models'
-import { User } from '@user/schemas'
 import { ERROR_MESSAGES, HttpError } from '@utils/error.helper'
-import { Model } from 'mongoose'
 
 @Injectable()
 export class UserService {
-  constructor(@InjectModel(User.name) private userModel: Model<User>) {}
+  constructor(private prismaService: PrismaService) {}
   async isUserLoginUsed(login: string): Promise<boolean> {
     try {
-      const user: User = await this.userModel.findOne({ login }).exec()
+      const user: User = await this.prismaService.user.findUnique({ where: { login } })
 
       if (user) {
         throw HttpError(HttpStatus.BAD_REQUEST)
@@ -24,7 +23,7 @@ export class UserService {
 
   async isUserEmailUsed(email: string): Promise<boolean> {
     try {
-      const user: User = await this.userModel.findOne({ email }).exec()
+      const user: User = await this.prismaService.user.findUnique({ where: { email } })
 
       if (user) {
         throw HttpError(HttpStatus.BAD_REQUEST)
@@ -36,8 +35,9 @@ export class UserService {
     }
   }
 
-  async getUser(id: string): Promise<UserAccountSnapshot> {
+  async getUser(id: number): Promise<UserAccountSnapshot> {
     const user: UserAccountSnapshot = {
+      id,
       login: 'Vincent',
       slug: 'vincent',
       email: 'vincent@mageguildwars.pl',

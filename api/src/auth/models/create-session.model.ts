@@ -1,7 +1,7 @@
 import { UserAccountSnapshot } from '@user/models'
 
 export interface CreateSessionUserData {
-  id: string
+  id: number
   login: string
 }
 

@@ -1,7 +1,7 @@
-import { Group } from '@user/models'
+import { Group } from '@prisma/client'
 
 export interface UserAccountSnapshot {
-  id?: string
+  id: number
   login: string
   slug: string
   email: string

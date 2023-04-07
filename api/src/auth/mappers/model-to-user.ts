@@ -1,7 +1,7 @@
+import { User as UserSnapshot } from '@prisma/client'
 import { UserAccountSnapshot } from '@user/models'
-import { UserDocument } from '@user/schemas'
 
-export const MapModelToUser = (user: UserDocument): UserAccountSnapshot => {
+export const MapModelToUser = (user: UserSnapshot): UserAccountSnapshot => {
   return {
     id: user.id,
     login: user.login,
