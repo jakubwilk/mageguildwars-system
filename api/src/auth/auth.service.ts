@@ -1,6 +1,7 @@
 import { MapModelToUser } from '@auth/mappers'
-import { CreateAccountRequestParams, CreateSessionUserData, CreateSessionUserSnapshot } from '@auth/models'
+import { CreateAccountRequestParams, CreateSessionUserData, CreateSessionUserSnapshot, CreateTokenModel } from '@auth/models'
 import { HttpStatus, Injectable } from '@nestjs/common'
+import { ConfigService } from '@nestjs/config'
 import { JwtService } from '@nestjs/jwt'
 import { InjectModel } from '@nestjs/mongoose'
 import { UserAccountSnapshot } from '@user/models'
@@ -12,7 +13,12 @@ import { Model } from 'mongoose'
 
 @Injectable()
 export class AuthService {
-  constructor(private jwtService: JwtService, @InjectModel(User.name) private userModel: Model<User>, private userService: UserService) {}
+  constructor(
+    private jwtService: JwtService,
+    private configService: ConfigService,
+    @InjectModel(User.name) private userModel: Model<User>,
+    private userService: UserService
+  ) {}
 
   async createPasswordHash(password: string) {
     try {
@@ -42,9 +48,8 @@ export class AuthService {
 
   async createSession(data: UserAccountSnapshot): Promise<CreateSessionUserSnapshot> {
     try {
-      const payload: CreateSessionUserData = { id: data.id, login: data.login }
-      const token = await this.jwtService.signAsync(payload, { expiresIn: '24h' })
-      return { token, user: data }
+      const tokens = await this.getTokens(data)
+      return { ...tokens, user: data }
     } catch (err) {
       throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.LDE_USER_3)
     }
@@ -54,5 +59,34 @@ export class AuthService {
     console.log('userId', userId)
 
     return { status: 200 }
+  }
+
+  async getTokens(data: UserAccountSnapshot): Promise<CreateTokenModel> {
+    try {
+      const { id, login } = data
+      const accessToken = await this.getAccessToken(id, login)
+      const refreshToken = await this.getRefreshToken(id, login)
+      return { accessToken, refreshToken }
+    } catch (err) {
+      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, err)
+    }
+  }
+
+  async getAccessToken(userId: string, login: string): Promise<string> {
+    try {
+      const payload: CreateSessionUserData = { id: userId, login }
+      return await this.jwtService.signAsync(payload, { secret: this.configService.get<string>('JWT_SECRET'), expiresIn: '6h' })
+    } catch (err) {
+      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, 'ACCESS TOKEN')
+    }
+  }
+
+  async getRefreshToken(userId: string, login: string): Promise<string> {
+    try {
+      const payload: CreateSessionUserData = { id: userId, login }
+      return await this.jwtService.signAsync(payload, { secret: this.configService.get<string>('JWT_REFRESH_SECRET'), expiresIn: '14d' })
+    } catch (err) {
+      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, 'REFRESH TOKEN')
+    }
   }
 }

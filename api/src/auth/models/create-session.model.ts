@@ -6,6 +6,7 @@ export interface CreateSessionUserData {
 }
 
 export interface CreateSessionUserSnapshot {
-  token: string
+  accessToken: string
+  refreshToken: string
   user: UserAccountSnapshot
 }

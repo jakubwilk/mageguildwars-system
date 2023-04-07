@@ -1,5 +1,5 @@
+import { AccessTokenStrategy, RefreshTokenStrategy } from '@auth/strategies'
 import { Module } from '@nestjs/common'
-import { JwtModule } from '@nestjs/jwt'
 import { MongooseModule } from '@nestjs/mongoose'
 import { User, UserSchema } from '@user/schemas'
 import { UserService } from '@user/user.service'
@@ -10,15 +10,8 @@ import { AuthController } from './auth.controller'
 import { AuthService } from './auth.service'
 
 @Module({
-  imports: [
-    JwtModule.register({
-      global: true,
-      secret: process.env['JWT_SECRET'],
-      signOptions: { expiresIn: '24h' },
-    }),
-    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
-  ],
-  providers: [AuthService, UserService],
+  imports: [MongooseModule.forFeature([{ name: User.name, schema: UserSchema }])],
+  providers: [AuthService, UserService, AccessTokenStrategy, RefreshTokenStrategy],
   controllers: [AuthController],
 })
 export class AuthModule {}
