@@ -1,31 +1,30 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-// TODO: Prisma is currently no use in project
-
-datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
-}
-
 generator client {
   provider = "prisma-client-js"
 }
 
+datasource db {
+  provider          = "mysql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
 model User {
-  id        Int @id @default(autoincrement())
-  login     String @unique
-  email     String @unique
-  password  String
-  group     Group @default(USER)
-  isActive  Boolean @default(false)
-  isLocked  Boolean @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  id           Int      @id @default(autoincrement())
+  login        String   @unique
+  slug         String   @unique
+  email        String   @unique
+  password     String
+  group        Group    @default(USER)
+  refreshToken String?   @unique @default("")
+  isActive     Boolean  @default(false)
+  isLocked     Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @default(now())
 }
 
 model Profile {
-  id              Int @id @default(autoincrement())
-  name            String @unique
+  id              Int       @id @default(autoincrement())
+  name            String    @unique
   alias           String
   role            Role
   title           BaseTitle @default(MAGE)

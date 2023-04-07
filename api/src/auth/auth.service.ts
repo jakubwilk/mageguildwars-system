@@ -3,20 +3,19 @@ import { CreateAccountRequestParams, CreateSessionUserData, CreateSessionUserSna
 import { HttpStatus, Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { JwtService } from '@nestjs/jwt'
-import { InjectModel } from '@nestjs/mongoose'
+import { PrismaService } from '@prisma/prisma.service'
 import { UserAccountSnapshot } from '@user/models'
-import { User } from '@user/schemas'
 import { UserService } from '@user/user.service'
+import { createSlug } from '@utils/database.helper'
 import { ERROR_MESSAGES, HttpError } from '@utils/error.helper'
 import * as argon2 from 'argon2'
-import { Model } from 'mongoose'
 
 @Injectable()
 export class AuthService {
   constructor(
     private jwtService: JwtService,
     private configService: ConfigService,
-    @InjectModel(User.name) private userModel: Model<User>,
+    private prismaService: PrismaService,
     private userService: UserService
   ) {}
 
@@ -35,11 +34,11 @@ export class AuthService {
       const hashedPassword = await this.createPasswordHash(password)
       const dataToCreate = {
         login,
+        slug: createSlug(login),
         email,
         password: hashedPassword,
       }
-      const user = new this.userModel(dataToCreate)
-      const data = await user.save()
+      const data = await this.prismaService.user.create({ data: dataToCreate })
       return await this.createSession(MapModelToUser(data))
     } catch (err) {
       throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.LDE_USER_1)
@@ -72,7 +71,7 @@ export class AuthService {
     }
   }
 
-  async getAccessToken(userId: string, login: string): Promise<string> {
+  async getAccessToken(userId: number, login: string): Promise<string> {
     try {
       const payload: CreateSessionUserData = { id: userId, login }
       return await this.jwtService.signAsync(payload, { secret: this.configService.get<string>('JWT_SECRET'), expiresIn: '6h' })
@@ -81,7 +80,7 @@ export class AuthService {
     }
   }
 
-  async getRefreshToken(userId: string, login: string): Promise<string> {
+  async getRefreshToken(userId: number, login: string): Promise<string> {
     try {
       const payload: CreateSessionUserData = { id: userId, login }
       return await this.jwtService.signAsync(payload, { secret: this.configService.get<string>('JWT_REFRESH_SECRET'), expiresIn: '14d' })
