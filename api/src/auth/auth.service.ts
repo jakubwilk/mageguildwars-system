@@ -39,7 +39,9 @@ export class AuthService {
         password: hashedPassword,
       }
       const data = await this.prismaService.user.create({ data: dataToCreate })
-      return await this.createSession(MapModelToUser(data))
+      const session: CreateSessionUserSnapshot = await this.createSession(MapModelToUser(data))
+      await this.prismaService.user.update({ where: { id: data.id }, data: { refreshToken: session.refreshToken } })
+      return session
     } catch (err) {
       throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.LDE_USER_1)
     }
