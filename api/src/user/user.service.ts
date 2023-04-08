@@ -1,49 +1,33 @@
 import { HttpStatus, Injectable } from '@nestjs/common'
-import { User } from '@prisma/client'
+import { User as UserModel, UserGroup } from '@prisma/client'
 import { PrismaService } from '@prisma/prisma.service'
-import { Group, UserAccountSnapshot } from '@user/models'
-import { ERROR_MESSAGES, HttpError } from '@utils/error.helper'
+import { UserSnapshot } from '@user/models'
+import { HttpError } from '@utils/error.helper'
 
 @Injectable()
 export class UserService {
   constructor(private prismaService: PrismaService) {}
-  async isUserLoginUsed(login: string): Promise<boolean> {
+
+  async isUserExist(field: keyof UserModel, value: string | boolean | Date): Promise<boolean> {
     try {
-      const user: User = await this.prismaService.user.findUnique({ where: { login } })
+      const user: UserModel = await this.prismaService.user.findUnique({ where: { [field]: value } })
 
-      if (user) {
-        throw HttpError(HttpStatus.BAD_REQUEST)
-      }
-
-      return false
+      return user === null
     } catch (err) {
-      throw HttpError(HttpStatus.BAD_REQUEST, ERROR_MESSAGES.USER_EXIST)
+      throw HttpError(HttpStatus.BAD_REQUEST, 'Podany użytkownik istnieje już w systemie')
     }
   }
 
-  async isUserEmailUsed(email: string): Promise<boolean> {
-    try {
-      const user: User = await this.prismaService.user.findUnique({ where: { email } })
-
-      if (user) {
-        throw HttpError(HttpStatus.BAD_REQUEST)
-      }
-
-      return false
-    } catch (err) {
-      throw HttpError(HttpStatus.BAD_REQUEST, ERROR_MESSAGES.EMAIL_EXIST)
-    }
-  }
-
-  async getUser(id: number): Promise<UserAccountSnapshot> {
-    const user: UserAccountSnapshot = {
-      id,
+  async getUser(uid: string): Promise<UserSnapshot> {
+    const user: UserSnapshot = {
+      uid,
       login: 'Vincent',
       slug: 'vincent',
       email: 'vincent@mageguildwars.pl',
-      group: Group.OPERATOR,
+      group: UserGroup.OPERATOR,
       isActive: true,
       isLocked: false,
+      isCreateProfileEnabled: true,
       createdAt: new Date(),
       updatedAt: new Date(),
     }
