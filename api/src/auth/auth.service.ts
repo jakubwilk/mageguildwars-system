@@ -1,10 +1,11 @@
 import { MapModelToUser } from '@auth/mappers'
-import { CreateAccountRequestParams, CreateSessionUserData, CreateSessionUserSnapshot, CreateTokenModel } from '@auth/models'
+import { AuthCreateUserParams, AuthCreateUserSnapshot, AuthTokenPayload, AuthTokensModel } from '@auth/models'
 import { HttpStatus, Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { JwtService } from '@nestjs/jwt'
+import { User as UserModel } from '@prisma/client'
 import { PrismaService } from '@prisma/prisma.service'
-import { UserAccountSnapshot } from '@user/models'
+import { UserSnapshot } from '@user/models'
 import { UserService } from '@user/user.service'
 import { createSlug } from '@utils/database.helper'
 import { ERROR_MESSAGES, HttpError } from '@utils/error.helper'
@@ -19,35 +20,71 @@ export class AuthService {
     private userService: UserService
   ) {}
 
-  async createPasswordHash(password: string) {
+  async createHash(data: string): Promise<string> {
     try {
-      return await argon2.hash(password)
+      return await argon2.hash(data)
     } catch (err) {
-      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.LDE_USER_2)
+      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, 'Wystapił problem z szyfrowaniem')
     }
   }
 
-  async createAccount({ login, email, password }: CreateAccountRequestParams): Promise<CreateSessionUserSnapshot> {
+  async getAccessToken(uid: string): Promise<string> {
     try {
-      await this.userService.isUserLoginUsed(login)
-      await this.userService.isUserEmailUsed(email)
-      const hashedPassword = await this.createPasswordHash(password)
-      const dataToCreate = {
-        login,
-        slug: createSlug(login),
-        email,
-        password: hashedPassword,
-      }
-      const data = await this.prismaService.user.create({ data: dataToCreate })
-      const session: CreateSessionUserSnapshot = await this.createSession(MapModelToUser(data))
-      await this.prismaService.user.update({ where: { id: data.id }, data: { refreshToken: session.refreshToken } })
-      return session
+      const payload: AuthTokenPayload = { uid }
+      return await this.jwtService.signAsync(payload, { secret: this.configService.get<string>('JWT_SECRET'), expiresIn: '6h' })
     } catch (err) {
-      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.LDE_USER_1)
+      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, 'Problem z generowaniem access tokenu')
     }
   }
 
-  async createSession(data: UserAccountSnapshot): Promise<CreateSessionUserSnapshot> {
+  async getRefreshToken(uid: string): Promise<string> {
+    try {
+      const payload: AuthTokenPayload = { uid }
+      return await this.jwtService.signAsync(payload, { secret: this.configService.get<string>('JWT_REFRESH_SECRET'), expiresIn: '14d' })
+    } catch (err) {
+      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, 'Problem z generowaniem refresh tokenu')
+    }
+  }
+
+  async getTokens(data: UserSnapshot): Promise<AuthTokensModel> {
+    try {
+      const { uid } = data
+      const accessToken = await this.getAccessToken(uid)
+      const refreshToken = await this.getRefreshToken(uid)
+      return { accessToken, refreshToken }
+    } catch (err) {
+      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, err)
+    }
+  }
+
+  async updateRefreshToken(uid: string, refreshToken: string) {
+    try {
+      const newRefreshToken = await argon2.hash(refreshToken)
+      await this.prismaService.user.update({ where: { uid }, data: { refreshToken: newRefreshToken } })
+    } catch (err) {
+      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, 'Problem z aktualizacją refresh token')
+    }
+  }
+
+  async refreshToken(uid: string, refreshToken: string) {
+    const user: UserModel = await this.prismaService.user.findUnique({ where: { uid } })
+
+    if (!user || !user.refreshToken) {
+      throw HttpError(HttpStatus.UNAUTHORIZED, 'Brak dostępu')
+    }
+
+    const isRefreshTokenCorrect = await argon2.verify(user.refreshToken, refreshToken)
+
+    if (!isRefreshTokenCorrect) {
+      throw HttpError(HttpStatus.UNAUTHORIZED, 'Brak dostępu')
+    }
+
+    const tokens = await this.getTokens(MapModelToUser(user))
+    await this.updateRefreshToken(user.uid, tokens.refreshToken)
+    return tokens
+  }
+
+  async getUserSessionData(data: UserSnapshot): Promise<AuthCreateUserSnapshot> {
     try {
       const tokens = await this.getTokens(data)
       return { ...tokens, user: data }
@@ -56,38 +93,27 @@ export class AuthService {
     }
   }
 
-  async endSession(userId: string) {
-    console.log('userId', userId)
+  async createAccount({ login, email, password }: AuthCreateUserParams): Promise<AuthCreateUserSnapshot> {
+    try {
+      await this.userService.isUserExist('login', login)
+      await this.userService.isUserExist('email', email)
+      const hashedPassword = await this.createHash(password)
+      const dataToCreate = {
+        login,
+        slug: createSlug(login),
+        email,
+        password: hashedPassword,
+      }
+      const data = await this.prismaService.user.create({ data: dataToCreate })
+      const session: AuthCreateUserSnapshot = await this.getUserSessionData(MapModelToUser(data))
+      await this.prismaService.user.update({ where: { id: data.id }, data: { refreshToken: session.refreshToken } })
+      return session
+    } catch (err) {
+      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.LDE_USER_1)
+    }
+  }
 
+  async logoutAccount() {
     return { status: 200 }
-  }
-
-  async getTokens(data: UserAccountSnapshot): Promise<CreateTokenModel> {
-    try {
-      const { id, login } = data
-      const accessToken = await this.getAccessToken(id, login)
-      const refreshToken = await this.getRefreshToken(id, login)
-      return { accessToken, refreshToken }
-    } catch (err) {
-      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, err)
-    }
-  }
-
-  async getAccessToken(userId: number, login: string): Promise<string> {
-    try {
-      const payload: CreateSessionUserData = { id: userId, login }
-      return await this.jwtService.signAsync(payload, { secret: this.configService.get<string>('JWT_SECRET'), expiresIn: '6h' })
-    } catch (err) {
-      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, 'ACCESS TOKEN')
-    }
-  }
-
-  async getRefreshToken(userId: number, login: string): Promise<string> {
-    try {
-      const payload: CreateSessionUserData = { id: userId, login }
-      return await this.jwtService.signAsync(payload, { secret: this.configService.get<string>('JWT_REFRESH_SECRET'), expiresIn: '14d' })
-    } catch (err) {
-      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, 'REFRESH TOKEN')
-    }
   }
 }
