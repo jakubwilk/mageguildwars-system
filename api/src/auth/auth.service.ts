@@ -112,8 +112,4 @@ export class AuthService {
       throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.LDE_USER_1)
     }
   }
-
-  async logoutAccount() {
-    return { status: 200 }
-  }
 }
