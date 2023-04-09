@@ -5,20 +5,17 @@ import { AppModule } from './app.module'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', process.env['CLIENT_URL'])
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Accept')
+    next()
+  })
   app.enableCors({
     origin: process.env['CLIENT_URL'],
     credentials: true,
     methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
-    allowedHeaders: [
-      'Content-Type',
-      'Authorization',
-      'Access-Control-Allow-Origin',
-      'Access-Control-Allow-Credential',
-      'Access-Control-Allow-Methods',
-      'Access-Control-Allow-Headers',
-      'Access-Control-Request-Method',
-      'Access-Control-Request-Headers',
-    ],
+    allowedHeaders: '*',
   })
   app.use(cookieParser())
   await app.listen(3001)
