@@ -20,3 +20,8 @@ export interface AuthCreateUserParams {
   email: string
   password: string
 }
+
+export interface AuthLoginUserParams {
+  login: string
+  password: string
+}

@@ -3,7 +3,7 @@ import { HttpStatus, Injectable } from '@nestjs/common'
 import { User as UserModel } from '@prisma/client'
 import { PrismaService } from '@prisma/prisma.service'
 import { UserSnapshot } from '@user/models'
-import { HttpError } from '@utils/error.helper'
+import { ERROR_MESSAGES, HttpError } from '@utils/error.helper'
 
 @Injectable()
 export class UserService {
@@ -15,7 +15,7 @@ export class UserService {
 
       return user === null
     } catch (err) {
-      throw HttpError(HttpStatus.BAD_REQUEST, 'Podany użytkownik istnieje już w systemie')
+      throw HttpError(HttpStatus.BAD_REQUEST, ERROR_MESSAGES.USER.USER_EXIST)
     }
   }
 
@@ -24,7 +24,15 @@ export class UserService {
       const user: UserModel = await this.prismaService.user.findUnique({ where: { uid } })
       return MapModelToUser(user)
     } catch (err) {
-      throw HttpError(HttpStatus.BAD_REQUEST, 'Brak użytkownika w systemie')
+      throw HttpError(HttpStatus.BAD_REQUEST, ERROR_MESSAGES.USER.MISSING_USER)
+    }
+  }
+
+  async getFullUserByName(login: string): Promise<UserModel> {
+    try {
+      return await this.prismaService.user.findUnique({ where: { login } })
+    } catch (err) {
+      throw HttpError(HttpStatus.BAD_REQUEST, ERROR_MESSAGES.USER.MISSING_USER)
     }
   }
 }

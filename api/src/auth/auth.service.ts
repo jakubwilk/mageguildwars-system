@@ -24,7 +24,15 @@ export class AuthService {
     try {
       return await argon2.hash(data)
     } catch (err) {
-      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, 'Wystapił problem z szyfrowaniem')
+      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.CRYPTO.ISSUE_WITH_CREATE_HASH)
+    }
+  }
+
+  async verifyHash(data: string, hashedData: string, msg?: string): Promise<boolean> {
+    try {
+      return await argon2.verify(hashedData, data)
+    } catch (err) {
+      throw HttpError(HttpStatus.BAD_REQUEST, msg || err)
     }
   }
 
@@ -33,7 +41,7 @@ export class AuthService {
       const payload: AuthTokenPayload = { uid }
       return await this.jwtService.signAsync(payload, { secret: this.configService.get<string>('JWT_SECRET'), expiresIn: '6h' })
     } catch (err) {
-      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, 'Problem z generowaniem access tokenu')
+      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.CRYPTO.ISSUE_WITH_CREATE_ACCESS_TOKEN)
     }
   }
 
@@ -42,7 +50,7 @@ export class AuthService {
       const payload: AuthTokenPayload = { uid }
       return await this.jwtService.signAsync(payload, { secret: this.configService.get<string>('JWT_REFRESH_SECRET'), expiresIn: '14d' })
     } catch (err) {
-      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, 'Problem z generowaniem refresh tokenu')
+      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.CRYPTO.ISSUE_WITH_CREATE_REFRESH_TOKEN)
     }
   }
 
@@ -62,7 +70,7 @@ export class AuthService {
       const newRefreshToken = await argon2.hash(refreshToken)
       await this.prismaService.user.update({ where: { uid }, data: { refreshToken: newRefreshToken } })
     } catch (err) {
-      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, 'Problem z aktualizacją refresh token')
+      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.CRYPTO.ISSUE_WITH_UPDATE_REFRESH_TOKEN)
     }
   }
 
@@ -70,13 +78,13 @@ export class AuthService {
     const user: UserModel = await this.prismaService.user.findUnique({ where: { uid } })
 
     if (!user || !user.refreshToken) {
-      throw HttpError(HttpStatus.UNAUTHORIZED, 'Brak dostępu')
+      throw HttpError(HttpStatus.UNAUTHORIZED, ERROR_MESSAGES.AUTH.NO_ACCESS)
     }
 
     const isRefreshTokenCorrect = await argon2.verify(user.refreshToken, refreshToken)
 
     if (!isRefreshTokenCorrect) {
-      throw HttpError(HttpStatus.UNAUTHORIZED, 'Brak dostępu')
+      throw HttpError(HttpStatus.UNAUTHORIZED, ERROR_MESSAGES.AUTH.NO_ACCESS)
     }
 
     const tokens = await this.getTokens(MapModelToUser(user))
@@ -89,7 +97,7 @@ export class AuthService {
       const tokens = await this.getTokens(data)
       return { ...tokens, user: data }
     } catch (err) {
-      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.LDE_USER_3)
+      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.AUTH.ISSUE_WITH_CREATE_SESSION)
     }
   }
 
@@ -109,7 +117,7 @@ export class AuthService {
       await this.prismaService.user.update({ where: { id: data.id }, data: { refreshToken: session.refreshToken } })
       return session
     } catch (err) {
-      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.LDE_USER_1)
+      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.AUTH.ISSUE_WITH_CREATE_USER)
     }
   }
 
@@ -118,7 +126,7 @@ export class AuthService {
       const user: UserSnapshot = await this.userService.getUser(uid)
       return await this.getUserSessionData(user)
     } catch (err) {
-      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, err || 'Wystapił problem z pobraniem danych użytkownika')
+      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, err || ERROR_MESSAGES.USER.ISSUE_WITH_GET_USER_DATA)
     }
   }
 }
