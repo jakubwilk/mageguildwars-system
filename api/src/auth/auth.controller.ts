@@ -29,6 +29,9 @@ export class AuthController {
     return {}
   }
 
+  @Get('auto-login')
+  async autoLoginAccount() {}
+
   @UseGuards(AccessTokenGuard)
   @Get()
   async logoutAccount(@Res() res: Response) {
