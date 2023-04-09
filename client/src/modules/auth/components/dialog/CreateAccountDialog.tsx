@@ -1,15 +1,27 @@
 import { useCallback } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { CREATE_ACCOUNT_INITIAL_VALUES, CreateAccountForm, useCreateAccountMutation } from '@auth'
+import {
+  authService,
+  CREATE_ACCOUNT_INITIAL_VALUES,
+  CreateAccountForm,
+  CreateAccountRequestParams,
+  useAuthContext,
+  useCreateAccountMutation,
+} from '@auth'
 import { Dialog, MIN_PASSWORD_LENGTH, TextField, typedFieldName } from '@common'
 import { joiResolver } from '@hookform/resolvers/joi'
 import { Button } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
 import Joi from 'joi'
 
-function CreateAccountDialog() {
+interface IProps {
+  handleCloseDialog: () => void
+}
+
+function CreateAccountDialog({ handleCloseDialog }: IProps) {
   const { t } = useTranslation()
+  const { setUser } = useAuthContext()
   const { mutate: createAccount, isLoading } = useCreateAccountMutation()
 
   const form = useForm({
@@ -41,19 +53,23 @@ function CreateAccountDialog() {
   })
 
   const handleCreateAccount = useCallback(
-    (data: any) => {
+    (data: CreateAccountRequestParams) => {
       console.log('data', data)
       createAccount(data, {
-        onSuccess: () =>
+        onSuccess: ({ data }) => {
+          authService.setLocalStorageItem('x-refresh-token', data.refreshToken)
+          setUser(data.user)
           notifications.show({
             message: t('auth:message.accountCreatedSuccessfully'),
             color: 'green',
             autoClose: 5000,
             withCloseButton: true,
-          }),
+          })
+          handleCloseDialog()
+        },
       })
     },
-    [createAccount]
+    [createAccount, t]
   )
 
   return (

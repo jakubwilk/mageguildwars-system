@@ -11,6 +11,11 @@ export interface CreateAccountRequestParams {
   password: string
 }
 
+export interface CreateAccountResponseSnapshot {
+  refreshToken: string
+  user: any
+}
+
 export const CREATE_ACCOUNT_INITIAL_VALUES: CreateAccountForm = {
   login: '',
   email: '',
