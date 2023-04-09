@@ -112,4 +112,13 @@ export class AuthService {
       throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.LDE_USER_1)
     }
   }
+
+  async loginAccount(uid: string): Promise<AuthCreateUserSnapshot> {
+    try {
+      const user: UserSnapshot = await this.userService.getUser(uid)
+      return await this.getUserSessionData(user)
+    } catch (err) {
+      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, err || 'Wystapił problem z pobraniem danych użytkownika')
+    }
+  }
 }
