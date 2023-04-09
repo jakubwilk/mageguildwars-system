@@ -1,11 +1,31 @@
-import React, { Suspense, useState } from 'react'
-import { i18n } from '@app/configs'
+import React, { Fragment, ReactNode, Suspense, useEffect, useState } from 'react'
+import { axiosApi, i18n } from '@app/configs'
 import { ForumPage } from '@app/pages'
-import { AuthContextProvider } from '@auth'
+import { API, AuthContextProvider, CreateAccountResponseSnapshot, useAuthContext } from '@auth'
 import { DialogContextProvider } from '@common'
 import { Notifications, notifications } from '@mantine/notifications'
 import { MutationCache, QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { AxiosError } from 'axios'
+import { AxiosError, AxiosResponse } from 'axios'
+
+import authService from '../modules/auth/services/AuthService'
+
+interface IProps {
+  children: ReactNode
+}
+
+function AppWrapper({ children }: IProps) {
+  const { setUser } = useAuthContext()
+  const refreshToken = authService.getLocalStorageItem('x-refresh-token')
+
+  useEffect(() => {
+    axiosApi.get(API.autoLoginAccount, { withCredentials: true }).then(({ data }: AxiosResponse<CreateAccountResponseSnapshot>) => {
+      authService.setLocalStorageItem('x-refresh-token', data.refreshToken)
+      setUser(data.user)
+    })
+  }, [refreshToken, setUser])
+
+  return <Fragment>{children}</Fragment>
+}
 
 function App() {
   const mutationCache = new MutationCache({
@@ -33,10 +53,12 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <AuthContextProvider>
         <DialogContextProvider>
-          <Suspense fallback={<div />}>
-            <Notifications />
-            <ForumPage />
-          </Suspense>
+          <AppWrapper>
+            <Suspense fallback={<div />}>
+              <Notifications />
+              <ForumPage />
+            </Suspense>
+          </AppWrapper>
         </DialogContextProvider>
       </AuthContextProvider>
     </QueryClientProvider>

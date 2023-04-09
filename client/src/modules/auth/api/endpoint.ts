@@ -1,6 +1,7 @@
 const API = {
-  createAccount: 'http://localhost:3001/auth',
-  logoutAccount: 'http://localhost:3001/auth',
+  createAccount: '/auth',
+  logoutAccount: '/auth',
+  autoLoginAccount: '/auth/me',
 }
 
 export default API

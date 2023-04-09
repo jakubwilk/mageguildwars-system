@@ -13,7 +13,7 @@ function AppNavigation() {
         authService.removeLocalStorageItem('x-refresh-token')
       },
     })
-  }, [setUser])
+  }, [logoutAccount, setUser])
 
   return (
     <div className={'flex items-center w-full'}>
