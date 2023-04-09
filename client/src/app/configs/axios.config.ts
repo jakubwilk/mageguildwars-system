@@ -10,7 +10,7 @@ const refreshAccessToken = async (axiosInstance: Axios) => {
 }
 
 const axiosApi = axios.create({
-  url: process.env['REACT_APP_API_ENDPOINT'],
+  baseURL: process.env['REACT_APP_API_ENDPOINT'],
 })
 
 const init = () => {
