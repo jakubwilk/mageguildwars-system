@@ -4,12 +4,12 @@ import { useDialog } from '@common'
 import { Button } from '@mantine/core'
 
 function CreateAccountMenuButton() {
-  const { isOpen, handleOpenDialog } = useDialog()
+  const { isOpen, handleOpenDialog, handleCloseDialog } = useDialog()
 
   return (
     <Fragment>
       <Button onClick={handleOpenDialog}>{'Zarejestruj się'}</Button>
-      {isOpen && <CreateAccountDialog />}
+      {isOpen && <CreateAccountDialog handleCloseDialog={handleCloseDialog} />}
     </Fragment>
   )
 }
