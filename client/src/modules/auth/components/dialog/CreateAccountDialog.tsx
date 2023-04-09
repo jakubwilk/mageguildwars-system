@@ -54,7 +54,6 @@ function CreateAccountDialog({ handleCloseDialog }: IProps) {
 
   const handleCreateAccount = useCallback(
     (data: CreateAccountRequestParams) => {
-      console.log('data', data)
       createAccount(data, {
         onSuccess: ({ data }) => {
           authService.setLocalStorageItem('x-refresh-token', data.refreshToken)
@@ -69,7 +68,7 @@ function CreateAccountDialog({ handleCloseDialog }: IProps) {
         },
       })
     },
-    [createAccount, t]
+    [createAccount, handleCloseDialog, setUser, t]
   )
 
   return (
