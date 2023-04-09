@@ -18,10 +18,12 @@ function AppWrapper({ children }: IProps) {
   const refreshToken = authService.getLocalStorageItem('x-refresh-token')
 
   useEffect(() => {
-    axiosApi.get(API.autoLoginAccount, { withCredentials: true }).then(({ data }: AxiosResponse<CreateAccountResponseSnapshot>) => {
-      authService.setLocalStorageItem('x-refresh-token', data.refreshToken)
-      setUser(data.user)
-    })
+    if (refreshToken && refreshToken !== 'undefined' && refreshToken !== 'null') {
+      axiosApi.get(API.autoLoginAccount, { withCredentials: true }).then(({ data }: AxiosResponse<CreateAccountResponseSnapshot>) => {
+        authService.setLocalStorageItem('x-refresh-token', data.refreshToken)
+        setUser(data.user)
+      })
+    }
   }, [refreshToken, setUser])
 
   return <Fragment>{children}</Fragment>
