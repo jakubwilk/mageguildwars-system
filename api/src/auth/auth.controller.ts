@@ -15,7 +15,11 @@ export class AuthController {
     return res
       .cookie('x-access-token', data.accessToken, {
         httpOnly: true,
-        expires: new Date(Date.now() + 86400000),
+        expires: new Date(Date.now() + 21600000),
+      })
+      .cookie('x-refresh-token', data.refreshToken, {
+        httpOnly: true,
+        expires: new Date(Date.now() + 604800000),
       })
       .json({ user: data.user, refreshToken: data.refreshToken })
   }
@@ -27,7 +31,7 @@ export class AuthController {
 
   @UseGuards(AccessTokenGuard)
   @Get()
-  async logoutAccount() {
-    return this.authService.logoutAccount()
+  async logoutAccount(@Res() res: Response) {
+    return res.clearCookie('x-access-token', { httpOnly: true }).clearCookie('x-refresh-token', { httpOnly: true }).end()
   }
 }
