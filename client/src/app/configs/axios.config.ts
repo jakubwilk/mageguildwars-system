@@ -9,24 +9,22 @@ const refreshAccessToken = async (axiosInstance: Axios) => {
   }
 }
 
-const axiosApi = axios
+const axiosApi = axios.create({
+  baseURL: process.env['REACT_APP_API_ENDPOINT'],
+})
 
-const init = () => {
-  axiosApi.interceptors.response.use(
-    (response) => response,
-    (error) => {
-      const originalRequest = error.config
+axiosApi.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const originalRequest = error.config
 
-      if (error.response.status === 401 && !originalRequest._retry) {
-        originalRequest._retry = true
-        return refreshAccessToken(axiosApi).then(() => axios(originalRequest))
-      }
-
-      return Promise.reject(error)
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true
+      return refreshAccessToken(axiosApi).then(() => axios(originalRequest))
     }
-  )
-}
 
-init()
+    return Promise.reject(error)
+  }
+)
 
 export default axiosApi
