@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { APP_THEME } from '@app/configs'
 import { MantineProvider } from '@mantine/core'
 
 import './app/configs/i18n.config'
@@ -11,7 +12,7 @@ import './styles/index.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
-  <MantineProvider withGlobalStyles withNormalizeCSS>
+  <MantineProvider theme={APP_THEME} withGlobalStyles withNormalizeCSS>
     <React.StrictMode>
       <App />
     </React.StrictMode>

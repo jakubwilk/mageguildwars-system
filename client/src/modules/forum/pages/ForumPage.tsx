@@ -1,10 +1,7 @@
-import { AppNavigation } from '@common'
-
 function ForumPage() {
   return (
     <div>
-      <AppNavigation />
-      <p>{'Forum Page'}</p>
+      <p>{'Forum Page 123'}</p>
     </div>
   )
 }

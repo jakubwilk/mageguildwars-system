@@ -17,7 +17,6 @@ function AppNavigation() {
 
   return (
     <div className={'flex items-center w-full'}>
-      <img src={'https://mageguildwars.pl/images/revolution/logo.png'} alt={'Logo MGW'} />
       {isUser ? (
         <div className={'flex items-center'}>
           <Text>{'Witaj użytkowniku'}</Text>
