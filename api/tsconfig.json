@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "paths": {
-      "@database/*": ["src/database/*"],
       "@auth/*": ["src/auth/*"],
       "@user/*": ["src/user/*"],
       "@utils/*": ["src/utils/*"],
