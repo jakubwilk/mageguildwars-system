@@ -1,8 +1,8 @@
 import { Controller, Get } from '@nestjs/common'
 
-@Controller('')
+@Controller('app')
 export class UserController {
-  @Get()
+  @Get('/')
   async sayHello() {
     return { text: 'Hello' }
   }
