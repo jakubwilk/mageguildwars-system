@@ -1,6 +1,6 @@
 import React, { Fragment, ReactNode, Suspense, useEffect, useState } from 'react'
-import { axiosApi, i18n } from '@app/configs'
-import { ForumPage } from '@app/pages'
+import { RouterProvider } from 'react-router-dom'
+import { APP_ROUTES, axiosApi, i18n } from '@app/configs'
 import { API, AuthContextProvider, CreateAccountResponseSnapshot, useAuthContext } from '@auth'
 import { DialogContextProvider } from '@common'
 import { Notifications, notifications } from '@mantine/notifications'
@@ -58,7 +58,7 @@ function App() {
           <AppWrapper>
             <Suspense fallback={<div />}>
               <Notifications />
-              <ForumPage />
+              <RouterProvider router={APP_ROUTES} />
             </Suspense>
           </AppWrapper>
         </DialogContextProvider>
