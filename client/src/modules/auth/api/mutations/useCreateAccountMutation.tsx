@@ -3,7 +3,7 @@ import { API, CreateAccountRequestParams, CreateAccountResponseSnapshot } from '
 import { useMutation } from '@tanstack/react-query'
 
 const createAccount = async (params: CreateAccountRequestParams) => {
-  const { data } = await axiosApi.post<CreateAccountResponseSnapshot>(API.createAccount, params, { withCredentials: true })
+  const { data } = await axiosApi.post<CreateAccountResponseSnapshot>(API.createAccount, params)
 
   return { data }
 }
