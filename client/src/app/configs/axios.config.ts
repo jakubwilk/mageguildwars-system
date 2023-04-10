@@ -11,6 +11,10 @@ const refreshAccessToken = async (axiosInstance: Axios) => {
 
 const axiosApi = axios.create({
   baseURL: process.env['REACT_APP_API_ENDPOINT'],
+  headers: {
+    'Content-Type': ['application/json'],
+  },
+  withCredentials: true,
 })
 
 axiosApi.interceptors.response.use(
@@ -18,7 +22,9 @@ axiosApi.interceptors.response.use(
   (error) => {
     const originalRequest = error.config
 
-    if (error.response.status === 401 && !originalRequest._retry) {
+    console.log('error', error)
+
+    if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true
       return refreshAccessToken(axiosApi).then(() => axios(originalRequest))
     }

@@ -3,7 +3,7 @@ import { API } from '@auth'
 import { useMutation } from '@tanstack/react-query'
 
 const logoutAccount = async (_: any) => {
-  const { data } = await axiosApi.get(API.logoutAccount, { withCredentials: true })
+  const { data } = await axiosApi.get(API.logoutAccount)
 
   return data
 }
