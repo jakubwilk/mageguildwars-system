@@ -1,0 +1,21 @@
+{
+  "phases": {
+    "setup": {
+      "nixPkgs": [
+        "nodejs",
+        "yarn"
+      ]
+    },
+    "install": {
+      "cmd": "yarn install"
+    },
+    "build": {
+      "cmds": [
+        "yarn build"
+      ]
+    }
+  },
+  "start": {
+    "cmd": "yarn start:prod"
+  }
+}
