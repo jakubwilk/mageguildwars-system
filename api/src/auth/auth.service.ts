@@ -1,22 +1,22 @@
 import { MapModelToUser } from '@auth/mappers'
 import { AuthCreateUserParams, AuthCreateUserSnapshot, AuthTokenPayload, AuthTokensModel } from '@auth/models'
-import { HttpStatus, Injectable } from '@nestjs/common'
+import { HttpStatus, Inject, Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { JwtService } from '@nestjs/jwt'
-import { User as UserModel } from '@prisma/client'
-import { PrismaService } from '@prisma/prisma.service'
+import { User } from '@user/entities/user.entity'
 import { UserSnapshot } from '@user/models'
 import { UserService } from '@user/user.service'
 import { createSlug } from '@utils/database.helper'
 import { ERROR_MESSAGES, HttpError } from '@utils/error.helper'
 import * as argon2 from 'argon2'
+import { v4 as uuid4 } from 'uuid'
 
 @Injectable()
 export class AuthService {
   constructor(
+    @Inject('USERS_REPOSITORY') private usersRepository: typeof User,
     private jwtService: JwtService,
     private configService: ConfigService,
-    private prismaService: PrismaService,
     private userService: UserService
   ) {}
 
@@ -68,14 +68,15 @@ export class AuthService {
   async updateRefreshToken(uid: string, refreshToken: string) {
     try {
       const newRefreshToken = await argon2.hash(refreshToken)
-      await this.prismaService.user.update({ where: { uid }, data: { refreshToken: newRefreshToken } })
+      await this.usersRepository.update({ refreshToken: newRefreshToken }, { where: { uid } })
+      // await this.prismaService.user.update({ where: { uid }, data: { refreshToken: newRefreshToken } })
     } catch (err) {
       throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.CRYPTO.ISSUE_WITH_UPDATE_REFRESH_TOKEN)
     }
   }
 
   async refreshToken(uid: string, refreshToken: string) {
-    const user: UserModel = await this.prismaService.user.findUnique({ where: { uid } })
+    const user: User = await this.usersRepository.findOne({ where: { uid } })
 
     if (!user || !user.refreshToken) {
       throw HttpError(HttpStatus.UNAUTHORIZED, ERROR_MESSAGES.AUTH.NO_ACCESS)
@@ -107,14 +108,15 @@ export class AuthService {
       await this.userService.isUserExist('email', email)
       const hashedPassword = await this.createHash(password)
       const dataToCreate = {
+        uid: uuid4(),
         login,
         slug: createSlug(login),
         email,
         password: hashedPassword,
       }
-      const data = await this.prismaService.user.create({ data: dataToCreate })
+      const data = await this.usersRepository.create(dataToCreate)
       const session: AuthCreateUserSnapshot = await this.getUserSessionData(MapModelToUser(data))
-      await this.prismaService.user.update({ where: { id: data.id }, data: { refreshToken: session.refreshToken } })
+      await this.usersRepository.update({ refreshToken: session.refreshToken }, { where: { id: data.id } })
       return session
     } catch (err) {
       throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.AUTH.ISSUE_WITH_CREATE_USER)

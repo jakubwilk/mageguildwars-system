@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus } from '@nestjs/common'
 
 export function HttpError(status: HttpStatus, message?: string) {
-  return new HttpException(message || null, status)
+  return new HttpException(message || null, status, { cause: new Error(message) })
 }
 
 export const ERROR_MESSAGES = {

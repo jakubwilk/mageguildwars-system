@@ -1,7 +1,8 @@
-import { User as UserModel } from '@prisma/client'
+// import { User as UserModel } from '@prisma/client'
+import { User } from '@user/entities/user.entity'
 import { UserSnapshot } from '@user/models'
 
-export const MapModelToUser = (user: UserModel): UserSnapshot => {
+export const MapModelToUser = (user: User): UserSnapshot => {
   return {
     uid: user.uid,
     login: user.login,
