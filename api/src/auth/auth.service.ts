@@ -128,7 +128,7 @@ export class AuthService {
       const user: UserSnapshot = await this.userService.getUser(uid)
       return await this.getUserSessionData(user)
     } catch (err) {
-      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, err || ERROR_MESSAGES.USER.ISSUE_WITH_GET_USER_DATA)
+      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.USER.ISSUE_WITH_GET_USER_DATA)
     }
   }
 }
