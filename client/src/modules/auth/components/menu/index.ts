@@ -1,1 +1,1 @@
-export { default as CreateAccountMenuButton } from './CreateAccountMenuButton'
+export { default as CreateOrLoginAccountMenuButton } from './CreateAccountMenuButton'

@@ -1,1 +1,1 @@
-export { default as CreateAccountDialog } from './CreateAccountDialog'
+export { default as CreateOrLoginDialog } from './CreateOrLoginDialog'

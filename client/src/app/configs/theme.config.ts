@@ -6,8 +6,12 @@ export const APP_THEME: MantineThemeOverride = {
   white: '#fff',
   black: '#2b2b2b',
   colors: {
-    'brand-color': ['#76606D', '#6E5867', '#655060', '#5C485A', '#533F53', '#4B374D', '#422F46', '#39273F', '#35233C', '#301E38'],
-    'light-brand-color': ['#5E3A55', '#4E2644', '#4A2040', '#46193B', '#421337', '#401035', '#3E0C32', '#37092C', '#310627', '#2A0221'],
+    night: ['#898989', '#828282', '#828282', '#6D6D6D', '#505050', '#424242', '#333333', '#252525', '#1E1E1E', '#161616'],
+    'eerie-black': ['#9B9B9B', '#919191', '#868686', '#7A7A7A', '#6D6D6D', '#5E5E5E', '#4E4E4E', '#3C3C3C', '#292929', '#232323'],
+    jonquil: ['#FFEC98', '#FFEA8E', '#FFE883', '#FFE677', '#FFE469', '#FFE15A', '#FFDE49', '#FFDB37', '#FFD723', '#FDCF00'],
+    'snow-white': ['#FAFAFA', '#FCFCFC', '#F5F5F5', '#EBEBEB', '#D6D6D6', '#C3C3C3', '#B1B1B1', '#A1A1A1', '#929292', '#858585'],
   },
-  primaryColor: 'brand-color',
+  primaryColor: 'night',
 }
+
+// #FCFCFC - Snow white
