@@ -1,4 +1,5 @@
 import { useCallback, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { AUTH_METHOD_ENUM } from '@auth'
 import { Button, Modal, Tabs, Title } from '@mantine/core'
 
@@ -10,17 +11,18 @@ interface IProps {
 }
 
 function CreateOrLoginDialog({ isOpen, handleClose }: IProps) {
-  const [dialogTitle, setDialogTitle] = useState('Zaloguj się')
+  const { t } = useTranslation()
+  const [dialogTitle, setDialogTitle] = useState(t('auth:tab.loginTitle'))
 
   const handleSetDialogTitle = useCallback(
     (value: string) => {
       if (value === AUTH_METHOD_ENUM.LOGIN) {
-        setDialogTitle('Logowanie na konto')
+        setDialogTitle(t('auth:tab.loginTitle'))
       } else {
-        setDialogTitle('Zakładanie konta')
+        setDialogTitle(t('auth:tab.registerTitle'))
       }
     },
-    [setDialogTitle]
+    [setDialogTitle, t]
   )
 
   const closeButton = useMemo(
@@ -29,7 +31,7 @@ function CreateOrLoginDialog({ isOpen, handleClose }: IProps) {
         {'Anuluj'}
       </Button>
     ),
-    []
+    [handleClose]
   )
 
   return (
