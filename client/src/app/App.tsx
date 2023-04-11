@@ -2,7 +2,6 @@ import React, { Fragment, ReactNode, Suspense, useEffect, useState } from 'react
 import { RouterProvider } from 'react-router-dom'
 import { APP_ROUTES, axiosApi, i18n } from '@app/configs'
 import { API, AuthContextProvider, CreateAccountResponseSnapshot, useAuthContext } from '@auth'
-import { DialogContextProvider } from '@common'
 import { Notifications, notifications } from '@mantine/notifications'
 import { MutationCache, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AxiosError, AxiosResponse } from 'axios'
@@ -54,14 +53,12 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthContextProvider>
-        <DialogContextProvider>
-          <AppWrapper>
-            <Suspense fallback={<div />}>
-              <Notifications />
-              <RouterProvider router={APP_ROUTES} />
-            </Suspense>
-          </AppWrapper>
-        </DialogContextProvider>
+        <AppWrapper>
+          <Suspense fallback={<div />}>
+            <Notifications />
+            <RouterProvider router={APP_ROUTES} />
+          </Suspense>
+        </AppWrapper>
       </AuthContextProvider>
     </QueryClientProvider>
   )
