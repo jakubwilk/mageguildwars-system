@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { ReactNode, useCallback } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import {
@@ -9,17 +9,18 @@ import {
   useAuthContext,
   useCreateAccountMutation,
 } from '@auth'
-import { Dialog, MIN_PASSWORD_LENGTH, TextField, typedFieldName } from '@common'
+import { MIN_PASSWORD_LENGTH, TextField, typedFieldName } from '@common'
 import { joiResolver } from '@hookform/resolvers/joi'
 import { Button } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
 import Joi from 'joi'
 
 interface IProps {
+  closeButton: ReactNode
   handleCloseDialog: () => void
 }
 
-function CreateAccountDialog({ handleCloseDialog }: IProps) {
+function CreateAccountDialog({ closeButton, handleCloseDialog }: IProps) {
   const { t } = useTranslation()
   const { setUser } = useAuthContext()
   const { mutate: createAccount, isLoading } = useCreateAccountMutation()
@@ -73,29 +74,28 @@ function CreateAccountDialog({ handleCloseDialog }: IProps) {
 
   return (
     <FormProvider {...form}>
-      <Dialog title={'Zakładanie konta'}>
-        <form onSubmit={form.handleSubmit(handleCreateAccount)}>
-          <TextField label={t('auth:field.login')} name={typedFieldName<CreateAccountForm>('login')} isRequired />
-          <TextField label={t('auth:field.email')} name={typedFieldName<CreateAccountForm>('email')} isRequired />
-          <TextField
-            label={t('auth:field.password')}
-            name={typedFieldName<CreateAccountForm>('password')}
-            type={'password'}
-            isRequired
-            isPasswordInput
-          />
-          <TextField
-            label={t('auth:field.repeatPassword')}
-            name={typedFieldName<CreateAccountForm>('repeatPassword')}
-            type={'password'}
-            isRequired
-            isPasswordInput
-          />
-          <Button type={'submit'} loading={isLoading}>
-            {t('common:action.register')}
-          </Button>
-        </form>
-      </Dialog>
+      <form onSubmit={form.handleSubmit(handleCreateAccount)}>
+        <TextField label={t('auth:field.login')} name={typedFieldName<CreateAccountForm>('login')} isRequired />
+        <TextField label={t('auth:field.email')} name={typedFieldName<CreateAccountForm>('email')} isRequired />
+        <TextField
+          label={t('auth:field.password')}
+          name={typedFieldName<CreateAccountForm>('password')}
+          type={'password'}
+          isRequired
+          isPasswordInput
+        />
+        <TextField
+          label={t('auth:field.repeatPassword')}
+          name={typedFieldName<CreateAccountForm>('repeatPassword')}
+          type={'password'}
+          isRequired
+          isPasswordInput
+        />
+        {closeButton}
+        <Button type={'submit'} loading={isLoading}>
+          {t('common:action.register')}
+        </Button>
+      </form>
     </FormProvider>
   )
 }
