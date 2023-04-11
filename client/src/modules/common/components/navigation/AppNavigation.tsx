@@ -16,7 +16,7 @@ function AppNavigation() {
   }, [logoutAccount, setUser])
 
   return (
-    <div className={'flex items-center w-full'}>
+    <div className={'flex items-center ml-8'}>
       {isUser ? (
         <div className={'flex items-center'}>
           <Text>{'Witaj użytkowniku'}</Text>
