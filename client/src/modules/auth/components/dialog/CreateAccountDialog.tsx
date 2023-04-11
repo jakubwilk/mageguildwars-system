@@ -9,11 +9,25 @@ import {
   useAuthContext,
   useCreateAccountMutation,
 } from '@auth'
-import { MIN_PASSWORD_LENGTH, TextField, typedFieldName } from '@common'
+import { COLOR_PALETTE, MIN_PASSWORD_LENGTH, TextField, typedFieldName } from '@common'
 import { joiResolver } from '@hookform/resolvers/joi'
-import { Button } from '@mantine/core'
+import { Button, createStyles, MantineTheme } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
+import { clsx } from 'clsx'
 import Joi from 'joi'
+
+const useStyles = createStyles((theme: MantineTheme) => ({
+  submitButton: {
+    '&.mantine-Button-root': {
+      borderRadius: '0.125rem',
+      backgroundColor: theme.colors[COLOR_PALETTE.JONQUIL][9],
+      color: theme.black,
+      '&:hover, &:focus': {
+        backgroundColor: theme.colors[COLOR_PALETTE.JONQUIL][5],
+      },
+    },
+  },
+}))
 
 interface IProps {
   closeButton: ReactNode
@@ -23,6 +37,7 @@ interface IProps {
 function CreateAccountDialog({ closeButton, handleCloseDialog }: IProps) {
   const { t } = useTranslation()
   const { setUser } = useAuthContext()
+  const { classes } = useStyles()
   const { mutate: createAccount, isLoading } = useCreateAccountMutation()
 
   const form = useForm({
@@ -91,10 +106,12 @@ function CreateAccountDialog({ closeButton, handleCloseDialog }: IProps) {
           isRequired
           isPasswordInput
         />
-        {closeButton}
-        <Button type={'submit'} loading={isLoading}>
-          {t('common:action.register')}
-        </Button>
+        <div className={'flex items-center justify-end mt-8'}>
+          {closeButton}
+          <Button type={'submit'} className={clsx('ml-4', classes.submitButton)} loading={isLoading}>
+            {t('common:action.register')}
+          </Button>
+        </div>
       </form>
     </FormProvider>
   )

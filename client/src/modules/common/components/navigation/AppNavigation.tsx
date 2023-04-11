@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-import { authService, CreateAccountMenuButton, useAuthContext, useLogoutAccountMutation } from '@auth'
+import { authService, CreateOrLoginAccountMenuButton, useAuthContext, useLogoutAccountMutation } from '@auth'
 import { Anchor, Button, Text } from '@mantine/core'
 
 function AppNavigation() {
@@ -26,7 +26,7 @@ function AppNavigation() {
           </Button>
         </div>
       ) : (
-        <CreateAccountMenuButton />
+        <CreateOrLoginAccountMenuButton />
       )}
     </div>
   )
