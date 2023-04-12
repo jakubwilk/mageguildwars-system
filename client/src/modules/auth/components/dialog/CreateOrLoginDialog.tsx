@@ -1,11 +1,9 @@
 import { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { AUTH_METHOD_ENUM } from '@auth'
+import { AUTH_METHOD_ENUM, CreateAccountDialog, LoginAccountDialog } from '@auth'
 import { COLOR_PALETTE } from '@common'
 import { Button, createStyles, MantineTheme, Modal, Tabs, Title } from '@mantine/core'
 import { clsx } from 'clsx'
-
-import CreateAccountDialog from './CreateAccountDialog'
 
 const useStyles = createStyles((theme: MantineTheme) => ({
   modal: {
@@ -94,7 +92,7 @@ function CreateOrLoginDialog({ isOpen, handleClose }: IProps) {
           </div>
         </Tabs.List>
         <Tabs.Panel value={AUTH_METHOD_ENUM.LOGIN} pt={'md'}>
-          {'Gallery tab content\r'}
+          <LoginAccountDialog closeButton={closeButton} handleCloseDialog={handleClose} />
         </Tabs.Panel>
         <Tabs.Panel value={AUTH_METHOD_ENUM.REGISTER} pt={'md'}>
           <CreateAccountDialog closeButton={closeButton} handleCloseDialog={handleClose} />
