@@ -13,6 +13,7 @@ interface IProps {
   size?: MantineSize
   radius?: MantineNumberSize
   className?: string
+  classNameWrapper?: string
   isRequired?: boolean
   isPointer?: boolean
   isMultiline?: boolean
@@ -29,6 +30,7 @@ function TextField({
   size = 'md',
   radius,
   className,
+  classNameWrapper,
   isRequired,
   isPointer,
   isMultiline,
@@ -41,7 +43,7 @@ function TextField({
     <Controller
       name={name}
       render={({ field: { name, value, onChange, onBlur }, fieldState: { error } }) => (
-        <Input.Wrapper id={id} label={label} required={isRequired}>
+        <Input.Wrapper id={id} label={label} required={isRequired} className={classNameWrapper}>
           {isPasswordInput ? (
             <PasswordInput
               id={id}
@@ -78,7 +80,7 @@ function TextField({
               disabled={isDisabled}
             />
           )}
-          {error && <Input.Error>{error.message}</Input.Error>}
+          {error && <Input.Error className={'mt-2'}>{error.message}</Input.Error>}
         </Input.Wrapper>
       )}
     />
