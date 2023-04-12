@@ -25,7 +25,7 @@ const useStyles = createStyles((theme: MantineTheme) => ({
     },
   },
   textField: {
-    '& .mantine-Input-input': {
+    '& .mantine-Input-input, & .mantine-PasswordInput-input > input': {
       backgroundColor: theme.colors[COLOR_PALETTE.EERIE_BLACK][9],
       borderColor: theme.colors[COLOR_PALETTE.EERIE_BLACK][7],
       color: theme.colors[COLOR_PALETTE.SNOW_WHITE][7],
@@ -76,7 +76,6 @@ function CreateAccountDialog({ closeButton, handleCloseDialog }: IProps) {
           }),
         repeatPassword: Joi.string()
           .valid(Joi.ref('password'))
-          .required()
           .messages({ 'string.empty': t('validation:fieldIsRequired'), 'any.only': t('validation:passwordAreNotTheSame') }),
       })
     ),

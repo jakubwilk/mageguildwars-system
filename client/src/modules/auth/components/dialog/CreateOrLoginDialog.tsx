@@ -81,7 +81,9 @@ function CreateOrLoginDialog({ isOpen, handleClose }: IProps) {
     <Modal opened={isOpen} onClose={handleClose} className={classes.modal} size={'lg'} radius={'xs'} withCloseButton={false}>
       <Tabs variant={'pills'} defaultValue={AUTH_METHOD_ENUM.LOGIN} onTabChange={handleSetDialogTitle}>
         <Tabs.List className={clsx('flex items-center justify-between', classes.tabs)}>
-          <Title size={'h4'}>{dialogTitle}</Title>
+          <Title size={'h4'} color={'white'}>
+            {dialogTitle}
+          </Title>
           <div className={'flex items-center'}>
             <Tabs.Tab value={AUTH_METHOD_ENUM.LOGIN} className={'duration-50'}>
               {'Logowanie'}
