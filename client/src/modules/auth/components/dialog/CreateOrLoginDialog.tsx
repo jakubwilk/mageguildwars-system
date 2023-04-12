@@ -23,6 +23,9 @@ const useStyles = createStyles((theme: MantineTheme) => ({
       '&[aria-selected=true]': {
         backgroundColor: theme.colors[COLOR_PALETTE.JONQUIL][1],
         color: theme.colors[COLOR_PALETTE.NIGHT][9],
+        '&:hover, &:focus': {
+          backgroundColor: theme.colors[COLOR_PALETTE.JONQUIL][1],
+        },
       },
       '&[aria-selected=false]': {
         color: theme.colors[COLOR_PALETTE.SNOW_WHITE][7],
