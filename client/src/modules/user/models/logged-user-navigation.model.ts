@@ -15,4 +15,22 @@ export const USER_NAVIGATION: Array<UserNavigation> = [
     link: '/user-panel/',
     iconColor: 'grape',
   },
+  {
+    id: '4f04812c-0165-45da-843e-e6a8fcea66c4',
+    name: 'Panel Strażnika',
+    link: '/mg-panel/',
+    iconColor: 'grape',
+  },
+  {
+    id: '268552b4-1a50-459b-825c-03ec93c1c25e',
+    name: 'Panel moderatora',
+    link: '/mod-panel/',
+    iconColor: 'blue',
+  },
+  {
+    id: 'b98de93f-e835-45de-9eae-65ea03160aa9',
+    name: 'Panel administratora',
+    link: '/admin-panel/',
+    iconColor: 'green',
+  },
 ]
