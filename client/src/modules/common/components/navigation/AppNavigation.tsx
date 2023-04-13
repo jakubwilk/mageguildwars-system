@@ -1,9 +1,14 @@
 import { useCallback } from 'react'
 import { authService, CreateOrLoginAccountMenuButton, useAuthContext, useLogoutAccountMutation } from '@auth'
 import { Anchor, Button, Text } from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
+import { IconMenu } from '@tabler/icons-react'
+
+import AppNavigationPanel from './AppNavigationPanel'
 
 function AppNavigation() {
   const { isUser, setUser } = useAuthContext()
+  const [opened, { open, close }] = useDisclosure(false)
   const { mutate: logoutAccount, isLoading } = useLogoutAccountMutation()
 
   const handleLogoutUser = useCallback(() => {
@@ -28,6 +33,10 @@ function AppNavigation() {
       ) : (
         <CreateOrLoginAccountMenuButton />
       )}
+      <Button variant={'default'} onClick={open} leftIcon={<IconMenu size={'1.25rem'} />} radius={'xs'}>
+        {'Menu'}
+      </Button>
+      <AppNavigationPanel isOpen={opened} handleClose={close} />
     </div>
   )
 }

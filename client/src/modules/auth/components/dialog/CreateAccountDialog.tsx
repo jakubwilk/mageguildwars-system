@@ -1,4 +1,4 @@
-import { ReactNode, useCallback } from 'react'
+import { ReactNode, useCallback, useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import {
@@ -86,6 +86,11 @@ function CreateAccountDialog({ closeButton, handleCloseDialog }: IProps) {
     },
     [createAccount, handleCloseDialog, setUser, t]
   )
+
+  useEffect(() => {
+    form.clearErrors()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <FormProvider {...form}>

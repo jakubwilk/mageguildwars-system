@@ -1,5 +1,6 @@
 import React, { Fragment, ReactNode, Suspense, useEffect, useState } from 'react'
-import { RouterProvider } from 'react-router-dom'
+// import { RouterProvider } from 'react-router-dom'
+// eslint-disable-next-line no-unused-vars
 import { APP_ROUTES, axiosApi, i18n } from '@app/configs'
 import { API, AuthContextProvider, CreateAccountResponseSnapshot, useAuthContext } from '@auth'
 import { Notifications, notifications } from '@mantine/notifications'
@@ -7,6 +8,8 @@ import { MutationCache, QueryClient, QueryClientProvider } from '@tanstack/react
 import { AxiosError, AxiosResponse } from 'axios'
 
 import authService from '../modules/auth/services/AuthService'
+
+import { RootPage } from './pages/root'
 
 interface IProps {
   children: ReactNode
@@ -56,7 +59,8 @@ function App() {
         <AppWrapper>
           <Suspense fallback={<div />}>
             <Notifications />
-            <RouterProvider router={APP_ROUTES} />
+            <RootPage />
+            {/*<RouterProvider router={APP_ROUTES} />*/}
           </Suspense>
         </AppWrapper>
       </AuthContextProvider>
