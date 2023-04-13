@@ -1,3 +1,4 @@
+import { authService } from '@auth'
 import axios, { Axios } from 'axios'
 
 const refreshAccessToken = async (axiosInstance: Axios) => {
@@ -13,8 +14,9 @@ const axiosApi = axios.create({
   baseURL: process.env['REACT_APP_API_ENDPOINT'],
   headers: {
     'Content-Type': ['application/json'],
+    'x-refresh-token': authService.getLocalStorageItem('x-refresh-token'),
   },
-  withCredentials: true,
+  withCredentials: false,
 })
 
 axiosApi.interceptors.response.use(

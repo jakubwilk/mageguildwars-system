@@ -1,14 +1,16 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { ForumPage } from '@app/pages'
-import { LayoutContainer } from '@common'
+
+import { RootPage } from '../pages/root'
 
 export const APP_ROUTES = createBrowserRouter([
   {
-    path: '/',
-    element: (
-      <LayoutContainer>
-        <ForumPage />
-      </LayoutContainer>
-    ),
+    element: <RootPage />,
+    children: [
+      {
+        path: '/',
+        element: <ForumPage />,
+      },
+    ],
   },
 ])

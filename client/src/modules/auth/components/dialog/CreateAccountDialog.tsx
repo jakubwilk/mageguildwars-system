@@ -11,24 +11,10 @@ import {
 } from '@auth'
 import { MIN_PASSWORD_LENGTH, TextField, typedFieldName } from '@common'
 import { joiResolver } from '@hookform/resolvers/joi'
-import { Button, createStyles, Grid } from '@mantine/core'
+import { Button, Grid } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
 import { clsx } from 'clsx'
 import Joi from 'joi'
-
-const useStyles = createStyles(() => ({
-  inputWrapper: {
-    '& .mantine-InputWrapper-label': {
-      display: 'block',
-      marginBottom: '0.5rem',
-    },
-  },
-  submitButton: {
-    '&.mantine-Button-root': {
-      borderRadius: '0.125rem',
-    },
-  },
-}))
 
 interface IProps {
   closeButton: ReactNode
@@ -38,7 +24,6 @@ interface IProps {
 function CreateAccountDialog({ closeButton, handleCloseDialog }: IProps) {
   const { t } = useTranslation()
   const { setUser } = useAuthContext()
-  const { classes } = useStyles()
   const { mutate: createAccount, isLoading } = useCreateAccountMutation()
 
   const form = useForm({
@@ -97,27 +82,16 @@ function CreateAccountDialog({ closeButton, handleCloseDialog }: IProps) {
       <form onSubmit={form.handleSubmit(handleCreateAccount)}>
         <Grid grow>
           <Grid.Col span={12}>
-            <TextField
-              label={t('auth:field.login')}
-              name={typedFieldName<CreateAccountForm>('login')}
-              classNameWrapper={classes.inputWrapper}
-              isRequired
-            />
+            <TextField label={t('auth:field.login')} name={typedFieldName<CreateAccountForm>('login')} isRequired />
           </Grid.Col>
           <Grid.Col span={12}>
-            <TextField
-              label={t('auth:field.email')}
-              name={typedFieldName<CreateAccountForm>('email')}
-              classNameWrapper={classes.inputWrapper}
-              isRequired
-            />
+            <TextField label={t('auth:field.email')} name={typedFieldName<CreateAccountForm>('email')} isRequired />
           </Grid.Col>
           <Grid.Col span={12}>
             <TextField
               label={t('auth:field.password')}
               name={typedFieldName<CreateAccountForm>('password')}
               type={'password'}
-              classNameWrapper={classes.inputWrapper}
               isRequired
               isPasswordInput
             />
@@ -127,15 +101,14 @@ function CreateAccountDialog({ closeButton, handleCloseDialog }: IProps) {
               label={t('auth:field.repeatPassword')}
               name={typedFieldName<CreateAccountForm>('repeatPassword')}
               type={'password'}
-              classNameWrapper={classes.inputWrapper}
               isRequired
               isPasswordInput
             />
           </Grid.Col>
         </Grid>
-        <div className={'flex items-center justify-end mt-8'}>
+        <div className={'flex items-center justify-end mt-4'}>
           {closeButton}
-          <Button type={'submit'} className={clsx('duration-100 ml-4', classes.submitButton)} loading={isLoading}>
+          <Button type={'submit'} className={clsx('duration-100 ml-4')} loading={isLoading}>
             {t('common:action.register')}
           </Button>
         </div>
