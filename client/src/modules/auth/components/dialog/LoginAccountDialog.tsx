@@ -1,9 +1,9 @@
 import { ReactNode, useCallback } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { COLOR_PALETTE, MIN_PASSWORD_LENGTH, TextField, typedFieldName } from '@common'
+import { MIN_PASSWORD_LENGTH, TextField, typedFieldName } from '@common'
 import { joiResolver } from '@hookform/resolvers/joi'
-import { Button, createStyles, Grid, MantineTheme } from '@mantine/core'
+import { Button, createStyles, Grid } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
 import { clsx } from 'clsx'
 import Joi from 'joi'
@@ -13,29 +13,16 @@ import { useAuthContext } from '../../hooks'
 import { LOGIN_ACCOUNT_INITIAL_VALUES, LoginAccountForm, LoginAccountRequestParams } from '../../models'
 import { authService } from '../../services'
 
-const useStyles = createStyles((theme: MantineTheme) => ({
+const useStyles = createStyles(() => ({
   inputWrapper: {
     '& .mantine-InputWrapper-label': {
       display: 'block',
       marginBottom: '0.5rem',
-      color: theme.colors[COLOR_PALETTE.SNOW_WHITE][7],
-    },
-  },
-  textField: {
-    '& .mantine-Input-input, & .mantine-PasswordInput-input > input': {
-      backgroundColor: theme.colors[COLOR_PALETTE.EERIE_BLACK][9],
-      borderColor: theme.colors[COLOR_PALETTE.EERIE_BLACK][7],
-      color: theme.colors[COLOR_PALETTE.SNOW_WHITE][7],
     },
   },
   submitButton: {
     '&.mantine-Button-root': {
       borderRadius: '0.125rem',
-      backgroundColor: theme.colors[COLOR_PALETTE.JONQUIL][9],
-      color: theme.black,
-      '&:hover, &:focus': {
-        backgroundColor: theme.colors[COLOR_PALETTE.JONQUIL][5],
-      },
     },
   },
 }))
@@ -99,7 +86,6 @@ function LoginAccountDialog({ closeButton, handleCloseDialog }: IProps) {
             <TextField
               label={t('auth:field.login')}
               name={typedFieldName<LoginAccountForm>('login')}
-              className={classes.textField}
               classNameWrapper={classes.inputWrapper}
               isRequired
             />
@@ -109,7 +95,6 @@ function LoginAccountDialog({ closeButton, handleCloseDialog }: IProps) {
               label={t('auth:field.password')}
               name={typedFieldName<LoginAccountForm>('password')}
               type={'password'}
-              className={classes.textField}
               classNameWrapper={classes.inputWrapper}
               isRequired
               isPasswordInput
