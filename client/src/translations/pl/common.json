@@ -3,5 +3,9 @@
     "register": "Utwórz konto",
     "login": "Zaloguj się",
     "cancel": "Anuluj"
+  },
+  "copyright": {
+    "allRightReversed": "Wszelkie prawa zastrzeżone",
+    "siteNameAndYear": "Mage Guild Wars 2009 - {{currentYear}}"
   }
 }
