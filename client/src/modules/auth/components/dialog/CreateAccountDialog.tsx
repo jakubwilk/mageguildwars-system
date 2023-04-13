@@ -9,36 +9,23 @@ import {
   useAuthContext,
   useCreateAccountMutation,
 } from '@auth'
-import { COLOR_PALETTE, MIN_PASSWORD_LENGTH, TextField, typedFieldName } from '@common'
+import { MIN_PASSWORD_LENGTH, TextField, typedFieldName } from '@common'
 import { joiResolver } from '@hookform/resolvers/joi'
-import { Button, createStyles, Grid, MantineTheme } from '@mantine/core'
+import { Button, createStyles, Grid } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
 import { clsx } from 'clsx'
 import Joi from 'joi'
 
-const useStyles = createStyles((theme: MantineTheme) => ({
+const useStyles = createStyles(() => ({
   inputWrapper: {
     '& .mantine-InputWrapper-label': {
       display: 'block',
       marginBottom: '0.5rem',
-      color: theme.colors[COLOR_PALETTE.SNOW_WHITE][7],
-    },
-  },
-  textField: {
-    '& .mantine-Input-input, & .mantine-PasswordInput-input > input': {
-      backgroundColor: theme.colors[COLOR_PALETTE.EERIE_BLACK][9],
-      borderColor: theme.colors[COLOR_PALETTE.EERIE_BLACK][7],
-      color: theme.colors[COLOR_PALETTE.SNOW_WHITE][7],
     },
   },
   submitButton: {
     '&.mantine-Button-root': {
       borderRadius: '0.125rem',
-      backgroundColor: theme.colors[COLOR_PALETTE.JONQUIL][9],
-      color: theme.black,
-      '&:hover, &:focus': {
-        backgroundColor: theme.colors[COLOR_PALETTE.JONQUIL][5],
-      },
     },
   },
 }))
@@ -108,7 +95,6 @@ function CreateAccountDialog({ closeButton, handleCloseDialog }: IProps) {
             <TextField
               label={t('auth:field.login')}
               name={typedFieldName<CreateAccountForm>('login')}
-              className={classes.textField}
               classNameWrapper={classes.inputWrapper}
               isRequired
             />
@@ -117,7 +103,6 @@ function CreateAccountDialog({ closeButton, handleCloseDialog }: IProps) {
             <TextField
               label={t('auth:field.email')}
               name={typedFieldName<CreateAccountForm>('email')}
-              className={classes.textField}
               classNameWrapper={classes.inputWrapper}
               isRequired
             />
@@ -127,7 +112,6 @@ function CreateAccountDialog({ closeButton, handleCloseDialog }: IProps) {
               label={t('auth:field.password')}
               name={typedFieldName<CreateAccountForm>('password')}
               type={'password'}
-              className={classes.textField}
               classNameWrapper={classes.inputWrapper}
               isRequired
               isPasswordInput
@@ -138,7 +122,6 @@ function CreateAccountDialog({ closeButton, handleCloseDialog }: IProps) {
               label={t('auth:field.repeatPassword')}
               name={typedFieldName<CreateAccountForm>('repeatPassword')}
               type={'password'}
-              className={classes.textField}
               classNameWrapper={classes.inputWrapper}
               isRequired
               isPasswordInput
