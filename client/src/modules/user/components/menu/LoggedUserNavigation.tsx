@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { authService, useAuthContext, useLogoutAccountMutation } from '@auth'
 import { createStyles, Divider, Group, Text, ThemeIcon, UnstyledButton } from '@mantine/core'
-import { IconSquareArrowLeft, IconUserCog } from '@tabler/icons-react'
+import { IconDatabaseCog, IconServerCog, IconShieldCog, IconSquareArrowLeft, IconUserCog } from '@tabler/icons-react'
 import { USER_NAVIGATION, UserNavigation } from '@user'
 import { clsx } from 'clsx'
 
@@ -14,6 +14,7 @@ const useStyles = createStyles((theme) => ({
   link: {
     display: 'block',
     padding: '0.5rem',
+    color: 'inherit',
     textDecoration: 'none',
     '&:hover, &:focus': {
       backgroundColor: theme.colors.gray[0],
@@ -45,7 +46,10 @@ function LoggedUserNavigation() {
     })
   }, [logoutAccount, setUser])
 
-  const menuIcons = useMemo(() => [<IconUserCog size={18} />], [])
+  const menuIcons = useMemo(
+    () => [<IconUserCog size={18} />, <IconShieldCog size={18} />, <IconServerCog size={18} />, <IconDatabaseCog size={18} />],
+    []
+  )
 
   return (
     <Fragment>
