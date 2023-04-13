@@ -1,6 +1,7 @@
 {
   "action": {
     "register": "Utwórz konto",
-    "login": "Zaloguj się"
+    "login": "Zaloguj się",
+    "cancel": "Anuluj"
   }
 }
