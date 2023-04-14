@@ -18,7 +18,7 @@ function AppWrapper({ children }: IProps) {
 
   useEffect(() => {
     if (refreshToken && refreshToken !== 'undefined' && refreshToken !== 'null') {
-      axiosApi.get(API.autoLoginAccount, { withCredentials: true }).then(({ data }: AxiosResponse<CreateAccountResponseSnapshot>) => {
+      axiosApi.get(API.autoLoginAccount).then(({ data }: AxiosResponse<CreateAccountResponseSnapshot>) => {
         authService.setLocalStorageItem('x-refresh-token', data.refreshToken)
         setUser(data.user)
       })
