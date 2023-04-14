@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Burger, createStyles, Header, MediaQuery, useMantineTheme } from '@mantine/core'
+import { Burger, createStyles, Header, useMantineTheme } from '@mantine/core'
 
 const useStyles = createStyles(() => ({
   logo: {
@@ -18,23 +18,23 @@ const useStyles = createStyles(() => ({
 
 interface IProps {
   isOpen: boolean
-  setOpened: (v: boolean) => void
+  handleOpen: () => void
 }
 
-function AppHeader({ isOpen, setOpened }: IProps) {
+function AppHeader({ isOpen, handleOpen }: IProps) {
   const theme = useMantineTheme()
   const { classes } = useStyles()
 
   return (
     <Header height={{ base: 70, md: 110 }} className={'px-4'}>
-      <div className={'flex items-center justify-between h-full'}>
-        <Link to={'/'}>
-          <img src={'https://mageguildwars.pl/images/revolution/logo.png'} alt={'Mage Guild Wars'} className={classes.logo} />
-        </Link>
+      <div className={'container mx-auto h-full'}>
+        <div className={'flex items-center justify-between h-full'}>
+          <Link to={'/'}>
+            <img src={'https://mageguildwars.pl/images/revolution/logo.png'} alt={'Mage Guild Wars'} className={classes.logo} />
+          </Link>
 
-        <MediaQuery largerThan={'sm'} styles={{ display: 'none' }}>
-          <Burger opened={isOpen} onClick={() => setOpened(!isOpen)} size={'sm'} color={theme.colors.gray[6]} />
-        </MediaQuery>
+          <Burger opened={isOpen} onClick={handleOpen} size={'sm'} color={theme.colors.gray[6]} />
+        </div>
       </div>
     </Header>
   )

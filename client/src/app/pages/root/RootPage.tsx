@@ -1,21 +1,17 @@
-import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { AppFooter, AppHeader, AppNavbar } from '@common'
-import { AppShell } from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
 
 function RootPage() {
-  const [opened, setOpened] = useState(false)
+  const [opened, { open, close }] = useDisclosure(false)
 
   return (
-    <AppShell
-      navbarOffsetBreakpoint={'sm'}
-      asideOffsetBreakpoint={'sm'}
-      navbar={<AppNavbar isOpen={opened} />}
-      footer={<AppFooter />}
-      header={<AppHeader isOpen={opened} setOpened={setOpened} />}
-    >
+    <div className={'relative min-h-screen'}>
+      <AppHeader isOpen={opened} handleOpen={open} />
+      <AppNavbar isOpen={opened} handleClose={close} />
       <Outlet />
-    </AppShell>
+      <AppFooter />
+    </div>
   )
 }
 
