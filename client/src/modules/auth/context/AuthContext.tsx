@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from 'react'
+import { UserSnapshot } from '@user'
 
 import { AuthContextType } from '../models'
 
@@ -14,7 +15,7 @@ interface IProps {
 
 function AuthContextProvider({ children }: IProps) {
   const [isUser, setIsUser] = useState(false)
-  const [user, setUser] = useState<object | null>(null)
+  const [user, setUser] = useState<UserSnapshot | null>(null)
 
   useEffect(() => {
     setIsUser(user !== null)

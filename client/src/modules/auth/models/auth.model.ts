@@ -1,7 +1,9 @@
+import { UserSnapshot } from '@user'
+
 export interface AuthContextType {
   isUser: boolean
-  user: object | null
-  setUser: (v: object | null) => void
+  user: UserSnapshot | null
+  setUser: (v: UserSnapshot | null) => void
 }
 
 export enum AUTH_METHOD_ENUM {

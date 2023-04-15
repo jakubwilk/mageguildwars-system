@@ -1,3 +1,5 @@
+import { UserSnapshot } from '@user'
+
 export interface CreateAccountForm {
   login: string
   email: string
@@ -13,7 +15,7 @@ export interface CreateAccountRequestParams {
 
 export interface CreateAccountResponseSnapshot {
   refreshToken: string
-  user: any
+  user: UserSnapshot
 }
 
 export const CREATE_ACCOUNT_INITIAL_VALUES: CreateAccountForm = {

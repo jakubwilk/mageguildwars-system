@@ -11,6 +11,7 @@ export const MapModelToUser = (user: UserModel): UserSnapshot => {
     isCreateProfileEnabled: user.isCreateProfileEnabled,
     isActive: user.isActive,
     isLocked: user.isLocked,
+    isGameMaster: user.isGameMaster,
     createdAt: user.createdAt,
     updatedAt: user.updatedAt,
   }

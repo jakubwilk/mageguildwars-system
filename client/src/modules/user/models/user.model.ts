@@ -1,4 +1,9 @@
-import { UserGroup } from '@prisma/client'
+export interface UserGroup {
+  BANNED: 'BANNED'
+  USER: 'USER'
+  MODERATOR: 'MODERATOR'
+  OPERATOR: 'OPERATOR'
+}
 
 export interface UserSnapshot {
   uid: string
