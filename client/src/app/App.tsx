@@ -13,8 +13,10 @@ interface IProps {
 }
 
 function AppWrapper({ children }: IProps) {
-  const { setUser } = useAuthContext()
+  const { setUser, user } = useAuthContext()
   const refreshToken = authService.getLocalStorageItem('x-refresh-token')
+
+  console.log('user', user)
 
   useEffect(() => {
     if (refreshToken && refreshToken !== 'undefined' && refreshToken !== 'null') {
