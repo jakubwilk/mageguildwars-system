@@ -3,7 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { MIN_PASSWORD_LENGTH, TextField, typedFieldName } from '@common'
 import { joiResolver } from '@hookform/resolvers/joi'
-import { Button, Grid } from '@mantine/core'
+import { Button, createStyles, Grid } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
 import { clsx } from 'clsx'
 import Joi from 'joi'
@@ -13,6 +13,25 @@ import { useAuthContext } from '../../hooks'
 import { LOGIN_ACCOUNT_INITIAL_VALUES, LoginAccountForm, LoginAccountRequestParams } from '../../models'
 import { authService } from '../../services'
 
+const useStyles = createStyles((theme) => ({
+  input: {
+    '& .mantine-Input-input, & .mantine-PasswordInput-innerInput': {
+      backgroundColor: theme.colors.night[7],
+      borderColor: theme.colors.night[4],
+      color: theme.colors.gray[6],
+    },
+    '& .mantine-Input.Wrapper-label': {
+      color: theme.colors.gray[6],
+    },
+  },
+  button: {
+    backgroundColor: theme.colors['dark-purple'][9],
+    '&:hover, &:focus': {
+      backgroundColor: theme.colors['dark-purple'][7],
+    },
+  },
+}))
+
 interface IProps {
   closeButton: ReactNode
   handleCloseDialog: () => void
@@ -20,6 +39,7 @@ interface IProps {
 
 function LoginAccountDialog({ closeButton, handleCloseDialog }: IProps) {
   const { t } = useTranslation()
+  const { classes } = useStyles()
   const { setUser } = useAuthContext()
   const { mutate: loginAccount, isLoading } = useLoginAccountMutation()
 
@@ -73,13 +93,19 @@ function LoginAccountDialog({ closeButton, handleCloseDialog }: IProps) {
       <form onSubmit={form.handleSubmit(handleLoginAccount)}>
         <Grid grow>
           <Grid.Col span={12}>
-            <TextField label={t('auth:field.login')} name={typedFieldName<LoginAccountForm>('login')} isRequired />
+            <TextField
+              label={t('auth:field.login')}
+              name={typedFieldName<LoginAccountForm>('login')}
+              className={classes.input}
+              isRequired
+            />
           </Grid.Col>
           <Grid.Col span={12}>
             <TextField
               label={t('auth:field.password')}
               name={typedFieldName<LoginAccountForm>('password')}
               type={'password'}
+              className={classes.input}
               isRequired
               isPasswordInput
             />
@@ -87,7 +113,7 @@ function LoginAccountDialog({ closeButton, handleCloseDialog }: IProps) {
         </Grid>
         <div className={'flex items-center justify-end mt-4'}>
           {closeButton}
-          <Button type={'submit'} className={clsx('duration-100 ml-4')} loading={isLoading}>
+          <Button type={'submit'} className={clsx('duration-100 ml-4', classes.button)} loading={isLoading}>
             {t('common:action.login')}
           </Button>
         </div>
