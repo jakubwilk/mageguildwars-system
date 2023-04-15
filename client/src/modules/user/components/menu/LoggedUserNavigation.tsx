@@ -2,7 +2,7 @@ import { Fragment, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { authService, useAuthContext, useLogoutAccountMutation } from '@auth'
-import { createStyles, Divider, Group, Text, ThemeIcon, UnstyledButton } from '@mantine/core'
+import { Button, createStyles, Divider, Group, Text, ThemeIcon } from '@mantine/core'
 import { IconDatabaseCog, IconServerCog, IconShieldCog, IconSquareArrowLeft, IconUserCog } from '@tabler/icons-react'
 import { USER_NAVIGATION, UserNavigation } from '@user'
 import { clsx } from 'clsx'
@@ -21,9 +21,18 @@ const useStyles = createStyles((theme) => ({
     },
   },
   button: {
+    backgroundColor: 'transparent',
     padding: '0.5rem',
+    color: theme.colors.gray[5],
+    fontWeight: 400,
     '&:hover, &:focus': {
-      backgroundColor: theme.colors.gray[0],
+      backgroundColor: theme.colors.night[3],
+    },
+    '& .icon': {
+      color: theme.colors.gray[8],
+    },
+    '& .mantine-Button-inner': {
+      justifyContent: 'flex-start',
     },
   },
   text: {
@@ -64,14 +73,13 @@ function LoggedUserNavigation() {
           </Group>
         </Link>
       ))}
-      <UnstyledButton onClick={handleLogoutUser} className={clsx('w-full duration-150', classes.button)}>
-        <Group>
-          <ThemeIcon variant={'light'} color={'red'}>
-            <IconSquareArrowLeft size={18} />
-          </ThemeIcon>
-          <Text className={clsx('uppercase', classes.text)}>{t('auth:action.logout')}</Text>
-        </Group>
-      </UnstyledButton>
+      <Button
+        onClick={handleLogoutUser}
+        className={clsx('w-full duration-150 uppercase', classes.button)}
+        leftIcon={<IconSquareArrowLeft size={18} />}
+      >
+        {t('auth:action.logout')}
+      </Button>
     </Fragment>
   )
 }
