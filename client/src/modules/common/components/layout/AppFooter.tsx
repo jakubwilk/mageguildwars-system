@@ -5,8 +5,8 @@ import { clsx } from 'clsx'
 
 const useStyles = createStyles((theme) => ({
   footer: {
-    backgroundColor: theme.colors.brand,
-    borderColor: theme.colors.night[5],
+    backgroundColor: theme.colors.night[6],
+    borderColor: 'transparent',
   },
   text: {
     color: theme.colors.gray[6],

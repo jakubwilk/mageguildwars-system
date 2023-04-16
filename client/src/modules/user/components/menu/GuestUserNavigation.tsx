@@ -8,21 +8,16 @@ import { clsx } from 'clsx'
 
 const useStyles = createStyles((theme) => ({
   line: {
-    borderColor: theme.colors.night[2],
+    borderColor: theme.colors.gray[9],
   },
   button: {
-    backgroundColor: 'transparent',
-    padding: '0.5rem',
     color: theme.colors.gray[5],
     fontWeight: 400,
+    borderColor: theme.colors.gray[9],
+    fontSize: '0.85rem',
     '&:hover, &:focus': {
-      backgroundColor: theme.colors.night[3],
-    },
-    '& .icon': {
-      color: theme.colors.gray[8],
-    },
-    '& .mantine-Button-inner': {
-      justifyContent: 'flex-start',
+      backgroundColor: theme.colors['dark-purple'][9],
+      borderColor: theme.colors['dark-purple'][9],
     },
   },
 }))
@@ -38,7 +33,11 @@ function GuestUserNavigation() {
       <Button
         onClick={open}
         className={clsx('w-full duration-150 uppercase', classes.button)}
+        radius={'sm'}
+        size={'md'}
+        variant={'outline'}
         leftIcon={<IconSquareArrowRight size={18} />}
+        uppercase
       >
         {t('auth:action.goIntoSystem')}
       </Button>
