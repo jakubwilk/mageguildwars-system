@@ -1,12 +1,11 @@
 import { ReactNode, useCallback, useEffect } from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { MIN_PASSWORD_LENGTH, TextField, typedFieldName } from '@common'
-import { joiResolver } from '@hookform/resolvers/joi'
-import { Button, createStyles, Grid } from '@mantine/core'
+import { typedFieldName } from '@common'
+import { Button, createStyles, Grid, PasswordInput, TextInput } from '@mantine/core'
+import { useForm, yupResolver } from '@mantine/form'
 import { notifications } from '@mantine/notifications'
 import { clsx } from 'clsx'
-import Joi from 'joi'
+import * as Yup from 'yup'
 
 import { useLoginAccountMutation } from '../../api'
 import { useAuthContext } from '../../hooks'
@@ -15,16 +14,22 @@ import { authService } from '../../services'
 
 const useStyles = createStyles((theme) => ({
   input: {
-    '& .mantine-Input-input, & .mantine-PasswordInput-innerInput': {
-      backgroundColor: theme.colors.night[7],
-      borderColor: theme.colors.night[4],
+    '& .mantine-TextInput-label, & .mantine-PasswordInput-label': {
       color: theme.colors.gray[6],
+      marginBottom: 8,
+      fontSize: '0.85rem',
     },
-    '& .mantine-Input.Wrapper-label': {
-      color: theme.colors.gray[6],
+    '& .mantine-TextInput-input, & .mantine-PasswordInput-input': {
+      backgroundColor: theme.colors.gray[3],
+      borderColor: theme.colors.gray[3],
+    },
+    '& .mantine-TextInput-error, & .mantine-PasswordInput-error': {
+      fontSize: '0.8rem',
     },
   },
   button: {
+    fontSize: '0.85rem',
+    fontWeight: 500,
     backgroundColor: theme.colors['dark-purple'][9],
     '&:hover, &:focus': {
       backgroundColor: theme.colors['dark-purple'][7],
@@ -44,22 +49,11 @@ function LoginAccountDialog({ closeButton, handleCloseDialog }: IProps) {
   const { mutate: loginAccount, isLoading } = useLoginAccountMutation()
 
   const form = useForm({
-    mode: 'onBlur',
-    defaultValues: LOGIN_ACCOUNT_INITIAL_VALUES,
-    resolver: joiResolver(
-      Joi.object({
-        login: Joi.string()
-          .required()
-          .messages({ 'string.empty': t('validation:fieldIsRequired') }),
-        password: Joi.string()
-          .min(MIN_PASSWORD_LENGTH)
-          .messages({
-            'string.empty': t('validation:fieldIsRequired'),
-            'string.min': t('validation:fieldShouldContainAtLeastCharacters', {
-              field: t('auth:field.password'),
-              characters: MIN_PASSWORD_LENGTH,
-            }),
-          }),
+    initialValues: LOGIN_ACCOUNT_INITIAL_VALUES,
+    validate: yupResolver(
+      Yup.object().shape({
+        login: Yup.string().required(t('validation:fieldIsRequired') as string),
+        password: Yup.string().required(t('validation:fieldIsRequired') as string),
       })
     ),
   })
@@ -89,36 +83,38 @@ function LoginAccountDialog({ closeButton, handleCloseDialog }: IProps) {
   }, [])
 
   return (
-    <FormProvider {...form}>
-      <form onSubmit={form.handleSubmit(handleLoginAccount)}>
-        <Grid grow>
-          <Grid.Col span={12}>
-            <TextField
-              label={t('auth:field.login')}
-              name={typedFieldName<LoginAccountForm>('login')}
-              className={classes.input}
-              isRequired
-            />
-          </Grid.Col>
-          <Grid.Col span={12}>
-            <TextField
-              label={t('auth:field.password')}
-              name={typedFieldName<LoginAccountForm>('password')}
-              type={'password'}
-              className={classes.input}
-              isRequired
-              isPasswordInput
-            />
-          </Grid.Col>
-        </Grid>
-        <div className={'flex items-center justify-end mt-4'}>
-          {closeButton}
-          <Button type={'submit'} className={clsx('duration-100 ml-4', classes.button)} loading={isLoading}>
-            {t('common:action.login')}
-          </Button>
-        </div>
-      </form>
-    </FormProvider>
+    <form onSubmit={form.onSubmit(handleLoginAccount)}>
+      <Grid gutter={'lg'} grow>
+        <Grid.Col span={12}>
+          <TextInput
+            {...form.getInputProps('login')}
+            label={t('auth:field.login')}
+            name={typedFieldName<LoginAccountForm>('login')}
+            className={classes.input}
+            size={'md'}
+            withAsterisk
+          />
+        </Grid.Col>
+        <Grid.Col span={12}>
+          <PasswordInput
+            {...form.getInputProps('password')}
+            label={t('auth:field.password')}
+            name={typedFieldName<LoginAccountForm>('password')}
+            className={classes.input}
+            size={'md'}
+            withAsterisk
+          />
+        </Grid.Col>
+        <Grid.Col span={12}>
+          <div className={'flex items-center justify-end mt-6'}>
+            {closeButton}
+            <Button type={'submit'} className={clsx('duration-100 ml-4', classes.button)} loading={isLoading} size={'md'}>
+              {t('common:action.login')}
+            </Button>
+          </div>
+        </Grid.Col>
+      </Grid>
+    </form>
   )
 }
 

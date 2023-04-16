@@ -7,7 +7,8 @@ import { clsx } from 'clsx'
 const useStyles = createStyles((theme) => ({
   dialog: {
     '& .mantine-Modal-content': {
-      backgroundColor: theme.colors.brand[9],
+      backgroundColor: theme.colors.night[6],
+      border: `1px solid ${theme.colors.gray[9]}`,
     },
   },
   tab: {
@@ -17,10 +18,16 @@ const useStyles = createStyles((theme) => ({
       color: theme.white,
     },
     '&[aria-selected="true"]': {
-      backgroundColor: theme.colors.brand[6],
+      backgroundColor: theme.colors.brand[5],
     },
   },
+  title: {
+    color: theme.colors.gray[4],
+    fontWeight: 400,
+  },
   button: {
+    fontSize: '0.85rem',
+    fontWeight: 500,
     backgroundColor: theme.colors.night[3],
     '&:hover, &:focus': {
       backgroundColor: theme.colors.night[1],
@@ -51,7 +58,7 @@ function CreateOrLoginDialog({ isOpen, handleClose }: IProps) {
 
   const closeButton = useMemo(
     () => (
-      <Button onClick={handleClose} className={clsx('duration-100', classes.button)}>
+      <Button onClick={handleClose} className={clsx('duration-100', classes.button)} size={'md'}>
         {t('common:action.cancel')}
       </Button>
     ),
@@ -59,10 +66,12 @@ function CreateOrLoginDialog({ isOpen, handleClose }: IProps) {
   )
 
   return (
-    <Modal opened={isOpen} onClose={handleClose} size={'lg'} radius={'md'} withCloseButton={false} className={classes.dialog}>
-      <Tabs variant={'pills'} defaultValue={AUTH_METHOD_ENUM.LOGIN} onTabChange={handleSetDialogTitle} className={'p-4'}>
-        <Tabs.List className={clsx('flex items-center justify-between')}>
-          <Title size={'h4'}>{dialogTitle}</Title>
+    <Modal opened={isOpen} onClose={handleClose} size={'lg'} radius={'sm'} withCloseButton={false} className={classes.dialog}>
+      <Tabs variant={'pills'} defaultValue={AUTH_METHOD_ENUM.LOGIN} onTabChange={handleSetDialogTitle} className={'p-2'}>
+        <Tabs.List className={clsx('flex items-center justify-between mb-8')}>
+          <Title size={'h4'} className={classes.title}>
+            {dialogTitle}
+          </Title>
           <div className={'flex items-center'}>
             <Tabs.Tab value={AUTH_METHOD_ENUM.LOGIN} className={clsx('duration-50', classes.tab)}>
               {t('auth:tab.loginTab')}

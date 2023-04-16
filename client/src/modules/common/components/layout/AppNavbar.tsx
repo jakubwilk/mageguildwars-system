@@ -3,10 +3,15 @@ import { createStyles, Drawer, Navbar } from '@mantine/core'
 import { GuestUserNavigation, LoggedUserNavigation } from '@user'
 import { clsx } from 'clsx'
 
+import { Logo } from '../logo'
+
 const useStyles = createStyles((theme) => ({
   drawer: {
+    '& .mantine-Paper-root': {
+      borderRight: `1px solid ${theme.colors.gray[9]}`,
+    },
     '& .mantine-Drawer-content, & .mantine-Drawer-header': {
-      backgroundColor: `${theme.colors.night[7]} !important`,
+      backgroundColor: `${theme.colors.night[6]} !important`,
     },
     '& .mantine-Drawer-close': {
       color: theme.colors.gray[5],
@@ -22,7 +27,7 @@ const useStyles = createStyles((theme) => ({
     },
   },
   navbar: {
-    backgroundColor: theme.colors.night[7],
+    backgroundColor: theme.colors.night[6],
   },
   text: {
     color: theme.colors.gray[6],
@@ -39,7 +44,7 @@ function AppNavbar({ isOpen, handleClose }: IProps) {
   const { isUser } = useAuthContext()
 
   return (
-    <Drawer opened={isOpen} onClose={handleClose} title={'Nawigacja'} className={classes.drawer}>
+    <Drawer opened={isOpen} onClose={handleClose} title={<Logo />} className={classes.drawer} withCloseButton>
       <Navbar className={clsx('border-0', classes.navbar)}>
         <Navbar.Section>{'Główna nawigacja'}</Navbar.Section>
         <Navbar.Section>{isUser ? <LoggedUserNavigation /> : <GuestUserNavigation />}</Navbar.Section>
