@@ -1,1 +1,2 @@
-export { default as FeaturePanel } from './FeaturePanel'
+export { default as FeaturePanels } from './FeaturePanels'
+export { default as FeatureSinglePanel } from './FeatureSinglePanel'
