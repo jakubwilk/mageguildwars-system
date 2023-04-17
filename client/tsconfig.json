@@ -7,7 +7,8 @@
       "@auth": ["./src/modules/auth/index.ts"],
       "@common": ["./src/modules/common/index.ts"],
       "@forum": ["./src/modules/forum/index.ts"],
-      "@user": ["./src/modules/user/index.ts"]
+      "@user": ["./src/modules/user/index.ts"],
+      "@feature-panel": ["./src/modules/feature-panel/index.ts"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],

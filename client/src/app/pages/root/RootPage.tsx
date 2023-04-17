@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom'
 import { AppFooter, AppHeader, AppNavbar } from '@common'
+import { FeaturePanel } from '@feature-panel'
 import { useDisclosure } from '@mantine/hooks'
 
 function RootPage() {
@@ -9,6 +10,7 @@ function RootPage() {
     <div className={'relative min-h-screen'}>
       <AppHeader isOpen={opened} handleOpen={open} />
       <AppNavbar isOpen={opened} handleClose={close} />
+      <FeaturePanel />
       <Outlet />
       <AppFooter />
     </div>
