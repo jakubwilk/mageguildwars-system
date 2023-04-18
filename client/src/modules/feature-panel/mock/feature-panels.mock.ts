@@ -6,7 +6,7 @@ export const FEATURE_PANELS_MOCK: Array<SingleFeaturePanel> = [
     link: '/forum/1/thread/1',
     title: 'Inwazja smoków',
     description: 'Tło fabularne. Staw czoła inwazji',
-    coverImageUrl: '',
+    coverImageUrl: 'https://i.imgur.com/wy5Y3Wb.jpg',
     altImageText: 'Wizerunek czarnego smoka z niebieskimi plamkami',
     created: new Date(2023, 4, 15),
   },
