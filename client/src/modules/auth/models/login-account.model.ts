@@ -1,3 +1,5 @@
+import { UserSnapshot } from '@user'
+
 export interface LoginAccountForm {
   login: string
   password: string
@@ -10,7 +12,7 @@ export interface LoginAccountRequestParams {
 
 export interface LoginAccountResponseSnapshot {
   refreshToken: string
-  user: any
+  user: UserSnapshot
 }
 
 export const LOGIN_ACCOUNT_INITIAL_VALUES: LoginAccountForm = {

@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, useEffect } from 'react'
+import { ReactNode, useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { typedFieldName } from '@common'
 import { Button, createStyles, Grid, PasswordInput, TextInput } from '@mantine/core'
@@ -7,8 +7,7 @@ import { notifications } from '@mantine/notifications'
 import { clsx } from 'clsx'
 import * as Yup from 'yup'
 
-import { useLoginAccountMutation } from '../../api'
-import { useAuthContext } from '../../hooks'
+import { useAuthContext, useMockLogin } from '../../hooks'
 import { LOGIN_ACCOUNT_INITIAL_VALUES, LoginAccountForm, LoginAccountRequestParams } from '../../models'
 import { authService } from '../../services'
 
@@ -46,7 +45,8 @@ function LoginAccountDialog({ closeButton, handleCloseDialog }: IProps) {
   const { t } = useTranslation()
   const { classes } = useStyles()
   const { setUser } = useAuthContext()
-  const { mutate: loginAccount, isLoading } = useLoginAccountMutation()
+  const { data: userData } = useMockLogin()
+  const [isLoading, setIsLoading] = useState(false)
 
   const form = useForm({
     initialValues: LOGIN_ACCOUNT_INITIAL_VALUES,
@@ -60,21 +60,24 @@ function LoginAccountDialog({ closeButton, handleCloseDialog }: IProps) {
 
   const handleLoginAccount = useCallback(
     (data: LoginAccountRequestParams) => {
-      loginAccount(data, {
-        onSuccess: ({ data }) => {
-          authService.setLocalStorageItem('x-refresh-token', data.refreshToken)
-          setUser(data.user)
+      setIsLoading(true)
+      setTimeout(() => {
+        if (userData) {
+          authService.setLocalStorageItem('x-refresh-token', userData.refreshToken)
+          setUser(userData.user)
+          authService.setLocalStorageItem('mocked-user', userData.user)
           notifications.show({
             message: t('auth:message.accountCreatedSuccessfully'),
             color: 'green',
             autoClose: 5000,
             withCloseButton: true,
           })
+          setIsLoading(false)
           handleCloseDialog()
-        },
-      })
+        }
+      }, 1500)
     },
-    [loginAccount, handleCloseDialog, setUser, t]
+    [handleCloseDialog, setUser, t, userData]
   )
 
   useEffect(() => {
