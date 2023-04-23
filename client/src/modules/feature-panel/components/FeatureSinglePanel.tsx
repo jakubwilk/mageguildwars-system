@@ -44,9 +44,11 @@ const useStyles = createStyles((theme) => ({
   },
 }))
 
-interface IProps extends SingleFeaturePanel {}
+interface IProps extends SingleFeaturePanel {
+  isCompact: boolean
+}
 
-function FeatureSinglePanel({ link, title, description, created, coverImageUrl }: IProps) {
+function FeatureSinglePanel({ link, title, description, created, coverImageUrl, isCompact }: IProps) {
   const { classes } = useStyles()
 
   const renderDate = useCallback((date: Date) => {
@@ -54,12 +56,12 @@ function FeatureSinglePanel({ link, title, description, created, coverImageUrl }
   }, [])
 
   return (
-    <Link to={link} className={clsx('relative h-[250px]', classes.link)}>
-      <div className={'relative flex flex-col justify-end p-6 h-[250px] z-30'}>
-        <Text fz={'lg'} fw={700} className={clsx('uppercase mb-2', classes.title)}>
+    <Link to={link} className={clsx('relative', !isCompact ? 'h-[150px]' : 'h-[250px]', classes.link)}>
+      <div className={clsx('relative flex flex-col justify-end z-30', !isCompact ? 'p-4' : 'p-6', !isCompact ? 'h-[150px]' : 'h-[250px]')}>
+        <Text fz={'lg'} fw={700} className={clsx('uppercase', isCompact && 'mb-2', classes.title)}>
           {title}
         </Text>
-        <Text className={classes.description}>{description}</Text>
+        {isCompact ? <Text className={classes.description}>{description}</Text> : null}
         <Text size={'sm'} className={classes.date}>
           {renderDate(created)}
         </Text>

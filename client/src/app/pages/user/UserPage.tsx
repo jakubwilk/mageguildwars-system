@@ -1,19 +1,15 @@
 import { useEffect } from 'react'
 import { useAppLayoutContext } from '@common'
 
-function ForumPage() {
+function UserPage() {
   const { setIsHomePage } = useAppLayoutContext()
 
   useEffect(() => {
-    setIsHomePage(true)
+    setIsHomePage(false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return (
-    <div>
-      <p>{'Forum Page 123'}</p>
-    </div>
-  )
+  return <p>{'User page'}</p>
 }
 
-export default ForumPage
+export default UserPage
