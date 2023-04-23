@@ -1,4 +1,5 @@
 import React, { Fragment, ReactNode, Suspense, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { RouterProvider } from 'react-router-dom'
 import { APP_ROUTES, axiosApi, i18n } from '@app/configs'
 import { API, AuthContextProvider, CreateAccountResponseSnapshot, useAuthContext } from '@auth'
@@ -6,26 +7,31 @@ import { Notifications, notifications } from '@mantine/notifications'
 import { MutationCache, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AxiosError, AxiosResponse } from 'axios'
 
-import authService from '../modules/auth/services/AuthService'
-
 interface IProps {
   children: ReactNode
 }
 
 function AppWrapper({ children }: IProps) {
-  const { setUser, user } = useAuthContext()
-  const refreshToken = authService.getLocalStorageItem('x-refresh-token')
-
-  console.log('user', user)
+  const { setUser } = useAuthContext()
+  const { t } = useTranslation()
 
   useEffect(() => {
-    if (refreshToken && refreshToken !== 'undefined' && refreshToken !== 'null') {
-      axiosApi.get(API.autoLoginAccount).then(({ data }: AxiosResponse<CreateAccountResponseSnapshot>) => {
-        authService.setLocalStorageItem('x-refresh-token', data.refreshToken)
+    axiosApi
+      .get(API.autoLoginAccount)
+      .then(({ data }: AxiosResponse<CreateAccountResponseSnapshot>) => {
         setUser(data.user)
+        notifications.show({
+          message: t('auth:message.userLoggedSuccessfully', { name: data.user.login }),
+          color: 'green',
+          autoClose: 5000,
+          withCloseButton: true,
+        })
       })
-    }
-  }, [refreshToken, setUser])
+      .catch((err) => {
+        notifications.show({ message: t('auth:message.userAutoLoginFailed'), color: 'red', autoClose: 5000, withCloseButton: true })
+      })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return <Fragment>{children}</Fragment>
 }

@@ -1,15 +1,12 @@
-import { ReactNode, useCallback, useEffect, useState } from 'react'
+import { ReactNode, useCallback, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { LOGIN_ACCOUNT_INITIAL_VALUES, LoginAccountForm, LoginAccountRequestParams, useAuthContext, useLoginAccountMutation } from '@auth'
 import { typedFieldName } from '@common'
 import { Button, createStyles, Grid, PasswordInput, TextInput } from '@mantine/core'
 import { useForm, yupResolver } from '@mantine/form'
 import { notifications } from '@mantine/notifications'
 import { clsx } from 'clsx'
 import * as Yup from 'yup'
-
-import { useAuthContext, useMockLogin } from '../../hooks'
-import { LOGIN_ACCOUNT_INITIAL_VALUES, LoginAccountForm, LoginAccountRequestParams } from '../../models'
-import { authService } from '../../services'
 
 const useStyles = createStyles((theme) => ({
   input: {
@@ -45,8 +42,7 @@ function LoginAccountDialog({ closeButton, handleCloseDialog }: IProps) {
   const { t } = useTranslation()
   const { classes } = useStyles()
   const { setUser } = useAuthContext()
-  const { data: userData } = useMockLogin()
-  const [isLoading, setIsLoading] = useState(false)
+  const { mutate: loginAccount, isLoading } = useLoginAccountMutation()
 
   const form = useForm({
     initialValues: LOGIN_ACCOUNT_INITIAL_VALUES,
@@ -60,24 +56,20 @@ function LoginAccountDialog({ closeButton, handleCloseDialog }: IProps) {
 
   const handleLoginAccount = useCallback(
     (data: LoginAccountRequestParams) => {
-      setIsLoading(true)
-      setTimeout(() => {
-        if (userData) {
-          authService.setLocalStorageItem('x-refresh-token', userData.refreshToken)
-          setUser(userData.user)
-          authService.setLocalStorageItem('mocked-user', userData.user)
+      loginAccount(data, {
+        onSuccess: ({ data }) => {
+          setUser(data.user)
           notifications.show({
-            message: t('auth:message.accountCreatedSuccessfully'),
+            message: t('auth:message.userLoggedSuccessfully', { name: data.user.login }),
             color: 'green',
             autoClose: 5000,
             withCloseButton: true,
           })
-          setIsLoading(false)
           handleCloseDialog()
-        }
-      }, 1500)
+        },
+      })
     },
-    [handleCloseDialog, setUser, t, userData]
+    [handleCloseDialog, loginAccount, setUser, t]
   )
 
   useEffect(() => {

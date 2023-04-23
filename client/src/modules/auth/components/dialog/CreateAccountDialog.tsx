@@ -1,7 +1,6 @@
 import { ReactNode, useCallback, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
-  authService,
   CREATE_ACCOUNT_INITIAL_VALUES,
   CreateAccountForm,
   CreateAccountRequestParams,
@@ -9,7 +8,7 @@ import {
   useCreateAccountMutation,
 } from '@auth'
 import { MIN_PASSWORD_LENGTH, typedFieldName } from '@common'
-import { Button, createStyles, Grid, TextInput } from '@mantine/core'
+import { Button, createStyles, Grid, PasswordInput, TextInput } from '@mantine/core'
 import { useForm, yupResolver } from '@mantine/form'
 import { notifications } from '@mantine/notifications'
 import { clsx } from 'clsx'
@@ -68,9 +67,11 @@ function CreateAccountDialog({ closeButton, handleCloseDialog }: IProps) {
             }) as string
           )
           .required(t('validation:fieldIsRequired') as string),
-        // repeatPassword: Yup.string()
-        //   .valid(Yup.ref('password'))
-        //   .messages({ 'string.empty': t('validation:fieldIsRequired'), 'any.only': t('validation:passwordAreNotTheSame') }),
+        repeatPassword: Yup.string()
+          .required(t('validation:fieldIsRequired') as string)
+          .test('checkIfPasswordsAreTheSame', t('validation:passwordAreNotTheSame') as string, function (this, repeatPassword) {
+            return this.parent.password === repeatPassword
+          }),
       })
     ),
   })
@@ -79,7 +80,6 @@ function CreateAccountDialog({ closeButton, handleCloseDialog }: IProps) {
     (data: CreateAccountRequestParams) => {
       createAccount(data, {
         onSuccess: ({ data }) => {
-          authService.setLocalStorageItem('x-refresh-token', data.refreshToken)
           setUser(data.user)
           notifications.show({
             message: t('auth:message.accountCreatedSuccessfully'),
@@ -123,7 +123,7 @@ function CreateAccountDialog({ closeButton, handleCloseDialog }: IProps) {
           />
         </Grid.Col>
         <Grid.Col span={12}>
-          <TextInput
+          <PasswordInput
             {...form.getInputProps('password')}
             label={t('auth:field.password')}
             name={typedFieldName<CreateAccountForm>('password')}
@@ -133,7 +133,7 @@ function CreateAccountDialog({ closeButton, handleCloseDialog }: IProps) {
           />
         </Grid.Col>
         <Grid.Col span={12}>
-          <TextInput
+          <PasswordInput
             {...form.getInputProps('repeatPassword')}
             label={t('auth:field.repeatPassword')}
             name={typedFieldName<CreateAccountForm>('repeatPassword')}
