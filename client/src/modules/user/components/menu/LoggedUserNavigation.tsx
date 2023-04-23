@@ -2,37 +2,38 @@ import { Fragment, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { authService, useAuthContext, useLogoutAccountMutation } from '@auth'
-import { Button, createStyles, Divider, Group, Text, ThemeIcon } from '@mantine/core'
+import { ActionIcon, Button, createStyles, Divider, Grid, Group, Text } from '@mantine/core'
 import { IconDatabaseCog, IconServerCog, IconShieldCog, IconSquareArrowLeft, IconUserCog } from '@tabler/icons-react'
 import { USER_NAVIGATION, UserNavigation } from '@user'
 import { clsx } from 'clsx'
 
 const useStyles = createStyles((theme) => ({
   line: {
-    borderColor: theme.colors.gray[2],
+    borderColor: theme.colors.gray[9],
   },
   link: {
-    display: 'block',
-    padding: '0.5rem',
-    color: 'inherit',
+    display: 'flex',
+    justifyContent: 'center',
     textDecoration: 'none',
+    height: '2.625rem',
+    color: theme.colors.gray[5],
+    fontWeight: 400,
+    border: `1px solid ${theme.colors.gray[9]}`,
+    borderRadius: '0.25rem',
+    fontSize: '0.85rem',
     '&:hover, &:focus': {
-      backgroundColor: theme.colors.gray[0],
+      backgroundColor: theme.colors['dark-purple'][9],
+      borderColor: theme.colors['dark-purple'][9],
     },
   },
   button: {
-    backgroundColor: 'transparent',
-    padding: '0.5rem',
     color: theme.colors.gray[5],
     fontWeight: 400,
+    borderColor: theme.colors.gray[9],
+    fontSize: '0.85rem',
     '&:hover, &:focus': {
-      backgroundColor: theme.colors.night[3],
-    },
-    '& .icon': {
-      color: theme.colors.gray[8],
-    },
-    '& .mantine-Button-inner': {
-      justifyContent: 'flex-start',
+      backgroundColor: theme.colors['dark-purple'][9],
+      borderColor: theme.colors['dark-purple'][9],
     },
   },
   text: {
@@ -63,20 +64,26 @@ function LoggedUserNavigation() {
   return (
     <Fragment>
       <Divider className={clsx('my-4', classes.line)} />
-      {USER_NAVIGATION.map((menu: UserNavigation, index) => (
-        <Link key={menu.id} to={menu.link} className={clsx('w-full duration-150', classes.link)}>
-          <Group>
-            <ThemeIcon variant={'light'} color={menu.iconColor}>
-              {menuIcons[index]}
-            </ThemeIcon>
-            <Text className={clsx('uppercase', classes.text)}>{menu.name}</Text>
-          </Group>
-        </Link>
-      ))}
+      <Grid className={'mb-2'}>
+        {USER_NAVIGATION.map((menu: UserNavigation, index) => (
+          <Grid.Col key={menu.id} span={6}>
+            <Link to={menu.link} className={clsx('w-full duration-150', classes.link)}>
+              <Group>
+                <ActionIcon variant={'transparent'}>{menuIcons[index]}</ActionIcon>
+                <Text className={clsx('uppercase', classes.text)}>{menu.name}</Text>
+              </Group>
+            </Link>
+          </Grid.Col>
+        ))}
+      </Grid>
       <Button
         onClick={handleLogoutUser}
         className={clsx('w-full duration-150 uppercase', classes.button)}
+        radius={'sm'}
+        size={'md'}
+        variant={'outline'}
         leftIcon={<IconSquareArrowLeft size={18} />}
+        uppercase
       >
         {t('auth:action.logout')}
       </Button>
