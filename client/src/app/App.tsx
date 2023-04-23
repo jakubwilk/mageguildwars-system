@@ -1,4 +1,5 @@
 import React, { Fragment, ReactNode, Suspense, useEffect, useState } from 'react'
+import { HelmetProvider } from 'react-helmet-async'
 import { useTranslation } from 'react-i18next'
 import { RouterProvider } from 'react-router-dom'
 import { APP_ROUTES, axiosApi, i18n } from '@app/configs'
@@ -61,16 +62,18 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthContextProvider>
-        <AppLayoutContextProvider>
-          <AppWrapper>
-            <Suspense fallback={<div />}>
-              <Notifications />
-              <RouterProvider router={APP_ROUTES} />
-            </Suspense>
-          </AppWrapper>
-        </AppLayoutContextProvider>
-      </AuthContextProvider>
+      <HelmetProvider>
+        <AuthContextProvider>
+          <AppLayoutContextProvider>
+            <AppWrapper>
+              <Suspense fallback={<div />}>
+                <Notifications />
+                <RouterProvider router={APP_ROUTES} />
+              </Suspense>
+            </AppWrapper>
+          </AppLayoutContextProvider>
+        </AuthContextProvider>
+      </HelmetProvider>
     </QueryClientProvider>
   )
 }
