@@ -1,11 +1,10 @@
 import axios, { Axios } from 'axios'
 
 const refreshAccessToken = async (axiosInstance: Axios) => {
+  // eslint-disable-next-line no-useless-catch
   try {
-    const { data } = await axiosInstance.get('/auth/refresh')
-    return data
+    await axiosInstance.get('/auth/refresh')
   } catch (err) {
-    console.error(err)
     throw err
   }
 }
@@ -22,12 +21,10 @@ axiosApi.interceptors.response.use(
   (response) => response,
   async function (error) {
     const originalRequest = error.config
-    if (error.response.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true
-
-      const resp = await refreshAccessToken(axiosApi)
-
-      axiosApi.defaults.headers.common['x-access-token'] = resp.accessToken
+    if (error.response.status === 401 && originalRequest._retry && originalRequest.headers['NO_RETRY_HEADER']) {
+      originalRequest._retry = false
+      originalRequest.headers['NO_RETRY_HEADER'] = 'true'
+      await refreshAccessToken(axiosApi)
       return axiosApi(originalRequest)
     }
     return Promise.reject(error)
