@@ -1,8 +1,10 @@
 import { useMemo } from 'react'
+import { useAppLayoutContext } from '@common'
 import { FeatureSinglePanel, SingleFeaturePanel, useFeaturePanels } from '@feature-panel'
 import { Grid, Loader } from '@mantine/core'
 
 function FeaturePanels() {
+  const { isHomePage } = useAppLayoutContext()
   const { data, isLoading } = useFeaturePanels()
 
   const loadingOverlay = useMemo(() => {
@@ -17,7 +19,7 @@ function FeaturePanels() {
     return (
       <Grid grow>
         {data.map(({ id, title, description, created, link, coverImageUrl }: SingleFeaturePanel) => (
-          <Grid.Col xs={12} sm={6} lg={4} key={id}>
+          <Grid.Col xs={12} sm={6} lg={isHomePage ? 4 : 3} key={id}>
             <FeatureSinglePanel
               id={id}
               link={link}
@@ -25,12 +27,13 @@ function FeaturePanels() {
               description={description}
               coverImageUrl={coverImageUrl}
               created={created}
+              isCompact={isHomePage}
             />
           </Grid.Col>
         ))}
       </Grid>
     )
-  }, [data])
+  }, [data, isHomePage])
 
   return <div className={'container mx-auto my-4'}>{isLoading ? loadingOverlay : panelGrid}</div>
 }

@@ -1,7 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom'
-import { ForumPage } from '@app/pages'
-
-import { RootPage } from '../pages/root'
+import { ForumPage, RootPage, UserPage } from '@app/pages'
 
 export const APP_ROUTES = createBrowserRouter([
   {
@@ -10,6 +8,10 @@ export const APP_ROUTES = createBrowserRouter([
       {
         path: '/',
         element: <ForumPage />,
+      },
+      {
+        path: '/user-panel',
+        element: <UserPage />,
       },
     ],
   },
