@@ -40,7 +40,7 @@ const useStyles = createStyles((theme) => ({
     marginTop: 16,
     display: 'block',
     textAlign: 'right',
-    color: theme.colors.gray[7],
+    color: theme.colors.gray[6],
   },
 }))
 

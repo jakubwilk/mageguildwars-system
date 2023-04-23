@@ -1,15 +1,7 @@
-import { useEffect } from 'react'
-import { useAppLayoutContext } from '@common'
+import { UserPage as ModuleUserPage } from '@user'
 
 function UserPage() {
-  const { setIsHomePage } = useAppLayoutContext()
-
-  useEffect(() => {
-    setIsHomePage(false)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  return <p>{'User page'}</p>
+  return <ModuleUserPage />
 }
 
 export default UserPage
