@@ -41,7 +41,11 @@ const useStyles = createStyles((theme) => ({
   },
 }))
 
-function LoggedUserNavigation() {
+interface IProps {
+  handleCloseSidebar: () => void
+}
+
+function LoggedUserNavigation({ handleCloseSidebar }: IProps) {
   const { setUser } = useAuthContext()
   const { t } = useTranslation()
   const { classes } = useStyles()
@@ -67,7 +71,7 @@ function LoggedUserNavigation() {
       <Grid className={'mb-2'}>
         {USER_NAVIGATION.map((menu: UserNavigation, index) => (
           <Grid.Col key={menu.id} span={6}>
-            <Link to={menu.link} className={clsx('w-full duration-150', classes.link)}>
+            <Link to={menu.link} className={clsx('w-full duration-150', classes.link)} onClick={handleCloseSidebar}>
               <Group>
                 <ActionIcon variant={'transparent'}>{menuIcons[index]}</ActionIcon>
                 <Text className={clsx('uppercase', classes.text)}>{menu.name}</Text>
