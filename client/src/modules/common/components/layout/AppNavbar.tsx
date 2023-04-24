@@ -47,7 +47,7 @@ function AppNavbar({ isOpen, handleClose }: IProps) {
     <Drawer opened={isOpen} onClose={handleClose} title={<Logo />} className={classes.drawer} withCloseButton>
       <Navbar className={clsx('border-0', classes.navbar)}>
         <Navbar.Section>{'Główna nawigacja'}</Navbar.Section>
-        <Navbar.Section>{isUser ? <LoggedUserNavigation /> : <GuestUserNavigation />}</Navbar.Section>
+        <Navbar.Section>{isUser ? <LoggedUserNavigation handleCloseSidebar={handleClose} /> : <GuestUserNavigation />}</Navbar.Section>
       </Navbar>
     </Drawer>
   )
