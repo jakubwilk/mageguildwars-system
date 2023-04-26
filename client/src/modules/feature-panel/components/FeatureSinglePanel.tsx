@@ -30,7 +30,8 @@ const useStyles = createStyles((theme) => ({
     },
   },
   title: {
-    fontFamily: 'Merriweather, serif',
+    fontFamily: theme.headings.fontFamily,
+    fontSize: '1.25rem',
     color: theme.colors.gray[4],
   },
   description: {
@@ -58,7 +59,7 @@ function FeatureSinglePanel({ link, title, description, created, coverImageUrl, 
   return (
     <Link to={link} className={clsx('relative', !isCompact ? 'h-[150px]' : 'h-[250px]', classes.link)}>
       <div className={clsx('relative flex flex-col justify-end z-30', !isCompact ? 'p-4' : 'p-6', !isCompact ? 'h-[150px]' : 'h-[250px]')}>
-        <Text fz={'lg'} fw={700} className={clsx('uppercase', isCompact && 'mb-2', classes.title)}>
+        <Text fw={700} className={clsx('uppercase', isCompact && 'mb-2', classes.title)}>
           {title}
         </Text>
         {isCompact ? <Text className={classes.description}>{description}</Text> : null}

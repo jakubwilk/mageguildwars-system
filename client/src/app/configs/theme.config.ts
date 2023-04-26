@@ -2,7 +2,7 @@ import { MantineThemeOverride } from '@mantine/core'
 
 export const APP_THEME: MantineThemeOverride = {
   fontFamily: 'Poppins, sans-serif',
-  headings: { fontFamily: 'Merriweather, serif', fontWeight: 700 },
+  headings: { fontFamily: 'Rubik, sans-serif', fontWeight: 700 },
   white: '#fff',
   black: '#2b2b2b',
   // TODO: Uncomment code when design colors will be ready
