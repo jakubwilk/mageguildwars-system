@@ -1,9 +1,12 @@
-import { Fragment, useEffect } from 'react'
+import { Fragment, useEffect, useMemo } from 'react'
 import { Helmet } from 'react-helmet-async'
+import { Link } from 'react-router-dom'
 import { useAuthContext } from '@auth'
-import { useAppLayoutContext } from '@common'
-import { createStyles } from '@mantine/core'
+import { PageWithoutTable, useAppLayoutContext } from '@common'
+import { createStyles, Text, Tooltip } from '@mantine/core'
 import { clsx } from 'clsx'
+
+import { USER_BREADCRUMB_NAVIGATION } from '../models'
 
 const useStyles = createStyles((theme) => ({
   page: {
@@ -24,15 +27,37 @@ function UserPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const breadcrumbs = useMemo(() => {
+    return USER_BREADCRUMB_NAVIGATION.map(({ id, link, name, title }) => {
+      if (link && title) {
+        return (
+          <Tooltip key={id} label={title} position={'bottom'} withArrow>
+            <Link to={link} aria-label={title}>
+              {name}
+            </Link>
+          </Tooltip>
+        )
+      }
+
+      return (
+        <Text key={id} size={'sm'} component={'span'}>
+          {name}
+        </Text>
+      )
+    })
+  }, [])
+
+  const title = useMemo(() => `Panel użytkownika ${user?.login}`, [user])
+
   return (
     <Fragment>
       <Helmet>
-        <title>{`Panel użytkownika ${user?.login} | Mage Guild Wars`}</title>
+        <title>{`${title} | Mage Guild Wars`}</title>
       </Helmet>
       <div className={'container mx-auto my-8'}>
-        <div className={clsx('p-4', classes.page)}>
-          <h2 className={clsx('mb-4 uppercase', classes.title)}>{`Ustawienia konta ${user?.login}`}</h2>
-        </div>
+        <PageWithoutTable title={title} breadcrumbs={breadcrumbs}>
+          <p className={clsx(classes.title)}>{'Ustawienia'}</p>
+        </PageWithoutTable>
       </div>
     </Fragment>
   )

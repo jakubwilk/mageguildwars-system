@@ -34,3 +34,23 @@ export const USER_NAVIGATION: Array<UserNavigation> = [
     iconColor: 'green',
   },
 ]
+
+export interface UserBreadcrumbNavigation {
+  id: string
+  link?: string
+  name: string
+  title?: string
+}
+
+export const USER_BREADCRUMB_NAVIGATION: Array<UserBreadcrumbNavigation> = [
+  {
+    id: 'e1062ea4-93a1-4452-a3ab-ba5aa94c498c',
+    link: '/',
+    name: 'Strona główna',
+    title: 'Powrót do strony głównej',
+  },
+  {
+    id: '4df60b41-aae6-44ae-90d0-ff4c4125b079',
+    name: 'Panel użytkownika',
+  },
+]
