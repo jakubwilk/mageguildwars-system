@@ -23,7 +23,6 @@ const useStyles = createStyles((theme) => ({
   },
   link: {
     display: 'block',
-    border: `1px solid ${theme.colors.gray[9]}`,
     textDecoration: 'none',
     '&:hover > .cover-overlay::after, &:focus > .cover-overlay::after': {
       backgroundColor: hexToRgba(theme.colors.night[9], 0.55),
@@ -35,13 +34,12 @@ const useStyles = createStyles((theme) => ({
     color: theme.colors.gray[4],
   },
   description: {
-    color: theme.colors.gray[6],
+    color: theme.colors.gray[5],
   },
   date: {
-    marginTop: 16,
-    display: 'block',
+    display: 'inline-block',
     textAlign: 'right',
-    color: theme.colors.gray[6],
+    color: theme.colors.gray[5],
   },
 }))
 
@@ -57,15 +55,19 @@ function FeatureSinglePanel({ link, title, description, created, coverImageUrl, 
   }, [])
 
   return (
-    <Link to={link} className={clsx('relative', !isCompact ? 'h-[150px]' : 'h-[250px]', classes.link)}>
-      <div className={clsx('relative flex flex-col justify-end z-30', !isCompact ? 'p-4' : 'p-6', !isCompact ? 'h-[150px]' : 'h-[250px]')}>
-        <Text fw={700} className={clsx('uppercase', isCompact && 'mb-2', classes.title)}>
-          {title}
-        </Text>
-        {isCompact ? <Text className={classes.description}>{description}</Text> : null}
-        <Text size={'sm'} className={classes.date}>
+    <Link to={link} className={clsx('relative rounded-lg overflow-hidden', !isCompact ? 'h-[150px]' : 'h-[250px]', classes.link)}>
+      <div
+        className={clsx('relative flex flex-col justify-between z-30', !isCompact ? 'p-4' : 'p-6', !isCompact ? 'h-[150px]' : 'h-[250px]')}
+      >
+        <Text size={'sm'} component={'span'} className={classes.date}>
           {renderDate(created)}
         </Text>
+        <div>
+          <Text fw={700} className={clsx('uppercase', isCompact && 'mb-2', classes.title)}>
+            {title}
+          </Text>
+          {isCompact ? <Text className={classes.description}>{description}</Text> : null}
+        </div>
       </div>
       <div
         className={clsx('cover-overlay absolute bg-cover bg-center h-full w-full top-0 left-0', classes.cover)}
