@@ -3,24 +3,14 @@ import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
 import { useAuthContext } from '@auth'
 import { PageWithoutTable, useAppLayoutContext } from '@common'
-import { createStyles, Text, Tooltip } from '@mantine/core'
-import { clsx } from 'clsx'
+import { Text, Tooltip } from '@mantine/core'
 
+import { UserSettingsContent } from '../components'
 import { USER_BREADCRUMB_NAVIGATION } from '../models'
-
-const useStyles = createStyles((theme) => ({
-  page: {
-    border: `1px solid ${theme.colors.gray[9]}`,
-  },
-  title: {
-    marginTop: 0,
-  },
-}))
 
 function UserPage() {
   const { setIsHomePage } = useAppLayoutContext()
   const { user } = useAuthContext()
-  const { classes } = useStyles()
 
   useEffect(() => {
     setIsHomePage(false)
@@ -54,9 +44,9 @@ function UserPage() {
       <Helmet>
         <title>{`${title} | Mage Guild Wars`}</title>
       </Helmet>
-      <div className={'container mx-auto my-8'}>
+      <div className={'container mx-auto mt-8 px-4'}>
         <PageWithoutTable title={title} breadcrumbs={breadcrumbs}>
-          <p className={clsx(classes.title)}>{'Ustawienia'}</p>
+          <UserSettingsContent />
         </PageWithoutTable>
       </div>
     </Fragment>
