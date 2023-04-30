@@ -5,7 +5,7 @@ import { clsx } from 'clsx'
 const useStyles = createStyles((theme) => ({
   title: {
     fontSize: '2rem',
-    color: theme.colors.gray[4],
+    color: theme.colors.gray[2],
   },
   breadcrumbs: {
     color: theme.colors.gray[6],

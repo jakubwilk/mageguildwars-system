@@ -1,4 +1,4 @@
-import { UserPage as ModuleUserPage } from '@user'
+import { UserSettingsPage as ModuleUserPage } from '@user'
 
 function UserPage() {
   return <ModuleUserPage />

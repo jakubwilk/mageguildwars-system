@@ -1,2 +1,2 @@
 export * from './menu'
-export { default as UserPage } from './UserSettingsPage'
+export * from './settings'
