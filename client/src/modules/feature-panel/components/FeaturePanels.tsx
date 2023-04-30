@@ -17,7 +17,7 @@ function FeaturePanels() {
 
   const panelGrid = useMemo(() => {
     return (
-      <Grid grow>
+      <Grid grow gutter={'xl'}>
         {data.map(({ id, title, description, created, link, coverImageUrl }: SingleFeaturePanel) => (
           <Grid.Col xs={12} sm={6} lg={isHomePage ? 4 : 3} key={id}>
             <FeatureSinglePanel
