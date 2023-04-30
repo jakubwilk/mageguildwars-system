@@ -31,7 +31,7 @@ const useStyles = createStyles((theme) => ({
   title: {
     fontFamily: theme.headings.fontFamily,
     fontSize: '1.25rem',
-    color: theme.colors.gray[4],
+    color: theme.colors.gray[5],
   },
   description: {
     color: theme.colors.gray[5],

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Burger, createStyles, Header, useMantineTheme } from '@mantine/core'
+import { Burger, createStyles, Header, Tooltip, useMantineTheme } from '@mantine/core'
 import { clsx } from 'clsx'
 
 import { Logo } from '../logo'
@@ -28,7 +28,9 @@ function AppHeader({ isOpen, handleOpen }: IProps) {
             <Logo />
           </Link>
 
-          <Burger opened={isOpen} onClick={handleOpen} size={'sm'} color={theme.colors.gray[1]} />
+          <Tooltip label={'Otwórz nawigację'} position={'bottom'} withArrow>
+            <Burger opened={isOpen} onClick={handleOpen} size={'sm'} color={theme.colors.gray[1]} />
+          </Tooltip>
         </div>
       </div>
     </Header>
