@@ -27,4 +27,8 @@ export const ERROR_MESSAGES = {
     MISSING_USER: 'Brak użytkownika w systemie. Proszę się upewnić, że podano poprawne dane.',
     ISSUE_WITH_GET_USER_DATA: 'Serwer napotkał wewnątrzny problem. Skontaktuj się z administratorem serwisu. Kod błędu: XAUTH_9237214',
   },
+  PROFILE: {
+    NO_MORE_PROFILES: 'Nie można dodać nowego profilu. Osiągnięto maksymalną liczbę dostępnych profili dla pojedynczego konta.',
+    ISSUE_WITH_CREATE_PROFILE: 'Wystąpił wewnętrzny problem podczas tworzenia nowego profilu. Skontaktuj się z administratorem.',
+  },
 }
