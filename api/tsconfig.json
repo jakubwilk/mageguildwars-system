@@ -3,6 +3,7 @@
     "paths": {
       "@auth/*": ["src/auth/*"],
       "@user/*": ["src/user/*"],
+      "@profile/*": ["src/profile/*"],
       "@utils/*": ["src/utils/*"],
       "@prisma/*": ["src/prisma/*"]
     },
