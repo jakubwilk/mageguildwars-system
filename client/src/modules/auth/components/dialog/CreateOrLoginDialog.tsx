@@ -23,7 +23,7 @@ const useStyles = createStyles((theme) => ({
   },
   title: {
     color: theme.colors.gray[4],
-    fontWeight: 400,
+    fontWeight: 600,
   },
   button: {
     fontSize: '0.85rem',
