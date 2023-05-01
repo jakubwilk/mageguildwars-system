@@ -27,16 +27,16 @@ model User {
 
 model Profile {
   id              Int       @id @default(autoincrement())
-  userId          Int
+  uid             String
   name            String    @unique
   slug            String
   role            ProfileRole
   title           BaseTitle @default(MAGE)
-  additionalTitle String
-  avatarUrl       String
-  signature       String
-  createdAt       DateTime
-  updatedAt       DateTime
+  additionalTitle String    @default("")
+  avatarUrl       String?   @default("https://i.imgur.com/6YnOpwt.png")
+  signature       String?   @default("")
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @default(now())
 }
 
 enum UserGroup {
@@ -47,6 +47,7 @@ enum UserGroup {
 }
 
 enum ProfileRole {
+  NONE
   FAIRY_TAIL
   LAMIA_SCALE
   BLUE_PEGASUS

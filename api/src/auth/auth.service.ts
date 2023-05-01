@@ -3,8 +3,10 @@ import { AuthCreateUserParams, AuthCreateUserSnapshot, AuthTokenPayload, AuthTok
 import { HttpStatus, Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { JwtService } from '@nestjs/jwt'
-import { User as UserModel } from '@prisma/client'
+import { Profile as ProfileModel, ProfileRole, User as UserModel } from '@prisma/client'
 import { PrismaService } from '@prisma/prisma.service'
+import { ProfileCreateParams } from '@profile/models'
+import { ProfileService } from '@profile/profile.service'
 import { UserSnapshot } from '@user/models'
 import { UserService } from '@user/user.service'
 import { createSlug } from '@utils/database.helper'
@@ -17,7 +19,8 @@ export class AuthService {
     private prismaService: PrismaService,
     private jwtService: JwtService,
     private configService: ConfigService,
-    private userService: UserService
+    private userService: UserService,
+    private profileService: ProfileService
   ) {}
 
   async createHash(data: string): Promise<string> {
@@ -115,6 +118,12 @@ export class AuthService {
       const data = await this.prismaService.user.create({ data: dataToCreate })
       const session: AuthCreateUserSnapshot = await this.getUserSessionData(MapModelToUser(data))
       await this.prismaService.user.update({ where: { id: data.id }, data: { refreshToken: session.refreshToken } })
+      const profileDataToCreate: ProfileCreateParams = {
+        name: data.login,
+        role: ProfileRole.NONE,
+      }
+      const profiles: Array<ProfileModel> = await this.profileService.createProfile(data.uid, profileDataToCreate)
+      console.log('profiles', profiles)
       return session
     } catch (err) {
       throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.AUTH.ISSUE_WITH_CREATE_USER)
