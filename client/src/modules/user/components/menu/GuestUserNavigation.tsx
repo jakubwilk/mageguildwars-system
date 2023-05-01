@@ -12,12 +12,14 @@ const useStyles = createStyles((theme) => ({
   },
   button: {
     color: theme.colors.gray[5],
-    fontWeight: 400,
-    borderColor: theme.colors.gray[9],
+    fontWeight: 600,
     fontSize: '0.85rem',
     '&:hover, &:focus': {
       backgroundColor: theme.colors['dark-purple'][9],
-      borderColor: theme.colors['dark-purple'][9],
+      color: theme.white,
+    },
+    '& .mantine-Button-inner': {
+      justifyContent: 'flex-start',
     },
   },
 }))
@@ -32,12 +34,11 @@ function GuestUserNavigation() {
       <Divider className={clsx('my-4', classes.line)} />
       <Button
         onClick={open}
-        className={clsx('w-full duration-150 uppercase', classes.button)}
+        className={clsx('w-full duration-150', classes.button)}
         radius={'sm'}
         size={'md'}
-        variant={'outline'}
+        variant={'subtle'}
         leftIcon={<IconSquareArrowRight size={18} />}
-        uppercase
       >
         {t('auth:action.goIntoSystem')}
       </Button>
