@@ -27,6 +27,7 @@ model User {
 
 model Profile {
   id              Int       @id @default(autoincrement())
+  userId          Int
   name            String    @unique
   slug            String
   role            ProfileRole

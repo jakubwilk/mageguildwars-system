@@ -2,8 +2,9 @@ import { AuthModule } from '@auth/auth.module'
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { UserModule } from '@user/user.module'
+import { ProfileModule } from './profile/profile.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({ envFilePath: '.env', isGlobal: true }), AuthModule, UserModule],
+  imports: [ConfigModule.forRoot({ envFilePath: '.env', isGlobal: true }), AuthModule, UserModule, ProfileModule],
 })
 export class AppModule {}
