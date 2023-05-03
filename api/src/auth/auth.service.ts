@@ -95,10 +95,10 @@ export class AuthService {
     return tokens
   }
 
-  async getUserSessionData(data: UserSnapshot): Promise<AuthCreateUserSnapshot> {
+  async getUserSessionData(data: UserSnapshot, profiles: Array<ProfileModel>): Promise<AuthCreateUserSnapshot> {
     try {
       const tokens = await this.getTokens(data)
-      return { ...tokens, user: data }
+      return { ...tokens, user: data, profiles }
     } catch (err) {
       throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.AUTH.ISSUE_WITH_CREATE_SESSION)
     }
@@ -116,14 +116,13 @@ export class AuthService {
         password: hashedPassword,
       }
       const data = await this.prismaService.user.create({ data: dataToCreate })
-      const session: AuthCreateUserSnapshot = await this.getUserSessionData(MapModelToUser(data))
-      await this.prismaService.user.update({ where: { id: data.id }, data: { refreshToken: session.refreshToken } })
       const profileDataToCreate: ProfileCreateParams = {
         name: data.login,
         role: ProfileRole.NONE,
       }
       const profiles: Array<ProfileModel> = await this.profileService.createProfile(data.uid, profileDataToCreate)
-      console.log('profiles', profiles)
+      const session: AuthCreateUserSnapshot = await this.getUserSessionData(MapModelToUser(data), profiles)
+      await this.prismaService.user.update({ where: { id: data.id }, data: { refreshToken: session.refreshToken } })
       return session
     } catch (err) {
       throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.AUTH.ISSUE_WITH_CREATE_USER)
@@ -133,7 +132,8 @@ export class AuthService {
   async loginAccount(uid: string): Promise<AuthCreateUserSnapshot> {
     try {
       const user: UserSnapshot = await this.userService.getUser(uid)
-      return await this.getUserSessionData(user)
+      const profiles: Array<ProfileModel> = await this.profileService.getProfiles(uid)
+      return await this.getUserSessionData(user, profiles)
     } catch (err) {
       throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.USER.ISSUE_WITH_GET_USER_DATA)
     }

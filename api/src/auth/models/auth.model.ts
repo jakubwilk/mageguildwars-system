@@ -1,3 +1,4 @@
+import { Profile as ProfileModel } from '@prisma/client'
 import { UserSnapshot } from '@user/models'
 
 export interface AuthTokensModel {
@@ -7,6 +8,7 @@ export interface AuthTokensModel {
 
 export interface AuthCreateUserSnapshot {
   user: UserSnapshot
+  profiles: Array<ProfileModel>
   accessToken: string
   refreshToken: string
 }

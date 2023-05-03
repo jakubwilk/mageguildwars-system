@@ -24,7 +24,15 @@ export class ProfileService {
       const profile: ProfileModel = await this.prismaService.profile.findUnique({ where: { name } })
       return profile === null
     } catch (err) {
-      throw HttpError(HttpStatus.BAD_REQUEST, 'Istnieje już profil o takiej nazwie. Proszę wybrać inne imię dla swojej postaci.')
+      throw HttpError(HttpStatus.BAD_REQUEST, ERROR_MESSAGES.PROFILE.PROFILE_WITH_NAME_EXIST)
+    }
+  }
+
+  async getProfiles(userId: string): Promise<ProfileModel[]> {
+    try {
+      return await this.prismaService.profile.findMany({ where: { uid: userId }, orderBy: { createdAt: 'asc' } })
+    } catch (err) {
+      throw HttpError(HttpStatus.BAD_REQUEST, ERROR_MESSAGES.PROFILE.ISSUE_WITH_GET_PROFILES)
     }
   }
 
