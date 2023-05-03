@@ -30,5 +30,8 @@ export const ERROR_MESSAGES = {
   PROFILE: {
     NO_MORE_PROFILES: 'Nie można dodać nowego profilu. Osiągnięto maksymalną liczbę dostępnych profili dla pojedynczego konta.',
     ISSUE_WITH_CREATE_PROFILE: 'Wystąpił wewnętrzny problem podczas tworzenia nowego profilu. Skontaktuj się z administratorem.',
+    PROFILE_WITH_NAME_EXIST: 'Istnieje już profil o takiej nazwie. Proszę wybrać inne imię dla swojej postaci.',
+    ISSUE_WITH_GET_PROFILES:
+      'Wystąpił problem z pobiraniem wszystkich profili przypisanych do konta. Skontaktuj się z administratorem serwisu.',
   },
 }
