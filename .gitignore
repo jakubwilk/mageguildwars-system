@@ -7,3 +7,6 @@ node_modules/
 
 # Prisma migrates
 /api/prisma/migrations/*
+
+# IDE
+.idea
