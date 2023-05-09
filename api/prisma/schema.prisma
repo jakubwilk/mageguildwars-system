@@ -17,6 +17,7 @@ model User {
   password                String
   group                   UserGroup @default(USER)
   refreshToken            String?   @unique @default("")
+  permissions             Permission[]
   isActive                Boolean   @default(false)
   isCreateProfileEnabled  Boolean   @default(true)
   isLocked                Boolean   @default(false)
@@ -27,6 +28,7 @@ model User {
 
 model Profile {
   id              Int       @id @default(autoincrement())
+  pid             String    @unique @default(uuid())
   uid             String
   name            String    @unique
   slug            String
@@ -35,8 +37,18 @@ model Profile {
   additionalTitle String    @default("")
   avatarUrl       String?   @default("https://i.imgur.com/6YnOpwt.png")
   signature       String?   @default("")
+  permissions     Permission[]
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @default(now())
+}
+
+model Permission {
+  id          Int     @id @default(autoincrement())
+  user        User    @relation(fields: [userId], references: [uid])
+  userId      String
+  profile     Profile @relation(fields: [profileId], references: [pid])
+  profileId   String
+  permission  String
 }
 
 enum UserGroup {
