@@ -9,46 +9,49 @@ datasource db {
 }
 
 model User {
-  id                      Int       @id @default(autoincrement())
-  uid                     String    @unique @default(uuid())
-  login                   String    @unique
-  slug                    String    @unique
-  email                   String    @unique
-  password                String
-  group                   UserGroup @default(USER)
-  refreshToken            String?   @unique @default("")
-  permissions             Permission[]
-  isActive                Boolean   @default(false)
-  isCreateProfileEnabled  Boolean   @default(true)
-  isLocked                Boolean   @default(false)
-  isGameMaster            Boolean   @default(false)
-  createdAt               DateTime  @default(now())
-  updatedAt               DateTime  @default(now())
+  id                     Int          @id @default(autoincrement())
+  login                  String       @unique
+  slug                   String       @unique
+  email                  String       @unique
+  password               String
+  group                  UserGroup    @default(USER)
+  refreshToken           String?      @unique @default("")
+  isActive               Boolean      @default(false)
+  isLocked               Boolean      @default(false)
+  createdAt              DateTime     @default(now())
+  updatedAt              DateTime     @default(now())
+  isCreateProfileEnabled Boolean      @default(true)
+  uid                    String       @unique @default(uuid())
+  isGameMaster           Boolean      @default(false)
+  permissions            Permission[]
 }
 
 model Profile {
-  id              Int       @id @default(autoincrement())
-  pid             String    @unique @default(uuid())
-  uid             String
-  name            String    @unique
-  slug            String
+  id              Int          @id @default(autoincrement())
+  name            String       @unique
   role            ProfileRole
-  title           BaseTitle @default(MAGE)
-  additionalTitle String    @default("")
-  avatarUrl       String?   @default("https://i.imgur.com/6YnOpwt.png")
-  signature       String?   @default("")
+  title           BaseTitle    @default(MAGE)
+  additionalTitle String       @default("")
+  avatarUrl       String?      @default("https://i.imgur.com/6YnOpwt.png")
+  signature       String?      @default("")
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @default(now())
+  slug            String
+  uid             String
+  pid             String       @unique @default(uuid())
   permissions     Permission[]
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @default(now())
 }
 
 model Permission {
-  id          Int     @id @default(autoincrement())
-  user        User    @relation(fields: [userId], references: [uid])
-  userId      String
-  profile     Profile @relation(fields: [profileId], references: [pid])
-  profileId   String
-  permission  String
+  id         Int     @id @default(autoincrement())
+  userId     String
+  profileId  String
+  permission String
+  profile    Profile @relation(fields: [profileId], references: [pid])
+  user       User    @relation(fields: [userId], references: [uid])
+
+  @@index([profileId], map: "Permission_profileId_fkey")
+  @@index([userId], map: "Permission_userId_fkey")
 }
 
 enum UserGroup {
