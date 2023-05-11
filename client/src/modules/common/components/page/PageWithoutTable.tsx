@@ -1,5 +1,5 @@
-import { ReactNode } from 'react'
-import { Breadcrumbs, createStyles } from '@mantine/core'
+import { Fragment, ReactNode } from 'react'
+import { Breadcrumbs, createStyles, Skeleton } from '@mantine/core'
 import { clsx } from 'clsx'
 
 const useStyles = createStyles((theme) => ({
@@ -24,16 +24,23 @@ interface IProps {
   title: string
   breadcrumbs: ReactNode
   children: ReactNode
+  isLoading?: boolean
 }
 
-function PageWithoutTable({ title, breadcrumbs, children }: IProps) {
+function PageWithoutTable({ title, breadcrumbs, children, isLoading }: IProps) {
   const { classes } = useStyles()
 
   return (
     <main>
       <header>
-        <h2 className={clsx('mt-0 mb-4', classes.title)}>{title}</h2>
-        <Breadcrumbs className={clsx(classes.breadcrumbs)}>{breadcrumbs}</Breadcrumbs>
+        {isLoading ? (
+          <Skeleton height={100} radius={'md'} />
+        ) : (
+          <Fragment>
+            <h2 className={clsx('mt-0 mb-4', classes.title)}>{title}</h2>
+            <Breadcrumbs className={clsx(classes.breadcrumbs)}>{breadcrumbs}</Breadcrumbs>
+          </Fragment>
+        )}
       </header>
       <section>{children}</section>
     </main>

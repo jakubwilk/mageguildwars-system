@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useAuthContext } from '@auth'
 import { PageWithoutTable, useAppLayoutContext } from '@common'
 import { Text, Tooltip } from '@mantine/core'
+import { isNil } from 'lodash'
 
 import { UserSettingsContent } from '../components'
 import { USER_BREADCRUMB_NAVIGATION } from '../models'
@@ -11,6 +12,7 @@ import { USER_BREADCRUMB_NAVIGATION } from '../models'
 function UserPage() {
   const { setIsHomePage } = useAppLayoutContext()
   const { user } = useAuthContext()
+  const isDataLoading = useMemo(() => isNil(user), [user])
 
   useEffect(() => {
     setIsHomePage(false)
@@ -45,7 +47,7 @@ function UserPage() {
         <title>{`${title} | Mage Guild Wars`}</title>
       </Helmet>
       <div className={'container mx-auto mt-8 px-4'}>
-        <PageWithoutTable title={title} breadcrumbs={breadcrumbs}>
+        <PageWithoutTable title={title} breadcrumbs={breadcrumbs} isLoading={isDataLoading}>
           <UserSettingsContent />
         </PageWithoutTable>
       </div>
