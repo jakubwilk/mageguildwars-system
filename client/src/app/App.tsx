@@ -1,13 +1,14 @@
-import React, { Fragment, ReactNode, Suspense, useEffect, useState } from 'react'
+import React, { Fragment, ReactNode, Suspense, useEffect, useMemo, useState } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import { useTranslation } from 'react-i18next'
 import { RouterProvider } from 'react-router-dom'
 import { APP_ROUTES, axiosApi, i18n } from '@app/configs'
-import { API, AuthContextProvider, CreateAccountResponseSnapshot, useAuthContext } from '@auth'
+import { API, AuthContextProvider, authService, CreateAccountResponseSnapshot, useAuthContext } from '@auth'
 import { AppLayoutContextProvider } from '@common'
 import { Notifications, notifications } from '@mantine/notifications'
 import { MutationCache, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AxiosError, AxiosResponse } from 'axios'
+import { isNil } from 'lodash'
 
 interface IProps {
   children: ReactNode
@@ -16,22 +17,25 @@ interface IProps {
 function AppWrapper({ children }: IProps) {
   const { setUser } = useAuthContext()
   const { t } = useTranslation()
+  const isPreviousSession = useMemo(() => !isNil(authService.getLocalStorageItem('x-access-token')), [])
 
   useEffect(() => {
-    axiosApi
-      .get(API.autoLoginAccount)
-      .then(({ data }: AxiosResponse<CreateAccountResponseSnapshot>) => {
-        setUser(data.user)
-        notifications.show({
-          message: t('auth:message.userLoggedSuccessfully', { name: data.user.login }),
-          color: 'green',
-          autoClose: 5000,
-          withCloseButton: true,
+    if (isPreviousSession) {
+      axiosApi
+        .get(API.autoLoginAccount)
+        .then(({ data }: AxiosResponse<CreateAccountResponseSnapshot>) => {
+          setUser(data.user)
+          notifications.show({
+            message: t('auth:message.userLoggedSuccessfully', { name: data.user.login }),
+            color: 'green',
+            autoClose: 5000,
+            withCloseButton: true,
+          })
         })
-      })
-      .catch((err) => {
-        notifications.show({ message: t('auth:message.userAutoLoginFailed'), color: 'red', autoClose: 5000, withCloseButton: true })
-      })
+        .catch(() => {
+          notifications.show({ message: t('auth:message.userAutoLoginFailed'), color: 'red', autoClose: 5000, withCloseButton: true })
+        })
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
