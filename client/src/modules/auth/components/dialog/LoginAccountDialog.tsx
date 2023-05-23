@@ -1,7 +1,14 @@
 import { ReactNode, useCallback, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { LOGIN_ACCOUNT_INITIAL_VALUES, LoginAccountForm, LoginAccountRequestParams, useAuthContext, useLoginAccountMutation } from '@auth'
-import { typedFieldName } from '@common'
+import {
+  authService,
+  LOGIN_ACCOUNT_INITIAL_VALUES,
+  LoginAccountForm,
+  LoginAccountRequestParams,
+  useAuthContext,
+  useLoginAccountMutation,
+} from '@auth'
+import { REFRESH_TOKEN, typedFieldName } from '@common'
 import { Button, createStyles, Grid, PasswordInput, TextInput } from '@mantine/core'
 import { useForm, yupResolver } from '@mantine/form'
 import { notifications } from '@mantine/notifications'
@@ -59,6 +66,7 @@ function LoginAccountDialog({ closeButton, handleCloseDialog }: IProps) {
       loginAccount(data, {
         onSuccess: ({ data }) => {
           setUser(data.user)
+          authService.setLocalStorageItem(REFRESH_TOKEN, data.refreshToken)
           notifications.show({
             message: t('auth:message.userLoggedSuccessfully', { name: data.user.login }),
             color: 'green',

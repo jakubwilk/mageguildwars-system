@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { RouterProvider } from 'react-router-dom'
 import { APP_ROUTES, axiosApi, i18n } from '@app/configs'
 import { API, AuthContextProvider, authService, CreateAccountResponseSnapshot, useAuthContext } from '@auth'
-import { AppLayoutContextProvider } from '@common'
+import { AppLayoutContextProvider, REFRESH_TOKEN } from '@common'
 import { Notifications, notifications } from '@mantine/notifications'
 import { MutationCache, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AxiosError, AxiosResponse } from 'axios'
@@ -17,7 +17,7 @@ interface IProps {
 function AppWrapper({ children }: IProps) {
   const { setUser } = useAuthContext()
   const { t } = useTranslation()
-  const isPreviousSession = useMemo(() => !isNil(authService.getLocalStorageItem('x-access-token')), [])
+  const isPreviousSession = useMemo(() => !isNil(authService.getLocalStorageItem(REFRESH_TOKEN)), [])
 
   useEffect(() => {
     if (isPreviousSession) {
