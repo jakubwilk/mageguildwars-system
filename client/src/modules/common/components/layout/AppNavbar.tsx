@@ -35,19 +35,21 @@ const useStyles = createStyles((theme) => ({
 }))
 
 interface IProps {
-  isOpen: boolean
-  handleClose: () => void
+  isSidebarOpen: boolean
+  handleOpenSidebar: () => void
 }
 
-function AppNavbar({ isOpen, handleClose }: IProps) {
+function AppNavbar({ isSidebarOpen, handleOpenSidebar }: IProps) {
   const { classes } = useStyles()
   const { isUser } = useAuthContext()
 
   return (
-    <Drawer opened={isOpen} onClose={handleClose} title={<Logo />} className={classes.drawer} withCloseButton>
+    <Drawer opened={isSidebarOpen} onClose={handleOpenSidebar} title={<Logo />} className={classes.drawer} withCloseButton>
       <Navbar className={clsx('border-0', classes.navbar)}>
         <Navbar.Section>{'Główna nawigacja'}</Navbar.Section>
-        <Navbar.Section>{isUser ? <LoggedUserNavigation handleCloseSidebar={handleClose} /> : <GuestUserNavigation />}</Navbar.Section>
+        <Navbar.Section>
+          {isUser ? <LoggedUserNavigation handleCloseSidebar={handleOpenSidebar} /> : <GuestUserNavigation />}
+        </Navbar.Section>
       </Navbar>
     </Drawer>
   )
