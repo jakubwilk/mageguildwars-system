@@ -1,8 +1,7 @@
-import { Fragment } from 'react'
+import { Fragment, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import { CreateOrLoginDialog } from '@auth'
+import { useAppLayoutContext } from '@common'
 import { Button, createStyles, Divider } from '@mantine/core'
-import { useDisclosure } from '@mantine/hooks'
 import { IconSquareArrowRight } from '@tabler/icons-react'
 import { clsx } from 'clsx'
 
@@ -27,13 +26,18 @@ const useStyles = createStyles((theme) => ({
 function GuestUserNavigation() {
   const { t } = useTranslation()
   const { classes } = useStyles()
-  const [opened, { close, open }] = useDisclosure(false)
+  const { isSidebarOpen, setIsSidebarOpen, setIsAuthModalOpen } = useAppLayoutContext()
+
+  const handleOpenAuthModalAndCloseSidebar = useCallback(() => {
+    setIsAuthModalOpen(true)
+    setIsSidebarOpen(!isSidebarOpen)
+  }, [isSidebarOpen, setIsAuthModalOpen, setIsSidebarOpen])
 
   return (
     <Fragment>
       <Divider className={clsx('my-4', classes.line)} />
       <Button
-        onClick={open}
+        onClick={handleOpenAuthModalAndCloseSidebar}
         className={clsx('w-full duration-150', classes.button)}
         radius={'sm'}
         size={'md'}
@@ -42,7 +46,6 @@ function GuestUserNavigation() {
       >
         {t('auth:action.goIntoSystem')}
       </Button>
-      {opened && <CreateOrLoginDialog isOpen={opened} handleClose={close} />}
     </Fragment>
   )
 }

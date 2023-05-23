@@ -1,12 +1,14 @@
-import { Fragment } from 'react'
+import { Fragment, useCallback } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { Outlet } from 'react-router-dom'
-import { AppFooter, AppHeader, AppNavbar } from '@common'
+import { CreateOrLoginDialog } from '@auth'
+import { AppFooter, AppHeader, AppNavbar, useAppLayoutContext } from '@common'
 import { FeaturePanels } from '@feature-panel'
-import { useDisclosure } from '@mantine/hooks'
 
 function RootPage() {
-  const [opened, { open, close }] = useDisclosure(false)
+  const { isSidebarOpen, isAuthModalOpen, setIsAuthModalOpen, setIsSidebarOpen } = useAppLayoutContext()
+
+  const handleCloseAuthModal = useCallback(() => setIsAuthModalOpen(false), [setIsAuthModalOpen])
 
   return (
     <Fragment>
@@ -14,11 +16,12 @@ function RootPage() {
         <title>{`Strona główna | Mage Guild Wars`}</title>
       </Helmet>
       <div className={'relative min-h-screen'}>
-        <AppHeader isOpen={opened} handleOpen={open} />
-        <AppNavbar isOpen={opened} handleClose={close} />
+        <AppHeader isOpen={isSidebarOpen} handleOpen={() => setIsSidebarOpen(true)} />
+        <AppNavbar isSidebarOpen={isSidebarOpen} handleOpenSidebar={() => setIsSidebarOpen(false)} />
         <FeaturePanels />
         <Outlet />
         <AppFooter />
+        {isAuthModalOpen && <CreateOrLoginDialog isOpen={isAuthModalOpen} handleClose={handleCloseAuthModal} />}
       </div>
     </Fragment>
   )
