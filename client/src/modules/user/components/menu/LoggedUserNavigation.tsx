@@ -1,7 +1,8 @@
 import { Fragment, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { authService, useAuthContext, useLogoutAccountMutation } from '@auth'
+import { REFRESH_TOKEN, useAppLayoutContext } from '@common'
 import { Button, createStyles, Divider, Grid } from '@mantine/core'
 import { IconDatabaseCog, IconServerCog, IconShieldCog, IconSquareArrowLeft, IconUserCog } from '@tabler/icons-react'
 import { USER_NAVIGATION, UserNavigation } from '@user'
@@ -46,18 +47,22 @@ interface IProps {
 
 function LoggedUserNavigation({ handleCloseSidebar }: IProps) {
   const { setUser } = useAuthContext()
+  const navigate = useNavigate()
   const { t } = useTranslation()
   const { classes } = useStyles()
+  const { setIsSidebarOpen } = useAppLayoutContext()
   const { mutate: logoutAccount } = useLogoutAccountMutation()
 
   const handleLogoutUser = useCallback(() => {
     logoutAccount(null, {
       onSuccess: () => {
         setUser(null)
-        authService.removeLocalStorageItem('x-refresh-token')
+        authService.removeLocalStorageItem(REFRESH_TOKEN)
+        setIsSidebarOpen(false)
+        navigate('/')
       },
     })
-  }, [logoutAccount, setUser])
+  }, [logoutAccount, navigate, setIsSidebarOpen, setUser])
 
   const menuIcons = useMemo(
     () => [<IconUserCog size={18} />, <IconShieldCog size={18} />, <IconServerCog size={18} />, <IconDatabaseCog size={18} />],
