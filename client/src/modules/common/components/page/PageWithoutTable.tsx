@@ -1,4 +1,4 @@
-import { Fragment, ReactNode } from 'react'
+import { ReactNode } from 'react'
 import { Breadcrumbs, createStyles, Skeleton } from '@mantine/core'
 import { clsx } from 'clsx'
 
@@ -24,10 +24,11 @@ interface IProps {
   title: string
   breadcrumbs: ReactNode
   children: ReactNode
+  headerActions?: ReactNode
   isLoading?: boolean
 }
 
-function PageWithoutTable({ title, breadcrumbs, children, isLoading }: IProps) {
+function PageWithoutTable({ title, breadcrumbs, children, headerActions, isLoading }: IProps) {
   const { classes } = useStyles()
 
   return (
@@ -36,10 +37,13 @@ function PageWithoutTable({ title, breadcrumbs, children, isLoading }: IProps) {
         {isLoading ? (
           <Skeleton height={100} radius={'md'} />
         ) : (
-          <Fragment>
-            <h2 className={clsx('mt-0 mb-4', classes.title)}>{title}</h2>
-            <Breadcrumbs className={clsx(classes.breadcrumbs)}>{breadcrumbs}</Breadcrumbs>
-          </Fragment>
+          <div className={'flex items-center justify-between'}>
+            <div>
+              <h2 className={clsx('mt-0 mb-4', classes.title)}>{title}</h2>
+              <Breadcrumbs className={clsx(classes.breadcrumbs)}>{breadcrumbs}</Breadcrumbs>
+            </div>
+            {headerActions && <div className={'ml-8'}>{headerActions}</div>}
+          </div>
         )}
       </header>
       <section>{children}</section>
