@@ -1,0 +1,11 @@
+{
+  "page": {
+    "settings": {
+      "title": "Panel użytkownika {{username}} | Mage Guild Wars"
+    }
+  },
+  "tabs": {
+    "title": "Konto",
+    "panel": "Ustawienia konta"
+  }
+}
