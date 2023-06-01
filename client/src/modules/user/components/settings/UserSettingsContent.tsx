@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useAuthContext } from '@auth'
 import { createStyles, Skeleton, Tabs } from '@mantine/core'
 import { clsx } from 'clsx'
@@ -6,7 +7,7 @@ import { isEmpty, isNil } from 'lodash'
 
 import { UserTabs } from '../../models'
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles(() => ({
   tabs: {
     flexDirection: 'column',
     [`@media screen and (min-width: 720px)`]: {
@@ -19,6 +20,7 @@ const useStyles = createStyles((theme) => ({
 }))
 
 function UserSettingsContent() {
+  const { t } = useTranslation()
   const { user } = useAuthContext()
   const { classes } = useStyles()
   const isDataLoading = useMemo(() => isNil(user), [user])
@@ -39,8 +41,8 @@ function UserSettingsContent() {
   return (
     <Tabs orientation={'vertical'} radius={'md'} variant={'pills'} defaultValue={UserTabs.SETTINGS} className={clsx('mt-8', classes.tabs)}>
       <Tabs.List className={'mr-4'}>
-        <img src={'https://i.imgur.com/6YnOpwt.png'} alt={'Vincent'} className={clsx('rounded-lg mb-4 mx-auto', classes.avatar)} />
-        <Tabs.Tab value={UserTabs.SETTINGS}>{'Konto'}</Tabs.Tab>
+        <img src={'https://i.imgur.com/6YnOpwt.png'} alt={user?.login} className={clsx('rounded-lg mb-4 mx-auto', classes.avatar)} />
+        <Tabs.Tab value={UserTabs.SETTINGS}>{t('user:tabs.title')}</Tabs.Tab>
         {hasUserProfiles &&
           profiles?.map(({ id, name }) => (
             <Tabs.Tab key={id} value={`${UserTabs.PROFILE}-${id}`}>
@@ -49,12 +51,12 @@ function UserSettingsContent() {
           ))}
       </Tabs.List>
       <Tabs.Panel value={UserTabs.SETTINGS}>
-        <p>{'Ustawienia konta'}</p>
+        <p>{t('user:tabs.panel')}</p>
       </Tabs.Panel>
       {hasUserProfiles &&
         profiles?.map(({ id, name }) => (
           <Tabs.Panel key={id} value={`${UserTabs.PROFILE}-${id}`}>
-            <p>{`Profil ${name}`}</p>
+            <p>{t('profile:tabs.title', { username: name })}</p>
           </Tabs.Panel>
         ))}
     </Tabs>
