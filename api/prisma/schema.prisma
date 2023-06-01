@@ -9,21 +9,22 @@ datasource db {
 }
 
 model User {
-  id                     Int          @id @default(autoincrement())
-  login                  String       @unique
-  slug                   String       @unique
-  email                  String       @unique
-  password               String
-  group                  UserGroup    @default(USER)
-  refreshToken           String?      @unique @default("")
-  isActive               Boolean      @default(false)
-  isLocked               Boolean      @default(false)
-  createdAt              DateTime     @default(now())
-  updatedAt              DateTime     @default(now())
-  isCreateProfileEnabled Boolean      @default(true)
-  uid                    String       @unique @default(uuid())
-  isGameMaster           Boolean      @default(false)
-  permissions            Permission[]
+  id                          Int           @id @default(autoincrement())
+  login                       String        @unique
+  slug                        String        @unique
+  email                       String        @unique
+  password                    String
+  group                       UserGroup     @default(USER)
+  refreshToken                String?       @unique @default("")
+  isActive                    Boolean       @default(false)
+  isLocked                    Boolean       @default(false)
+  createdAt                   DateTime      @default(now())
+  updatedAt                   DateTime      @default(now())
+  isCreateProfileEnabled      Boolean       @default(true)
+  uid                         String        @unique @default(uuid())
+  isGameMaster                Boolean       @default(false)
+  isGameMasterProfileEnabled  Boolean       @default(false)
+  permissions                 Permission[]
 }
 
 model Profile {
