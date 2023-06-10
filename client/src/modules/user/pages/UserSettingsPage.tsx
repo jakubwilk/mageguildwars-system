@@ -7,7 +7,6 @@ import { Text, Tooltip } from '@mantine/core'
 import { isNil } from 'lodash'
 
 import CreateNewProfileButton from '../../profile/components/create-profile/CreateNewProfileButton'
-import { UserSettingsContent } from '../components'
 import { USER_BREADCRUMB_NAVIGATION } from '../models'
 
 function UserPage() {
@@ -49,7 +48,7 @@ function UserPage() {
       </Helmet>
       <div className={'container mx-auto mt-8 px-4'}>
         <PageWithoutTable title={title} breadcrumbs={breadcrumbs} headerActions={<CreateNewProfileButton />} isLoading={isDataLoading}>
-          <UserSettingsContent />
+          <p>{'Dupa'}</p>
         </PageWithoutTable>
       </div>
     </Fragment>

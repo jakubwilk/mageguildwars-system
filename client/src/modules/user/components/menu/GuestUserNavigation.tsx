@@ -26,12 +26,11 @@ const useStyles = createStyles((theme) => ({
 function GuestUserNavigation() {
   const { t } = useTranslation()
   const { classes } = useStyles()
-  const { isSidebarOpen, setIsSidebarOpen, setIsAuthModalOpen } = useAppLayoutContext()
+  const { isSidebarOpen, setIsSidebarOpen } = useAppLayoutContext()
 
   const handleOpenAuthModalAndCloseSidebar = useCallback(() => {
-    setIsAuthModalOpen(true)
     setIsSidebarOpen(!isSidebarOpen)
-  }, [isSidebarOpen, setIsAuthModalOpen, setIsSidebarOpen])
+  }, [isSidebarOpen, setIsSidebarOpen])
 
   return (
     <Fragment>
