@@ -1,2 +1,1 @@
-export * from './dialog'
-export * from './menu'
+export const test = 'test'

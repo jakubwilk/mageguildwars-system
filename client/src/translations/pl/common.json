@@ -1,8 +1,14 @@
 {
+  "mainPage": {
+    "title": "Strona główna | Mage Guild Wars"
+  },
   "action": {
     "register": "Utwórz konto",
     "login": "Zaloguj się",
-    "cancel": "Anuluj"
+    "cancel": "Anuluj",
+    "account": "Konto",
+    "logout": "Wyloguj się",
+    "openNavigation": "Otwórz nawigację"
   },
   "copyright": {
     "allRightReversed": "Wszelkie prawa zastrzeżone",
