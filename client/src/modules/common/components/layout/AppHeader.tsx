@@ -1,4 +1,4 @@
-import { Fragment, useMemo } from 'react'
+import { Fragment, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { useAuthContext } from '@auth'
@@ -6,6 +6,7 @@ import { Anchor, Burger, createStyles, Header, Tooltip, useMantineTheme } from '
 import { useViewportSize } from '@mantine/hooks'
 import { clsx } from 'clsx'
 
+import { useAppLayoutContext } from '../../hooks'
 import { Logo } from '../logo'
 
 const useStyles = createStyles((theme) => ({
@@ -60,10 +61,13 @@ interface IProps {
 
 function AppHeader({ isOpen, handleOpen }: IProps) {
   const theme = useMantineTheme()
+  const { setIsAuthModalOpen } = useAppLayoutContext()
   const { width } = useViewportSize()
   const { isUser } = useAuthContext()
   const { classes } = useStyles()
   const { t } = useTranslation()
+
+  const handleOpenLoginDialog = useCallback(() => setIsAuthModalOpen(true), [setIsAuthModalOpen])
 
   const headerHeight = useMemo(() => {
     if (width <= 720) {
@@ -103,6 +107,7 @@ function AppHeader({ isOpen, handleOpen }: IProps) {
                 <Anchor
                   component={'button'}
                   type={'button'}
+                  onClick={handleOpenLoginDialog}
                   className={clsx('duration-150 rounded-md text-center flex-1 md:flex-auto', classes.anchorButton, classes.login)}
                 >
                   {t('common:action.login')}

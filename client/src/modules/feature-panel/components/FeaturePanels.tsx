@@ -35,7 +35,7 @@ function FeaturePanels() {
     )
   }, [data, isHomePage])
 
-  return <div className={'container mx-auto my-4'}>{isLoading ? loadingOverlay : panelGrid}</div>
+  return <div className={'container mx-auto mb-4'}>{isLoading ? loadingOverlay : panelGrid}</div>
 }
 
 export default FeaturePanels

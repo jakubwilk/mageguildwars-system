@@ -1,11 +1,14 @@
-import { Fragment } from 'react'
+import { Fragment, useCallback } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { Outlet } from 'react-router-dom'
+import { LoginAccountDialog } from '@auth'
 import { AppFooter, AppHeader, AppNavbar, useAppLayoutContext } from '@common'
 import { FeaturePanels } from '@feature-panel'
 
 function RootPage() {
-  const { isSidebarOpen, setIsSidebarOpen } = useAppLayoutContext()
+  const { isSidebarOpen, isAuthModalOpen, setIsAuthModalOpen, setIsSidebarOpen } = useAppLayoutContext()
+
+  const handleCloseLoginDialog = useCallback(() => setIsAuthModalOpen(false), [setIsAuthModalOpen])
 
   return (
     <Fragment>
@@ -18,6 +21,7 @@ function RootPage() {
         <FeaturePanels />
         <Outlet />
         <AppFooter />
+        {isAuthModalOpen && <LoginAccountDialog isOpen={isAuthModalOpen} handleClose={handleCloseLoginDialog} />}
       </div>
     </Fragment>
   )
