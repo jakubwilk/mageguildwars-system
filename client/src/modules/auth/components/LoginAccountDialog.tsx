@@ -92,10 +92,11 @@ function LoginAccountDialog({ isOpen, handleClose }: IProps) {
             autoClose: 5000,
             withCloseButton: true,
           })
+          handleClose()
         },
       })
     },
-    [loginAccount, setUser, t]
+    [handleClose, loginAccount, setUser, t]
   )
 
   useEffect(() => {
