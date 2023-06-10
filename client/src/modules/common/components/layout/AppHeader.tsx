@@ -46,10 +46,10 @@ const useStyles = createStyles((theme) => ({
   },
   logout: {
     marginRight: '1rem',
-    backgroundColor: theme.colors.red[3],
+    backgroundColor: theme.colors.red[9],
     '&:hover, &:focus': {
       color: theme.white,
-      backgroundColor: theme.colors.red[2],
+      backgroundColor: theme.colors.red[8],
     },
   },
 }))
