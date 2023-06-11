@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom'
-import { ForumPage, RootPage, UserPage } from '@app/pages'
+import { CreateAccountPage, ForumPage, RootPage, UserPage } from '@app/pages'
 
 export const APP_ROUTES = createBrowserRouter([
   {
@@ -14,5 +14,9 @@ export const APP_ROUTES = createBrowserRouter([
         element: <UserPage />,
       },
     ],
+  },
+  {
+    path: '/account-create',
+    element: <CreateAccountPage />,
   },
 ])
