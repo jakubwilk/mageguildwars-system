@@ -129,7 +129,7 @@ function AppHeader({ isOpen, handleOpen }: IProps) {
                   {t('common:action.login')}
                 </Anchor>
                 <Anchor
-                  href={'/create-account'}
+                  href={'/account-create'}
                   className={clsx('duration-150 rounded-md text-center flex-1 md:flex-auto', classes.anchorButton, classes.register)}
                 >
                   {t('common:action.register')}
