@@ -106,7 +106,7 @@ function LoginAccountDialog({ isOpen, handleClose }: IProps) {
 
   return (
     <Modal opened={isOpen} onClose={handleClose} size={'lg'} radius={'sm'} withCloseButton={false} className={classes.dialog}>
-      <Title size={'h4'} className={classes.title}>
+      <Title size={'h4'} className={clsx('mb-4', classes.title)}>
         {t('auth:tab.loginTitle')}
       </Title>
       <form onSubmit={form.onSubmit(handleLoginAccount)}>
@@ -132,7 +132,7 @@ function LoginAccountDialog({ isOpen, handleClose }: IProps) {
             />
           </Grid.Col>
           <Grid.Col span={12}>
-            <div className={'flex items-center justify-end mt-6'}>
+            <div className={'flex items-center justify-end'}>
               {closeButton}
               <Button type={'submit'} className={clsx('duration-100 ml-4', classes.button)} loading={isLoading} size={'md'}>
                 {t('common:action.login')}
