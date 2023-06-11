@@ -1,12 +1,13 @@
 import { Fragment, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
-import { useAuthContext } from '@auth'
+import { Link, useNavigate } from 'react-router-dom'
+import { authService, useAuthContext, useLogoutAccountMutation } from '@auth'
 import { Anchor, Burger, createStyles, Header, Tooltip, useMantineTheme } from '@mantine/core'
 import { useViewportSize } from '@mantine/hooks'
 import { clsx } from 'clsx'
 
 import { useAppLayoutContext } from '../../hooks'
+import { REFRESH_TOKEN } from '../../utils'
 import { Logo } from '../logo'
 
 const useStyles = createStyles((theme) => ({
@@ -18,12 +19,13 @@ const useStyles = createStyles((theme) => ({
     color: theme.colors.gray[4],
     marginLeft: '1rem',
     padding: '10px 20px',
+    fontSize: '0.9rem',
     '&:hover, &:focus': {
       textDecoration: 'none',
     },
   },
   login: {
-    backgroundColor: theme.colors['dark-purple'][8],
+    backgroundColor: theme.colors['dark-purple'][9],
     '&:hover, &:focus': {
       color: theme.white,
       backgroundColor: theme.colors['dark-purple'][7],
@@ -38,7 +40,7 @@ const useStyles = createStyles((theme) => ({
     },
   },
   user: {
-    backgroundColor: theme.colors['dark-purple'][8],
+    backgroundColor: theme.colors['dark-purple'][9],
     '&:hover, &:focus': {
       color: theme.white,
       backgroundColor: theme.colors['dark-purple'][7],
@@ -61,13 +63,26 @@ interface IProps {
 
 function AppHeader({ isOpen, handleOpen }: IProps) {
   const theme = useMantineTheme()
+  const { setUser } = useAuthContext()
+  const navigate = useNavigate()
   const { setIsAuthModalOpen } = useAppLayoutContext()
   const { width } = useViewportSize()
   const { isUser } = useAuthContext()
   const { classes } = useStyles()
   const { t } = useTranslation()
+  const { mutate: logoutAccount } = useLogoutAccountMutation()
 
   const handleOpenLoginDialog = useCallback(() => setIsAuthModalOpen(true), [setIsAuthModalOpen])
+
+  const handleLogoutUser = useCallback(() => {
+    logoutAccount(null, {
+      onSuccess: () => {
+        setUser(null)
+        authService.removeLocalStorageItem(REFRESH_TOKEN)
+        navigate('/')
+      },
+    })
+  }, [logoutAccount, navigate, setUser])
 
   const headerHeight = useMemo(() => {
     if (width <= 720) {
@@ -97,6 +112,7 @@ function AppHeader({ isOpen, handleOpen }: IProps) {
                 <Anchor
                   component={'button'}
                   type={'button'}
+                  onClick={handleLogoutUser}
                   className={clsx('duration-150 rounded-md text-center flex-1 md:flex-auto', classes.anchorButton, classes.logout)}
                 >
                   {t('common:action.logout')}
