@@ -7,8 +7,8 @@ interface IProps {
 
 function RegisterWrapper({ form, rules }: IProps) {
   return (
-    <div className={'container mx-auto lg:min-h-screen h-full'}>
-      <div className={'flex items-center justify-center h-[inherit] min-h-[inherit] flex-col md:flex-row'}>
+    <div className={'container mx-auto h-full my-8'}>
+      <div className={'flex items-start justify-start h-[inherit] min-h-[inherit] flex-col md:flex-row-reverse'}>
         {rules}
         {form}
       </div>
