@@ -1,3 +1,4 @@
+import { AUTH_RULES } from '@auth/constants'
 import { MapModelToUser } from '@auth/mappers'
 import { AuthCreateUserParams, AuthCreateUserSnapshot, AuthTokenPayload, AuthTokensModel } from '@auth/models'
 import { HttpStatus, Injectable } from '@nestjs/common'
@@ -136,6 +137,14 @@ export class AuthService {
       return await this.getUserSessionData(user, profiles)
     } catch (err) {
       throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.USER.ISSUE_WITH_GET_USER_DATA)
+    }
+  }
+
+  async getAuthRules(): Promise<any> {
+    try {
+      return AUTH_RULES
+    } catch (err) {
+      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.COMMON.ISSUE_WITH_GET_DATA)
     }
   }
 }
