@@ -51,4 +51,10 @@ export class AuthController {
       .clearCookie(AUTH_COOKIE_NAME.REFRESH_TOKEN, { httpOnly: true })
       .end()
   }
+
+  @Get('/rules')
+  async getRegistrationRules(@Res() res: Response) {
+    const rules = await this.authService.getAuthRules()
+    return res.json(rules)
+  }
 }

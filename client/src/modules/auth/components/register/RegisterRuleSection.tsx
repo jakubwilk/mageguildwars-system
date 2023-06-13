@@ -1,5 +1,12 @@
 import { ReactNode } from 'react'
-import { Box, Text } from '@mantine/core'
+import { Box, createStyles, Text } from '@mantine/core'
+import { clsx } from 'clsx'
+
+const useStyles = createStyles((theme) => ({
+  ruleTitle: {
+    color: theme.colors.gray[5],
+  },
+}))
 
 interface IProps {
   title: string
@@ -7,9 +14,13 @@ interface IProps {
 }
 
 function RegisterRuleSection({ title, content }: IProps) {
+  const { classes } = useStyles()
+
   return (
     <Box>
-      <Text fz={'xl'}>{title}</Text>
+      <Text fz={'xl'} className={clsx('ml-8', classes.ruleTitle)}>
+        {title}
+      </Text>
       {content}
     </Box>
   )

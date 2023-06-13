@@ -5,6 +5,10 @@ export function HttpError(status: HttpStatus, message?: string) {
 }
 
 export const ERROR_MESSAGES = {
+  COMMON: {
+    ISSUE_WITH_GET_DATA:
+      'Wystąpił problem z pobraniem danych potrzebnych do wyświetlenia na widoku. Skontaktuj się z administratorem serwisu.',
+  },
   AUTH: {
     WRONG_DATA: 'Błąd dancyh wejściowych. Wprowadzono niepoprawne dane.',
     WRONG_LOGIN_DATA: 'Wprowadzono błędne dane logowania. Sprawdź login lub hasło.',

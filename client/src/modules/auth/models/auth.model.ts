@@ -12,3 +12,9 @@ export enum AUTH_METHOD_ENUM {
   // eslint-disable-next-line no-unused-vars
   REGISTER = 'REGISTER',
 }
+
+export interface AuthRulesResponseSnapshot {
+  id: string
+  title: string
+  content: Array<{ id: string; text: string }>
+}

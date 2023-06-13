@@ -27,3 +27,9 @@ export interface AuthLoginUserParams {
   login: string
   password: string
 }
+
+export interface AuthRules {
+  id: string
+  title: string
+  content: Array<{ id: string; text: string }>
+}
