@@ -2,9 +2,9 @@ import { useContext } from 'react'
 import { AppLayoutContext } from '@common'
 
 function useAppLayoutContext() {
-  const { isHomePage, isSidebarOpen, isAuthModalOpen, setIsHomePage, setIsSidebarOpen, setIsAuthModalOpen } = useContext(AppLayoutContext)
+  const { isHomePage, setIsHomePage } = useContext(AppLayoutContext)
 
-  return { isHomePage, isSidebarOpen, isAuthModalOpen, setIsHomePage, setIsSidebarOpen, setIsAuthModalOpen }
+  return { isHomePage, setIsHomePage }
 }
 
 export default useAppLayoutContext
