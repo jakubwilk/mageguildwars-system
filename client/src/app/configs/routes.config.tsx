@@ -1,10 +1,15 @@
 import { createBrowserRouter } from 'react-router-dom'
-import { RootPage } from '@app/pages'
+import { HomePage, RootPage } from '@app/pages'
 
 export const APP_ROUTES = createBrowserRouter([
   {
     element: <RootPage />,
-    children: [],
+    children: [
+      {
+        path: '/',
+        element: <HomePage />,
+      },
+    ],
   },
   {
     path: '/account-create',

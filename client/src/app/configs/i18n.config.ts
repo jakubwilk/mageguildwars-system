@@ -5,6 +5,7 @@ import detector from 'i18next-browser-languagedetector'
 import auth from '../../translations/pl/auth.json'
 import common from '../../translations/pl/common.json'
 import error from '../../translations/pl/error.json'
+import home from '../../translations/pl/home.json'
 import profile from '../../translations/pl/profile.json'
 import user from '../../translations/pl/user.json'
 import validation from '../../translations/pl/validation.json'
@@ -17,6 +18,7 @@ const resources = {
     validation,
     error,
     auth,
+    home,
   },
 }
 
