@@ -3,11 +3,7 @@ import { AppLayoutContextType } from '@common'
 
 export const AppLayoutContext = createContext<AppLayoutContextType>({
   isHomePage: true,
-  isSidebarOpen: false,
-  isAuthModalOpen: false,
   setIsHomePage: () => {},
-  setIsSidebarOpen: () => {},
-  setIsAuthModalOpen: () => {},
 })
 
 interface IProps {
@@ -16,13 +12,8 @@ interface IProps {
 
 function AppLayoutContextProvider({ children }: IProps) {
   const [isHomePage, setIsHomePage] = useState(true)
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
 
-  const values = useMemo(
-    () => ({ isHomePage, isSidebarOpen, isAuthModalOpen, setIsHomePage, setIsSidebarOpen, setIsAuthModalOpen }),
-    [isAuthModalOpen, isHomePage, isSidebarOpen]
-  )
+  const values = useMemo(() => ({ isHomePage, setIsHomePage }), [isHomePage])
 
   return <AppLayoutContext.Provider value={values}>{children}</AppLayoutContext.Provider>
 }

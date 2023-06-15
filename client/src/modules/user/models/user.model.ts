@@ -1,5 +1,3 @@
-import { ProfileSnapshot } from '@profile'
-
 export enum UserTabs {
   // eslint-disable-next-line no-unused-vars
   SETTINGS = 'SETTINGS',
@@ -30,5 +28,5 @@ export interface UserSnapshot {
   isGameMaster: boolean
   createdAt: Date
   updatedAt: Date
-  profiles: Array<ProfileSnapshot>
+  profiles: Array<any>
 }
