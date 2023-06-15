@@ -5,7 +5,7 @@ import { clsx } from 'clsx'
 
 const useStyles = createStyles((theme) => ({
   footer: {
-    backgroundColor: theme.colors.night[6],
+    backgroundColor: 'transparent',
     borderColor: 'transparent',
   },
   text: {
@@ -20,8 +20,8 @@ function AppFooter() {
 
   return (
     <Footer height={80} className={clsx('relative w-full bottom-0 left-0 z-10', classes.footer)}>
-      <div className={'container mx-auto h-full'}>
-        <div className={'flex items-center justify-end px-4 h-full'}>
+      <div className={'mx-8 h-full'}>
+        <div className={'flex items-center justify-end h-full'}>
           <div className={clsx('flex flex-col text-right uppercase mr-4', classes.text)}>
             <Text fz={'xs'}>{t('common:copyright.allRightReversed')}</Text>
             <Text fz={'xs'}>{t('common:copyright.siteNameAndYear', { currentYear })}</Text>
