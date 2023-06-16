@@ -13,5 +13,5 @@ export const APP_THEME: MantineThemeOverride = {
   // jonquil: ['#FFEC98', '#FFEA8E', '#FFE883', '#FFE677', '#FFE469', '#FFE15A', '#FFDE49', '#FFDB37', '#FFD723', '#FDCF00'],
   // 'snow-white': ['#FAFAFA', '#FCFCFC', '#F5F5F5', '#EBEBEB', '#D6D6D6', '#C3C3C3', '#B1B1B1', '#A1A1A1', '#929292', '#858585'],
   // },
-  // primaryColor: 'brand',
+  primaryColor: 'indigo',
 }
