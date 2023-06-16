@@ -33,11 +33,13 @@ export class AuthService {
   }
 
   async verifyHash(data: string, hashedData: string, msg?: string): Promise<boolean> {
-    try {
-      return await argon2.verify(hashedData, data)
-    } catch (err) {
-      throw HttpError(HttpStatus.BAD_REQUEST, msg || err)
+    const isHashCorrect = await argon2.verify(hashedData, data)
+
+    if (isHashCorrect) {
+      return true
     }
+
+    throw HttpError(HttpStatus.BAD_REQUEST, msg)
   }
 
   async getAccessToken(uid: string): Promise<string> {
