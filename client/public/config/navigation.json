@@ -1,5 +1,5 @@
 {
-  "helperMenu": [
+  "helperNavigation": [
     {
       "id": 1,
       "href": "/",
@@ -33,7 +33,7 @@
       "isEnabledForLoggedUser": false
     }
   ],
-  "mainMenu": [
+  "mainNavigation": [
     {
       "id": "1",
       "title": "Aktualności",
