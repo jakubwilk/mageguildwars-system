@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom'
-import { HomePage, RootPage } from '@app/pages'
+import { CreateAccountPage, HomePage, LoginAccountPage, RootPage } from '@app/pages'
 
 export const APP_ROUTES = createBrowserRouter([
   {
@@ -12,7 +12,11 @@ export const APP_ROUTES = createBrowserRouter([
     ],
   },
   {
+    path: '/account-login',
+    element: <LoginAccountPage />,
+  },
+  {
     path: '/account-create',
-    element: null,
+    element: <CreateAccountPage />,
   },
 ])
