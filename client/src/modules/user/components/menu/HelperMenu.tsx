@@ -1,44 +1,18 @@
 import { Fragment, useCallback } from 'react'
 import { useAuthContext } from '@auth'
-import { Anchor, createStyles, Tooltip } from '@mantine/core'
+import { useAppConfigContext } from '@common'
+import { Anchor, createStyles, Skeleton, Tooltip } from '@mantine/core'
 import { clsx } from 'clsx'
 
-const NAVIGATION = [
-  {
-    id: 1,
-    href: '/',
-    title: 'Przejdź do zakładki z regulaminem',
-    name: 'Zasady',
-    isDisabled: false,
-    isEnabledForLoggedUser: false,
-  },
-  {
-    id: 2,
-    href: '/',
-    title: 'Przejdź do zakładki z FAQ',
-    name: 'Pomoc',
-    isDisabled: false,
-    isEnabledForLoggedUser: false,
-  },
-  {
-    id: 3,
-    href: '/',
-    title: 'Przejdź do systemu raportowania użytkowników',
-    name: 'System zgłoszeń',
-    isDisabled: false,
-    isEnabledForLoggedUser: true,
-  },
-  {
-    id: 4,
-    href: '/',
-    title: 'Przejdź do zakładki z informacjami o wymianie linków',
-    name: 'Partnerstwo',
-    isDisabled: false,
-    isEnabledForLoggedUser: false,
-  },
-]
-
 const useStyles = createStyles((theme) => ({
+  skeleton: {
+    '&::after': {
+      background: theme.colors.dark[4],
+    },
+    '&::before': {
+      background: theme.colors.dark[6],
+    },
+  },
   list: {
     margin: 0,
     padding: 0,
@@ -66,6 +40,7 @@ interface IProps {
 
 function HelperMenu({ isDesktopView = true }: IProps) {
   const { isUser } = useAuthContext()
+  const { helperNavigation, isHelperNavigationLoading } = useAppConfigContext()
   const { classes } = useStyles()
 
   const checkIsLinkEnabledForEveryUser = useCallback(
@@ -97,9 +72,11 @@ function HelperMenu({ isDesktopView = true }: IProps) {
     [classes.linkDesktop, classes.linkDesktopDisabled, isDesktopView]
   )
 
-  return (
+  return isHelperNavigationLoading ? (
+    <Skeleton height={20} width={'30%'} radius={'sm'} className={classes.skeleton} />
+  ) : (
     <ul className={clsx('flex', classes.list)}>
-      {NAVIGATION.map(({ id, href, title, name, isDisabled, isEnabledForLoggedUser }) => (
+      {helperNavigation.map(({ id, href, title, name, isDisabled, isEnabledForLoggedUser }) => (
         <Fragment key={id}>
           {checkIsLinkEnabledForEveryUser(isEnabledForLoggedUser) && (
             <Tooltip label={title} className={setLinkClassName(isDisabled)}>

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { RouterProvider } from 'react-router-dom'
 import { APP_ROUTES, axiosApi, i18n } from '@app/configs'
 import { API, AuthContextProvider, authService, CreateAccountResponseSnapshot, useAuthContext } from '@auth'
-import { AppLayoutContextProvider, REFRESH_TOKEN } from '@common'
+import { AppConfigContextProvider, AppLayoutContextProvider, HelperNavigationType, MainNavigationType, REFRESH_TOKEN } from '@common'
 import { Notifications, notifications } from '@mantine/notifications'
 import { MutationCache, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AxiosError, AxiosResponse } from 'axios'
@@ -42,6 +42,11 @@ function AppWrapper({ children }: IProps) {
   return <Fragment>{children}</Fragment>
 }
 
+type NavigationState = {
+  helperNavigation: Array<HelperNavigationType>
+  mainNavigation: Array<MainNavigationType>
+}
+
 function App() {
   const mutationCache = new MutationCache({
     onError: (err) => {
@@ -63,18 +68,34 @@ function App() {
         mutationCache,
       })
   )
+  const [navigation, setNavigation] = useState<NavigationState>({ helperNavigation: [], mainNavigation: [] })
+  const { helperNavigation, mainNavigation } = navigation
+
+  useEffect(() => {
+    fetch(`${process.env.PUBLIC_URL}/config/navigation.json`, { credentials: 'same-origin' })
+      .then((res) => res.json())
+      .then((res) => {
+        setNavigation(res)
+      })
+      .catch((err) => {
+        console.error(err)
+        setNavigation({ helperNavigation: [], mainNavigation: [] })
+      })
+  }, [])
 
   return (
     <QueryClientProvider client={queryClient}>
       <HelmetProvider>
         <AuthContextProvider>
           <AppLayoutContextProvider>
-            <AppWrapper>
-              <Suspense fallback={<div />}>
-                <Notifications />
-                <RouterProvider router={APP_ROUTES} />
-              </Suspense>
-            </AppWrapper>
+            <AppConfigContextProvider helperNavigation={helperNavigation} mainNavigation={mainNavigation}>
+              <AppWrapper>
+                <Suspense fallback={<div />}>
+                  <Notifications />
+                  <RouterProvider router={APP_ROUTES} />
+                </Suspense>
+              </AppWrapper>
+            </AppConfigContextProvider>
           </AppLayoutContextProvider>
         </AuthContextProvider>
       </HelmetProvider>
