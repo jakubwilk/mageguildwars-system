@@ -29,12 +29,7 @@ function GuestMenu() {
       >
         {t('auth:action.login')}
       </Button>
-      <Button
-        component={Link}
-        to={authRoutes.registerPage()}
-        className={clsx('duration-100 w-full sm:w-auto', classes.buttonBasic)}
-        color={'indigo'}
-      >
+      <Button component={Link} to={authRoutes.registerPage()} className={clsx('duration-100 w-full sm:w-auto', classes.buttonBasic)}>
         {t('auth:action.register')}
       </Button>
     </div>
