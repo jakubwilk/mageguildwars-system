@@ -1,22 +1,24 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { CreateAccountPage, HomePage, LoginAccountPage, RootPage } from '@app/pages'
+import { authRoutes } from '@auth'
+import { commonRoutes } from '@common'
 
 export const APP_ROUTES = createBrowserRouter([
   {
     element: <RootPage />,
     children: [
       {
-        path: '/',
+        path: commonRoutes.homePage(),
         element: <HomePage />,
       },
     ],
   },
   {
-    path: '/account-login',
+    path: authRoutes.loginPage(),
     element: <LoginAccountPage />,
   },
   {
-    path: '/account-create',
+    path: authRoutes.registerPage(),
     element: <CreateAccountPage />,
   },
 ])
