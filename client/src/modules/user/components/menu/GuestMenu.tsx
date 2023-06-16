@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
+import { authRoutes } from '@auth'
 import { Button, createStyles } from '@mantine/core'
 import { clsx } from 'clsx'
 
@@ -23,14 +24,14 @@ function GuestMenu() {
     <div className={'flex items-center justify-center w-full flex-col sm:justify-end md:w-auto sm:flex-row'}>
       <Button
         component={Link}
-        to={'/account-login'}
+        to={authRoutes.loginPage()}
         className={clsx('duration-100 mb-2 mr-0 sm:mb-0 sm:mr-4 w-full sm:w-auto', classes.buttonBasic, classes.loginButton)}
       >
         {t('auth:action.login')}
       </Button>
       <Button
         component={Link}
-        to={'/account-create'}
+        to={authRoutes.registerPage()}
         className={clsx('duration-100 w-full sm:w-auto', classes.buttonBasic)}
         color={'indigo'}
       >
