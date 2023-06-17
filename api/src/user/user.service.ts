@@ -19,24 +19,35 @@ export class UserService {
 
       return user === null
     } catch (err) {
-      throw HttpError(HttpStatus.BAD_REQUEST, err)
+      throw HttpError(HttpStatus.BAD_REQUEST, err?.response)
     }
   }
 
   async getUser(uid: string): Promise<UserSnapshot> {
     try {
       const user: UserModel = await this.prismaService.user.findUnique({ where: { uid } })
+
+      if (!user) {
+        throw HttpError(HttpStatus.BAD_REQUEST, ERROR_MESSAGES.USER.MISSING_USER)
+      }
+
       return MapModelToUser(user)
     } catch (err) {
-      throw HttpError(HttpStatus.BAD_REQUEST, ERROR_MESSAGES.USER.MISSING_USER)
+      throw HttpError(HttpStatus.BAD_REQUEST, err?.response)
     }
   }
 
   async getFullUserByName(login: string): Promise<UserModel> {
     try {
-      return await this.prismaService.user.findUnique({ where: { login } })
+      const user: UserModel = await this.prismaService.user.findUnique({ where: { login } })
+
+      if (!user) {
+        throw HttpError(HttpStatus.BAD_REQUEST, ERROR_MESSAGES.USER.MISSING_USER)
+      }
+
+      return user
     } catch (err) {
-      throw HttpError(HttpStatus.BAD_REQUEST, ERROR_MESSAGES.USER.MISSING_USER)
+      throw HttpError(HttpStatus.BAD_REQUEST, err?.response)
     }
   }
 }

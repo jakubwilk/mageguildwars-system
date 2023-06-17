@@ -128,7 +128,7 @@ export class AuthService {
       await this.prismaService.user.update({ where: { id: data.id }, data: { refreshToken: session.refreshToken } })
       return session
     } catch (err) {
-      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.AUTH.ISSUE_WITH_CREATE_USER)
+      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, err || ERROR_MESSAGES.AUTH.ISSUE_WITH_CREATE_USER)
     }
   }
 
@@ -138,7 +138,7 @@ export class AuthService {
       const profiles: Array<ProfileModel> = await this.profileService.getProfiles(uid)
       return await this.getUserSessionData(user, profiles)
     } catch (err) {
-      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.USER.ISSUE_WITH_GET_USER_DATA)
+      throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, err || ERROR_MESSAGES.USER.ISSUE_WITH_GET_USER_DATA)
     }
   }
 
