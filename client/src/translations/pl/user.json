@@ -7,5 +7,21 @@
   "tabs": {
     "title": "Konto",
     "panel": "Ustawienia konta"
+  },
+  "groups": {
+    "user": "Uzytkownik",
+    "moderator": "Moderator",
+    "operator": "Administrator",
+    "banned": "Zbanowany",
+    "none": "Niezdefiniowany"
+  },
+  "fields": {
+    "registerDate": "Data rejestracji:",
+    "updateDate": "Data ostatniej edycji:",
+    "group": "Grupa:",
+    "isAccountActive": "Konto aktywne:",
+    "isAccountLocked": "Konto zablokowane:",
+    "isProfileCreationActive": "Mozliwość tworzenia profili:",
+    "isGameMasterProfileCreationActive": "Możliwość stworzenia profilu Mistrza Gry:"
   }
 }
