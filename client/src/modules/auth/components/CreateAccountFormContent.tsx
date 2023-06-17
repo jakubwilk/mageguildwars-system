@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import { commonRoutes } from '@common'
+import { commonRoutes, MIN_PASSWORD_LENGTH } from '@common'
 import { Button, createStyles, Grid, PasswordInput, TextInput, Title, Tooltip } from '@mantine/core'
 import { UseFormReturnType } from '@mantine/form'
 import { IconArrowNarrowLeft } from '@tabler/icons-react'
@@ -71,6 +71,7 @@ function CreateAccountFormContent<T>({ form, isButtonLoading }: IProps<T>) {
         <Grid.Col span={12}>
           <TextInput
             label={t('auth:field.login')}
+            description={t('auth:message.loginRegisterDescription')}
             size={'md'}
             className={clsx('duration-100', classes.input)}
             withAsterisk
@@ -80,6 +81,7 @@ function CreateAccountFormContent<T>({ form, isButtonLoading }: IProps<T>) {
         <Grid.Col span={12}>
           <TextInput
             label={t('auth:field.email')}
+            description={t('auth:message.emailDescription')}
             size={'md'}
             className={clsx('duration-100', classes.input)}
             withAsterisk
@@ -89,6 +91,7 @@ function CreateAccountFormContent<T>({ form, isButtonLoading }: IProps<T>) {
         <Grid.Col span={12}>
           <PasswordInput
             label={t('auth:field.password')}
+            description={t('auth:message.passwordDescription', { min: MIN_PASSWORD_LENGTH })}
             size={'md'}
             className={clsx('duration-100', classes.input)}
             autoComplete={'off'}
