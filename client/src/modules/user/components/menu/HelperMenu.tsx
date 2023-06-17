@@ -1,7 +1,8 @@
 import { Fragment, useCallback } from 'react'
+import { Link } from 'react-router-dom'
 import { useAuthContext } from '@auth'
 import { useAppConfigContext } from '@common'
-import { Anchor, createStyles, Skeleton, Tooltip } from '@mantine/core'
+import { createStyles, Skeleton, Tooltip } from '@mantine/core'
 import { clsx } from 'clsx'
 
 const useStyles = createStyles((theme) => ({
@@ -80,7 +81,7 @@ function HelperMenu({ isDesktopView = true }: IProps) {
         <Fragment key={id}>
           {checkIsLinkEnabledForEveryUser(isEnabledForLoggedUser) && (
             <Tooltip label={title} className={setLinkClassName(isDisabled)}>
-              <Anchor href={href}>{name}</Anchor>
+              <Link to={href}>{name}</Link>
             </Tooltip>
           )}
         </Fragment>
