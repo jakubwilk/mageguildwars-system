@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   CREATE_ACCOUNT_INITIAL_VALUES,
   CreateAccountFormContent,
@@ -9,13 +9,14 @@ import {
   useAuthContext,
   useCreateAccountMutation,
 } from '@auth'
-import { Logo } from '@common'
+import { commonRoutes, Logo } from '@common'
 import { Tooltip } from '@mantine/core'
 import { useForm, yupResolver } from '@mantine/form'
 import { notifications } from '@mantine/notifications'
 
 function CreateAccountForm() {
   const { t } = useTranslation()
+  const navigate = useNavigate()
   const { setUser } = useAuthContext()
   const { mutate: createAccount, isLoading } = useCreateAccountMutation()
   const form = useForm<CreateAccountRequestParams>({
@@ -34,6 +35,7 @@ function CreateAccountForm() {
             autoClose: 5000,
             withCloseButton: true,
           })
+          navigate(commonRoutes.homePage())
         },
       })
     },

@@ -20,5 +20,5 @@ export const responseWithUserDataAndTokens = (data: AuthCreateUserSnapshot, res:
   return res
     .cookie(AUTH_COOKIE_NAME.ACCESS_TOKEN, data.accessToken, { ...DEFAULT_ACCESS_TOKEN_OPTIONS })
     .cookie(AUTH_COOKIE_NAME.REFRESH_TOKEN, data.refreshToken, { ...DEFAULT_REFRESH_TOKEN_OPTIONS })
-    .json({ user: { ...data.user, profiles: data.profiles }, refreshToken: data.refreshToken })
+    .json({ user: { ...data.user }, refreshToken: data.refreshToken })
 }
