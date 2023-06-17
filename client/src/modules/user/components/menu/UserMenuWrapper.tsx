@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { useAuthContext } from '@auth'
 import { BREAKPOINT } from '@common'
 import { useViewportSize } from '@mantine/hooks'
-import { GuestMenu, HelperMenu } from '@user'
+import { GuestMenu, HelperMenu, UserMenu } from '@user'
 
 function UserMenuWrapper() {
   const { isUser } = useAuthContext()
@@ -13,7 +13,7 @@ function UserMenuWrapper() {
   return (
     <div className={'flex justify-between items-center'}>
       {isDesktopView && <HelperMenu />}
-      {isUser ? <p>{'DesktopMenu Uzytkownika'}</p> : <GuestMenu />}
+      {isUser ? <UserMenu /> : <GuestMenu />}
     </div>
   )
 }
