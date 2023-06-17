@@ -9,6 +9,8 @@ import { notifications } from '@mantine/notifications'
 import { IconPower } from '@tabler/icons-react'
 import { clsx } from 'clsx'
 
+import { userRoutes } from '../../config'
+
 const useStyles = createStyles((theme) => ({
   accountButton: {
     backgroundColor: theme.colors.dark[5],
@@ -45,7 +47,11 @@ function UserMenu() {
 
   return (
     <div className={'w-full md:w-auto flex items-center flex-col sm:flex-row justify-end'}>
-      <Button component={Link} to={'/'} className={clsx('duration-100 mb-4 w-full sm:w-auto sm:mb-0 sm:mr-4', classes.accountButton)}>
+      <Button
+        component={Link}
+        to={userRoutes.userDashboardPage()}
+        className={clsx('duration-100 mb-4 w-full sm:w-auto sm:mb-0 sm:mr-4', classes.accountButton)}
+      >
         {username}
       </Button>
       <Tooltip label={t('auth:tooltip.logoutFromAccount')} position={'bottom'} disabled={isMobileView}>

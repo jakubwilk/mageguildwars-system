@@ -1,7 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom'
-import { CreateAccountPage, HomePage, LoginAccountPage, RootPage } from '@app/pages'
+import { CreateAccountPage, HomePage, LoginAccountPage, RootPage, UserDashboardPage } from '@app/pages'
 import { authRoutes } from '@auth'
 import { commonRoutes } from '@common'
+import { userRoutes } from '@user'
 
 export const APP_ROUTES = createBrowserRouter([
   {
@@ -10,6 +11,10 @@ export const APP_ROUTES = createBrowserRouter([
       {
         path: commonRoutes.homePage(),
         element: <HomePage />,
+      },
+      {
+        path: userRoutes.userDashboardPage(),
+        element: <UserDashboardPage />,
       },
     ],
   },
