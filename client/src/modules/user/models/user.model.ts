@@ -18,6 +18,7 @@ export interface UserSnapshot {
   isActive: boolean
   isLocked: boolean
   isCreateProfileEnabled: boolean
+  isGameMasterProfileEnabled: boolean
   isGameMaster: boolean
   createdAt: Date
   updatedAt: Date

@@ -1,4 +1,9 @@
 {
+  "value": {
+    "emptyMark": "-",
+    "yes": "Tak",
+    "no": "Nie"
+  },
   "mainPage": {
     "title": "Strona główna | Mage Guild Wars"
   },
