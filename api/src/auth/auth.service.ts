@@ -4,7 +4,7 @@ import { AuthCreateUserParams, AuthCreateUserSnapshot, AuthTokenPayload, AuthTok
 import { HttpStatus, Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { JwtService } from '@nestjs/jwt'
-import { Profile as ProfileModel, ProfileRole, User as UserModel } from '@prisma/client'
+import { ProfileRole, User as UserModel } from '@prisma/client'
 import { PrismaService } from '@prisma/prisma.service'
 import { ProfileCreateParams } from '@profile/models'
 import { ProfileService } from '@profile/profile.service'
@@ -98,10 +98,10 @@ export class AuthService {
     return tokens
   }
 
-  async getUserSessionData(data: UserSnapshot, profiles: Array<ProfileModel>): Promise<AuthCreateUserSnapshot> {
+  async getUserSessionData(data: UserSnapshot): Promise<AuthCreateUserSnapshot> {
     try {
       const tokens = await this.getTokens(data)
-      return { ...tokens, user: data, profiles }
+      return { ...tokens, user: data }
     } catch (err) {
       throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.AUTH.ISSUE_WITH_CREATE_SESSION)
     }
@@ -123,8 +123,8 @@ export class AuthService {
         name: data.login,
         role: ProfileRole.NONE,
       }
-      const profiles: Array<ProfileModel> = await this.profileService.createProfile(data.uid, profileDataToCreate)
-      const session: AuthCreateUserSnapshot = await this.getUserSessionData(MapModelToUser(data), profiles)
+      await this.profileService.createProfile(data.uid, profileDataToCreate)
+      const session: AuthCreateUserSnapshot = await this.getUserSessionData(MapModelToUser(data))
       await this.prismaService.user.update({ where: { id: data.id }, data: { refreshToken: session.refreshToken } })
       return session
     } catch (err) {
@@ -135,8 +135,8 @@ export class AuthService {
   async loginAccount(uid: string): Promise<AuthCreateUserSnapshot> {
     try {
       const user: UserSnapshot = await this.userService.getUser(uid)
-      const profiles: Array<ProfileModel> = await this.profileService.getProfiles(uid)
-      return await this.getUserSessionData(user, profiles)
+      // const profiles: Array<ProfileModel> = await this.profileService.getProfiles(uid)
+      return await this.getUserSessionData(user)
     } catch (err) {
       throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, err || ERROR_MESSAGES.USER.ISSUE_WITH_GET_USER_DATA)
     }

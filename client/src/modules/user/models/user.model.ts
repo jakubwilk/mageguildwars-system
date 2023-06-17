@@ -1,10 +1,3 @@
-export enum UserTabs {
-  // eslint-disable-next-line no-unused-vars
-  SETTINGS = 'SETTINGS',
-  // eslint-disable-next-line no-unused-vars
-  PROFILE = 'PROFILE',
-}
-
 export enum UserGroup {
   // eslint-disable-next-line no-unused-vars
   BANNED = 'BANNED',
@@ -28,5 +21,4 @@ export interface UserSnapshot {
   isGameMaster: boolean
   createdAt: Date
   updatedAt: Date
-  profiles: Array<any>
 }
