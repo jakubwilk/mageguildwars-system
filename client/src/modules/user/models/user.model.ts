@@ -22,3 +22,8 @@ export interface UserSnapshot {
   createdAt: Date
   updatedAt: Date
 }
+
+export type UserRoutesType = {
+  userDashboardPage: () => string
+  userProfilePreviewPage: (slug: string) => string
+}
