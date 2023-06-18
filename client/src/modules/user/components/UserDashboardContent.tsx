@@ -9,12 +9,12 @@ function UserDashboardContent() {
     <div className={'mt-4 md:mt-8'}>
       <Grid gutter={'lg'} grow>
         <Grid.Col sm={7} md={8}>
-          <SettingsCard title={t('user:sections.details')}>
+          <SettingsCard title={t('user:section.details')}>
             <UserDetailsSection />
           </SettingsCard>
         </Grid.Col>
         <Grid.Col sm={5} md={4}>
-          <SettingsCard title={t('user:sections.settings')}>
+          <SettingsCard title={t('user:section.settings')}>
             <UserSettingsSection />
           </SettingsCard>
         </Grid.Col>
