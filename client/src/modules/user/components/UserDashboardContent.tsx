@@ -1,20 +1,21 @@
+import { useTranslation } from 'react-i18next'
 import { Grid } from '@mantine/core'
-import { SettingsCard, UserDetailsSection } from '@user'
+import { SettingsCard, UserDetailsSection, UserSettingsSection } from '@user'
 
 function UserDashboardContent() {
+  const { t } = useTranslation()
+
   return (
     <div className={'mt-4 md:mt-8'}>
       <Grid gutter={'lg'} grow>
         <Grid.Col sm={7} md={8}>
-          <SettingsCard title={'Informacje'}>
+          <SettingsCard title={t('user:sections.details')}>
             <UserDetailsSection />
           </SettingsCard>
         </Grid.Col>
         <Grid.Col sm={5} md={4}>
-          <SettingsCard title={'Ustawienia'}>
-            <p>{'Zmień hasło'}</p>
-            <p>{'Zmień email'}</p>
-            <p>{'Anonimizuj dane'}</p>
+          <SettingsCard title={t('user:sections.settings')}>
+            <UserSettingsSection />
           </SettingsCard>
         </Grid.Col>
         <Grid.Col span={12}>{'Profil 1'}</Grid.Col>
