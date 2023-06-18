@@ -1,7 +1,8 @@
 {
   "page": {
     "settings": {
-      "title": "Panel użytkownika {{username}} | Mage Guild Wars"
+      "title": "Panel użytkownika {{username}} | Mage Guild Wars",
+      "changePasswordTitle": "Zmiana hasła użytkownika | Mage Guild Wars"
     }
   },
   "tabs": {
@@ -22,6 +23,21 @@
     "isAccountActive": "Konto aktywne:",
     "isAccountLocked": "Konto zablokowane:",
     "isProfileCreationActive": "Mozliwość tworzenia profili:",
-    "isGameMasterProfileCreationActive": "Możliwość stworzenia profilu Mistrza Gry:"
+    "isGameMasterProfileCreationActive": "Możliwość stworzenia profilu Mistrza Gry:",
+    "oldPassword": "Stare hasło",
+    "newPassword": "Nowe hasło",
+    "repeatNewPassword": "Powtórz nowe hasło"
+  },
+  "section": {
+    "details": "Informacje",
+    "settings": "Ustawienia"
+  },
+  "action": {
+    "changePassword": "Zmień hasło",
+    "changeEmailAddress": "Zmień adres email",
+    "anonymizeAccount": "Anonimizuj konto"
+  },
+  "dialog": {
+    "changePasswordTitle": "Zmiana hasła"
   }
 }

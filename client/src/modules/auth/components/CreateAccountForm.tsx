@@ -39,7 +39,7 @@ function CreateAccountForm() {
         },
       })
     },
-    [createAccount, setUser, t]
+    [createAccount, navigate, setUser, t]
   )
 
   useEffect(() => {
