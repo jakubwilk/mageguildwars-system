@@ -52,7 +52,7 @@ function UserDetailsSection() {
   )
 
   return (
-    <List className={clsx('list-none mt-6')}>
+    <List className={clsx('list-none')}>
       {renderListItem(t('user:fields.registerDate'), parseDate(user?.createdAt))}
       {renderListItem(t('user:fields.updateDate'), parseDate(user?.updatedAt))}
       {renderListItem(t('user:fields.group'), convertUserGroupToText(user?.group))}

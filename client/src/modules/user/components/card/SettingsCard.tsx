@@ -26,7 +26,7 @@ function SettingsCard({ title, children }: IProps) {
 
   return (
     <Box className={clsx('p-6', classes.card)}>
-      <Text className={clsx(classes.title)}>{title}</Text>
+      <Text className={clsx(classes.title, 'mb-6')}>{title}</Text>
       {children}
     </Box>
   )
