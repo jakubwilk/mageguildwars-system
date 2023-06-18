@@ -37,12 +37,11 @@ const useStyles = createStyles((theme) => ({
       color: theme.colors.gray[4],
     },
   },
-  link: {
-    color: theme.colors.gray[6],
-    textDecoration: 'none',
-    fontSize: theme.fontSizes.sm,
+  cancelButton: {
+    backgroundColor: theme.colors.dark[5],
+    color: theme.white,
     '&:hover, &:focus': {
-      color: theme.colors.indigo[6],
+      backgroundColor: theme.colors.dark[4],
     },
   },
 }))
@@ -116,11 +115,13 @@ function ChangePasswordForm({ handleClose }: IProps) {
             />
           </Grid.Col>
           <Grid.Col span={12}>
-            <div className={'flex flex-row text-center'}>
-              <Button variant={'light'} onClick={handleClose}>
+            <div className={'flex flex-col-reverse justify-center sm:flex-row sm:justify-end'}>
+              <Button variant={'light'} onClick={handleClose} className={clsx('duration-100 sm:mr-4', classes.cancelButton)}>
                 {t('common:action.cancel')}
               </Button>
-              <Button type={'submit'}>{t('common:action.save')}</Button>
+              <Button type={'submit'} className={clsx('duration-100 mb-4 sm:mb-0')}>
+                {t('common:action.save')}
+              </Button>
             </div>
           </Grid.Col>
         </Grid>
