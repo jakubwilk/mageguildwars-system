@@ -18,8 +18,12 @@ function UserDashboardContent() {
             <UserSettingsSection />
           </SettingsCard>
         </Grid.Col>
-        <Grid.Col span={12}>{'Profil 1'}</Grid.Col>
-        <Grid.Col span={12}>{'Dodaj profil'}</Grid.Col>
+        <Grid.Col sm={7} md={8}>
+          {'Profil 1'}
+        </Grid.Col>
+        <Grid.Col sm={7} md={8}>
+          {'Dodaj profil'}
+        </Grid.Col>
       </Grid>
     </div>
   )
