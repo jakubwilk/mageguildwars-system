@@ -18,7 +18,7 @@ const useStyles = createStyles((theme) => ({
 function Logo() {
   const { classes } = useStyles()
 
-  return <img src={'https://mageguildwars.pl/images/revolution/logo.png'} alt={'Mage Guild Wars'} className={classes.logo} />
+  return <img src={'https://i.imgur.com/anA1Lpw.png'} alt={'Mage Guild Wars'} className={classes.logo} />
 }
 
 export default Logo
