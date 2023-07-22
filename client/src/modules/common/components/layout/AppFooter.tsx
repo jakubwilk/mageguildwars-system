@@ -26,7 +26,7 @@ function AppFooter() {
             <Text fz={'xs'}>{t('common:copyright.allRightReversed')}</Text>
             <Text fz={'xs'}>{t('common:copyright.siteNameAndYear', { currentYear })}</Text>
           </div>
-          <img src={'https://mageguildwars.pl/images/revolution/mgw.png'} alt={'Ikona Mage Guild Wars'} height={30} />
+          <img src={'https://i.imgur.com/o9BN1ol.png'} alt={'Ikona Mage Guild Wars'} height={30} />
         </div>
       </div>
     </Footer>
