@@ -1,0 +1,52 @@
+openapi: 3.0.0
+paths:
+  /auth:
+    post:
+      operationId: AuthController_createAccount
+      parameters: []
+      responses:
+        "201":
+          description: ""
+    get:
+      operationId: AuthController_logoutAccount
+      parameters: []
+      responses:
+        "200":
+          description: ""
+  /auth/login:
+    post:
+      operationId: AuthController_loginAccount
+      parameters: []
+      responses:
+        "201":
+          description: ""
+  /auth/me:
+    get:
+      operationId: AuthController_autoLoginAccount
+      parameters: []
+      responses:
+        "200":
+          description: ""
+  /auth/refresh:
+    get:
+      operationId: AuthController_refreshToken
+      parameters: []
+      responses:
+        "200":
+          description: ""
+  /auth/rules:
+    get:
+      operationId: AuthController_getRegistrationRules
+      parameters: []
+      responses:
+        "200":
+          description: ""
+info:
+  title: Title
+  description: description
+  version: "1.0"
+  contact: {}
+tags: []
+servers: []
+components:
+  schemas: {}
