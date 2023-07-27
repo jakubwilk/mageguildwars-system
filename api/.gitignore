@@ -41,3 +41,7 @@ lerna-debug.log*
 
 # Prisma migrates
 /prisma/migrations/*
+
+# OpenAPI
+/generated-api
+/generated-api/*

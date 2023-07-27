@@ -1,10 +1,16 @@
 import { NestFactory } from '@nestjs/core'
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import * as cookieParser from 'cookie-parser'
+import * as fs from 'fs'
+import { stringify } from 'yaml'
 
 import { AppModule } from './app.module'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
+  const options = new DocumentBuilder().setTitle('Title').setDescription('description').setVersion('1.0').build()
+  const document = SwaggerModule.createDocument(app, options)
+
   app.enableCors({
     origin: process.env['CLIENT_URL'],
     credentials: true,
@@ -22,6 +28,12 @@ async function bootstrap() {
       'x-access-token',
     ],
   })
+
+  if (process.env.NODE_ENV === 'development') {
+    fs.writeFileSync('./docs-api/mgw-domain.yaml', stringify(document))
+  }
+
+  SwaggerModule.setup('/api-docs', app, document)
   app.use(cookieParser())
   await app.listen(parseInt(process.env['API_PORT']))
 }
