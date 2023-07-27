@@ -8,7 +8,13 @@ import { AppModule } from './app.module'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
-  const options = new DocumentBuilder().setTitle('Title').setDescription('description').setVersion('1.0').build()
+  const options = new DocumentBuilder()
+    .addCookieAuth('x-access-token', { type: 'http', scheme: 'Bearer' })
+    .addCookieAuth('x-refresh-token', { type: 'http', scheme: 'Bearer' })
+    .setTitle('Mage Guild Wars API')
+    .setDescription('Swagger schema for MGW Rest API')
+    .setVersion('1.0')
+    .build()
   const document = SwaggerModule.createDocument(app, options)
 
   app.enableCors({
@@ -29,7 +35,7 @@ async function bootstrap() {
     ],
   })
 
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env['NODE_ENV'] === 'development') {
     fs.writeFileSync('./docs-api/mgw-domain.yaml', stringify(document))
   }
 

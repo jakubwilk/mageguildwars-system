@@ -3,23 +3,56 @@ paths:
   /auth:
     post:
       operationId: AuthController_createAccount
+      summary: Create user account with first player profile
       parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUserDto"
       responses:
         "201":
-          description: ""
+          description: Account with first profile successfully created
+        "400":
+          description: Account cannot be created because there is record in database with
+            the same email or login or profile with that name already exists in
+            database
+        "500":
+          description: There is a problem with create hash, read or write data into database
+      tags: &a1
+        - Auth module
     get:
       operationId: AuthController_logoutAccount
+      summary: Logout from account
       parameters: []
       responses:
         "200":
-          description: ""
+          description: Cookies have been deleted
+        "401":
+          description: Missing auth token cookie
+      tags: *a1
+      security:
+        - x-access-token: []
   /auth/login:
     post:
       operationId: AuthController_loginAccount
+      summary: Log in to the account
       parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginUserDto"
       responses:
-        "201":
-          description: ""
+        "200":
+          description: Successfully logged into account
+        "400":
+          description: Account not found in the database
+        "500":
+          description: There is a problem with create hash, read or write data into database
+      tags: *a1
   /auth/me:
     get:
       operationId: AuthController_autoLoginAccount
@@ -27,6 +60,7 @@ paths:
       responses:
         "200":
           description: ""
+      tags: *a1
   /auth/refresh:
     get:
       operationId: AuthController_refreshToken
@@ -34,6 +68,7 @@ paths:
       responses:
         "200":
           description: ""
+      tags: *a1
   /auth/rules:
     get:
       operationId: AuthController_getRegistrationRules
@@ -41,12 +76,47 @@ paths:
       responses:
         "200":
           description: ""
+      tags: *a1
 info:
-  title: Title
-  description: description
+  title: Mage Guild Wars API
+  description: Swagger schema for MGW Rest API
   version: "1.0"
   contact: {}
 tags: []
 servers: []
 components:
-  schemas: {}
+  securitySchemes:
+    cookie:
+      type: http
+      in: cookie
+      name: x-refresh-token
+      scheme: Bearer
+  schemas:
+    CreateUserDto:
+      type: object
+      properties:
+        login:
+          type: string
+          description: Account and first profile username
+        email:
+          type: string
+          description: Account email
+        password:
+          type: string
+          description: Strong safe account password
+      required:
+        - login
+        - email
+        - password
+    LoginUserDto:
+      type: object
+      properties:
+        login:
+          type: string
+          description: Account name used in registration process
+        password:
+          type: string
+          description: User password
+      required:
+        - login
+        - password
