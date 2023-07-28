@@ -18,7 +18,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "generate-api": "openapi-generator-cli generate -i docs-api/mgw-domain.yaml -g typescript-axios -o ./../api-domain --additional-properties=supportsES6=true,withInterfaces=true"
+    "generate-api": "openapi-generator-cli generate -i docs-api/mgw-domain.yaml -g typescript-axios -o ./../api-domain --additional-properties=npmName=api-domain,npmVersion=9.6.3,supportsES6=true,withInterfaces=true"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
