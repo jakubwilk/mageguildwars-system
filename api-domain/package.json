@@ -1,7 +1,7 @@
 {
-  "name": "api-domain",
+  "name": "@jakubwilk/api-domain",
   "version": "1.0.0",
-  "description": "OpenAPI client for api-domain",
+  "description": "OpenAPI client for @jakubwilk/api-domain",
   "author": "OpenAPI-Generator Contributors",
   "repository": {
     "type": "git",
@@ -12,7 +12,7 @@
     "typescript",
     "openapi-client",
     "openapi-generator",
-    "api-domain"
+    "@jakubwilk/api-domain"
   ],
   "license": "Unlicense",
   "main": "./dist/index.js",
