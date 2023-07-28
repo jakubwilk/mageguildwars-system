@@ -1,6 +1,6 @@
 {
   "name": "api-domain",
-  "version": "9.6.3",
+  "version": "1.0",
   "description": "OpenAPI client for api-domain",
   "author": "OpenAPI-Generator Contributors",
   "repository": {
