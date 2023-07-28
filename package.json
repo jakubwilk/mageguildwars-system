@@ -7,7 +7,8 @@
   "private": true,
   "workspaces": [
     "client",
-    "api"
+    "api",
+    "api-domain"
   ],
   "scripts": {
     "client:start": "cross-env PORT=3000 lerna run start --scope client",
