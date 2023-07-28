@@ -1,6 +1,6 @@
 {
   "name": "@jakubwilk/api-domain",
-  "version": "1.0.0",
+  "version": "1.0.1-alpha.0",
   "description": "OpenAPI client for @jakubwilk/api-domain",
   "author": "OpenAPI-Generator Contributors",
   "repository": {
