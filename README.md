@@ -43,4 +43,5 @@ JWT_SECRET=
 JWT_REFRESH_SECRET=
 CLIENT_URL=
 API_PORT=
+NODE_ENV=[development||production]
 ```
