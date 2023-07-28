@@ -14,6 +14,10 @@ paths:
       responses:
         "201":
           description: Account with first profile successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthUserSnapshotDto"
         "400":
           description: Account cannot be created because there is record in database with
             the same email or login or profile with that name already exists in
@@ -48,6 +52,10 @@ paths:
       responses:
         "200":
           description: Successfully logged into account
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthUserSnapshotDto"
         "400":
           description: Account not found in the database
         "500":
@@ -56,19 +64,33 @@ paths:
   /auth/me:
     get:
       operationId: AuthController_autoLoginAccount
+      summary: Auto login to account with saved refresh-token
       parameters: []
       responses:
         "200":
-          description: ""
+          description: Successfully logged into account
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthUserSnapshotDto"
       tags: *a1
+      security:
+        - x-refresh-token: []
   /auth/refresh:
     get:
       operationId: AuthController_refreshToken
+      summary: Create fresh access token based on refresh token and update refresh token
       parameters: []
       responses:
         "200":
-          description: ""
+          description: Successfully updated pair of tokens
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthUserTokensDto"
       tags: *a1
+      security:
+        - x-refresh-token: []
   /auth/rules:
     get:
       operationId: AuthController_getRegistrationRules
@@ -108,6 +130,77 @@ components:
         - login
         - email
         - password
+    UserSnapshotDto:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: Unique user ID
+        login:
+          type: string
+          description: Account username and first profile name
+        slug:
+          type: string
+          description: User slug used in URLs
+        email:
+          type: string
+          description: User email
+        group:
+          type: string
+          description: Account group
+        isActive:
+          type: boolean
+          description: Check if account is activated by admins
+        isLocked:
+          type: boolean
+          description: Check if account is banned or temporary locked
+        isCreateProfileEnabled:
+          type: boolean
+          description: Check if user is allowed to create more profiles
+        isGameMasterProfileEnabled:
+          type: boolean
+          description: Check if user is allowed to create game master profile
+        isGameMaster:
+          type: boolean
+          description: "Check if account is game master. TODO: To remove"
+        createdAt:
+          format: date-time
+          type: string
+          description: Date when account was created
+        updatedAt:
+          format: date-time
+          type: string
+          description: Date of last account update
+      required:
+        - uid
+        - login
+        - slug
+        - email
+        - group
+        - isActive
+        - isLocked
+        - isCreateProfileEnabled
+        - isGameMasterProfileEnabled
+        - isGameMaster
+        - createdAt
+        - updatedAt
+    AuthUserSnapshotDto:
+      type: object
+      properties:
+        user:
+          description: User object
+          allOf:
+            - $ref: "#/components/schemas/UserSnapshotDto"
+        accessToken:
+          type: string
+          description: User access token used in authorization
+        refreshToken:
+          type: string
+          description: User refresh token used to update access token
+      required:
+        - user
+        - accessToken
+        - refreshToken
     LoginUserDto:
       type: object
       properties:
@@ -120,3 +213,15 @@ components:
       required:
         - login
         - password
+    AuthUserTokensDto:
+      type: object
+      properties:
+        accessToken:
+          type: string
+          description: User unique access token
+        refreshToken:
+          type: string
+          description: User unique refresh token
+      required:
+        - accessToken
+        - refreshToken

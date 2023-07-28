@@ -1,31 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { UserSnapshot } from '@user/models'
-
-export interface AuthTokensModel {
-  accessToken: string
-  refreshToken: string
-}
-
-export interface AuthCreateUserSnapshot {
-  user: UserSnapshot
-  accessToken: string
-  refreshToken: string
-}
-
-export interface AuthTokenPayload {
-  uid: string
-}
-
-export interface AuthCreateUserParams {
-  login: string
-  email: string
-  password: string
-}
-
-export interface AuthLoginUserParams {
-  login: string
-  password: string
-}
+import { UserSnapshotDto } from '@user/models'
 
 export interface AuthRules {
   id: string
@@ -34,6 +8,24 @@ export interface AuthRules {
 }
 
 // R E F A C T O R
+export class AuthTokenDto {
+  @ApiProperty({
+    description: 'Unique user ID',
+  })
+  uid: string
+}
+
+export class AuthUserTokensDto {
+  @ApiProperty({
+    description: 'User unique access token',
+  })
+  accessToken: string
+
+  @ApiProperty({
+    description: 'User unique refresh token',
+  })
+  refreshToken: string
+}
 
 export class CreateUserDto {
   @ApiProperty({
@@ -62,4 +54,21 @@ export class LoginUserDto {
     description: 'User password',
   })
   password: string
+}
+
+export class AuthUserSnapshotDto {
+  @ApiProperty({
+    description: 'User object',
+  })
+  user: UserSnapshotDto
+
+  @ApiProperty({
+    description: 'User access token used in authorization',
+  })
+  accessToken: string
+
+  @ApiProperty({
+    description: 'User refresh token used to update access token',
+  })
+  refreshToken: string
 }

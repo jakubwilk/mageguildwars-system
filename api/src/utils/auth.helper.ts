@@ -1,4 +1,4 @@
-import { AuthCreateUserSnapshot } from '@auth/models'
+import { AuthUserSnapshotDto } from '@auth/models'
 import { Response } from 'express'
 
 export const AUTH_COOKIE_NAME = {
@@ -16,7 +16,7 @@ export const DEFAULT_REFRESH_TOKEN_OPTIONS = {
   expires: new Date(Date.now() + 604800000),
 }
 
-export const responseWithUserDataAndTokens = (data: AuthCreateUserSnapshot, res: Response) => {
+export const responseWithUserDataAndTokens = (data: AuthUserSnapshotDto, res: Response): Response<AuthUserSnapshotDto> => {
   return res
     .cookie(AUTH_COOKIE_NAME.ACCESS_TOKEN, data.accessToken, { ...DEFAULT_ACCESS_TOKEN_OPTIONS })
     .cookie(AUTH_COOKIE_NAME.REFRESH_TOKEN, data.refreshToken, { ...DEFAULT_REFRESH_TOKEN_OPTIONS })

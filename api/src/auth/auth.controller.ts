@@ -1,5 +1,5 @@
 import { AccessTokenGuard, RefreshTokenGuard } from '@auth/guards'
-import { AuthCreateUserSnapshot, CreateUserDto, LoginUserDto } from '@auth/models'
+import { AuthUserSnapshotDto, AuthUserTokensDto, CreateUserDto, LoginUserDto } from '@auth/models'
 import { Body, Controller, Get, HttpStatus, Post, Req, Res, UseGuards } from '@nestjs/common'
 import { ApiCookieAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { UserService } from '@user/user.service'
@@ -16,45 +16,51 @@ export class AuthController {
 
   @Post()
   @ApiOperation({ summary: 'Create user account with first player profile' })
-  @ApiResponse({ status: 201, description: 'Account with first profile successfully created' })
+  @ApiResponse({ status: 201, description: 'Account with first profile successfully created', type: AuthUserSnapshotDto })
   @ApiResponse({
     status: 400,
     description:
       'Account cannot be created because there is record in database with the same email or login or profile with that name already exists in database',
   })
   @ApiResponse({ status: 500, description: 'There is a problem with create hash, read or write data into database' })
-  async createAccount(@Body() createUserDto: CreateUserDto, @Res() res: Response) {
-    const data: AuthCreateUserSnapshot = await this.authService.createAccount(createUserDto)
+  async createAccount(@Body() createUserDto: CreateUserDto, @Res() res: Response): Promise<Response<AuthUserSnapshotDto>> {
+    const data: AuthUserSnapshotDto = await this.authService.createAccount(createUserDto)
     return responseWithUserDataAndTokens(data, res)
   }
 
   @Post('login')
   @ApiOperation({ summary: 'Log in to the account' })
-  @ApiResponse({ status: 200, description: 'Successfully logged into account' })
+  @ApiResponse({ status: 200, description: 'Successfully logged into account', type: AuthUserSnapshotDto })
   @ApiResponse({
     status: 400,
     description: 'Account not found in the database',
   })
   @ApiResponse({ status: 500, description: 'There is a problem with create hash, read or write data into database' })
-  async loginAccount(@Body() loginUserDto: LoginUserDto, @Res() res: Response) {
+  async loginAccount(@Body() loginUserDto: LoginUserDto, @Res() res: Response): Promise<Response<AuthUserSnapshotDto>> {
     const { login, password } = loginUserDto
     const user = await this.userService.getFullUserByName(login)
     await this.authService.verifyHash(password, user.password, ERROR_MESSAGES.AUTH.WRONG_LOGIN_DATA)
-    const data: AuthCreateUserSnapshot = await this.authService.loginAccount(user.uid)
+    const data: AuthUserSnapshotDto = await this.authService.loginAccount(user.uid)
     return responseWithUserDataAndTokens(data, res)
   }
 
   @UseGuards(RefreshTokenGuard)
   @Get('me')
-  async autoLoginAccount(@Req() req: Request, @Res() res: Response) {
+  @ApiCookieAuth('x-refresh-token')
+  @ApiOperation({ summary: 'Auto login to account with saved refresh-token' })
+  @ApiResponse({ status: 200, description: 'Successfully logged into account', type: AuthUserSnapshotDto })
+  async autoLoginAccount(@Req() req: Request, @Res() res: Response): Promise<Response<AuthUserSnapshotDto>> {
     const uid = req.user['uid']
-    const data: AuthCreateUserSnapshot = await this.authService.loginAccount(uid)
+    const data: AuthUserSnapshotDto = await this.authService.loginAccount(uid)
     return responseWithUserDataAndTokens(data, res)
   }
 
   @UseGuards(RefreshTokenGuard)
   @Get('refresh')
-  async refreshToken(@Req() req: Request) {
+  @ApiCookieAuth('x-refresh-token')
+  @ApiOperation({ summary: 'Create fresh access token based on refresh token and update refresh token' })
+  @ApiResponse({ status: 200, description: 'Successfully updated pair of tokens', type: AuthUserTokensDto })
+  async refreshToken(@Req() req: Request): Promise<AuthUserTokensDto> {
     const uid = req.user['uid']
     const refreshToken = req.cookies[AUTH_COOKIE_NAME.REFRESH_TOKEN]
     return await this.authService.refreshToken(uid, refreshToken)

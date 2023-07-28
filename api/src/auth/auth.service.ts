@@ -1,6 +1,6 @@
 import { AUTH_RULES } from '@auth/constants'
 import { MapModelToUser } from '@auth/mappers'
-import { AuthCreateUserParams, AuthCreateUserSnapshot, AuthTokenPayload, AuthTokensModel } from '@auth/models'
+import { AuthTokenDto, AuthUserSnapshotDto, AuthUserTokensDto, CreateUserDto } from '@auth/models'
 import { HttpStatus, Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { JwtService } from '@nestjs/jwt'
@@ -44,7 +44,7 @@ export class AuthService {
 
   async getAccessToken(uid: string): Promise<string> {
     try {
-      const payload: AuthTokenPayload = { uid }
+      const payload: AuthTokenDto = { uid }
       return await this.jwtService.signAsync(payload, { secret: this.configService.get<string>('JWT_SECRET'), expiresIn: '6h' })
     } catch (err) {
       throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.CRYPTO.ISSUE_WITH_CREATE_ACCESS_TOKEN)
@@ -53,14 +53,14 @@ export class AuthService {
 
   async getRefreshToken(uid: string): Promise<string> {
     try {
-      const payload: AuthTokenPayload = { uid }
+      const payload: AuthTokenDto = { uid }
       return await this.jwtService.signAsync(payload, { secret: this.configService.get<string>('JWT_REFRESH_SECRET'), expiresIn: '14d' })
     } catch (err) {
       throw HttpError(HttpStatus.INTERNAL_SERVER_ERROR, ERROR_MESSAGES.CRYPTO.ISSUE_WITH_CREATE_REFRESH_TOKEN)
     }
   }
 
-  async getTokens(data: UserSnapshot): Promise<AuthTokensModel> {
+  async getTokens(data: UserSnapshot): Promise<AuthUserTokensDto> {
     try {
       const { uid } = data
       const accessToken = await this.getAccessToken(uid)
@@ -98,7 +98,7 @@ export class AuthService {
     return tokens
   }
 
-  async getUserSessionData(data: UserSnapshot): Promise<AuthCreateUserSnapshot> {
+  async getUserSessionData(data: UserSnapshot): Promise<AuthUserSnapshotDto> {
     try {
       const tokens = await this.getTokens(data)
       return { ...tokens, user: data }
@@ -107,7 +107,7 @@ export class AuthService {
     }
   }
 
-  async createAccount({ login, email, password }: AuthCreateUserParams): Promise<AuthCreateUserSnapshot> {
+  async createAccount({ login, email, password }: CreateUserDto): Promise<AuthUserSnapshotDto> {
     try {
       await this.userService.isUserExist('login', login)
       await this.userService.isUserExist('email', email)
@@ -124,7 +124,7 @@ export class AuthService {
         role: ProfileRole.NONE,
       }
       await this.profileService.createProfile(data.uid, profileDataToCreate)
-      const session: AuthCreateUserSnapshot = await this.getUserSessionData(MapModelToUser(data))
+      const session: AuthUserSnapshotDto = await this.getUserSessionData(MapModelToUser(data))
       await this.prismaService.user.update({ where: { id: data.id }, data: { refreshToken: session.refreshToken } })
       return session
     } catch (err) {
@@ -132,7 +132,7 @@ export class AuthService {
     }
   }
 
-  async loginAccount(uid: string): Promise<AuthCreateUserSnapshot> {
+  async loginAccount(uid: string): Promise<AuthUserSnapshotDto> {
     try {
       const user: UserSnapshot = await this.userService.getUser(uid)
       // const profiles: Array<ProfileModel> = await this.profileService.getProfiles(uid)

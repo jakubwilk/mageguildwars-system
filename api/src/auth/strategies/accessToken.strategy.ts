@@ -1,4 +1,4 @@
-import { AuthTokenPayload } from '@auth/models'
+import { AuthTokenDto } from '@auth/models'
 import { Injectable } from '@nestjs/common'
 import { PassportStrategy } from '@nestjs/passport'
 import { Request } from 'express'
@@ -17,7 +17,7 @@ export class AccessTokenStrategy extends PassportStrategy(Strategy, 'jwt') {
     })
   }
 
-  async validate(payload: AuthTokenPayload) {
+  async validate(payload: AuthTokenDto) {
     return { uid: payload.uid }
   }
 
