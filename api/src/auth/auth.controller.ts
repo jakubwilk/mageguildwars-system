@@ -36,8 +36,8 @@ export class AuthController {
     description: 'Account not found in the database',
   })
   @ApiResponse({ status: 500, description: 'There is a problem with create hash, read or write data into database' })
-  async loginAccount(@Body() userData: LoginUserDto, @Res() res: Response) {
-    const { login, password } = userData
+  async loginAccount(@Body() loginUserDto: LoginUserDto, @Res() res: Response) {
+    const { login, password } = loginUserDto
     const user = await this.userService.getFullUserByName(login)
     await this.authService.verifyHash(password, user.password, ERROR_MESSAGES.AUTH.WRONG_LOGIN_DATA)
     const data: AuthCreateUserSnapshot = await this.authService.loginAccount(user.uid)
