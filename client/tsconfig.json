@@ -2,12 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@app/configs": ["./src/app/configs/index.ts"],
-      "@app/pages": ["./src/app/pages/index.ts"],
-      "@auth": ["./src/modules/auth/index.ts"],
-      "@common": ["./src/modules/common/index.ts"],
-      "@home": ["./src/modules/home/index.ts"],
-      "@user": ["./src/modules/user/index.ts"]
+      "@app/configs": ["./src/app/configs/index.ts"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
