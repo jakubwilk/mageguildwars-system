@@ -1,12 +1,13 @@
 import { createBrowserRouter } from 'react-router-dom'
+import { HomePage, RootPage } from '@app/pages'
 
 export const APP_ROUTES = createBrowserRouter([
   {
-    // element: <RootPage />,
+    element: <RootPage />,
     children: [
       {
-        // path: commonRoutes.homePage(),
-        // element: <HomePage />,
+        path: '/',
+        element: <HomePage />,
       },
       {
         // path: userRoutes.userDashboardPage(),
