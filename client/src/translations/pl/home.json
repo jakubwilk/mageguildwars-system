@@ -1,5 +1,8 @@
 {
   "page": {
     "title": "Strona główna | Mage Guild Wars"
+  },
+  "tooltip": {
+    "backToHome": "Powrót na stronę główną"
   }
 }
