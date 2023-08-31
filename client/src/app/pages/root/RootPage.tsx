@@ -1,37 +1,22 @@
-import { useTranslation } from 'react-i18next'
-import { Link, Outlet } from 'react-router-dom'
-import { clsx, createStyles, Tooltip } from '@mantine/core'
-
-import logoImage from './../../../assets/images/logo.png'
-import homeImage from './../../../assets/images/mgw-home.jpg'
-
-const useStyles = createStyles(() => ({
-  home: {
-    backgroundImage: `url(${homeImage})`,
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-  },
-}))
+import { useMemo } from 'react'
+import { Outlet } from 'react-router-dom'
+import { useViewportSize } from '@mantine/hooks'
+import { AppLeftBar, HomeScreen } from '@modules/common'
 
 function RootPage() {
-  const [t] = useTranslation()
-  const { classes } = useStyles()
+  const { width } = useViewportSize()
+
+  const isMobileWidth = useMemo(() => width < 992, [width])
 
   return (
     <main>
-      <section className={clsx('min-h-screen min-w-full', classes.home)}>
-        <div className={'min-h-[inherit] container mx-auto'}>
-          <div className={'p-4 min-h-[inherit] flex items-center justify-center'}>
-            <Tooltip label={t('home:tooltip.backToHome')} position={'bottom'}>
-              <Link to={'/'}>
-                <img src={logoImage} alt={''} />
-              </Link>
-            </Tooltip>
-          </div>
+      <AppLeftBar />
+      <div className={'w-auto ml-[70px]'}>
+        <HomeScreen homeClassName={isMobileWidth ? 'min-h-[400px]' : 'min-h-[80vh]'} />
+        <div className={'mx-auto container'}>
+          <Outlet />
         </div>
-      </section>
-      <Outlet />
+      </div>
     </main>
   )
 }
