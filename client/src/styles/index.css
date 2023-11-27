@@ -1,2 +1,13 @@
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --dark-background-color: #2b282f;
+    --sidebar-icon-color: #535353;
+    --purple-hover-color: #32283b;
+    --grey-light-color: #d9d9d9;
+}
+
+body {
+    background-color: var(--dark-background-color) !important;
+}

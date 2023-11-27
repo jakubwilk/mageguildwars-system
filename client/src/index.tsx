@@ -8,11 +8,12 @@ import './app/configs/i18n.config'
 import App from './app/App'
 import reportWebVitals from './reportWebVitals'
 
+import '@mantine/core/styles.css'
 import './styles/index.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
-  <MantineProvider theme={APP_THEME} withGlobalStyles withNormalizeCSS>
+  <MantineProvider theme={APP_THEME} withCssVariables>
     <React.StrictMode>
       <App />
     </React.StrictMode>

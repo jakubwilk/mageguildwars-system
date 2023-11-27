@@ -1,0 +1,22 @@
+.sidebar {
+    background-color: var(--mantine-color-dark-7) !important;
+}
+
+.itemIcon {
+    color: var(--sidebar-icon-color) !important;
+    background-color: transparent !important;
+    height: auto !important;
+    width: auto !important;
+    padding: 0.5rem !important;
+
+    &:hover, &:focus {
+        background-color: var(--purple-hover-color) !important;
+        color: var(--grey-light-color) !important;
+        outline: none !important;
+    }
+}
+
+.userAvatar {
+    height: auto !important;
+    width: 50px !important;
+}
