@@ -4,7 +4,8 @@
     "paths": {
       "@app/configs": ["./src/app/configs/index.ts"],
       "@app/pages": ["./src/app/pages/index.ts"],
-      "@modules/common": ["./src/modules/common/index.ts"]
+      "@modules/common": ["./src/modules/common/index.ts"],
+      "@modules/common/styles": ["./src/modules/common/styles/*"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
