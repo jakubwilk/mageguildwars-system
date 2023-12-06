@@ -1,8 +1,0 @@
-{
-  "tabs": {
-    "title": "Profil {{username}}"
-  },
-  "actions": {
-    "addNewProfile": "Utwórz nowy profil"
-  }
-}

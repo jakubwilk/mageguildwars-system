@@ -1,6 +1,0 @@
-{
-  "fieldIsRequired": "To pole jest wymagane",
-  "wrongEmailAddress": "Niepoprawny adres email",
-  "fieldShouldContainAtLeastCharacters": "{{field}} powinno składać się z minimum {{characters}} znaków",
-  "passwordAreNotTheSame": "Podane hasła różnią się od siebie"
-}
