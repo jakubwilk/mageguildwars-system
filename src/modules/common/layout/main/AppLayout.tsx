@@ -1,6 +1,6 @@
 'use client'
 import { ReactNode } from 'react'
-import { SideNavbar } from '@modules/common'
+import { SidebarNavbar } from '@modules/common'
 
 interface IProps {
   children: ReactNode
@@ -9,7 +9,7 @@ interface IProps {
 const AppLayout = ({ children }: IProps) => {
   return (
     <>
-      <SideNavbar />
+      <SidebarNavbar />
       {children}
     </>
   )

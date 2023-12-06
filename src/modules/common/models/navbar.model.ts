@@ -1,9 +1,10 @@
-import { ReactNode } from 'react'
+import { TablerIconsProps } from '@tabler/icons-react'
 
 export interface IAppNavbar {
   slug: string
   name: string
+  description: string
   url: string
-  icon?: ReactNode
+  Icon: (props: TablerIconsProps) => JSX.Element
   isDisabled: boolean
 }
