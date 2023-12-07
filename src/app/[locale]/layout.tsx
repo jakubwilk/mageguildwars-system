@@ -3,6 +3,7 @@ import { Poppins } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { ColorSchemeScript, MantineProvider } from '@mantine/core'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 import '@mantine/core/styles.css'
 import '../globals.css'
@@ -30,6 +31,7 @@ export default function RootLayout({ children, params: { locale } }: IProps) {
         <meta name={'description'} content={t('pageDescription')} />
       </head>
       <body className={poppins.className}>
+        <SpeedInsights />
         <MantineProvider>{children}</MantineProvider>
       </body>
     </html>
