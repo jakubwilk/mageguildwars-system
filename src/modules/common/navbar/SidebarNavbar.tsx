@@ -1,10 +1,10 @@
 'use client'
 
-import { IAppNavbar, SidebarNavbarLink, useSideNav } from '@modules/common'
+import { IAppNavbar, SidebarNavbarLink, useSidebarNav } from '@modules/common'
 import { isEmpty } from 'lodash'
 
 const SidebarNavbar = () => {
-  const { menu } = useSideNav()
+  const { menu } = useSidebarNav()
 
   if (isEmpty(menu)) {
     return null

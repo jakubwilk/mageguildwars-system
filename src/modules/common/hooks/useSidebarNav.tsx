@@ -7,7 +7,7 @@ import { MAIN_NAVBAR } from '../utils/navbar-app.utils'
 
 type TNavbarAppOptions = Pick<IAppNavbar, 'slug' | 'isDisabled'>
 
-const useSideNav = (options?: Array<TNavbarAppOptions>) => {
+const useSidebarNav = (options?: Array<TNavbarAppOptions>) => {
   if (isEmpty(options)) {
     return { menu: MAIN_NAVBAR }
   }
@@ -15,4 +15,4 @@ const useSideNav = (options?: Array<TNavbarAppOptions>) => {
   return { menu: [] }
 }
 
-export default useSideNav
+export default useSidebarNav
