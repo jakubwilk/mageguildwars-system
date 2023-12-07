@@ -1,12 +1,12 @@
 import { ReactNode } from 'react'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 import { ColorSchemeScript, MantineProvider } from '@mantine/core'
 
 import '@mantine/core/styles.css'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const poppins = Poppins({ weight: ['400'], subsets: ['latin-ext'] })
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <head>
         <ColorSchemeScript />
       </head>
-      <body className={inter.className}>
+      <body className={poppins.className}>
         <MantineProvider>{children}</MantineProvider>
       </body>
     </html>
