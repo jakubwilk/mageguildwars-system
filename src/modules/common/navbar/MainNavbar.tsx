@@ -19,7 +19,7 @@ const MainNavbar = ({ handleOpenNav }: IProps) => {
       <Group>
         <Tooltip position={'bottom'} label={'Wejdź na serwer Discord'}>
           <Anchor
-            href={'#'}
+            href={'https://discord.gg/NJQhwKq'}
             className={clsx(
               'flex items-center py-1 px-2 rounded',
               navbarStyles.mainNavbarItemDiscord,
