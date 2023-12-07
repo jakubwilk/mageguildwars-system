@@ -1,1 +1,1 @@
-export { default as useSideNav } from './useSideNav'
+export { default as useSidebarNav } from './useSidebarNav'
