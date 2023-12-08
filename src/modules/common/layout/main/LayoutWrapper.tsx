@@ -3,6 +3,7 @@ import { MantineProvider } from '@mantine/core'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactNode } from 'react'
 import { App } from '@modules/common'
+import { AuthProvider } from '@modules/auth'
 
 const queryClient = new QueryClient()
 
@@ -14,7 +15,9 @@ const LayoutWrapper = ({ children }: IProps) => {
   return (
     <QueryClientProvider client={queryClient}>
       <MantineProvider>
-        <App>{children}</App>
+        <AuthProvider>
+          <App>{children}</App>
+        </AuthProvider>
       </MantineProvider>
     </QueryClientProvider>
   )
