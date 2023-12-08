@@ -1,8 +1,13 @@
 'use client'
 import Link from 'next/link'
-import { ActionIcon, Anchor, Group, Tooltip } from '@mantine/core'
+import { ActionIcon, Anchor, Group, Tooltip, Divider } from '@mantine/core'
 import { navbarStyles } from '@modules/common'
-import { IconBrandDiscordFilled, IconCategory, IconDoorEnter } from '@tabler/icons-react'
+import {
+  IconBrandDiscordFilled,
+  IconCategory,
+  IconDoorEnter,
+  IconHome,
+} from '@tabler/icons-react'
 import { clsx } from 'clsx'
 
 interface IProps {
@@ -34,8 +39,29 @@ const MainNavbar = ({ handleOpenNav }: IProps) => {
         </Tooltip>
       </Group>
       <Group>
+        <Tooltip position={'bottom'} label={'Wróć na stronę główną'}>
+          <Anchor
+            href={'/'}
+            component={Link}
+            className={navbarStyles.mainNavbarAnchorItem}
+          >
+            <ActionIcon
+              variant={'transparent'}
+              color={'violet'}
+              aria-label={'Wróć na stronę główną'}
+              className={navbarStyles.mainNavbarItem}
+            >
+              <IconHome style={{ width: '80%', height: '80%' }} stroke={1.5} />
+            </ActionIcon>
+          </Anchor>
+        </Tooltip>
+        <Divider orientation='vertical' color={'dark'} />
         <Tooltip position={'bottom'} label={'Dołącz do rozgrywki'}>
-          <Anchor href={'/auth'} component={Link}>
+          <Anchor
+            href={'/auth'}
+            component={Link}
+            className={navbarStyles.mainNavbarAnchorItem}
+          >
             <ActionIcon
               variant={'transparent'}
               color={'violet'}
@@ -46,6 +72,7 @@ const MainNavbar = ({ handleOpenNav }: IProps) => {
             </ActionIcon>
           </Anchor>
         </Tooltip>
+        <Divider orientation='vertical' color={'dark'} />
         <Tooltip position={'bottom'} label={'Otwórz panel boczny'}>
           <ActionIcon
             variant={'transparent'}
