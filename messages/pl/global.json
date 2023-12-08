@@ -1,4 +1,6 @@
 {
-  "pageTitle": "Mage Guild Wars",
-  "pageDescription": "PBF osadzony w świecie Fairy Tail"
+  "global": {
+    "pageTitle": "Mage Guild Wars",
+    "pageDescription": "PBF osadzony w świecie Fairy Tail"
+  }
 }
