@@ -1,11 +1,24 @@
-import { AppLayout } from '@modules/common'
+import { getTranslations } from 'next-intl/server'
+import { AuthPage } from '@modules/auth'
+import { AuthLayout } from '@modules/common'
 
-export default function Home() {
+interface IParams {
+  params: { locale: string }
+}
+
+export const generateMetadata = async ({ params: { locale } }: IParams) => {
+  const t = await getTranslations({ locale, namespace: 'auth' })
+
+  return {
+    title: t('pageTitle'),
+    description: t('pageDescription'),
+  }
+}
+
+export default function Auth() {
   return (
-    <AppLayout>
-      <div className={'flex flex-col items-center justify-between p-24'}>
-        <p>{'Auth'}</p>
-      </div>
-    </AppLayout>
+    <AuthLayout>
+      <AuthPage />
+    </AuthLayout>
   )
 }
