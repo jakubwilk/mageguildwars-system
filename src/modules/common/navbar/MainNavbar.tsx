@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 import { ActionIcon, Anchor, Group, Tooltip } from '@mantine/core'
 import { navbarStyles } from '@modules/common'
 import { IconBrandDiscordFilled, IconCategory, IconDoorEnter } from '@tabler/icons-react'
@@ -21,7 +22,7 @@ const MainNavbar = ({ handleOpenNav }: IProps) => {
           <Anchor
             href={'https://discord.gg/NJQhwKq'}
             className={clsx(
-              'flex items-center py-1 px-2 rounded',
+              'min-w-[100px] flex items-center py-1 px-2 rounded',
               navbarStyles.mainNavbarItemDiscord,
             )}
           >
@@ -34,14 +35,16 @@ const MainNavbar = ({ handleOpenNav }: IProps) => {
       </Group>
       <Group>
         <Tooltip position={'bottom'} label={'Dołącz do rozgrywki'}>
-          <ActionIcon
-            variant={'transparent'}
-            color={'violet'}
-            aria-label={'Dołącz do rozgrywki'}
-            className={navbarStyles.mainNavbarItem}
-          >
-            <IconDoorEnter style={{ width: '80%', height: '80%' }} stroke={1.5} />
-          </ActionIcon>
+          <Anchor href={'/auth'} component={Link}>
+            <ActionIcon
+              variant={'transparent'}
+              color={'violet'}
+              aria-label={'Dołącz do rozgrywki'}
+              className={navbarStyles.mainNavbarItem}
+            >
+              <IconDoorEnter style={{ width: '80%', height: '80%' }} stroke={1.5} />
+            </ActionIcon>
+          </Anchor>
         </Tooltip>
         <Tooltip position={'bottom'} label={'Otwórz panel boczny'}>
           <ActionIcon
