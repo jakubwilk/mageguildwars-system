@@ -13,6 +13,6 @@ export const config = {
     // - … the ones containing a dot (e.g. `favicon.ico`)
     '/((?!api|_next|_vercel|.*\\..*).*)',
     // Match all pathnames within `/users`, optionally with a locale prefix
-    '/([\\w-]+)?/users/(.+)'
-  ]
+    '/([\\w-]+)?/users/(.+)',
+  ],
 }
