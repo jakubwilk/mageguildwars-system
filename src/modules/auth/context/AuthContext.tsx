@@ -1,17 +1,17 @@
 'use client'
-import { ReactNode, createContext, useCallback, useMemo, useState } from 'react'
+import { createContext, ReactNode, useCallback, useMemo, useState } from 'react'
 import { IAuthContext } from '@modules/auth'
 
 interface IProps {
   children: ReactNode
 }
 
-export const AuthContext = createContext<IAuthContext>({ user: null, setUser: () => {} })
+export const AuthContext = createContext<IAuthContext>({ user: false, setUser: () => {} })
 
 const AuthProvider = ({ children }: IProps) => {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState<boolean>(false)
 
-  const handleSetUser = useCallback((user: any) => setUser(user), [])
+  const handleSetUser = useCallback((user: boolean) => setUser(user), [])
 
   const contextValues: IAuthContext = useMemo(
     () => ({ user, setUser: handleSetUser }),

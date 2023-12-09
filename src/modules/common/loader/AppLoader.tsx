@@ -1,8 +1,8 @@
 'use client'
 
+import { ReactNode } from 'react'
 import { Loader } from '@mantine/core'
 import { isNil } from 'lodash'
-import { ReactNode } from 'react'
 
 interface IProps {
   customLoader?: ReactNode
@@ -12,16 +12,18 @@ interface IProps {
 const AppLoader = ({ customLoader, isFullPageLoader }: IProps) => {
   if (isFullPageLoader && isNil(customLoader)) {
     return (
-      <div className='w-full h-full absolute z-10 flex items-center justify-center'>
-        <Loader color='violet' />;
+      <div className={'w-full h-full absolute z-10 flex items-center justify-center'}>
+        <Loader color={'violet'} />
+        {';\r'}
       </div>
     )
   }
 
   if (!isFullPageLoader && isNil(customLoader)) {
     return (
-      <div className='w-full h-full flex items-center justify-center'>
-        <Loader color='violet' />;
+      <div className={'w-full h-full flex items-center justify-center'}>
+        <Loader color={'violet'} />
+        {';\r'}
       </div>
     )
   }

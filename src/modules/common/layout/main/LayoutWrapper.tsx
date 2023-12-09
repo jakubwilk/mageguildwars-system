@@ -1,9 +1,9 @@
 'use client'
-import { MantineProvider } from '@mantine/core'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactNode } from 'react'
-import { App } from '@modules/common'
+import { MantineProvider } from '@mantine/core'
 import { AuthProvider } from '@modules/auth'
+import { App } from '@modules/common'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const queryClient = new QueryClient()
 

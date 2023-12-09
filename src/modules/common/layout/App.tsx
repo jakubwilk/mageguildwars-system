@@ -1,8 +1,9 @@
 'use client'
 
-import { useFetchInitialSettingsQuery } from '@/config'
 import { ReactNode } from 'react'
 import { AppLoader } from '@modules/common'
+
+import { useFetchInitialSettingsQuery } from '@/config'
 
 interface IProps {
   children: ReactNode
