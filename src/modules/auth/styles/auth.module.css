@@ -1,0 +1,13 @@
+.backToHome {
+    color: var(--mantine-color-dark-2);
+    font-size: 0.85rem;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+.backToHome:hover,
+.backToHome:focus {
+    outline: none;
+    color: var(--mantine-color-white);
+    text-decoration: none;
+}

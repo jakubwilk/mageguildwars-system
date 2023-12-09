@@ -1,7 +1,13 @@
 'use client'
-import { ActionIcon, Anchor, Group, Tooltip } from '@mantine/core'
+import Link from 'next/link'
+import { ActionIcon, Anchor, Divider, Group, Tooltip } from '@mantine/core'
 import { navbarStyles } from '@modules/common'
-import { IconBrandDiscordFilled, IconCategory, IconDoorEnter } from '@tabler/icons-react'
+import {
+  IconBrandDiscordFilled,
+  IconCategory,
+  IconDoorEnter,
+  IconHome,
+} from '@tabler/icons-react'
 import { clsx } from 'clsx'
 
 interface IProps {
@@ -21,7 +27,7 @@ const MainNavbar = ({ handleOpenNav }: IProps) => {
           <Anchor
             href={'https://discord.gg/NJQhwKq'}
             className={clsx(
-              'flex items-center py-1 px-2 rounded',
+              'min-w-[100px] flex items-center py-1 px-2 rounded',
               navbarStyles.mainNavbarItemDiscord,
             )}
           >
@@ -33,16 +39,40 @@ const MainNavbar = ({ handleOpenNav }: IProps) => {
         </Tooltip>
       </Group>
       <Group>
-        <Tooltip position={'bottom'} label={'Dołącz do rozgrywki'}>
-          <ActionIcon
-            variant={'transparent'}
-            color={'violet'}
-            aria-label={'Dołącz do rozgrywki'}
-            className={navbarStyles.mainNavbarItem}
+        <Tooltip position={'bottom'} label={'Wróć na stronę główną'}>
+          <Anchor
+            href={'/'}
+            component={Link}
+            className={navbarStyles.mainNavbarAnchorItem}
           >
-            <IconDoorEnter style={{ width: '80%', height: '80%' }} stroke={1.5} />
-          </ActionIcon>
+            <ActionIcon
+              variant={'transparent'}
+              color={'violet'}
+              aria-label={'Wróć na stronę główną'}
+              className={navbarStyles.mainNavbarItem}
+            >
+              <IconHome style={{ width: '80%', height: '80%' }} stroke={1.5} />
+            </ActionIcon>
+          </Anchor>
         </Tooltip>
+        <Divider orientation={'vertical'} color={'dark'} />
+        <Tooltip position={'bottom'} label={'Dołącz do rozgrywki'}>
+          <Anchor
+            href={'/auth'}
+            component={Link}
+            className={navbarStyles.mainNavbarAnchorItem}
+          >
+            <ActionIcon
+              variant={'transparent'}
+              color={'violet'}
+              aria-label={'Dołącz do rozgrywki'}
+              className={navbarStyles.mainNavbarItem}
+            >
+              <IconDoorEnter style={{ width: '80%', height: '80%' }} stroke={1.5} />
+            </ActionIcon>
+          </Anchor>
+        </Tooltip>
+        <Divider orientation={'vertical'} color={'dark'} />
         <Tooltip position={'bottom'} label={'Otwórz panel boczny'}>
           <ActionIcon
             variant={'transparent'}

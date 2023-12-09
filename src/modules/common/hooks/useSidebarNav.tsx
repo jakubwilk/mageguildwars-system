@@ -1,5 +1,4 @@
 'use client'
-
 import { IAppNavbar } from '@modules/common'
 import { isEmpty } from 'lodash'
 

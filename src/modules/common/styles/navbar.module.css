@@ -3,6 +3,16 @@
     border-bottom: 1px solid var(--mantine-color-dark-7)
 }
 
+.mainNavbarAnchorItem {
+    display: block;
+    width: 28px;
+    height: 28px;
+}
+
+.mainNavbarAnchorItem:focus {
+    outline: none;
+}
+
 .mainNavbarItem {
     color: var(--mantine-color-gray-6);
 }
