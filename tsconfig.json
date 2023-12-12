@@ -20,9 +20,10 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
+      "@config/theme": ["./src/config/index.ts"],
       "@modules/common": ["./src/modules/common/index.ts"],
       "@modules/auth": ["./src/modules/auth/index.ts"],
-      "@config/theme": ["./src/config/index.ts"]
+      "@modules/locale": ["./src/modules/locale/index.ts"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

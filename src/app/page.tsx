@@ -1,9 +1,12 @@
 import { AppLayout } from '@modules/common'
+import { getTranslations } from '@modules/locale'
 
 export const generateMetadata = async () => {
+  const { translate } = getTranslations('global')
+
   return {
-    title: 'pageTitle', // t('pageTitle'),
-    description: 'pageDescription', // t('pageDescription'),
+    title: translate('pageTitle'),
+    description: translate('pageDescription'),
   }
 }
 

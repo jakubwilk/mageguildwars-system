@@ -1,10 +1,13 @@
 import { AuthPage } from '@modules/auth'
 import { AuthLayout } from '@modules/common'
+import { getTranslations } from '@modules/locale'
 
 export const generateMetadata = async () => {
+  const { translate } = getTranslations('auth')
+
   return {
-    title: 'pageTitle', // t('pageTitle'),
-    description: 'pageDescription', // t('pageDescription'),
+    title: translate('pageTitle'),
+    description: translate('pageDescription'),
   }
 }
 
