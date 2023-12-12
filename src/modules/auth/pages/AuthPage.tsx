@@ -1,6 +1,6 @@
 'use client'
 
-import { BackToHome } from '@modules/auth'
+import { AuthAccordion, BackToHome, LoginForm, RegisterForm } from '@modules/auth'
 
 const AuthPage = () => {
   return (
@@ -8,6 +8,7 @@ const AuthPage = () => {
       <div className={'container mx-auto py-8'}>
         <div className={'flex flex-col items-center'}>
           <h1>{'Auth'}</h1>
+          <AuthAccordion loginForm={<LoginForm />} registerForm={<RegisterForm />} />
           <BackToHome />
         </div>
       </div>
