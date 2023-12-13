@@ -34,7 +34,7 @@ const AuthAccordion = ({ loginForm, registerForm }: IProps) => {
     return (
       <div
         className={clsx(
-          'flex flex-col items-start p-4',
+          'flex flex-col items-start p-8',
           authStyles.authAccordionButtonInner,
         )}
       >
@@ -47,7 +47,7 @@ const AuthAccordion = ({ loginForm, registerForm }: IProps) => {
   return (
     <div className={clsx('w-full max-w-[70vw] mt-4', authStyles.authAccordionWrapper)}>
       <div className={'grid grid-cols-2'}>
-        <div className={'flex items-center w-full h-full p-4'}>
+        <div className={'flex items-center justify-center w-full h-full p-4'}>
           {isLoginTab ? loginForm : registerForm}
         </div>
         <div
