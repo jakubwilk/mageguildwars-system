@@ -21,3 +21,7 @@ textarea,
 select {
   transition: all .1s ease-in-out;
 }
+
+[aria-hidden="true"] {
+  display: none;
+}

@@ -7,7 +7,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import '@mantine/core/styles.css'
 import './globals.css'
 
-const poppins = Poppins({ weight: ['400'], subsets: ['latin-ext'] })
+const poppins = Poppins({ weight: ['400', '700', '900'], subsets: ['latin-ext'] })
 
 interface IProps {
   children: ReactNode

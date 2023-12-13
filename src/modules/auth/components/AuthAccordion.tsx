@@ -2,8 +2,9 @@
 
 import { ReactNode, useCallback, useMemo, useState } from 'react'
 import { Button } from '@mantine/core'
-import { AuthPageTabEnum } from '@modules/auth'
+import { AuthPageTabEnum, authStyles } from '@modules/auth'
 import { useLocale } from '@modules/locale'
+import { clsx } from 'clsx'
 import { isEqual } from 'lodash'
 
 interface IProps {
@@ -24,24 +25,51 @@ const AuthAccordion = ({ loginForm, registerForm }: IProps) => {
     [],
   )
 
+  const buttonContent = useMemo(() => {
+    const title = isLoginTab ? 'actions.registerAction' : 'actions.loginAction'
+    const description = isLoginTab
+      ? 'actions.registerActionText'
+      : 'actions.loginActionText'
+
+    return (
+      <div
+        className={clsx(
+          'flex flex-col items-start p-4',
+          authStyles.authAccordionButtonInner,
+        )}
+      >
+        {translateByHook(description)}
+        <span>{translateByHook(title)}</span>
+      </div>
+    )
+  }, [isLoginTab, translateByHook])
+
   return (
-    <div className={'max-w-[70vh] max-h-[70vh]'}>
-      <div className={'flex flex-col md:flex-row items-center'}>
-        <div className={'flex items-center w-full h-full'}>
+    <div className={clsx('w-full max-w-[70vw] mt-4', authStyles.authAccordionWrapper)}>
+      <div className={'grid grid-cols-2'}>
+        <div className={'flex items-center w-full h-full p-4'}>
           {isLoginTab ? loginForm : registerForm}
         </div>
-        <div className={'flex items-center w-full h-full'}>
-          {isLoginTab ? (
-            <Button onClick={handleSwitchToRegisterTab} unstyled>
-              {translateByHook('actions.registerActionText')}
-              <span>{translateByHook('actions.registerAction')}</span>
-            </Button>
-          ) : (
-            <Button onClick={handleSwitchToLoginTab} unstyled>
-              {translateByHook('actions.loginActionText')}
-              <span>{translateByHook('actions.loginAction')}</span>
-            </Button>
+        <div
+          className={clsx(
+            'flex items-center w-full h-full',
+            authStyles.authAccordionButtonDivider,
           )}
+        >
+          <Button
+            onClick={isLoginTab ? handleSwitchToRegisterTab : handleSwitchToLoginTab}
+            className={clsx(
+              'flex items-end h-full w-full cursor-pointer',
+              authStyles.authAccordionButton,
+              isLoginTab
+                ? authStyles.authAccordionRegisterButton
+                : authStyles.authAccordionLoginButton,
+            )}
+            loading={false}
+            unstyled
+          >
+            {buttonContent}
+          </Button>
         </div>
       </div>
     </div>
