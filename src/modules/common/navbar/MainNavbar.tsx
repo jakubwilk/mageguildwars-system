@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import { ActionIcon, Anchor, Divider, Group, Tooltip } from '@mantine/core'
+import { ActionIcon, Anchor, Group, Tooltip } from '@mantine/core'
 import { navbarStyles } from '@modules/common'
 import {
   IconBrandDiscordFilled,
@@ -18,7 +18,7 @@ const MainNavbar = ({ handleOpenNav }: IProps) => {
   return (
     <div
       className={clsx(
-        'flex items-center justify-between h-[50px] px-4',
+        'container mx-auto flex items-center justify-between h-[70px] px-4',
         navbarStyles.mainNavbar,
       )}
     >
@@ -55,7 +55,6 @@ const MainNavbar = ({ handleOpenNav }: IProps) => {
             </ActionIcon>
           </Anchor>
         </Tooltip>
-        <Divider orientation={'vertical'} color={'dark'} />
         <Tooltip position={'bottom'} label={'Dołącz do rozgrywki'}>
           <Anchor
             href={'/auth'}
@@ -72,7 +71,6 @@ const MainNavbar = ({ handleOpenNav }: IProps) => {
             </ActionIcon>
           </Anchor>
         </Tooltip>
-        <Divider orientation={'vertical'} color={'dark'} />
         <Tooltip position={'bottom'} label={'Otwórz panel boczny'}>
           <ActionIcon
             variant={'transparent'}

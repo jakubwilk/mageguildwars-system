@@ -1,6 +1,6 @@
 'use client'
 import { ReactNode } from 'react'
-import { MantineProvider } from '@mantine/core'
+import { createTheme, MantineProvider } from '@mantine/core'
 import { AuthProvider } from '@modules/auth'
 import { App } from '@modules/common'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -11,10 +11,14 @@ interface IProps {
   children: ReactNode
 }
 
+const theme = createTheme({
+  primaryColor: 'violet',
+})
+
 const LayoutWrapper = ({ children }: IProps) => {
   return (
     <QueryClientProvider client={queryClient}>
-      <MantineProvider>
+      <MantineProvider defaultColorScheme={'dark'} theme={theme}>
         <AuthProvider>
           <App>{children}</App>
         </AuthProvider>
