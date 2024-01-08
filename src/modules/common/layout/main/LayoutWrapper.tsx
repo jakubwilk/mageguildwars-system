@@ -1,4 +1,5 @@
 'use client'
+
 import { ReactNode } from 'react'
 import { Poppins } from 'next/font/google'
 import { createTheme, MantineProvider } from '@mantine/core'
