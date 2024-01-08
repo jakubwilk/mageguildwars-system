@@ -8,6 +8,11 @@
 :root {
   --discord-background-color: #5663F7;
   --discord-background-hover-color: #7289DA;
+
+  --mgw-font-weight-light: 300;
+  --mgw-font-weight-regular: 400;
+  --mgw-font-weight-bold: 700;
+  --mgw-font-weight-black: 900;
 }
 
 body {
@@ -20,8 +25,4 @@ button,
 textarea,
 select {
   transition: all .1s ease-in-out;
-}
-
-[aria-hidden="true"] {
-  display: none;
 }

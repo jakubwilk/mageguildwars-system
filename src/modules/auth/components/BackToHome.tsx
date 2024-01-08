@@ -13,7 +13,7 @@ const BackToHome = () => {
     <Anchor
       href={'/'}
       component={Link}
-      className={clsx('flex items-center mt-4', authStyles.backToHome)}
+      className={clsx('flex items-center mt-8', authStyles.backToHome)}
     >
       <IconArrowNarrowLeft size={18} stroke={1.5} className={'mr-2'} />
       <>{translateByHook('actions.backToHome')}</>

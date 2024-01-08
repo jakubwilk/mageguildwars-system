@@ -1,11 +1,10 @@
 'use client'
 
-import { ReactNode, useCallback, useMemo, useState } from 'react'
-import { Button } from '@mantine/core'
-import { AuthPageTabEnum, authStyles } from '@modules/auth'
-import { useLocale } from '@modules/locale'
+import { ReactNode, useMemo } from 'react'
+import { Divider, DividerProps } from '@mantine/core'
+import { useViewportSize } from '@mantine/hooks'
+import { authStyles } from '@modules/auth'
 import { clsx } from 'clsx'
-import { isEqual } from 'lodash'
 
 interface IProps {
   loginForm: ReactNode
@@ -13,64 +12,31 @@ interface IProps {
 }
 
 const AuthAccordion = ({ loginForm, registerForm }: IProps) => {
-  const { translateByHook } = useLocale('auth')
-  const [card, setCard] = useState<AuthPageTabEnum>(AuthPageTabEnum.LOGIN)
+  const { width } = useViewportSize()
 
-  const isLoginTab = useMemo(() => isEqual(card, AuthPageTabEnum.LOGIN), [card])
-
-  const handleSwitchToLoginTab = useCallback(() => setCard(AuthPageTabEnum.LOGIN), [])
-
-  const handleSwitchToRegisterTab = useCallback(
-    () => setCard(AuthPageTabEnum.REGISTER),
-    [],
+  const isMobile = useMemo(() => width <= 768, [width])
+  const dividerProps: DividerProps = useMemo(
+    () => ({ orientation: isMobile ? 'horizontal' : 'vertical' }),
+    [isMobile],
   )
 
-  const buttonContent = useMemo(() => {
-    const title = isLoginTab ? 'actions.registerAction' : 'actions.loginAction'
-    const description = isLoginTab
-      ? 'actions.registerActionText'
-      : 'actions.loginActionText'
-
-    return (
-      <div
-        className={clsx(
-          'flex flex-col items-start p-8',
-          authStyles.authAccordionButtonInner,
-        )}
-      >
-        {translateByHook(description)}
-        <span>{translateByHook(title)}</span>
-      </div>
-    )
-  }, [isLoginTab, translateByHook])
-
   return (
-    <div className={clsx('w-full max-w-[70vw] mt-4', authStyles.authAccordionWrapper)}>
-      <div className={'grid grid-cols-2'}>
-        <div className={'flex items-center justify-center w-full h-full p-4'}>
-          {isLoginTab ? loginForm : registerForm}
-        </div>
-        <div
+    <div
+      className={clsx(
+        'w-full max-w-full md:max-w-[75vw] xl:max-w-[50vw] mx-4 mt-4 p-8 rounded-md',
+        authStyles.authAccordionWrapper,
+      )}
+    >
+      <div className={'flex flex-col md:flex-row gap-8 h-[inherit]'}>
+        {loginForm}
+        <Divider
+          {...dividerProps}
           className={clsx(
-            'flex items-center w-full h-full',
-            authStyles.authAccordionButtonDivider,
+            'flex items-center justify-center mb-2 mt-4 md:my-0',
+            authStyles.authAccordionDivider,
           )}
-        >
-          <Button
-            onClick={isLoginTab ? handleSwitchToRegisterTab : handleSwitchToLoginTab}
-            className={clsx(
-              'flex items-end h-full w-full cursor-pointer',
-              authStyles.authAccordionButton,
-              isLoginTab
-                ? authStyles.authAccordionRegisterButton
-                : authStyles.authAccordionLoginButton,
-            )}
-            loading={false}
-            unstyled
-          >
-            {buttonContent}
-          </Button>
-        </div>
+        />
+        {registerForm}
       </div>
     </div>
   )

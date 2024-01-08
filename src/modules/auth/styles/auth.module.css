@@ -1,3 +1,8 @@
+.authPageTitle {
+    font-weight: var(--mgw-font-weight-light);
+    font-size: 1.5rem;
+}
+
 .backToHome {
     color: var(--mantine-color-dark-2);
     font-size: 0.85rem;
@@ -14,7 +19,6 @@
 
 .authAccordionWrapper {
     background-color: var(--mantine-color-dark-8);
-    border: 1px solid var(--mantine-color-gray-8);
 }
 
 .authAccordionButtonDivider {
@@ -69,4 +73,18 @@
 
 .authAccordionLoginButton {
     background-image: url('https://i.imgur.com/QFq5Fzl.png');
+}
+
+.authAccordionDivider {
+    position: relative;
+}
+
+.authAccordionDivider::after {
+    content: 'Lub';
+    position: absolute;
+    padding: 1rem;
+    z-index: 10;
+    background-color: var(--mantine-color-dark-8);
+    font-size: 0.9rem;
+    color: var(--mantine-color-dark-2);
 }
