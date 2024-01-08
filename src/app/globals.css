@@ -13,6 +13,8 @@
   --mgw-font-weight-regular: 400;
   --mgw-font-weight-bold: 700;
   --mgw-font-weight-black: 900;
+
+  --mgw-font-poppins: 'Poppins', sans-serif;
 }
 
 body {
