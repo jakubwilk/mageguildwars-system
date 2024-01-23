@@ -1,7 +1,6 @@
 'use client'
 
 import { Title } from '@mantine/core'
-import { AuthAccordion, BackToHome, LoginForm, RegisterForm } from '@modules/auth'
 import { authStyles } from '@modules/auth'
 import { clsx } from 'clsx'
 
@@ -13,8 +12,6 @@ const AuthPage = () => {
           <Title order={1} className={clsx('mb-4 text-center', authStyles.authPageTitle)}>
             {'Dołącz do rozgrywki'}
           </Title>
-          <AuthAccordion loginForm={<LoginForm />} registerForm={<RegisterForm />} />
-          <BackToHome />
         </div>
       </div>
     </div>

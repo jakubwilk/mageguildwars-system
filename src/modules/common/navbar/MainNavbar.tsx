@@ -1,12 +1,16 @@
 'use client'
+import { useCallback } from 'react'
 import Link from 'next/link'
 import { ActionIcon, Anchor, Group, Tooltip } from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
+import { LoginModal } from '@modules/auth'
 import { navbarStyles } from '@modules/common'
 import {
   IconBrandDiscordFilled,
   IconCategory,
-  IconDoorEnter,
   IconHome,
+  IconLogin,
+  IconUserPlus,
 } from '@tabler/icons-react'
 import { clsx } from 'clsx'
 
@@ -15,6 +19,11 @@ interface IProps {
 }
 
 const MainNavbar = ({ handleOpenNav }: IProps) => {
+  const [opened, { open: handleOpenLoginModal, close: handleCloseLoginModal }] =
+    useDisclosure(false)
+
+  const handleOpen = useCallback(() => handleOpenLoginModal(), [handleOpenLoginModal])
+
   return (
     <div
       className={clsx(
@@ -55,7 +64,7 @@ const MainNavbar = ({ handleOpenNav }: IProps) => {
             </ActionIcon>
           </Anchor>
         </Tooltip>
-        <Tooltip position={'bottom'} label={'Dołącz do rozgrywki'}>
+        <Tooltip position={'bottom'} label={'Zarejestruj się'}>
           <Anchor
             href={'/auth'}
             component={Link}
@@ -64,13 +73,25 @@ const MainNavbar = ({ handleOpenNav }: IProps) => {
             <ActionIcon
               variant={'transparent'}
               color={'violet'}
-              aria-label={'Dołącz do rozgrywki'}
+              aria-label={'Otwórz konto'}
               className={navbarStyles.mainNavbarItem}
             >
-              <IconDoorEnter style={{ width: '80%', height: '80%' }} stroke={1.5} />
+              <IconUserPlus style={{ width: '80%', height: '80%' }} stroke={1.5} />
             </ActionIcon>
           </Anchor>
         </Tooltip>
+        <Tooltip position={'bottom'} label={'Zaloguj się na konto'}>
+          <ActionIcon
+            variant={'transparent'}
+            color={'violet'}
+            aria-label={'Zaloguj się'}
+            className={navbarStyles.mainNavbarItem}
+            onClick={handleOpen}
+          >
+            <IconLogin style={{ width: '80%', height: '80%' }} stroke={1.5} />
+          </ActionIcon>
+        </Tooltip>
+        {opened && <LoginModal handleCloseModal={handleCloseLoginModal} />}
         <Tooltip position={'bottom'} label={'Otwórz panel boczny'}>
           <ActionIcon
             variant={'transparent'}

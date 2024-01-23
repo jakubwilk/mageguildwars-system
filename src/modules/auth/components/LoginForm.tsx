@@ -1,50 +1,17 @@
-import { useCallback } from 'react'
+import { useMemo } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import Link from 'next/link'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Anchor, Button } from '@mantine/core'
-import { formStyles, ILoginFormFields, LoginFormFields } from '@modules/auth'
-import { z } from 'zod'
-
-const schema = z.object({
-  login: z.string().min(1, { message: 'Pole jest wymagane' }),
-  password: z.string().min(1, { message: 'Pole jest wymagane' }),
-  isRemember: z.boolean(),
-})
+import { TextFieldInput } from '@modules/common'
 
 const LoginForm = () => {
-  const form = useForm<ILoginFormFields>({
-    values: {
-      login: '',
-      password: '',
-      isRemember: false,
-    },
-    resolver: zodResolver(schema),
-  })
+  const form = useForm()
 
-  const handleSubmit = useCallback((values: ILoginFormFields) => {
-    console.log('values', values)
-  }, [])
+  const values = useMemo(() => form, [form])
 
   return (
-    <FormProvider {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className={'md:mr-4 w-full'}>
-        <LoginFormFields />
-        <Anchor
-          href={'/restore-password'}
-          component={Link}
-          className={formStyles.loginFormLink}
-        >
-          {'Zapomniałeś hasła? Przypomnij je'}
-        </Anchor>
-        <Button
-          type={'submit'}
-          variant={'filled'}
-          color={'violet'}
-          className={'w-full mt-4'}
-        >
-          {'Zaloguj się'}
-        </Button>
+    <FormProvider {...values}>
+      <form>
+        <TextFieldInput name={'login'} label={'Nazwa użytkownika'} required />
+        <TextFieldInput name={'password'} label={'Hasło'} isPassword required />
       </form>
     </FormProvider>
   )
