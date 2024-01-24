@@ -2,6 +2,7 @@
   "pageTitle": "Mage Guild Wars",
   "pageDescription": "PBF osadzony w świecie Fairy Tail",
   "actions": {
-    "backToHome": "Powrót do strony głównej"
+    "backToHome": "Powrót do strony głównej",
+    "openMenu": "Otwórz panel boczny"
   }
 }
