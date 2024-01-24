@@ -2,7 +2,8 @@
 
 import { useMemo } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import { TextFieldInput } from '@modules/common'
+import { Button } from '@mantine/core'
+import { CheckboxFieldInput, TextFieldInput } from '@modules/common'
 import { useLocale } from '@modules/locale'
 
 const LoginForm = () => {
@@ -21,6 +22,11 @@ const LoginForm = () => {
           isPassword
           required
         />
+        <CheckboxFieldInput
+          name={'remember'}
+          label={'Zapamiętaj dane przy następnym logowaniu'}
+        />
+        <Button fullWidth>{translateByHook('actions.loginAction')}</Button>
       </form>
     </FormProvider>
   )
