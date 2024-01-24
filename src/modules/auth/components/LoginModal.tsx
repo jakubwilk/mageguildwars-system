@@ -1,6 +1,7 @@
 'use client'
 
 import { Modal } from '@mantine/core'
+import { useLocale } from '@modules/locale'
 
 import LoginForm from './LoginForm'
 
@@ -9,8 +10,10 @@ interface IProps {
 }
 
 const LoginModal = ({ handleCloseModal }: IProps) => {
+  const { translateByHook } = useLocale('auth')
+
   return (
-    <Modal opened onClose={handleCloseModal} title={'Logowanie'}>
+    <Modal opened onClose={handleCloseModal} title={translateByHook('modal.title')}>
       <LoginForm />
     </Modal>
   )

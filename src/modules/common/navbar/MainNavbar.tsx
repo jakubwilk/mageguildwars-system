@@ -5,20 +5,19 @@ import { ActionIcon, Anchor, Group, Tooltip } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { LoginModal } from '@modules/auth'
 import { navbarStyles } from '@modules/common'
-import {
-  IconBrandDiscordFilled,
-  IconCategory,
-  IconHome,
-  IconLogin,
-  IconUserPlus,
-} from '@tabler/icons-react'
+import { useLocale } from '@modules/locale'
+import { IconCategory, IconHome, IconLogin, IconUserPlus } from '@tabler/icons-react'
 import { clsx } from 'clsx'
+
+import DiscordButton from './DiscordButton'
 
 interface IProps {
   handleOpenNav: () => void
 }
 
 const MainNavbar = ({ handleOpenNav }: IProps) => {
+  const { translateByHook } = useLocale('auth')
+  const { translateByHook: translateGlobalByHook } = useLocale('global')
   const [opened, { open: handleOpenLoginModal, close: handleCloseLoginModal }] =
     useDisclosure(false)
 
@@ -32,20 +31,7 @@ const MainNavbar = ({ handleOpenNav }: IProps) => {
       )}
     >
       <Group>
-        <Tooltip position={'bottom'} label={'Wejdź na serwer Discord'}>
-          <Anchor
-            href={'https://discord.gg/NJQhwKq'}
-            className={clsx(
-              'min-w-[100px] flex items-center py-1 px-2 rounded',
-              navbarStyles.mainNavbarItemDiscord,
-            )}
-          >
-            <IconBrandDiscordFilled width={20} stroke={1.5} />
-            <span className={clsx('pl-2', navbarStyles.mainNavbarItemDiscordText)}>
-              {'Discord'}
-            </span>
-          </Anchor>
-        </Tooltip>
+        <DiscordButton />
       </Group>
       <Group>
         <Tooltip position={'bottom'} label={'Wróć na stronę główną'}>
@@ -64,7 +50,7 @@ const MainNavbar = ({ handleOpenNav }: IProps) => {
             </ActionIcon>
           </Anchor>
         </Tooltip>
-        <Tooltip position={'bottom'} label={'Zarejestruj się'}>
+        <Tooltip position={'bottom'} label={translateByHook('actions.registerAction')}>
           <Anchor
             href={'/auth'}
             component={Link}
@@ -73,18 +59,18 @@ const MainNavbar = ({ handleOpenNav }: IProps) => {
             <ActionIcon
               variant={'transparent'}
               color={'violet'}
-              aria-label={'Otwórz konto'}
+              aria-label={translateByHook('actions.registerAction')}
               className={navbarStyles.mainNavbarItem}
             >
               <IconUserPlus style={{ width: '80%', height: '80%' }} stroke={1.5} />
             </ActionIcon>
           </Anchor>
         </Tooltip>
-        <Tooltip position={'bottom'} label={'Zaloguj się na konto'}>
+        <Tooltip position={'bottom'} label={translateByHook('actions.loginAction')}>
           <ActionIcon
             variant={'transparent'}
             color={'violet'}
-            aria-label={'Zaloguj się'}
+            aria-label={translateByHook('actions.loginAction')}
             className={navbarStyles.mainNavbarItem}
             onClick={handleOpen}
           >
@@ -92,11 +78,11 @@ const MainNavbar = ({ handleOpenNav }: IProps) => {
           </ActionIcon>
         </Tooltip>
         {opened && <LoginModal handleCloseModal={handleCloseLoginModal} />}
-        <Tooltip position={'bottom'} label={'Otwórz panel boczny'}>
+        <Tooltip position={'bottom'} label={translateGlobalByHook('actions.openMenu')}>
           <ActionIcon
             variant={'transparent'}
             color={'violet'}
-            aria-label={'Otwórz panel boczny'}
+            aria-label={translateGlobalByHook('actions.openMenu')}
             className={navbarStyles.mainNavbarItem}
             onClick={handleOpenNav}
           >

@@ -4,10 +4,10 @@ import { get } from 'lodash'
 
 const useLocale = (namespace: TNamespace = 'common') => {
   const translateByHook = useCallback(
-    (localeKey: string) => {
+    (localeKey: string): string => {
       const translations = getNamespace(namespace)
 
-      return <>{get(translations, localeKey)}</>
+      return (get(translations, localeKey) as string) || '-'
     },
     [namespace],
   )
