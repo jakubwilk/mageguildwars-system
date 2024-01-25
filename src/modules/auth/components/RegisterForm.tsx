@@ -20,8 +20,9 @@ const RegisterForm = () => {
   const { translateByHook } = useLocale('auth')
   const form = useForm<IRegisterFormFields>({
     mode: 'onChange',
+    criteriaMode: 'all',
     resolver: yupResolver(AUTH_REGISTER_SCHEMA),
-    values: AUTH_REGISTER_VALUES,
+    defaultValues: AUTH_REGISTER_VALUES,
   })
 
   const handleRegisterSubmit = useCallback((formValues: IRegisterFormFields) => {
@@ -35,8 +36,14 @@ const RegisterForm = () => {
       <form
         onSubmit={form.handleSubmit(handleRegisterSubmit)}
         className={'flex flex-col w-full gap-4'}
+        noValidate
       >
-        <TextFieldInput name={'login'} label={translateByHook('fields.login')} required />
+        <TextFieldInput
+          name={'login'}
+          label={translateByHook('fields.login')}
+          description={translateByHook('description.login')}
+          required
+        />
         <TextFieldInput
           name={'password'}
           label={translateByHook('fields.password')}
@@ -45,21 +52,21 @@ const RegisterForm = () => {
         />
         <TextFieldInput name={'email'} label={translateByHook('fields.email')} required />
         <Text className={clsx('text-center', styles.linkText)}>
-          {'Rejestrując się akceptujesz tym samym '}
+          {translateByHook('text.register.ifRegister')}
           <Anchor href={'/'} component={Link}>
-            {'regulamin'}
+            {translateByHook('text.link.rules')}
           </Anchor>
-          {' Mage Guild Wars'}
+          {translateByHook('text.register.name')}
         </Text>
         <Button type={'submit'} fullWidth>
           {translateByHook('actions.registerAction')}
         </Button>
         <Text className={clsx('text-center', styles.linkText)}>
-          {'Masz już konto? Przejdź do '}
+          {translateByHook('text.register.haveAccount')}
           <Anchor href={'/'} component={Link}>
-            {'strony głównej'}
+            {translateByHook('text.link.homepage')}
           </Anchor>
-          {' żeby się zalogować'}
+          {translateByHook('text.register.goToLogin')}
         </Text>
       </form>
     </FormProvider>

@@ -8,6 +8,7 @@ import {
   TextInputProps,
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
+import { inputStyles } from '@modules/common'
 
 type MantineInputProps = TextInputProps & PasswordInputProps
 
@@ -35,7 +36,10 @@ const TextFieldInput = ({
     <Controller
       control={control}
       name={name as string}
-      render={({ field: { name, onBlur, onChange }, fieldState: { error } }) =>
+      render={({
+        field: { name, onBlur, onChange, ...otherFormProps },
+        fieldState: { error },
+      }) =>
         isPassword ? (
           <PasswordInput
             label={label}
@@ -43,10 +47,12 @@ const TextFieldInput = ({
             placeholder={placeholder}
             onBlur={onBlur}
             onChange={onChange}
-            error={!!error}
-            description={error?.message || description}
+            classNames={{ description: inputStyles.description }}
+            {...(error && { error: error?.message || description })}
+            {...(description && { description })}
             visible={visible}
             onVisibilityChange={toggle}
+            {...otherFormProps}
             {...restProps}
           />
         ) : (
@@ -56,8 +62,10 @@ const TextFieldInput = ({
             placeholder={placeholder}
             onBlur={onBlur}
             onChange={onChange}
-            error={!!error}
-            description={error?.message || description}
+            classNames={{ description: inputStyles.description }}
+            {...(error && { error: error?.message || description })}
+            {...(description && { description })}
+            {...otherFormProps}
             {...restProps}
           />
         )
@@ -70,8 +78,9 @@ const TextFieldInput = ({
       placeholder={placeholder}
       onBlur={onBlur}
       onChange={onChange}
-      error={!!error}
-      description={error || description}
+      classNames={{ description: inputStyles.description }}
+      {...(error && { error: error || description })}
+      {...(description && { description })}
       visible={visible}
       onVisibilityChange={toggle}
       {...restProps}
@@ -83,8 +92,9 @@ const TextFieldInput = ({
       placeholder={placeholder}
       onBlur={onBlur}
       onChange={onChange}
-      error={!!error}
-      description={error || description}
+      classNames={{ description: inputStyles.description }}
+      {...(error && { error: error || description })}
+      {...(description && { description })}
       {...restProps}
     />
   )

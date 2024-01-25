@@ -27,6 +27,7 @@ const LoginForm = () => {
       <form
         onSubmit={form.handleSubmit(handleLoginSubmit)}
         className={'flex flex-col gap-4'}
+        noValidate
       >
         <TextFieldInput name={'login'} label={translateByHook('fields.login')} required />
         <TextFieldInput
