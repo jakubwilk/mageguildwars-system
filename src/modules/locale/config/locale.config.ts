@@ -17,10 +17,10 @@ export const getNamespace = (namespace: TNamespace): Record<string, unknown> => 
 }
 
 export const getTranslations = (namespace: TNamespace) => {
-  const translate = (localeKey: string) => {
+  const translate = (localeKey: string): string => {
     const translations = getNamespace(namespace)
 
-    return get(translations, localeKey)
+    return get(translations, localeKey) as string
   }
 
   return { translate }
