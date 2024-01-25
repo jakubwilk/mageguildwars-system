@@ -8,10 +8,17 @@
 :root {
   --discord-background-color: #5663F7;
   --discord-background-hover-color: #7289DA;
+
+  --mgw-font-weight-light: 300;
+  --mgw-font-weight-regular: 400;
+  --mgw-font-weight-bold: 700;
+  --mgw-font-weight-black: 900;
+
+  --mgw-font-poppins: 'Poppins', sans-serif;
 }
 
 body {
-  background-color: var(--mantine-color-dark-9);
+  background-color: var(--mantine-color-dark-7);
 }
 
 a,

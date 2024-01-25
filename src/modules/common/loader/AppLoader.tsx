@@ -1,7 +1,7 @@
 'use client'
 
-import { ReactNode } from 'react'
-import { Loader } from '@mantine/core'
+import { ReactNode, useMemo } from 'react'
+import { Loader, LoaderProps } from '@mantine/core'
 import { isNil } from 'lodash'
 
 interface IProps {
@@ -10,11 +10,12 @@ interface IProps {
 }
 
 const AppLoader = ({ customLoader, isFullPageLoader }: IProps) => {
+  const loaderProps: LoaderProps = useMemo(() => ({ color: 'violet', size: 'xl' }), [])
+
   if (isFullPageLoader && isNil(customLoader)) {
     return (
       <div className={'w-full h-full absolute z-10 flex items-center justify-center'}>
-        <Loader color={'violet'} />
-        {';\r'}
+        <Loader {...loaderProps} />
       </div>
     )
   }
@@ -22,8 +23,7 @@ const AppLoader = ({ customLoader, isFullPageLoader }: IProps) => {
   if (!isFullPageLoader && isNil(customLoader)) {
     return (
       <div className={'w-full h-full flex items-center justify-center'}>
-        <Loader color={'violet'} />
-        {';\r'}
+        <Loader {...loaderProps} />
       </div>
     )
   }

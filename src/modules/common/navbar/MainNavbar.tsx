@@ -1,42 +1,37 @@
 'use client'
+import { useCallback } from 'react'
 import Link from 'next/link'
-import { ActionIcon, Anchor, Divider, Group, Tooltip } from '@mantine/core'
+import { ActionIcon, Anchor, Group, Tooltip } from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
+import { LoginModal } from '@modules/auth'
 import { navbarStyles } from '@modules/common'
-import {
-  IconBrandDiscordFilled,
-  IconCategory,
-  IconDoorEnter,
-  IconHome,
-} from '@tabler/icons-react'
+import { useLocale } from '@modules/locale'
+import { IconCategory, IconHome, IconLogin, IconUserPlus } from '@tabler/icons-react'
 import { clsx } from 'clsx'
+
+import DiscordButton from './DiscordButton'
 
 interface IProps {
   handleOpenNav: () => void
 }
 
 const MainNavbar = ({ handleOpenNav }: IProps) => {
+  const { translateByHook } = useLocale('auth')
+  const { translateByHook: translateGlobalByHook } = useLocale('global')
+  const [opened, { open: handleOpenLoginModal, close: handleCloseLoginModal }] =
+    useDisclosure(false)
+
+  const handleOpen = useCallback(() => handleOpenLoginModal(), [handleOpenLoginModal])
+
   return (
     <div
       className={clsx(
-        'flex items-center justify-between h-[50px] px-4',
+        'container mx-auto flex items-center justify-between h-[70px] px-4',
         navbarStyles.mainNavbar,
       )}
     >
       <Group>
-        <Tooltip position={'bottom'} label={'Wejdź na serwer Discord'}>
-          <Anchor
-            href={'https://discord.gg/NJQhwKq'}
-            className={clsx(
-              'min-w-[100px] flex items-center py-1 px-2 rounded',
-              navbarStyles.mainNavbarItemDiscord,
-            )}
-          >
-            <IconBrandDiscordFilled width={20} stroke={1.5} />
-            <span className={clsx('pl-2', navbarStyles.mainNavbarItemDiscordText)}>
-              {'Discord'}
-            </span>
-          </Anchor>
-        </Tooltip>
+        <DiscordButton />
       </Group>
       <Group>
         <Tooltip position={'bottom'} label={'Wróć na stronę główną'}>
@@ -55,8 +50,7 @@ const MainNavbar = ({ handleOpenNav }: IProps) => {
             </ActionIcon>
           </Anchor>
         </Tooltip>
-        <Divider orientation={'vertical'} color={'dark'} />
-        <Tooltip position={'bottom'} label={'Dołącz do rozgrywki'}>
+        <Tooltip position={'bottom'} label={translateByHook('actions.registerAction')}>
           <Anchor
             href={'/auth'}
             component={Link}
@@ -65,19 +59,30 @@ const MainNavbar = ({ handleOpenNav }: IProps) => {
             <ActionIcon
               variant={'transparent'}
               color={'violet'}
-              aria-label={'Dołącz do rozgrywki'}
+              aria-label={translateByHook('actions.registerAction')}
               className={navbarStyles.mainNavbarItem}
             >
-              <IconDoorEnter style={{ width: '80%', height: '80%' }} stroke={1.5} />
+              <IconUserPlus style={{ width: '80%', height: '80%' }} stroke={1.5} />
             </ActionIcon>
           </Anchor>
         </Tooltip>
-        <Divider orientation={'vertical'} color={'dark'} />
-        <Tooltip position={'bottom'} label={'Otwórz panel boczny'}>
+        <Tooltip position={'bottom'} label={translateByHook('actions.loginAction')}>
           <ActionIcon
             variant={'transparent'}
             color={'violet'}
-            aria-label={'Otwórz panel boczny'}
+            aria-label={translateByHook('actions.loginAction')}
+            className={navbarStyles.mainNavbarItem}
+            onClick={handleOpen}
+          >
+            <IconLogin style={{ width: '80%', height: '80%' }} stroke={1.5} />
+          </ActionIcon>
+        </Tooltip>
+        {opened && <LoginModal handleCloseModal={handleCloseLoginModal} />}
+        <Tooltip position={'bottom'} label={translateGlobalByHook('actions.openMenu')}>
+          <ActionIcon
+            variant={'transparent'}
+            color={'violet'}
+            aria-label={translateGlobalByHook('actions.openMenu')}
             className={navbarStyles.mainNavbarItem}
             onClick={handleOpenNav}
           >

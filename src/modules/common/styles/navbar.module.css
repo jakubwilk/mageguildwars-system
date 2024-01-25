@@ -1,6 +1,16 @@
 .mainNavbar {
-    background-color: var(--mantine-color-dark-8);
-    border-bottom: 1px solid var(--mantine-color-dark-7)
+    /*background-color: var(--mantine-color-dark-8);*/
+    /*border-bottom: 1px solid var(--mantine-color-dark-7)*/
+}
+
+.mainNavbarAnchorItem {
+    display: block;
+    width: 28px;
+    height: 28px;
+}
+
+.mainNavbarAnchorItem:focus {
+    outline: none;
 }
 
 .mainNavbarAnchorItem {
