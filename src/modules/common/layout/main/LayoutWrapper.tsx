@@ -22,7 +22,11 @@ const theme = createTheme({
 const LayoutWrapper = ({ children }: IProps) => {
   return (
     <QueryClientProvider client={queryClient}>
-      <MantineProvider defaultColorScheme={'dark'} theme={theme}>
+      <MantineProvider
+        defaultColorScheme={'dark'}
+        forceColorScheme={'dark'}
+        theme={theme}
+      >
         <AuthProvider>
           <App>{children}</App>
         </AuthProvider>
