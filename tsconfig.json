@@ -23,6 +23,7 @@
       "@config/theme": ["./src/config/index.ts"],
       "@modules/common": ["./src/modules/common/index.ts"],
       "@modules/auth": ["./src/modules/auth/index.ts"],
+      "@modules/user": ["./src/modules/user/index.ts"],
       "@modules/locale": ["./src/modules/locale/index.ts"]
     }
   },
