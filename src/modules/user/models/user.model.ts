@@ -101,3 +101,33 @@ export const USER_MAIN_MENU: Array<IUserMenu> = [
     slug: '/mastercp',
   },
 ]
+
+// MOCK VALUES
+export const MOCK_USER: IUser = {
+  uid: '2b58f40c-edf4-4d53-9d41-22e5e9272b0a',
+  login: 'Vincent',
+  email: 'vincent@mageguildwars.pl',
+  group: UserGroupEnum.OPERATOR,
+  title: 'Administrator',
+  avatarUri: '',
+  registerDate: new Date(),
+  updateDate: new Date(),
+  profiles: [
+    {
+      name: 'Vincent',
+      place: 'Fiore',
+      birthYear: 'Y21',
+      guild: GuildEnum.FAIRY_TAIL,
+      group: CharacterGroupEnum.GUILD_MEMBER,
+      imageUri: '',
+      titles: ['Członek gildii'],
+      magic: [],
+      skills: [],
+      weapons: [],
+      companions: [],
+    },
+  ],
+  isLocked: false,
+  isBanned: false,
+}
+// END

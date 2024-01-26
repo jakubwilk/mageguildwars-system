@@ -4,21 +4,32 @@ import { useCallback, useMemo } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Button } from '@mantine/core'
-import { AUTH_LOGIN_SCHEMA, AUTH_LOGIN_VALUES, ILoginFormFields } from '@modules/auth'
+import {
+  AUTH_LOGIN_SCHEMA,
+  AUTH_LOGIN_VALUES,
+  ILoginFormFields,
+  useAuthContext,
+} from '@modules/auth'
 import { CheckboxFieldInput, TextFieldInput } from '@modules/common'
 import { useLocale } from '@modules/locale'
+import { MOCK_USER } from '@modules/user'
 
 const LoginForm = () => {
   const { translateByHook } = useLocale('auth')
+  const { setUser } = useAuthContext()
   const form = useForm<ILoginFormFields>({
     mode: 'onChange',
     resolver: yupResolver(AUTH_LOGIN_SCHEMA),
     values: AUTH_LOGIN_VALUES,
   })
 
-  const handleLoginSubmit = useCallback((formValues: ILoginFormFields) => {
-    console.log('formValues', formValues)
-  }, [])
+  const handleLoginSubmit = useCallback(
+    (formValues: ILoginFormFields) => {
+      console.log('formValues', formValues)
+      setUser(MOCK_USER)
+    },
+    [setUser],
+  )
 
   const values = useMemo(() => form, [form])
 

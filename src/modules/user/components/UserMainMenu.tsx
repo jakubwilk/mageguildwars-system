@@ -17,8 +17,7 @@ import { isEqual } from 'lodash'
 
 const UserMainMenu = () => {
   const { push } = useRouter()
-  const { setUser } = useAuthContext()
-  const MOCK_UID = '1234-123456-123456-1234'
+  const { user, setUser } = useAuthContext()
 
   const buildNavigation = useCallback((type: UserMenuEnum) => {
     const filteredMenu = USER_MAIN_MENU.filter(
@@ -28,7 +27,9 @@ const UserMainMenu = () => {
 
     return filteredMenu.map((item: IUserMenu) => {
       const replacedLink = item.slug.includes(USER_MENU_LINK_PLACEHOLDER_UID)
-        ? item.slug.replace(USER_MENU_LINK_PLACEHOLDER_UID, MOCK_UID)
+        ? user
+          ? item.slug.replace(USER_MENU_LINK_PLACEHOLDER_UID, user?.uid)
+          : item.slug
         : item.slug
 
       return (
