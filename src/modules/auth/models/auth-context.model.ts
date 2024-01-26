@@ -1,4 +1,6 @@
+import { IUser } from '@modules/user'
+
 export interface IAuthContext {
-  user: boolean
-  setUser: (user: boolean) => void
+  user: IUser | null
+  setUser: (user: IUser) => void
 }
