@@ -1,12 +1,15 @@
 'use client'
 
+import { useMemo } from 'react'
 import Link from 'next/link'
 import { ActionIcon, Anchor, Group, Tooltip } from '@mantine/core'
+import { useAuthContext } from '@modules/auth'
 import { navbarStyles } from '@modules/common'
 import { useLocale } from '@modules/locale'
-import { GuestMainMenu } from '@modules/user'
+import { GuestMainMenu, UserMainMenu } from '@modules/user'
 import { IconCategory, IconHome } from '@tabler/icons-react'
 import { clsx } from 'clsx'
+import { isNil } from 'lodash'
 
 import DiscordButton from './DiscordButton'
 
@@ -16,6 +19,9 @@ interface IProps {
 
 const MainNavbar = ({ handleOpenNav }: IProps) => {
   const { translateByHook } = useLocale('global')
+  const { user } = useAuthContext()
+
+  const isUser = useMemo(() => !isNil(user), [user])
 
   return (
     <div
@@ -44,7 +50,7 @@ const MainNavbar = ({ handleOpenNav }: IProps) => {
             </ActionIcon>
           </Anchor>
         </Tooltip>
-        <GuestMainMenu />
+        {isUser ? <UserMainMenu /> : <GuestMainMenu />}
         <Tooltip position={'bottom'} label={translateByHook('actions.openMenu')}>
           <ActionIcon
             variant={'transparent'}

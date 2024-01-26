@@ -1,10 +1,50 @@
 'use client'
 
+import { useCallback } from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { ActionIcon, Menu, Tooltip } from '@mantine/core'
+import { useAuthContext } from '@modules/auth'
 import { navbarStyles } from '@modules/common'
+import {
+  IUserMenu,
+  USER_MAIN_MENU,
+  USER_MENU_LINK_PLACEHOLDER_UID,
+  UserMenuEnum,
+} from '@modules/user'
 import { IconUser } from '@tabler/icons-react'
+import { isEqual } from 'lodash'
 
 const UserMainMenu = () => {
+  const { push } = useRouter()
+  const { setUser } = useAuthContext()
+  const MOCK_UID = '1234-123456-123456-1234'
+
+  const buildNavigation = useCallback((type: UserMenuEnum) => {
+    const filteredMenu = USER_MAIN_MENU.filter(
+      (item: IUserMenu) => isEqual(item.type, type),
+      [],
+    )
+
+    return filteredMenu.map((item: IUserMenu) => {
+      const replacedLink = item.slug.includes(USER_MENU_LINK_PLACEHOLDER_UID)
+        ? item.slug.replace(USER_MENU_LINK_PLACEHOLDER_UID, MOCK_UID)
+        : item.slug
+
+      return (
+        <Menu.Item key={item.name} component={Link} href={replacedLink}>
+          {item.name}
+        </Menu.Item>
+      )
+    })
+  }, [])
+
+  const handleUserLogout = useCallback(() => {
+    console.log('logout clicked')
+    setUser(null)
+    push('/')
+  }, [push, setUser])
+
   return (
     <Menu width={250}>
       <Menu.Target>
@@ -21,13 +61,12 @@ const UserMainMenu = () => {
       </Menu.Target>
       <Menu.Dropdown>
         <Menu.Label>{'Główne'}</Menu.Label>
-        <Menu.Item>{'Ustawienia'}</Menu.Item>
+        {buildNavigation(UserMenuEnum.MAIN)}
         <Menu.Label>{'Mage Guild Wars'}</Menu.Label>
         <Menu.Item>{'Ryu'}</Menu.Item>
-        <Menu.Item>{'Profile'}</Menu.Item>
-        <Menu.Item>{'Dodaj profil'}</Menu.Item>
+        {buildNavigation(UserMenuEnum.MGW)}
         <Menu.Label>{'Inne'}</Menu.Label>
-        <Menu.Item>{'Wyloguj'}</Menu.Item>
+        <Menu.Item onClick={handleUserLogout}>{'Wyloguj'}</Menu.Item>
       </Menu.Dropdown>
     </Menu>
   )
