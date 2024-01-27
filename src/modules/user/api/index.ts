@@ -1,2 +1,2 @@
 export { default as useGetUserQuery } from './useGetUserQuery'
-export * from './useGetUserQuery'
+export { default as getUser } from './queries/getUser'

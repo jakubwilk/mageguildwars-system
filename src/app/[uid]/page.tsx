@@ -1,5 +1,5 @@
 import { AppLayout, PageContainer } from '@modules/common'
-import { ProfilePage } from '@modules/user'
+import { getUser, ProfilePage } from '@modules/user'
 
 interface IParams {
   params: {
@@ -7,22 +7,20 @@ interface IParams {
   }
 }
 
-export const generateMetadata = async ({ params }: IParams) => {
-  console.log('params', params)
+export const generateMetadata = async ({ params: { uid } }: IParams) => {
+  const { login } = await getUser(uid)
 
   return {
-    title: 'dupa',
-    description: 'wolowa',
+    title: `Profil użytkownika ${login} | Mage Guild Wars`,
+    description: `Szczegóły użytkownika ${login} na Mage Guild Wars. Sprawdź konto, utworzone profile oraz staż na Mage Guild Wars`,
   }
 }
 
-export default function Profile({ params }: IParams) {
-  console.log('params 1', params)
-
+export default function Profile({ params: { uid } }: IParams) {
   return (
     <AppLayout>
       <PageContainer>
-        <ProfilePage />
+        <ProfilePage uid={uid} />
       </PageContainer>
     </AppLayout>
   )
