@@ -1,12 +1,28 @@
 import { AppLayout, PageContainer } from '@modules/common'
+import { ProfilePage } from '@modules/user'
 
-export const generateMetadata = async () => {}
+interface IParams {
+  params: {
+    uid: string
+  }
+}
 
-export default function CreateProfile() {
+export const generateMetadata = async ({ params }: IParams) => {
+  console.log('params', params)
+
+  return {
+    title: 'dupa',
+    description: 'wolowa',
+  }
+}
+
+export default function Profile({ params }: IParams) {
+  console.log('params 1', params)
+
   return (
     <AppLayout>
       <PageContainer>
-        <p>{'Profile'}</p>
+        <ProfilePage />
       </PageContainer>
     </AppLayout>
   )
