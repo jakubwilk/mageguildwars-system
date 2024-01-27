@@ -1,4 +1,4 @@
-import { AppLayout } from '@modules/common'
+import { AppLayout, PageContainer } from '@modules/common'
 import { getTranslations } from '@modules/locale'
 
 export const generateMetadata = async () => {
@@ -13,9 +13,9 @@ export const generateMetadata = async () => {
 export default function Home() {
   return (
     <AppLayout>
-      <div className={'flex flex-col items-center justify-between p-24'}>
+      <PageContainer>
         <p>{'Content'}</p>
-      </div>
+      </PageContainer>
     </AppLayout>
   )
 }
