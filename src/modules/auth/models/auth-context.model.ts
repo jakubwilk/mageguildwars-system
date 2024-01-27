@@ -1,6 +1,6 @@
-import { IUser } from '@modules/user'
+import { TUserLite } from '@modules/user'
 
 export interface IAuthContext {
-  user: IUser | null
-  setUser: (user: IUser | null) => void
+  user: TUserLite | null
+  setUser: (user: TUserLite | null) => void
 }

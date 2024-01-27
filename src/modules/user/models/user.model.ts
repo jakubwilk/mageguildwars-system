@@ -10,6 +10,7 @@ export interface IUser {
   profiles: Array<ICharacter>
   isLocked: boolean
   isBanned: boolean
+  hasCreateProfileEnabled: boolean
 }
 
 export interface ICharacter {
@@ -24,7 +25,13 @@ export interface ICharacter {
   skills: Array<string>
   weapons: Array<string>
   companions: Array<string>
+  isGameMaster: boolean
 }
+
+export type TUserLite = Pick<
+  IUser,
+  'uid' | 'login' | 'group' | 'isLocked' | 'isBanned' | 'hasCreateProfileEnabled'
+>
 
 export enum UserGroupEnum {
   BANNED,
@@ -49,6 +56,7 @@ export enum GuildEnum {
   RAVEN_TAIL,
   PHANTOM_LORD,
   MAGIC_COUNCIL,
+  GAME_MASTER,
 }
 
 export enum UserMenuEnum {
@@ -125,9 +133,11 @@ export const MOCK_USER: IUser = {
       skills: [],
       weapons: [],
       companions: [],
+      isGameMaster: false,
     },
   ],
   isLocked: false,
   isBanned: false,
+  hasCreateProfileEnabled: true,
 }
 // END
