@@ -14,7 +14,10 @@ const ProfilePage = ({ uid }: IProps) => {
   const { data: userData } = useGetUserQuery(uid, { enabled: !isNil(uid) })
   const { user } = useAuthContext()
 
-  const isUserLogged = useMemo(() => isEqual(user?.uid, userData?.uid), [])
+  const isUserLogged = useMemo(
+    () => isEqual(user?.uid, userData?.uid) && !isNil(user?.uid),
+    [user?.uid, userData?.uid],
+  )
 
   console.log('userData', userData)
   console.log('isUserLogged', isUserLogged)
