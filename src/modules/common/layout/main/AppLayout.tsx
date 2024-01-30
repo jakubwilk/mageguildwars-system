@@ -24,6 +24,7 @@ const AppLayout = ({ children }: IProps) => {
         <SidebarNavbar />
       </Drawer>
       <MainNavbar handleOpenNav={openNavbar} />
+      <div className={'w-full py-8 mb-4'} />
       {children}
     </>
   )
