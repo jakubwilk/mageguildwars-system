@@ -7,9 +7,7 @@ interface IProps {
 }
 
 const PageContainer = ({ children }: IProps) => {
-  return (
-    <div className={'flex flex-col items-center justify-between p-24'}>{children}</div>
-  )
+  return <div className={'container mx-auto px-4'}>{children}</div>
 }
 
 export default PageContainer
