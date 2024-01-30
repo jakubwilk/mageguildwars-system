@@ -20,10 +20,10 @@ const PageWithTitle = ({
 }: IProps) => {
   const headerClass = useMemo(() => {
     if (isTitleAbsolute) {
-      return 'rounded-md'
+      return 'rounded-xl'
     }
 
-    return 'rounded-t-md'
+    return 'rounded-t-xl'
   }, [isTitleAbsolute])
 
   return (
