@@ -1,4 +1,5 @@
 import { AppLayout, PageContainer } from '@modules/common'
+import { getTranslations } from '@modules/locale'
 import { getUser, ProfilePage } from '@modules/user'
 
 interface IParams {
@@ -9,10 +10,17 @@ interface IParams {
 
 export const generateMetadata = async ({ params: { uid } }: IParams) => {
   const { login } = await getUser(uid)
+  const { translate } = getTranslations('profile')
+  const { translate: globalTranslate } = getTranslations('global')
+
+  const title = `${translate('pageTitle')} ${login} | ${globalTranslate('pageTitle')}`
+  const description = `${translate('pageDescription.0')} ${login} ${translate(
+    'pageDescription.1',
+  )}`
 
   return {
-    title: `Profil użytkownika ${login} | Mage Guild Wars`,
-    description: `Szczegóły użytkownika ${login} na Mage Guild Wars. Sprawdź konto, utworzone profile oraz staż na Mage Guild Wars`,
+    title,
+    description,
   }
 }
 

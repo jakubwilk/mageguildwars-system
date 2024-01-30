@@ -6,6 +6,8 @@ import { isEqual, isNil } from 'lodash'
 
 import { useGetUserQuery } from '@/modules/user'
 
+import PageWithTitle from '../../common/pages/PageWithTitle'
+
 interface IProps {
   uid: string
 }
@@ -22,7 +24,11 @@ const ProfilePage = ({ uid }: IProps) => {
   console.log('userData', userData)
   console.log('isUserLogged', isUserLogged)
 
-  return <div>{'Profile page'}</div>
+  return (
+    <PageWithTitle title={'Profil użytkownika'}>
+      <div>{'Profile page'}</div>
+    </PageWithTitle>
+  )
 }
 
 export default ProfilePage
