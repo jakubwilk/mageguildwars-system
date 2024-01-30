@@ -1,7 +1,7 @@
 import { cache } from 'react'
-import { MOCK_USER } from '@modules/user'
+import { IUser, MOCK_USER } from '@modules/user'
 
-const getUser = cache(async (uid: string) => {
+const getUser = cache(async (uid: string): Promise<IUser> => {
   // const { data } = await axios.get<IUser>(`https://localhost:8080/api/user/${uid}`, {
   //   withCredentials: true,
   // })
@@ -9,10 +9,8 @@ const getUser = cache(async (uid: string) => {
   // return data
 
   return {
-    MOCK_USER: {
-      uid,
-    },
     ...MOCK_USER,
+    uid,
   }
 })
 

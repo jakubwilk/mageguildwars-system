@@ -1,10 +1,10 @@
 'use client'
 
 import { TQueryOptions } from '@config'
-import { getUser } from '@modules/user'
-import { useQuery } from '@tanstack/react-query'
+import { getUser, IUser } from '@modules/user'
+import { useQuery, UseQueryResult } from '@tanstack/react-query'
 
-const useGetUserQuery = (uid: string, options?: TQueryOptions) => {
+const useGetUserQuery = (uid: string, options?: TQueryOptions): UseQueryResult<IUser> => {
   return useQuery({ queryKey: ['GET_USER'], queryFn: () => getUser(uid), ...options })
 }
 

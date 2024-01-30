@@ -1,3 +1,5 @@
+import { MantineColor } from '@mantine/core'
+
 export interface IUser {
   uid: string
   login: string
@@ -45,7 +47,7 @@ export enum CharacterGroupEnum {
   GUILD_MASTER,
   MAGIC_COUNCIL_MEMBER,
   GAME_MASTER,
-  EVENT_MASTER,
+  NONE,
 }
 
 export enum GuildEnum {
@@ -57,6 +59,7 @@ export enum GuildEnum {
   PHANTOM_LORD,
   MAGIC_COUNCIL,
   GAME_MASTER,
+  NONE,
 }
 
 export enum UserMenuEnum {
@@ -68,6 +71,11 @@ export interface IUserMenu {
   type: UserMenuEnum
   name: string
   slug: string
+}
+
+export type TCharacterGuild = {
+  name: string
+  color: MantineColor
 }
 
 export const USER_MENU_LINK_PLACEHOLDER_UID: string = ':uid'
@@ -110,6 +118,21 @@ export const USER_MAIN_MENU: Array<IUserMenu> = [
   },
 ]
 
+export const EMPTY_PROFILE: ICharacter = {
+  name: '',
+  place: '',
+  birthYear: '',
+  guild: GuildEnum.NONE,
+  group: CharacterGroupEnum.NONE,
+  imageUri: '',
+  titles: [],
+  magic: [],
+  skills: [],
+  weapons: [],
+  companions: [],
+  isGameMaster: false,
+}
+
 // MOCK VALUES
 export const MOCK_USER: IUser = {
   uid: '2b58f40c-edf4-4d53-9d41-22e5e9272b0a',
@@ -122,7 +145,7 @@ export const MOCK_USER: IUser = {
   updateDate: new Date(),
   profiles: [
     {
-      name: 'Vincent',
+      name: 'Uchiha Shuto',
       place: 'Fiore',
       birthYear: 'Y21',
       guild: GuildEnum.FAIRY_TAIL,
