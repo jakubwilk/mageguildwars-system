@@ -4,6 +4,15 @@
     "0": "Szczegóły gracza",
     "1": "na Mage Guild Wars. Sprawdź konto, utworzone profile oraz staż na Mage Guild Wars"
   },
+  "fields": {
+    "email": "Email",
+    "password": "Hasło",
+    "registerDate": "Data rejestracji",
+    "updateDate": "Data ostatniej aktualizacji",
+    "isAccountLocked": "Czy konto jest zablokowane",
+    "isAccountBanned": "Czy konto jest zbanowane",
+    "isUserAbleToCreateCharacters": "Czy użytkownik może tworzyć nowe postacie"
+  },
   "guilds": {
     "fairyTail": "Fairy Tail",
     "lamiaScale": "Lamia Scale",
@@ -15,5 +24,6 @@
     "outsider": "Samotnik",
     "gameMaster": "Mistrz Gry",
     "noGuild": "Brak gildii"
-  }
+  },
+  "noCharactersFound": "Użytkownik nie posiada utworzonych żadnych postaci"
 }
