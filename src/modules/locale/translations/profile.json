@@ -1,7 +1,7 @@
 {
-  "pageTitle": "Profil użytkownika",
+  "pageTitle": "Profil gracza",
   "pageDescription": {
-    "0": "Szczegóły użytkownika",
+    "0": "Szczegóły gracza",
     "1": "na Mage Guild Wars. Sprawdź konto, utworzone profile oraz staż na Mage Guild Wars"
   },
   "guilds": {
@@ -12,6 +12,7 @@
     "ravenTail": "Raven Tail",
     "phantomLord": "Phantom Lord",
     "magicCouncil": "Rada Magii",
+    "outsider": "Samotnik",
     "gameMaster": "Mistrz Gry",
     "noGuild": "Brak gildii"
   }

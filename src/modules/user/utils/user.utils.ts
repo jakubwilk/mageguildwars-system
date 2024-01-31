@@ -1,5 +1,5 @@
 import { getTranslations } from '@modules/locale'
-import { GuildEnum, TCharacterGuild } from '@modules/user'
+import { GuildEnum, TCharacterGuild, UserGroupEnum } from '@modules/user'
 
 export const getGuildName = (guild: GuildEnum): TCharacterGuild => {
   const { translate } = getTranslations('profile')
@@ -35,6 +35,11 @@ export const getGuildName = (guild: GuildEnum): TCharacterGuild => {
         name: translate('guilds.phantomLord'),
         color: 'grape',
       }
+    case GuildEnum.OUTSIDER:
+      return {
+        name: translate('guilds.outsider'),
+        color: 'rgba(207, 170, 112, 1)',
+      }
     case GuildEnum.MAGIC_COUNCIL:
       return {
         name: translate('guilds.magicCouncil'),
@@ -49,6 +54,34 @@ export const getGuildName = (guild: GuildEnum): TCharacterGuild => {
       return {
         name: translate('guilds.noGuild'),
         color: 'gray',
+      }
+  }
+}
+
+export const getGroupName = (group: UserGroupEnum): TCharacterGuild => {
+  const { translate } = getTranslations('account')
+
+  switch (group) {
+    case UserGroupEnum.BANNED:
+      return {
+        name: translate('groups.banned'),
+        color: 'gray',
+      }
+    case UserGroupEnum.OPERATOR:
+      return {
+        name: translate('groups.operator'),
+        color: 'rgba(133, 115, 88, 1)',
+      }
+    case UserGroupEnum.ROOT:
+      return {
+        name: translate('groups.root'),
+        color: 'pink',
+      }
+    case UserGroupEnum.USER:
+    default:
+      return {
+        name: translate('groups.user'),
+        color: 'rgba(122, 122, 122, 1)',
       }
   }
 }

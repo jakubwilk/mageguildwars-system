@@ -10,6 +10,7 @@ interface IProps {
   children: ReactNode
   isTitleAbsolute?: boolean
   additionalTitleLeftSideContent?: ReactNode
+  additionalTitleRightSideContent?: ReactNode
 }
 
 const PageWithTitle = ({
@@ -17,6 +18,7 @@ const PageWithTitle = ({
   children,
   isTitleAbsolute = false,
   additionalTitleLeftSideContent = null,
+  additionalTitleRightSideContent = null,
 }: IProps) => {
   const headerClass = useMemo(() => {
     if (isTitleAbsolute) {
@@ -30,15 +32,18 @@ const PageWithTitle = ({
     <main className={'w-full'}>
       <header
         className={clsx(
-          'flex items-center text-left p-8',
+          'flex items-center justify-between text-left p-8',
           headerClass,
           pageStyles.header,
         )}
       >
-        {additionalTitleLeftSideContent}
-        <Title order={2} className={pageStyles.title}>
-          {title}
-        </Title>
+        <div>
+          {additionalTitleLeftSideContent}
+          <Title order={2} className={pageStyles.title}>
+            {title}
+          </Title>
+        </div>
+        {additionalTitleRightSideContent}
       </header>
       {children}
     </main>

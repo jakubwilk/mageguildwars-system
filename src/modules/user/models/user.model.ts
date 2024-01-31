@@ -2,14 +2,12 @@ import { MantineColor } from '@mantine/core'
 
 export interface IUser {
   uid: string
-  login: string
   email: string
   group: UserGroupEnum
-  title: string
-  avatarUri: string
   registerDate: Date
   updateDate: Date
   profiles: Array<ICharacter>
+  profilesLimit: number
   isLocked: boolean
   isBanned: boolean
   hasCreateProfileEnabled: boolean
@@ -30,10 +28,7 @@ export interface ICharacter {
   isGameMaster: boolean
 }
 
-export type TUserLite = Pick<
-  IUser,
-  'uid' | 'login' | 'group' | 'isLocked' | 'isBanned' | 'hasCreateProfileEnabled'
->
+export type TUserLite = Pick<IUser, 'uid' | 'profiles'>
 
 export enum UserGroupEnum {
   BANNED,
@@ -57,6 +52,7 @@ export enum GuildEnum {
   GRIMOIRE_HEART,
   RAVEN_TAIL,
   PHANTOM_LORD,
+  OUTSIDER,
   MAGIC_COUNCIL,
   GAME_MASTER,
   NONE,
@@ -76,6 +72,11 @@ export interface IUserMenu {
 export type TCharacterGuild = {
   name: string
   color: MantineColor
+}
+
+export enum UserAccountFormModeEnum {
+  FORM_MODE = 'FORM',
+  VIEW_MODE = 'VIEW',
 }
 
 export const USER_MAIN_MENU: Array<IUserMenu> = [
@@ -129,13 +130,11 @@ export const EMPTY_PROFILE: ICharacter = {
 // MOCK VALUES
 export const MOCK_USER: IUser = {
   uid: '2b58f40c-edf4-4d53-9d41-22e5e9272b0a',
-  login: 'Vincent',
   email: 'vincent@mageguildwars.pl',
-  group: UserGroupEnum.OPERATOR,
-  title: 'Administrator',
-  avatarUri: '',
+  group: UserGroupEnum.ROOT,
   registerDate: new Date(),
   updateDate: new Date(),
+  profilesLimit: 4,
   profiles: [
     {
       name: 'Uchiha Shuto',
