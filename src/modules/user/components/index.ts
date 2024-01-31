@@ -1,3 +1,5 @@
 export { default as UserMainMenu } from './UserMainMenu'
 export { default as GuestMainMenu } from './GuestMainMenu'
 export { default as UserAccountDetails } from './UserAccountDetails'
+export { default as FieldWrapper } from './FieldWrapper'
+export { default as ChangeEmailModal } from './modals/ChangeEmailModal'
