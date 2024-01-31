@@ -5,3 +5,12 @@
     margin-bottom: 0.35rem;
     line-height: 1.25rem;
 }
+
+.viewLabel {
+    font-size: 0.9rem;
+    color: var(--mantine-color-dark-2)
+}
+
+.badgeWithIcon {
+    width: 16px;
+}
