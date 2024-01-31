@@ -6,18 +6,13 @@ import { useRouter } from 'next/navigation'
 import { ActionIcon, Menu, Tooltip } from '@mantine/core'
 import { useAuthContext } from '@modules/auth'
 import { navbarStyles } from '@modules/common'
-import {
-  IUserMenu,
-  USER_MAIN_MENU,
-  USER_MENU_LINK_PLACEHOLDER_UID,
-  UserMenuEnum,
-} from '@modules/user'
+import { IUserMenu, USER_MAIN_MENU, UserMenuEnum } from '@modules/user'
 import { IconUser } from '@tabler/icons-react'
 import { isEqual } from 'lodash'
 
 const UserMainMenu = () => {
   const { push } = useRouter()
-  const { user, setUser } = useAuthContext()
+  const { setUser } = useAuthContext()
 
   const buildNavigation = useCallback((type: UserMenuEnum) => {
     const filteredMenu = USER_MAIN_MENU.filter(
@@ -26,14 +21,8 @@ const UserMainMenu = () => {
     )
 
     return filteredMenu.map((item: IUserMenu) => {
-      const replacedLink = item.slug.includes(USER_MENU_LINK_PLACEHOLDER_UID)
-        ? user
-          ? item.slug.replace(USER_MENU_LINK_PLACEHOLDER_UID, user?.uid)
-          : item.slug
-        : item.slug
-
       return (
-        <Menu.Item key={item.name} component={Link} href={replacedLink}>
+        <Menu.Item key={item.name} component={Link} href={item.slug}>
           {item.name}
         </Menu.Item>
       )

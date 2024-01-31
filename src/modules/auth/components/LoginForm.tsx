@@ -40,7 +40,7 @@ const LoginForm = () => {
         className={'flex flex-col gap-4'}
         noValidate
       >
-        <TextFieldInput name={'login'} label={translateByHook('fields.login')} required />
+        <TextFieldInput name={'email'} label={translateByHook('fields.email')} required />
         <TextFieldInput
           name={'password'}
           label={translateByHook('fields.password')}

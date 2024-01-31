@@ -78,23 +78,16 @@ export type TCharacterGuild = {
   color: MantineColor
 }
 
-export const USER_MENU_LINK_PLACEHOLDER_UID: string = ':uid'
-
 export const USER_MAIN_MENU: Array<IUserMenu> = [
   {
     type: UserMenuEnum.MAIN,
     name: 'Podgląd konta',
-    slug: USER_MENU_LINK_PLACEHOLDER_UID,
-  },
-  {
-    type: UserMenuEnum.MAIN,
-    name: 'Ustawienia',
-    slug: `${USER_MENU_LINK_PLACEHOLDER_UID}/settings`,
+    slug: '/account',
   },
   {
     type: UserMenuEnum.MAIN,
     name: 'Powiadomienia',
-    slug: `${USER_MENU_LINK_PLACEHOLDER_UID}/notifications`,
+    slug: '/account/notifications',
   },
   {
     type: UserMenuEnum.MAIN,
@@ -109,7 +102,7 @@ export const USER_MAIN_MENU: Array<IUserMenu> = [
   {
     type: UserMenuEnum.MGW,
     name: 'Dodaj nową postać',
-    slug: `${USER_MENU_LINK_PLACEHOLDER_UID}/create`,
+    slug: '/account/create',
   },
   {
     type: UserMenuEnum.MGW,

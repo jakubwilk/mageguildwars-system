@@ -38,19 +38,13 @@ const RegisterForm = () => {
         className={'flex flex-col w-full gap-4'}
         noValidate
       >
-        <TextFieldInput
-          name={'login'}
-          label={translateByHook('fields.login')}
-          description={translateByHook('description.login')}
-          required
-        />
+        <TextFieldInput name={'email'} label={translateByHook('fields.email')} required />
         <TextFieldInput
           name={'password'}
           label={translateByHook('fields.password')}
           isPassword
           required
         />
-        <TextFieldInput name={'email'} label={translateByHook('fields.email')} required />
         <Text className={clsx('text-center', styles.linkText)}>
           {translateByHook('text.register.ifRegister')}
           <Anchor href={'/'} component={Link}>
