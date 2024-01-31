@@ -9,12 +9,14 @@ interface IParams {
 }
 
 export const generateMetadata = async ({ params: { uid } }: IParams) => {
-  const { login } = await getUser(uid)
+  const { profiles } = await getUser(uid)
   const { translate } = getTranslations('profile')
   const { translate: globalTranslate } = getTranslations('global')
 
-  const title = `${translate('pageTitle')} ${login} | ${globalTranslate('pageTitle')}`
-  const description = `${translate('pageDescription.0')} ${login} ${translate(
+  const title = `${translate('pageTitle')} ${profiles[0].name} | ${globalTranslate(
+    'pageTitle',
+  )}`
+  const description = `${translate('pageDescription.0')} ${profiles[0].name} ${translate(
     'pageDescription.1',
   )}`
 
