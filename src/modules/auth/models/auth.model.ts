@@ -1,4 +1,5 @@
 import { getTranslations } from '@modules/locale'
+import { UserGroupEnum } from '@modules/user'
 import { boolean, object, ObjectSchema, string } from 'yup'
 
 const { translate } = getTranslations('auth')
@@ -12,6 +13,12 @@ export interface ILoginFormFields {
 export interface IRegisterFormFields {
   email: string
   password: string
+}
+
+export interface ICreateUserRequest {
+  email: string
+  password: string
+  group: UserGroupEnum
 }
 
 export const AUTH_LOGIN_SCHEMA: ObjectSchema<ILoginFormFields> = object({

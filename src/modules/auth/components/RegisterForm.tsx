@@ -9,6 +9,7 @@ import {
   AUTH_REGISTER_SCHEMA,
   AUTH_REGISTER_VALUES,
   IRegisterFormFields,
+  useCreateAccountMutation,
 } from '@modules/auth'
 import { TextFieldInput } from '@modules/common'
 import { useLocale } from '@modules/locale'
@@ -17,6 +18,7 @@ import { clsx } from 'clsx'
 import styles from './../styles/auth.module.css'
 
 const RegisterForm = () => {
+  const { mutate: createAccount } = useCreateAccountMutation()
   const { translateByHook } = useLocale('auth')
   const form = useForm<IRegisterFormFields>({
     mode: 'onChange',
@@ -25,9 +27,22 @@ const RegisterForm = () => {
     defaultValues: AUTH_REGISTER_VALUES,
   })
 
-  const handleRegisterSubmit = useCallback((formValues: IRegisterFormFields) => {
-    console.log('formValues', formValues)
-  }, [])
+  const handleRegisterSubmit = useCallback(
+    (formValues: IRegisterFormFields) => {
+      createAccount(formValues, {
+        onSuccess: (response) => {
+          console.log('response', response)
+        },
+        onError: (error) => {
+          console.log('error', error)
+        },
+        onSettled: (settled) => {
+          console.log('settled', settled)
+        },
+      })
+    },
+    [createAccount],
+  )
 
   const values = useMemo(() => form, [form])
 
