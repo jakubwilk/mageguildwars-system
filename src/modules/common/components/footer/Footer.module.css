@@ -1,0 +1,6 @@
+.copyrightText {
+    font-weight: var(--mgw-font-weight-light);
+    color: var(--mantine-color-gray-5);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}

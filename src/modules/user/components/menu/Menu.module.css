@@ -1,0 +1,26 @@
+.link {
+    color: var(--mantine-color-gray-6);
+}
+
+.link:hover,
+.link:focus {
+    color: var(--mantine-color-violet-5);
+}
+
+.button {
+    color: var(--mantine-color-gray-6);
+}
+
+.button:hover,
+.button:focus {
+    color: var(--mantine-color-violet-5);
+}
+
+.logout {
+    color: var(--mantine-color-red-5)
+}
+
+.logout:hover,
+.logout:focus {
+    color: var(--mantine-color-red-3)
+}

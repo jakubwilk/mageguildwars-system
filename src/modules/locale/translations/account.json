@@ -1,8 +1,0 @@
-{
-  "groups": {
-    "user": "Użytkownik",
-    "operator": "Operator",
-    "root": "Administrator",
-    "banned": "Zbanowany"
-  }
-}
