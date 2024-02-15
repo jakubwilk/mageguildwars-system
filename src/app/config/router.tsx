@@ -11,6 +11,11 @@ export const APP_ROUTER = createBrowserRouter([
         path: '/',
         element: <HomePage />,
       },
+    ],
+  },
+  {
+    element: <Root isAuthPage />,
+    children: [
       {
         path: '/create-account',
         element: <AuthPage />,
