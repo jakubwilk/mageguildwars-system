@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Text } from '@mantine/core'
+import { Text, Tooltip } from '@mantine/core'
 import { IconArrowNarrowLeft } from '@tabler/icons-react'
 import clsx from 'clsx'
 
@@ -23,10 +23,20 @@ export function RegisterWrapper() {
           />
         </div>
         <RegisterForm />
-        <Link className={'flex items-center justify-center mt-8'} to={'/'}>
-          <IconArrowNarrowLeft className={'mr-1'} stroke={1.5} />
-          <Text>{'Powrót na stronę główną'}</Text>
-        </Link>
+        <div className={'flex justify-center'}>
+          <Tooltip color={'gray'} label={'Wróć na stronę główną Mage Guild Wars'}>
+            <Link
+              className={clsx(
+                'flex items-center justify-center mt-8',
+                classes.backToHomeLink,
+              )}
+              to={'/'}
+            >
+              <IconArrowNarrowLeft className={'mr-1'} stroke={1.5} />
+              <Text className={classes.backToHomeText}>{'Powrót na stronę główną'}</Text>
+            </Link>
+          </Tooltip>
+        </div>
       </div>
     </div>
   )

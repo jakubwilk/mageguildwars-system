@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Button, Tooltip } from '@mantine/core'
 import { IconBrandDiscordFilled } from '@tabler/icons-react'
 
+import '@mantine/core/styles/Button.css'
 import classes from './Socials.module.css'
 
 interface IProps {

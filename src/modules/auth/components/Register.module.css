@@ -1,3 +1,13 @@
 .wrapper {
     background-color: var(--mantine-color-dark-8);
 }
+
+.backToHomeLink:hover,
+.backToHomeLink:focus {
+    color: var(--mantine-color-violet-5)
+}
+
+.backToHomeText {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}

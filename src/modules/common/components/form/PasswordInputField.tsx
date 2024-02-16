@@ -18,7 +18,7 @@ export function PasswordInputField({
   label,
   description,
   handleChange,
-  isControlled,
+  isControlled = true,
   ...restProps
 }: IProps) {
   const { control } = useFormContext()
