@@ -15,7 +15,7 @@ export function RegisterWrapper() {
         classes.wrapper,
       )}
     >
-      <div className={'m-4'}>
+      <div className={'m-8'}>
         <div className={'flex justify-center mb-8'}>
           <img
             alt={'Srebrny napis Mage Guild Wars'}
