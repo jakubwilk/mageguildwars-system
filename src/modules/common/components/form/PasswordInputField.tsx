@@ -3,6 +3,7 @@ import { PasswordInput, PasswordInputProps } from '@mantine/core'
 import { isNil } from 'lodash'
 
 import '@mantine/core/styles/PasswordInput.css'
+import classes from './Form.module.css'
 
 interface IProps extends PasswordInputProps {
   name: string
@@ -29,6 +30,9 @@ export function PasswordInputField({
         name={name}
         render={({ field: { name, value, onBlur, onChange }, fieldState: { error } }) => (
           <PasswordInput
+            classNames={{
+              label: classes.label,
+            }}
             description={description}
             label={label}
             name={name}
@@ -51,6 +55,9 @@ export function PasswordInputField({
 
   return (
     <PasswordInput
+      classNames={{
+        label: classes.label,
+      }}
       description={description}
       label={label}
       name={name}

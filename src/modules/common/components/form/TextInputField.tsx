@@ -3,6 +3,7 @@ import { TextInput, TextInputProps } from '@mantine/core'
 import { isNil } from 'lodash'
 
 import '@mantine/core/styles/Input.css'
+import classes from './Form.module.css'
 
 interface IProps extends TextInputProps {
   name: string
@@ -29,6 +30,10 @@ export function TextInputField({
         name={name}
         render={({ field: { name, value, onBlur, onChange }, fieldState: { error } }) => (
           <TextInput
+            classNames={{
+              label: classes.label,
+              description: classes.description,
+            }}
             description={description}
             label={label}
             name={name}
@@ -51,6 +56,10 @@ export function TextInputField({
 
   return (
     <TextInput
+      classNames={{
+        label: classes.label,
+        description: classes.description,
+      }}
       description={description}
       label={label}
       name={name}
