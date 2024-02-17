@@ -8,7 +8,7 @@ import classes from './Form.module.css'
 interface IProps extends PasswordInputProps {
   name: string
   error?: string
-  handleChange?: () => void
+  handleChange?: (value: string) => void
   isControlled?: boolean
 }
 
@@ -32,19 +32,21 @@ export function PasswordInputField({
           <PasswordInput
             classNames={{
               label: classes.label,
+              description: classes.description,
             }}
             description={description}
             label={label}
             name={name}
             onBlur={onBlur}
-            onChange={() => {
+            onChange={(event) => {
               if (handleChange) {
-                handleChange()
+                const { value } = event.target
+                handleChange(value)
               }
 
-              onChange()
+              onChange(event)
             }}
-            {...(!isNil(value) && { value })}
+            value={value}
             {...(!isNil(error) && { error: error.message })}
             {...restProps}
           />
@@ -61,7 +63,12 @@ export function PasswordInputField({
       description={description}
       label={label}
       name={name}
-      onChange={handleChange}
+      onChange={(event) => {
+        if (handleChange) {
+          const { value } = event.target
+          handleChange(value)
+        }
+      }}
       {...(!isNil(error) && { error })}
       {...restProps}
     />
