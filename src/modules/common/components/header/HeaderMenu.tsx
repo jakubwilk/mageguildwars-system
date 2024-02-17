@@ -41,7 +41,11 @@ export function HeaderMenu() {
           orientation={'vertical'}
         />
         <Tooltip color={'gray'} label={'Otwórz panel boczny'}>
-          <Button className={classes.button} onClick={open} variant={'transparent'}>
+          <Button
+            className={clsx('px-0', classes.button)}
+            onClick={open}
+            variant={'transparent'}
+          >
             <IconMenu2 stroke={1.5} style={{ height: '28px', width: '28px' }} />
           </Button>
         </Tooltip>
