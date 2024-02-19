@@ -1,0 +1,12 @@
+.loginFormLink {
+    color: var(--mantine-color-gray-6);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color .1s ease-in-out;
+}
+
+.loginFormLink:hover,
+.loginFormLink:focus {
+    outline: none;
+    color: var(--mantine-color-violet-6);
+}
