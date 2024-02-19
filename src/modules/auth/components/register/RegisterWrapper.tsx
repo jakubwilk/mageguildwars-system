@@ -3,7 +3,7 @@ import { Text, Tooltip } from '@mantine/core'
 import { IconArrowNarrowLeft } from '@tabler/icons-react'
 import clsx from 'clsx'
 
-import { useResources } from '../../resources/hooks'
+import { useResources } from '../../../resources/hooks'
 
 import { RegisterForm } from './RegisterForm.tsx'
 

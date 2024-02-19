@@ -5,11 +5,12 @@ import { Group } from '@mantine/core'
 import { isEqual } from 'lodash'
 import { object, string } from 'yup'
 
-import { Button, PasswordInputField, TextInputField } from '../../common/components'
-import { useResources } from '../../resources/hooks'
+import { Button, PasswordInputField, TextInputField } from '../../../common/components'
+import { useResources } from '../../../resources/hooks'
 
 export function RegisterForm() {
   const { getResource } = useResources('AUTH')
+
   const form = useForm({
     mode: 'onChange',
     criteriaMode: 'all',
