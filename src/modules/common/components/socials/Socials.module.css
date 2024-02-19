@@ -1,0 +1,20 @@
+.discord {
+    background-color: var(--discord-background-color);
+    color: var(--mantine-color-white);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    font-weight: var(--mgw-font-weight-bold);
+}
+
+.discord:hover,
+.discord:focus {
+    background-color: var(--discord-background-hover-color);
+}
+
+.discordButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+}
