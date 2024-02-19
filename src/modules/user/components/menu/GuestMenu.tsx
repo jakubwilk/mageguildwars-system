@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
-import { Button, Group, Tooltip } from '@mantine/core'
-import { IconLogin2, IconUserPlus } from '@tabler/icons-react'
-import clsx from 'clsx'
+import { Group, Tooltip } from '@mantine/core'
+import { IconUserPlus } from '@tabler/icons-react'
+
+import { UserLoginModal } from '../modal/UserLoginModal.tsx'
 
 import classes from './Menu.module.css'
 
@@ -13,11 +14,7 @@ export function GuestMenu() {
           <IconUserPlus stroke={1.5} style={{ height: '24px', width: '24px' }} />
         </Link>
       </Tooltip>
-      <Tooltip color={'gray'} label={'Zaloguj się na konto'}>
-        <Button className={clsx('px-0', classes.button)} variant={'transparent'}>
-          <IconLogin2 stroke={1.5} style={{ height: '24px', width: '24px' }} />
-        </Button>
-      </Tooltip>
+      <UserLoginModal />
     </Group>
   )
 }

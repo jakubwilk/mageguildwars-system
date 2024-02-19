@@ -1,0 +1,13 @@
+.forgotPasswordText {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+.forgotPasswordLink {
+    color: var(--mantine-color-violet-5);
+}
+
+.forgotPasswordLink:hover,
+.forgotPasswordLink:focus {
+    color: var(--mantine-color-dark-1);
+}
