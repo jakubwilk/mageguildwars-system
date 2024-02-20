@@ -17,6 +17,7 @@
 }
 
 .logout {
+    padding: 0;
     color: var(--mantine-color-red-5)
 }
 

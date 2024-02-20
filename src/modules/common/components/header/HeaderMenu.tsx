@@ -33,7 +33,7 @@ export function HeaderMenu() {
           my={'xs'}
           orientation={'vertical'}
         />
-        {isUser ? <UserMenu /> : <GuestMenu />}
+        {!isUser ? <UserMenu /> : <GuestMenu />}
         <Divider
           className={classes.divider}
           mx={'sm'}
