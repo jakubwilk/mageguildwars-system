@@ -21,7 +21,7 @@ export function UserMenu() {
 
           <Menu.Dropdown>
             <Menu.Label className={'uppercase'}>{'Konto'}</Menu.Label>
-            <Menu.Item component={Link} to={'/'}>
+            <Menu.Item component={Link} to={'/settings'}>
               {'Edytuj dane'}
             </Menu.Item>
             <Menu.Item component={Link} to={'/'}>

@@ -12,7 +12,7 @@ export const APP_ROUTER = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: '/user',
+        path: '/settings',
         element: <EditUserPage />,
       },
     ],
