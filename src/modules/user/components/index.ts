@@ -2,3 +2,5 @@ export * from './menu/GuestMenu.tsx'
 export * from './menu/UserMenu'
 
 export * from './modal/UserLoginModal.tsx'
+
+export * from './layout/EditUserHeader.tsx'

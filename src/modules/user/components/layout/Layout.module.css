@@ -1,0 +1,19 @@
+.editUserHeader {
+    background-color: var(--mantine-color-dark-6);
+}
+
+.editUserHeaderTitle,
+.editUserHeaderTitleText {
+    font-weight: var(--mgw-font-weight-light);
+    font-size: 2rem;
+}
+
+.editUserHeaderTitleText {
+    background-color: var(--mantine-primary-color-6);
+    color: white;
+}
+
+.editUserHeaderText {
+    font-size: 0.9rem;
+    color: var(--mantine-color-gray-6);
+}
