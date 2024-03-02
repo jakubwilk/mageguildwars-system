@@ -1,16 +1,14 @@
 import { useCallback } from 'react'
 
 import { getResources } from '../config'
-import { TResourcePrefix, TResourceSuffix } from '../models'
+import { TResources } from '../models'
 
-export const useResources = (prefix: TResourcePrefix) => {
+export const useResources = <T extends keyof TResources>(prefix: T) => {
   const getResource = useCallback(
-    (key: TResourceSuffix): string => {
-      const resources = getResources()
-      const prefixedResource = resources[prefix]
-
-      if (prefixedResource) {
-        return prefixedResource[key]
+    (key: keyof TResources[T]): string => {
+      const singleResource = getResources()[prefix]
+      if (singleResource && Object.keys(singleResource).includes(key as string)) {
+        return singleResource[key as keyof typeof singleResource] as string
       }
 
       return '_'
