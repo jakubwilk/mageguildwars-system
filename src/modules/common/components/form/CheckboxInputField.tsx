@@ -32,11 +32,11 @@ export function CheckboxInputField({
         name={name}
         render={({ field: { name, value, onBlur, onChange }, fieldState: { error } }) => (
           <Checkbox
+            checked={isChecked}
             classNames={{
               label: classes.label,
               description: clsx(classes.description, classes.checkboxDescription),
             }}
-            defaultChecked={isChecked}
             description={description}
             label={label}
             name={name}
