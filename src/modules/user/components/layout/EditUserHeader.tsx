@@ -1,6 +1,7 @@
 import { Text, Title } from '@mantine/core'
 import clsx from 'clsx'
 
+import '@mantine/core/styles/Title.layer.css'
 import classes from './Layout.module.css'
 
 export function EditUserHeader() {
