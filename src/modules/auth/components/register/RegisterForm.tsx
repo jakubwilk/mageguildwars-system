@@ -10,6 +10,7 @@ import { useResources } from '../../../resources/hooks'
 
 export function RegisterForm() {
   const { getResource } = useResources('AUTH')
+  const { getResource: getCommonResources } = useResources('COMMON')
 
   const form = useForm({
     mode: 'onChange',
@@ -22,18 +23,18 @@ export function RegisterForm() {
     resolver: yupResolver(
       object({
         email: string()
-          .required(getResource('REGISTER_FORM_FIELD_REQUIRED_VALIDATION_TEXT'))
-          .email(getResource('REGISTER_FORM_FIELD_EMAIL_VALIDATION_TEXT'))
+          .required(getCommonResources('FIELD_REQUIRED_TEXT'))
+          .email(getCommonResources('FIELD_INCORRECT_EMAIL_TEXT'))
           .nullable(),
         password: string()
-          .required(getResource('REGISTER_FORM_FIELD_REQUIRED_VALIDATION_TEXT'))
-          .min(10, getResource('REGISTER_FORM_FIELD_PASSWORD_VALIDATION_TEXT'))
+          .required(getCommonResources('FIELD_REQUIRED_TEXT'))
+          .min(10, getCommonResources('FIELD_INCORRECT_PASSWORD_TEXT'))
           .nullable(),
         repeatPassword: string()
-          .required(getResource('REGISTER_FORM_FIELD_REQUIRED_VALIDATION_TEXT'))
+          .required(getCommonResources('FIELD_REQUIRED_TEXT'))
           .test(
             'checkIfPasswordsAreTheSame',
-            getResource('REGISTER_FORM_FIELD_REPEAT_PASSWORD_VALIDATION_TEXT'),
+            getCommonResources('FIELD_NOT_SAME_PASSWORD_TEXT'),
             function (value, context) {
               const passwordValue = context.parent.password
               return isEqual(value, passwordValue)

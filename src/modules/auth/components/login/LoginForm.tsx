@@ -17,6 +17,7 @@ import classes from './Login.module.css'
 
 export function LoginForm() {
   const { getResource } = useResources('AUTH')
+  const { getResource: getCommonResources } = useResources('COMMON')
 
   const form = useForm({
     mode: 'onChange',
@@ -29,12 +30,10 @@ export function LoginForm() {
     resolver: yupResolver(
       object({
         email: string()
-          .required(getResource('LOGIN_FORM_FIELD_REQUIRED_VALIDATION_TEXT'))
-          .email(getResource('LOGIN_FORM_FIELD_EMAIL_VALIDATION_TEXT'))
+          .required(getCommonResources('FIELD_REQUIRED_TEXT'))
+          .email(getCommonResources('FIELD_INCORRECT_EMAIL_TEXT'))
           .nullable(),
-        password: string()
-          .required(getResource('LOGIN_FORM_FIELD_REQUIRED_VALIDATION_TEXT'))
-          .nullable(),
+        password: string().required(getCommonResources('FIELD_REQUIRED_TEXT')).nullable(),
         rememberMe: boolean(),
       }),
     ),

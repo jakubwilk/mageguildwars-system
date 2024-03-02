@@ -5,7 +5,7 @@ import { Group } from '@mantine/core'
 import clsx from 'clsx'
 import { object, string } from 'yup'
 
-import { Button, TextInputField } from '../../../common/components'
+import { Button, PasswordInputField } from '../../../common/components'
 import { useResources } from '../../../resources/hooks'
 
 import classes from './Layout.module.css'
@@ -15,7 +15,7 @@ interface IProps {
   handleCloseOverlay: () => void
 }
 
-export function EditEmailBlockForm({ handleOpenOverlay, handleCloseOverlay }: IProps) {
+export function EditPasswordBlockForm({ handleOpenOverlay, handleCloseOverlay }: IProps) {
   const { getResource } = useResources('USER')
   const { getResource: getCommonResources } = useResources('COMMON')
 
@@ -23,18 +23,16 @@ export function EditEmailBlockForm({ handleOpenOverlay, handleCloseOverlay }: IP
     mode: 'onChange',
     criteriaMode: 'all',
     defaultValues: {
-      currentEmail: '',
-      newEmail: '',
+      currentPassword: '',
+      newPassword: '',
     },
     resolver: yupResolver(
       object({
-        currentEmail: string()
+        currentPassword: string()
           .required(getCommonResources('FIELD_REQUIRED_TEXT'))
-          .email(getCommonResources('FIELD_INCORRECT_EMAIL_TEXT'))
           .nullable(),
-        newEmail: string()
+        newPassword: string()
           .required(getCommonResources('FIELD_REQUIRED_TEXT'))
-          .email(getCommonResources('FIELD_INCORRECT_EMAIL_TEXT'))
           .nullable(),
       }),
     ),
@@ -58,15 +56,15 @@ export function EditEmailBlockForm({ handleOpenOverlay, handleCloseOverlay }: IP
     <FormProvider {...values}>
       <form noValidate onSubmit={form.handleSubmit(handleSave)}>
         <Group>
-          <TextInputField
-            label={getResource('EDIT_USER_FORM_CURRENT_EMAIL_LABEL')}
-            name={'currentEmail'}
+          <PasswordInputField
+            label={getResource('EDIT_USER_FORM_CURRENT_PASSWORD_LABEL')}
+            name={'currentPassword'}
             required
             withAsterisk
           />
-          <TextInputField
-            label={getResource('EDIT_USER_FORM_NEW_EMAIL_LABEL')}
-            name={'newEmail'}
+          <PasswordInputField
+            label={getResource('EDIT_USER_FORM_NEW_PASSWORD_LABEL')}
+            name={'newPassword'}
             required
             withAsterisk
           />
