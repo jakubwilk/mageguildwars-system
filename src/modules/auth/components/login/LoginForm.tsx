@@ -48,7 +48,7 @@ export function LoginForm() {
 
   return (
     <FormProvider {...values}>
-      <form onSubmit={form.handleSubmit(handleSubmit)}>
+      <form noValidate onSubmit={form.handleSubmit(handleSubmit)}>
         <Group>
           <TextInputField
             className={'w-full'}

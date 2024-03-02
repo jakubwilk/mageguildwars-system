@@ -52,7 +52,7 @@ export function RegisterForm() {
 
   return (
     <FormProvider {...values}>
-      <form onSubmit={form.handleSubmit(handleSubmit)}>
+      <form noValidate onSubmit={form.handleSubmit(handleSubmit)}>
         <Group>
           <TextInputField
             description={getResource('REGISTER_FORM_FIELD_EMAIL_DESCRIPTION_TEXT')}
