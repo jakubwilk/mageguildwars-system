@@ -17,3 +17,16 @@
     font-size: 0.9rem;
     color: var(--mantine-color-gray-6);
 }
+
+.editUserBlock {
+    background-color: var(--mantine-color-dark-6);
+}
+
+.editUserBlockTitle {
+    font-weight: var(--mgw-font-weight-regular);
+    font-size: 1rem;
+}
+
+.editUserBlockButton {
+    font-weight: var(--mgw-font-weight-regular);
+}
