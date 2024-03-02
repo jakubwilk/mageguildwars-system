@@ -33,6 +33,7 @@ export function EditPasswordBlockForm({ handleOpenOverlay, handleCloseOverlay }:
           .nullable(),
         newPassword: string()
           .required(getCommonResources('FIELD_REQUIRED_TEXT'))
+          .min(10, getCommonResources('FIELD_INCORRECT_PASSWORD_TEXT'))
           .nullable(),
       }),
     ),
