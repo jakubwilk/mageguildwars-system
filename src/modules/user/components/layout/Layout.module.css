@@ -25,6 +25,12 @@
 .editUserBlockTitle {
     font-weight: var(--mgw-font-weight-regular);
     font-size: 1rem;
+    text-transform: uppercase;
+    color: var(--mantine-color-dark-2);
+}
+
+.editUserBlockTitleIcon {
+    color: var(--mantine-color-violet-5);
 }
 
 .editUserBlockButton {

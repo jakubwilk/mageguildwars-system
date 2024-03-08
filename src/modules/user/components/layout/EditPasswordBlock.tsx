@@ -1,5 +1,6 @@
 import { Box, LoadingOverlay, Title } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
+import { IconLock } from '@tabler/icons-react'
 import clsx from 'clsx'
 
 import { useResources } from '../../../resources/hooks'
@@ -23,7 +24,18 @@ export function EditPasswordBlock() {
         zIndex={100}
       />
       <section className={clsx('p-8 rounded-md', classes.editUserBlock)}>
-        <Title className={clsx('mb-8 break-words', classes.editUserBlockTitle)} order={2}>
+        <Title
+          className={clsx(
+            'flex items-center mb-8 break-words',
+            classes.editUserBlockTitle,
+          )}
+          order={2}
+        >
+          <IconLock
+            className={clsx('mr-2', classes.editUserBlockTitleIcon)}
+            stroke={1.5}
+            style={{ height: '18px', width: '18px' }}
+          />
           {getResource('EDIT_USER_BLOCK_CHANGE_PASSWORD_TEXT')}
         </Title>
         <EditPasswordBlockForm
