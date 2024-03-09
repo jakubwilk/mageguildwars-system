@@ -44,6 +44,7 @@ export function EditUserInformationBlock() {
 
       return (
         <Badge
+          className={'ml-2'}
           classNames={{ label: classes.editUserBlockBadgeLabel }}
           color={customColor || 'gray'}
           radius={'sm'}
@@ -91,7 +92,7 @@ export function EditUserInformationBlock() {
               </ThemeIcon>
             }
           >
-            {'Data utworzenia: '}
+            {getResource('EDIT_USER_BLOCK_FIELD_CREATED_AT_TEXT')}
             {renderBadge(formatUserDate(new Date()))}
           </List.Item>
           <List.Item
@@ -101,7 +102,7 @@ export function EditUserInformationBlock() {
               </ThemeIcon>
             }
           >
-            {'Data ostatniej aktualizacji: '}
+            {getResource('EDIT_USER_BLOCK_FIELD_UPDATED_AT_TEXT')}
             {renderBadge(formatUserDate(new Date()))}
           </List.Item>
           <List.Item
@@ -111,7 +112,7 @@ export function EditUserInformationBlock() {
               </ThemeIcon>
             }
           >
-            {'Grupa użytkownika: '}
+            {getResource('EDIT_USER_BLOCK_FIELD_GROUP_TEXT')}
             {renderBadge('Operator', getUserGroupColor(3))}
           </List.Item>
           <List.Item
@@ -126,7 +127,7 @@ export function EditUserInformationBlock() {
               </ThemeIcon>
             }
           >
-            {'Czy można tworzyć nowe postacie: '}
+            {getResource('EDIT_USER_BLOCK_FIELD_CHARACTERS_ENABLED_TEXT')}
             {renderBadge(true)}
           </List.Item>
           <List.Item
@@ -141,7 +142,7 @@ export function EditUserInformationBlock() {
               </ThemeIcon>
             }
           >
-            {'Czy jest dostep do panelu Mistrza Gry: '}
+            {getResource('EDIT_USER_BLOCK_FIELD_GAME_MASTER_ENABLED_TEXT')}
             {renderBadge(false)}
           </List.Item>
         </List>
