@@ -20,6 +20,7 @@
 
 .editUserBlock {
     background-color: var(--mantine-color-dark-6);
+    height: 100%;
 }
 
 .editUserBlockTitle {
@@ -35,4 +36,9 @@
 
 .editUserBlockButton {
     font-weight: var(--mgw-font-weight-regular);
+}
+
+.editUserBlockBadgeLabel {
+    font-weight: var(--mgw-font-weight-light);
+    font-family: var(--mgw-font-poppins);
 }
