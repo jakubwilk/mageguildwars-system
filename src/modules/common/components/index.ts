@@ -11,3 +11,6 @@ export * from './form/Button.tsx'
 export * from './form/TextInputField.tsx'
 export * from './form/PasswordInputField.tsx'
 export * from './form/CheckboxInputField.tsx'
+
+export * from './sidebar/SidebarWrapper.tsx'
+export * from './sidebar/SidebarMenu.tsx'

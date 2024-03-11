@@ -4,6 +4,7 @@
     text-transform: uppercase;
     font-size: 0.9rem;
     font-weight: var(--mgw-font-weight-bold);
+    width: 100%;
 }
 
 .discord:hover,

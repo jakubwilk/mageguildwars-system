@@ -1,0 +1,10 @@
+.sidebar {
+    border-right: 1px solid var(--mantine-color-dark-5);
+    transition: all .1s ease-in-out;
+    background-color: var(--mantine-color-dark-7);
+}
+
+.hideSidebarButton {
+    font-weight: var(--mgw-font-weight-light);
+    text-transform: uppercase;
+}

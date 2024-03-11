@@ -29,7 +29,7 @@ export function Discord({ isOnlyIcon = false }: IProps) {
   )
 
   return (
-    <Tooltip color={'gray'} label={'Przejdź na serwer Discord'}>
+    <Tooltip color={'gray'} label={'Przejdź na serwer Discord'} position={'right'}>
       {DiscordComponent}
     </Tooltip>
   )
