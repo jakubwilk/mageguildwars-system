@@ -2,8 +2,10 @@ import { useMemo } from 'react'
 import { Button, Tooltip } from '@mantine/core'
 import { IconArrowNarrowLeft, IconArrowNarrowRight } from '@tabler/icons-react'
 import clsx from 'clsx'
+import { isNil } from 'lodash'
 
-import { GuestMenu } from '../../../user/components'
+import { GuestMenu, UserMenu } from '../../../user/components'
+import { useUserContext } from '../../../user/hooks'
 import { Logo } from '../logo/Logo.tsx'
 import { Discord } from '../socials/Discord.tsx'
 
@@ -12,9 +14,18 @@ import classes from './Sidebar.module.css'
 interface IProps {
   isExpanded: boolean
   handleExpandSidebar: () => void
+  setIsSidebarExpanded: (val: boolean) => void
 }
 
-export function SidebarMenu({ isExpanded, handleExpandSidebar }: IProps) {
+export function SidebarMenu({
+  isExpanded,
+  handleExpandSidebar,
+  setIsSidebarExpanded,
+}: IProps) {
+  const { user } = useUserContext()
+
+  const isUser = useMemo(() => !isNil(user), [user])
+
   const sidebarButtonProps = useMemo(
     () => ({
       color: 'gray',
@@ -58,7 +69,14 @@ export function SidebarMenu({ isExpanded, handleExpandSidebar }: IProps) {
           isExpanded ? classes.sidebarMenu : '',
         )}
       >
-        <GuestMenu isExpanded={isExpanded} />
+        {!isUser ? (
+          <UserMenu isExpanded={isExpanded} setIsSidebarExpanded={setIsSidebarExpanded} />
+        ) : (
+          <GuestMenu
+            isExpanded={isExpanded}
+            setIsSidebarExpanded={setIsSidebarExpanded}
+          />
+        )}
         <Discord isOnlyIcon={!isExpanded} />
         {isExpanded ? WideSidebarButton : ShortSidebarButton}
       </div>

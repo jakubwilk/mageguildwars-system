@@ -8,9 +8,10 @@ import classes from './Menu.module.css'
 
 interface IProps {
   isExpanded: boolean
+  setIsSidebarExpanded: (val: boolean) => void
 }
 
-export function GuestMenu({ isExpanded }: IProps) {
+export function GuestMenu({ isExpanded, setIsSidebarExpanded }: IProps) {
   const renderRegisterLink = useCallback(
     () => (
       <Link
@@ -19,6 +20,7 @@ export function GuestMenu({ isExpanded }: IProps) {
           isExpanded ? `w-full p-2 flex items-center ${classes.linkExpanded}` : '',
           classes.link,
         )}
+        onClick={() => setIsSidebarExpanded(false)}
         to={'/create-account'}
       >
         <IconUserPlus
@@ -38,7 +40,7 @@ export function GuestMenu({ isExpanded }: IProps) {
         )}
       </Link>
     ),
-    [isExpanded],
+    [isExpanded, setIsSidebarExpanded],
   )
 
   const renderLoginLink = useCallback(
@@ -49,6 +51,7 @@ export function GuestMenu({ isExpanded }: IProps) {
           isExpanded ? `w-full p-2 flex items-center ${classes.linkExpanded}` : '',
           classes.link,
         )}
+        onClick={() => setIsSidebarExpanded(false)}
         to={'/login'}
       >
         <IconLogin2
@@ -68,7 +71,7 @@ export function GuestMenu({ isExpanded }: IProps) {
         )}
       </Link>
     ),
-    [isExpanded],
+    [isExpanded, setIsSidebarExpanded],
   )
 
   if (isExpanded) {

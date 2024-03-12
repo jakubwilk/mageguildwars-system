@@ -11,7 +11,7 @@ interface IProps {
 }
 
 export function SidebarWrapper({ isSidebarExpanded, setIsSidebarExpanded }: IProps) {
-  const [isExpanded, setIsExpanded] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(isSidebarExpanded)
 
   const expandedClassName = useMemo(() => {
     if (isExpanded) {
@@ -29,12 +29,16 @@ export function SidebarWrapper({ isSidebarExpanded, setIsSidebarExpanded }: IPro
   return (
     <aside
       className={clsx(
-        'h-full p-4 fixed left-0 top-0 z-[100]',
+        'h-full p-4 fixed left-0 top-0 z-[100] overflow-y-auto',
         expandedClassName,
         classes.sidebar,
       )}
     >
-      <SidebarMenu handleExpandSidebar={handleExpandSidebar} isExpanded={isExpanded} />
+      <SidebarMenu
+        handleExpandSidebar={handleExpandSidebar}
+        isExpanded={isExpanded}
+        setIsSidebarExpanded={setIsSidebarExpanded}
+      />
     </aside>
   )
 }

@@ -31,8 +31,12 @@
     color: var(--mantine-color-violet-5);
 }
 
+.buttonExpanded:focus,
+.buttonExpanded:hover {
+    background-color: var(--mantine-color-gray-light-hover);
+}
+
 .logout {
-    padding: 0;
     color: var(--mantine-color-red-5)
 }
 
