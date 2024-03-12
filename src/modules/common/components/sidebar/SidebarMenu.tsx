@@ -3,6 +3,7 @@ import { Button, Tooltip } from '@mantine/core'
 import { IconArrowNarrowLeft, IconArrowNarrowRight } from '@tabler/icons-react'
 import clsx from 'clsx'
 
+import { GuestMenu } from '../../../user/components'
 import { Discord } from '../socials/Discord.tsx'
 
 import classes from './Sidebar.module.css'
@@ -49,7 +50,13 @@ export function SidebarMenu({ isExpanded, handleExpandSidebar }: IProps) {
   return (
     <nav className={'h-full flex flex-col justify-between'}>
       <div className={'h-full flex items-center justify-center'}>{'test'}</div>
-      <div className={'flex flex-col items-center gap-4'}>
+      <div
+        className={clsx(
+          'flex flex-col items-center gap-4',
+          isExpanded ? classes.sidebarMenu : '',
+        )}
+      >
+        <GuestMenu isExpanded={isExpanded} />
         <Discord isOnlyIcon={!isExpanded} />
         {isExpanded ? WideSidebarButton : ShortSidebarButton}
       </div>

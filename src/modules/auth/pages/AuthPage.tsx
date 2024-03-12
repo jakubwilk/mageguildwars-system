@@ -1,10 +1,14 @@
-import { RegisterWrapper } from '../components'
+import { AuthWrapper } from '../components'
 
-export function AuthPage() {
+interface IProps {
+  isLogin?: boolean
+}
+
+export function AuthPage({ isLogin }: IProps) {
   return (
     <div className={'container mx-auto px-4'}>
       <div className={'flex justify-end'}>
-        <RegisterWrapper />
+        <AuthWrapper isLogin={isLogin} />
       </div>
     </div>
   )

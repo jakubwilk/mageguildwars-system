@@ -15,7 +15,7 @@ export function SidebarWrapper({ isSidebarExpanded, setIsSidebarExpanded }: IPro
 
   const expandedClassName = useMemo(() => {
     if (isExpanded) {
-      return 'w-[300px]'
+      return 'w-full max-w-[350px]'
     }
 
     return 'w-[70px]'

@@ -1,5 +1,9 @@
 import { AuthPage as AuthModulePage } from '../../modules/auth/pages'
 
-export function AuthPage() {
-  return <AuthModulePage />
+interface IProps {
+  isLogin?: boolean
+}
+
+export function AuthPage({ isLogin }: IProps) {
+  return <AuthModulePage isLogin={isLogin} />
 }

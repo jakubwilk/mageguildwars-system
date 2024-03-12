@@ -3,13 +3,18 @@ import { Text, Tooltip } from '@mantine/core'
 import { IconArrowNarrowLeft } from '@tabler/icons-react'
 import clsx from 'clsx'
 
-import { useResources } from '../../../resources/hooks'
+import { useResources } from '../../resources/hooks'
 
-import { RegisterForm } from './RegisterForm.tsx'
+import { LoginForm } from './login/LoginForm.tsx'
+import { RegisterForm } from './register/RegisterForm.tsx'
 
-import classes from './Register.module.css'
+import classes from './register/Register.module.css'
 
-export function RegisterWrapper() {
+interface IProps {
+  isLogin?: boolean
+}
+
+export function AuthWrapper({ isLogin }: IProps) {
   const { getResource } = useResources('AUTH')
 
   return (
@@ -26,7 +31,7 @@ export function RegisterWrapper() {
             src={'https://mageguildwars.pl/images/mgw_modern/logo.png'}
           />
         </div>
-        <RegisterForm />
+        {isLogin ? <LoginForm /> : <RegisterForm />}
         <div className={'flex justify-center'}>
           <Tooltip
             color={'gray'}

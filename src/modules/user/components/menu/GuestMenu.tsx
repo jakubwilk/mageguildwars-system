@@ -1,20 +1,93 @@
+import { useCallback } from 'react'
 import { Link } from 'react-router-dom'
-import { Group, Tooltip } from '@mantine/core'
-import { IconUserPlus } from '@tabler/icons-react'
-
-import { UserLoginModal } from '../modal/UserLoginModal.tsx'
+import { Group, Text, Tooltip } from '@mantine/core'
+import { IconLogin2, IconUserPlus } from '@tabler/icons-react'
+import clsx from 'clsx'
 
 import classes from './Menu.module.css'
 
-export function GuestMenu() {
+interface IProps {
+  isExpanded: boolean
+}
+
+export function GuestMenu({ isExpanded }: IProps) {
+  const renderRegisterLink = useCallback(
+    () => (
+      <Link
+        className={clsx(
+          'rounded-md',
+          isExpanded ? `w-full p-2 flex items-center ${classes.linkExpanded}` : '',
+          classes.link,
+        )}
+        to={'/create-account'}
+      >
+        <IconUserPlus
+          stroke={1.5}
+          style={{
+            height: '24px',
+            width: '24px',
+          }}
+        />
+        {isExpanded && (
+          <Text className={clsx('ml-2', classes.linkText)}>
+            {'Zarejestruj się'}
+            <span className={clsx('block', classes.linkSubText)}>
+              {'Stwórz nowe konto i rozpocznij przygodę'}
+            </span>
+          </Text>
+        )}
+      </Link>
+    ),
+    [isExpanded],
+  )
+
+  const renderLoginLink = useCallback(
+    () => (
+      <Link
+        className={clsx(
+          'rounded-md',
+          isExpanded ? `w-full p-2 flex items-center ${classes.linkExpanded}` : '',
+          classes.link,
+        )}
+        to={'/login'}
+      >
+        <IconLogin2
+          stroke={1.5}
+          style={{
+            height: '24px',
+            width: '24px',
+          }}
+        />
+        {isExpanded && (
+          <Text className={clsx('ml-2', classes.linkText)}>
+            {'Zaloguj się'}
+            <span className={clsx('block', classes.linkSubText)}>
+              {'Zaloguj się na konto, by kontynuować rozgrywkę'}
+            </span>
+          </Text>
+        )}
+      </Link>
+    ),
+    [isExpanded],
+  )
+
+  if (isExpanded) {
+    return (
+      <Group gap={'md'}>
+        {renderLoginLink()}
+        {renderRegisterLink()}
+      </Group>
+    )
+  }
+
   return (
-    <Group gap={'sm'}>
-      <Tooltip color={'gray'} label={'Utwórz nowe konto'}>
-        <Link className={classes.link} to={'/create-account'}>
-          <IconUserPlus stroke={1.5} style={{ height: '24px', width: '24px' }} />
-        </Link>
+    <Group gap={'md'} justify={'center'}>
+      <Tooltip color={'gray'} label={'Zaloguj się na konto'} position={'right'}>
+        {renderLoginLink()}
       </Tooltip>
-      <UserLoginModal />
+      <Tooltip color={'gray'} label={'Utwórz nowe konto'} position={'right'}>
+        {renderRegisterLink()}
+      </Tooltip>
     </Group>
   )
 }
