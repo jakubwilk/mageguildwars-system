@@ -4,6 +4,7 @@ import { IconArrowNarrowLeft, IconArrowNarrowRight } from '@tabler/icons-react'
 import clsx from 'clsx'
 
 import { GuestMenu } from '../../../user/components'
+import { Logo } from '../logo/Logo.tsx'
 import { Discord } from '../socials/Discord.tsx'
 
 import classes from './Sidebar.module.css'
@@ -49,6 +50,7 @@ export function SidebarMenu({ isExpanded, handleExpandSidebar }: IProps) {
 
   return (
     <nav className={'h-full flex flex-col justify-between'}>
+      <Logo isExpanded={isExpanded} />
       <div className={'h-full flex items-center justify-center'}>{'test'}</div>
       <div
         className={clsx(

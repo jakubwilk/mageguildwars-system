@@ -14,3 +14,5 @@ export * from './form/CheckboxInputField.tsx'
 
 export * from './sidebar/SidebarWrapper.tsx'
 export * from './sidebar/SidebarMenu.tsx'
+
+export * from './logo/Logo.tsx'
