@@ -22,8 +22,10 @@ export function SidebarMenu({ handleClose }: IProps) {
 
   return (
     <nav className={'h-full flex flex-col justify-between'}>
-      <Logo isExpanded onClick={handleClose} />
-      <div className={'h-full flex items-center justify-center'}>{'test'}</div>
+      <div className={'mb-4'}>
+        <Logo isExpanded onClick={handleClose} />
+        {'test'}
+      </div>
       <div className={'flex flex-col items-center gap-4'}>
         {!isUser ? <UserMenu handleClose={handleClose} /> : <GuestMenu />}
         <Divider className={'h-[1px] w-full'} />

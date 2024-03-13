@@ -4,6 +4,8 @@ import { Avatar, Button, Group, Menu, Text } from '@mantine/core'
 import { IconDoorExit } from '@tabler/icons-react'
 import clsx from 'clsx'
 
+import { loadEnvVariable } from '../../../common/utils'
+
 import '@mantine/core/styles/Menu.css'
 import '@mantine/core/styles/Divider.layer.css'
 import classes from './Menu.module.css'
@@ -60,8 +62,15 @@ export function UserMenu({ handleClose }: IProps) {
           {'Dodaj nowe konto'}
         </Menu.Item>
         <Menu.Divider className={'h-[1px]'} />
+        <Menu.Item
+          component={Link}
+          onClick={handleClose}
+          to={loadEnvVariable('VITE_ADMIN_PANEL_URL')}
+        >
+          {'Panel Administratora'}
+        </Menu.Item>
         <Menu.Item component={Link} onClick={handleClose} to={'/'}>
-          {'Dziennik fabularny'}
+          {'Panel Operatora'}
         </Menu.Item>
         <Menu.Item component={Link} onClick={handleClose} to={'/'}>
           {'Panel Mistrza Gry'}

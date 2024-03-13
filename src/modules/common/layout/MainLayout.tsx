@@ -19,7 +19,7 @@ export function MainLayout({ children }: IProps) {
       <Button onClick={handleOpen}>{'Otwórz menu'}</Button>
       <SidebarWrapper handleClose={handleClose} isOpen={opened} />
       <div className={clsx('h-full w-full relative min-h-screen')}>
-        <div className={'container mx-auto px-4'}>{children}</div>
+        <div className={'container lg:max-w-[65vw] mx-auto px-4'}>{children}</div>
         <Footer />
       </div>
     </main>
