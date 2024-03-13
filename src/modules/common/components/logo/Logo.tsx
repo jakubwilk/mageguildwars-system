@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom'
 
 interface IProps {
   isExpanded: boolean
+  onClick?: () => void
 }
 
-export function Logo({ isExpanded }: IProps) {
+export function Logo({ isExpanded, onClick }: IProps) {
   const logoClassName = useMemo(() => {
     if (isExpanded) {
       return 'w-full max-w-[270px]'
@@ -16,7 +17,15 @@ export function Logo({ isExpanded }: IProps) {
 
   return (
     <div className={'relative'}>
-      <Link className={'flex items-center justify-center'} to={'/'}>
+      <Link
+        className={'flex items-center justify-center'}
+        onClick={() => {
+          if (onClick) {
+            onClick()
+          }
+        }}
+        to={'/'}
+      >
         <img
           alt={'Logo Mage Guild Wars'}
           className={logoClassName}
