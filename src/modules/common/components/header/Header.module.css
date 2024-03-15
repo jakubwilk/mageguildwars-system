@@ -1,0 +1,23 @@
+.link {
+    color: var(--mantine-color-gray-6);
+}
+
+.link:hover,
+.link:focus {
+    color: var(--mantine-color-violet-5);
+}
+
+.button {
+    color: var(--mantine-color-gray-6);
+}
+
+.button:hover,
+.button:focus {
+    color: var(--mantine-color-violet-5);
+}
+
+.divider {
+    background-color: var(--mantine-color-gray-7);
+    width: 1px;
+    display: block;
+}
