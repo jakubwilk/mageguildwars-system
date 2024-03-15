@@ -20,3 +20,8 @@
 .sidebarButton:focus .sidebarButtonText {
     color: var(--mantine-color-gray-1);
 }
+
+.sidebarMobileButtonText {
+    font-size: 1.25rem;
+    font-weight: var(--mgw-font-weight-light);
+}
