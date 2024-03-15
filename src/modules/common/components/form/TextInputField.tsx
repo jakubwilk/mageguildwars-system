@@ -31,6 +31,7 @@ export function TextInputField({
         render={({ field: { name, value, onBlur, onChange }, fieldState: { error } }) => (
           <TextInput
             classNames={{
+              root: classes.root,
               label: classes.label,
               description: classes.description,
             }}
@@ -58,6 +59,7 @@ export function TextInputField({
   return (
     <TextInput
       classNames={{
+        root: classes.root,
         label: classes.label,
         description: classes.description,
       }}

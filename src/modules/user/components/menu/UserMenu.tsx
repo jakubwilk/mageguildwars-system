@@ -1,30 +1,111 @@
-import { Avatar, Button, Group, Menu, Tooltip } from '@mantine/core'
+import { useCallback } from 'react'
+import { Link } from 'react-router-dom'
+import { Avatar, Button, Group, Menu, Text } from '@mantine/core'
 import { IconDoorExit } from '@tabler/icons-react'
+import clsx from 'clsx'
 
+import { loadEnvVariable } from '../../../common/utils'
+
+import '@mantine/core/styles/Menu.css'
+import '@mantine/core/styles/Divider.layer.css'
 import classes from './Menu.module.css'
 
-export function UserMenu() {
+interface IProps {
+  handleClose: () => void
+}
+
+export function UserMenu({ handleClose }: IProps) {
+  const renderLogoutLink = useCallback(
+    () => (
+      <Button
+        className={clsx(
+          'w-full h-[auto] p-2 flex items-center',
+          classes.logout,
+          classes.buttonExpanded,
+        )}
+        onClick={handleClose}
+        variant={'transparent'}
+      >
+        <IconDoorExit stroke={1.5} style={{ height: '24px', width: '24px' }} />
+        <Text className={clsx('ml-2 text-left', classes.linkText)}>
+          {'Wyloguj się'}
+          <span className={clsx('block', classes.linkSubText)}>
+            {'Zakończ sesje użytkownika'}
+          </span>
+        </Text>
+      </Button>
+    ),
+    [],
+  )
+
+  const renderUserMenu = useCallback(() => {
+    const UserMenuComponent = (
+      <Menu.Dropdown>
+        <Menu.Label className={'uppercase'}>{'Konto'}</Menu.Label>
+        <Menu.Item component={Link} onClick={handleClose} to={'/settings'}>
+          {'Edytuj dane'}
+        </Menu.Item>
+        <Menu.Item component={Link} onClick={handleClose} to={'/'}>
+          {'Anonimizuj swoje dane'}
+        </Menu.Item>
+        <Menu.Label className={'uppercase'}>{'Mage Guild Wars'}</Menu.Label>
+        <Menu.Item component={Link} onClick={handleClose} to={'/'}>
+          {'Character 1'}
+        </Menu.Item>
+        <Menu.Item component={Link} onClick={handleClose} to={'/'}>
+          {'Character 2'}
+        </Menu.Item>
+        <Menu.Item component={Link} onClick={handleClose} to={'/'}>
+          {'Character 3'}
+        </Menu.Item>
+        <Menu.Item component={Link} disabled={true} to={'/'}>
+          {'Dodaj nowe konto'}
+        </Menu.Item>
+        <Menu.Divider className={'h-[1px]'} />
+        <Menu.Item
+          component={Link}
+          onClick={handleClose}
+          to={loadEnvVariable('VITE_ADMIN_PANEL_URL')}
+        >
+          {'Panel Administratora'}
+        </Menu.Item>
+        <Menu.Item component={Link} onClick={handleClose} to={'/'}>
+          {'Panel Operatora'}
+        </Menu.Item>
+        <Menu.Item component={Link} onClick={handleClose} to={'/'}>
+          {'Panel Mistrza Gry'}
+        </Menu.Item>
+      </Menu.Dropdown>
+    )
+
+    return (
+      <Menu width={250}>
+        <Menu.Target>
+          <Button
+            className={clsx(
+              'm-0 p-2 flex items-center h-[auto] w-full',
+              classes.buttonExpanded,
+            )}
+            variant={'transparent'}
+          >
+            <Avatar radius={'xl'} />
+            <Text className={clsx('ml-2 text-left', classes.linkText)}>
+              {'mgw-vincent'}
+              <span className={clsx('block', classes.linkSubText)}>
+                {'Otwórz menu użytkownika'}
+              </span>
+            </Text>
+          </Button>
+        </Menu.Target>
+        {UserMenuComponent}
+      </Menu>
+    )
+  }, [])
+
   return (
     <Group gap={'sm'}>
-      <Tooltip color={'gray'} label={'Otwórz menu użytkownika'}>
-        <Menu width={250}>
-          <Menu.Target>
-            <Button className={'p-0 m-0 h-[38px] w-[38px]'} variant={'transparent'}>
-              <Avatar radius={'xl'} />
-            </Button>
-          </Menu.Target>
-
-          <Menu.Dropdown>
-            <Menu.Label className={'uppercase'}>{'Konto'}</Menu.Label>
-            <Menu.Label className={'uppercase'}>{'Mage Guild Wars'}</Menu.Label>
-          </Menu.Dropdown>
-        </Menu>
-      </Tooltip>
-      <Tooltip color={'gray'} label={'Wyloguj się z aplikacji'}>
-        <Button className={classes.logout} variant={'transparent'}>
-          <IconDoorExit stroke={1.5} style={{ height: '24px', width: '24px' }} />
-        </Button>
-      </Tooltip>
+      {renderUserMenu()}
+      {renderLogoutLink()}
     </Group>
   )
 }

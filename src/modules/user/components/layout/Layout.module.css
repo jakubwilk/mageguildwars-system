@@ -1,0 +1,44 @@
+.editUserHeader {
+    background-color: var(--mantine-color-dark-6);
+}
+
+.editUserHeaderTitle,
+.editUserHeaderTitleText {
+    font-weight: var(--mgw-font-weight-light);
+    font-size: 2rem;
+}
+
+.editUserHeaderTitleText {
+    background-color: var(--mantine-primary-color-6);
+    color: white;
+}
+
+.editUserHeaderText {
+    font-size: 0.9rem;
+    color: var(--mantine-color-gray-6);
+}
+
+.editUserBlock {
+    background-color: var(--mantine-color-dark-6);
+    height: 100%;
+}
+
+.editUserBlockTitle {
+    font-weight: var(--mgw-font-weight-regular);
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: var(--mantine-color-dark-2);
+}
+
+.editUserBlockTitleIcon {
+    color: var(--mantine-color-violet-5);
+}
+
+.editUserBlockButton {
+    font-weight: var(--mgw-font-weight-regular);
+}
+
+.editUserBlockBadgeLabel {
+    font-weight: var(--mgw-font-weight-light);
+    font-family: var(--mgw-font-poppins);
+}

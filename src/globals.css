@@ -1,9 +1,11 @@
-@tailwind components;
-@tailwind utilities;
+@layer mantine, tailwind
 
 @layer tailwind {
   @tailwind base;
 }
+
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --discord-background-color: #5663F7;

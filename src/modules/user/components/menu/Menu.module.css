@@ -1,10 +1,25 @@
 .link {
+    text-decoration: none;
     color: var(--mantine-color-gray-6);
 }
 
 .link:hover,
 .link:focus {
     color: var(--mantine-color-violet-5);
+}
+
+.linkExpanded:focus,
+.linkExpanded:hover {
+    background-color: var(--mantine-color-gray-light-hover);
+}
+
+.linkText {
+    color: var(--mantine-color-gray-5);
+}
+
+.linkSubText {
+    color: var(--mantine-color-dark-3);
+    font-size: 0.8rem;
 }
 
 .button {
@@ -14,6 +29,11 @@
 .button:hover,
 .button:focus {
     color: var(--mantine-color-violet-5);
+}
+
+.buttonExpanded:focus,
+.buttonExpanded:hover {
+    background-color: var(--mantine-color-gray-light-hover);
 }
 
 .logout {

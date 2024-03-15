@@ -1,3 +1,7 @@
+.root {
+    width: 100%;
+}
+
 .label {
     margin-bottom: 0.3rem;
     text-transform: uppercase;

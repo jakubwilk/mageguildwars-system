@@ -31,6 +31,7 @@ export function PasswordInputField({
         render={({ field: { name, value, onBlur, onChange }, fieldState: { error } }) => (
           <PasswordInput
             classNames={{
+              root: classes.root,
               label: classes.label,
               description: classes.description,
             }}
@@ -58,6 +59,7 @@ export function PasswordInputField({
   return (
     <PasswordInput
       classNames={{
+        root: classes.root,
         label: classes.label,
       }}
       description={description}
