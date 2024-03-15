@@ -3,6 +3,8 @@ export enum AuthResourcesEnum {
   REGISTER_WRAPPER_BACK_LINK_TEXT = 'Powrót na stronę główną',
   REGISTER_WRAPPER_BACK_LINK_TOOLTIP_TEXT = 'Wróć na stronę główną Mage Guild Wars',
 
+  REGISTER_FORM_FIELD_SLUG_LABEL = 'Nazwa konta',
+  REGISTER_FORM_FIELD_SLUG_DESCRIPTION_TEXT = 'Należy mieć na uwadzę, że nie jest to nazwa użytkownika ani nazwa postaci. Wartość ta będzie służyć za identyfikacje konta użytkownika przez Administrację',
   REGISTER_FORM_FIELD_EMAIL_LABEL = 'Adres email',
   REGISTER_FORM_FIELD_EMAIL_DESCRIPTION_TEXT = 'Służy nie tylko do odzyskania dostępu do konta, ale również głównie za pomocą adresu email użytkownik może się zalogować',
   REGISTER_FORM_FIELD_PASSWORD_LABEL = 'Hasło',

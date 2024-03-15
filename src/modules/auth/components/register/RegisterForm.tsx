@@ -16,12 +16,14 @@ export function RegisterForm() {
     mode: 'onChange',
     criteriaMode: 'all',
     defaultValues: {
+      slug: '',
       email: '',
       password: '',
       repeatPassword: '',
     },
     resolver: yupResolver(
       object({
+        slug: string().required(getCommonResources('FIELD_REQUIRED_TEXT')).nullable(),
         email: string()
           .required(getCommonResources('FIELD_REQUIRED_TEXT'))
           .email(getCommonResources('FIELD_INCORRECT_EMAIL_TEXT'))
@@ -55,6 +57,12 @@ export function RegisterForm() {
     <FormProvider {...values}>
       <form noValidate onSubmit={form.handleSubmit(handleSubmit)}>
         <Group>
+          <TextInputField
+            description={getResource('REGISTER_FORM_FIELD_SLUG_DESCRIPTION_TEXT')}
+            label={getResource('REGISTER_FORM_FIELD_SLUG_LABEL')}
+            name={'slug'}
+            withAsterisk
+          />
           <TextInputField
             description={getResource('REGISTER_FORM_FIELD_EMAIL_DESCRIPTION_TEXT')}
             label={getResource('REGISTER_FORM_FIELD_EMAIL_LABEL')}
