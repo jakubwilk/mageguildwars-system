@@ -7,12 +7,15 @@ import { object, string } from 'yup'
 
 import { Button, PasswordInputField, TextInputField } from '../../../common/components'
 import { useResources } from '../../../resources/hooks'
+import { useCreateAccountMutation } from '../../api'
+import { IRegisterDataRequest, IRegisterFormData } from '../../models'
 
 export function RegisterForm() {
   const { getResource } = useResources('AUTH')
   const { getResource: getCommonResources } = useResources('COMMON')
+  const { mutate: createAccount, isPending } = useCreateAccountMutation()
 
-  const form = useForm({
+  const form = useForm<IRegisterFormData>({
     mode: 'onChange',
     criteriaMode: 'all',
     defaultValues: {
@@ -23,15 +26,13 @@ export function RegisterForm() {
     },
     resolver: yupResolver(
       object({
-        slug: string().required(getCommonResources('FIELD_REQUIRED_TEXT')).nullable(),
+        slug: string().required(getCommonResources('FIELD_REQUIRED_TEXT')),
         email: string()
           .required(getCommonResources('FIELD_REQUIRED_TEXT'))
-          .email(getCommonResources('FIELD_INCORRECT_EMAIL_TEXT'))
-          .nullable(),
+          .email(getCommonResources('FIELD_INCORRECT_EMAIL_TEXT')),
         password: string()
           .required(getCommonResources('FIELD_REQUIRED_TEXT'))
-          .min(10, getCommonResources('FIELD_INCORRECT_PASSWORD_TEXT'))
-          .nullable(),
+          .min(10, getCommonResources('FIELD_INCORRECT_PASSWORD_TEXT')),
         repeatPassword: string()
           .required(getCommonResources('FIELD_REQUIRED_TEXT'))
           .test(
@@ -41,15 +42,25 @@ export function RegisterForm() {
               const passwordValue = context.parent.password
               return isEqual(value, passwordValue)
             },
-          )
-          .nullable(),
+          ),
       }),
     ),
   })
 
-  const handleSubmit = useCallback((values: unknown) => {
-    console.log('values', values)
-  }, [])
+  const handleSubmit = useCallback(
+    (values: IRegisterFormData) => {
+      const requestData: IRegisterDataRequest = {
+        slug: values.slug,
+        email: values.email,
+        password: values.password,
+      }
+
+      createAccount(requestData)
+    },
+    [createAccount],
+  )
+
+  console.log('isPending', isPending)
 
   const values = useMemo(() => form, [form])
 
