@@ -20,7 +20,7 @@ export function AuthWrapper({ isLogin }: IProps) {
   return (
     <div
       className={clsx(
-        'flex items-end rounded-md h-full w-full min-h-[calc(100vh-32px)] sm:max-w-[400px]',
+        'flex items-end rounded-md h-full w-full my-4 min-h-[calc(100vh-32px)] sm:max-w-[400px]',
         classes.wrapper,
       )}
     >

@@ -1,6 +1,5 @@
 .forgotPasswordText {
     font-size: 0.9rem;
-    text-transform: uppercase;
     color: var(--mantine-color-gray-4);
 }
 
