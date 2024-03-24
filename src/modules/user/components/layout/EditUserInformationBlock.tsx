@@ -66,7 +66,7 @@ export function EditUserInformationBlock() {
 
   return (
     <Box
-      className={'lg:col-span-2 xl:col-span-1 rounded-md overflow-hidden'}
+      className={'md:col-span-2 2xl:col-span-1 rounded-md overflow-hidden'}
       pos={'relative'}
     >
       <section className={clsx('p-8 rounded-md', classes.editUserBlock)}>

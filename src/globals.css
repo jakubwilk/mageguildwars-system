@@ -30,3 +30,8 @@ textarea,
 select {
   transition: all .1s ease-in-out;
 }
+
+a:focus-visible {
+  outline: calc(.125rem*var(--mantine-scale)) solid var(--mantine-primary-color-filled);
+  outline-offset: calc(.125rem*var(--mantine-scale));
+}

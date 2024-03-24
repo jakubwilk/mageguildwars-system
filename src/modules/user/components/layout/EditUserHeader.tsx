@@ -10,7 +10,7 @@ export function EditUserHeader() {
   const { getResource } = useResources('USER')
 
   return (
-    <div className={clsx('p-8 col-span-full rounded-md', classes.editUserHeader)}>
+    <div className={clsx('p-8 mt-8 col-span-full rounded-md', classes.editUserHeader)}>
       <Title className={clsx('break-words', classes.editUserHeaderTitle)} order={1}>
         {getResource('EDIT_USER_HEADER_ACCOUNT_WITH_TEXT')}
         <Text

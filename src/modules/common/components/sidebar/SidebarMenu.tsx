@@ -27,7 +27,7 @@ export function SidebarMenu({ handleClose }: IProps) {
         {'test'}
       </div>
       <div className={'flex flex-col items-center gap-4'}>
-        {isUser ? <UserMenu handleClose={handleClose} /> : <GuestMenu />}
+        {!isUser ? <UserMenu handleClose={handleClose} /> : <GuestMenu />}
         <Divider className={'h-[1px] w-full'} />
         <Discord />
         <Button
