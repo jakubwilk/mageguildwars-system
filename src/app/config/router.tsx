@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom'
 
 import { Root } from '../../modules/common/layout'
 import { loadEnvVariable } from '../../modules/common/utils'
-import { AdminPage, AuthPage, EditUserPage, HomePage } from '../pages'
+import { AdminPage, AuthPage, CharacterPage, EditUserPage, HomePage } from '../pages'
 
 export const APP_ROUTER = createBrowserRouter([
   {
@@ -15,6 +15,10 @@ export const APP_ROUTER = createBrowserRouter([
       {
         path: '/settings',
         element: <EditUserPage />,
+      },
+      {
+        path: '/characters/:slug',
+        element: <CharacterPage />,
       },
       {
         path: loadEnvVariable('VITE_ADMIN_PANEL_URL'),

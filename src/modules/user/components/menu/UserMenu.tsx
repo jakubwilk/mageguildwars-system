@@ -49,13 +49,13 @@ export function UserMenu({ handleClose }: IProps) {
           {'Anonimizuj swoje dane'}
         </Menu.Item>
         <Menu.Label className={'uppercase'}>{'Mage Guild Wars'}</Menu.Label>
-        <Menu.Item component={Link} onClick={handleClose} to={'/'}>
+        <Menu.Item component={Link} onClick={handleClose} to={'/characters/character1'}>
           {'Character 1'}
         </Menu.Item>
-        <Menu.Item component={Link} onClick={handleClose} to={'/'}>
+        <Menu.Item component={Link} onClick={handleClose} to={'/characters/character2'}>
           {'Character 2'}
         </Menu.Item>
-        <Menu.Item component={Link} onClick={handleClose} to={'/'}>
+        <Menu.Item component={Link} onClick={handleClose} to={'/characters/character3'}>
           {'Character 3'}
         </Menu.Item>
         <Menu.Item component={Link} disabled={true} to={'/'}>

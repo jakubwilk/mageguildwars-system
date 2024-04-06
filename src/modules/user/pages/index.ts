@@ -1,2 +1,2 @@
-export * from './UserPage.tsx'
+export * from './CharacterPage.tsx'
 export * from './EditUserPage.tsx'
