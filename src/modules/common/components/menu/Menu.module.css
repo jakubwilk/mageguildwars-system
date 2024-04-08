@@ -1,0 +1,8 @@
+.close {
+    color: var(--mantine-color-gray-7);
+    transition: color .1s ease-in-out;
+}
+
+.close:hover {
+    color: var(--mantine-color-white);
+}
