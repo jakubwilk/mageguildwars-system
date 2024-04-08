@@ -29,6 +29,7 @@ button,
 textarea,
 select {
   transition: all .1s ease-in-out;
+  text-decoration: none;
 }
 
 a:focus-visible {
