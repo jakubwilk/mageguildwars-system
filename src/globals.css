@@ -8,11 +8,12 @@
 @tailwind utilities;
 
 :root {
-  --discord-background-color: #5663F7;
-  --discord-background-hover-color: #7289DA;
+  --discord-background-color: #5663f7;
+  --discord-background-hover-color: #7289da;
 
   --mgw-font-weight-light: 300;
   --mgw-font-weight-regular: 400;
+  --mgw-font-weight-semibold: 600;
   --mgw-font-weight-bold: 700;
   --mgw-font-weight-black: 900;
 
@@ -28,11 +29,11 @@ input,
 button,
 textarea,
 select {
-  transition: all .1s ease-in-out;
+  transition: all 0.1s ease-in-out;
   text-decoration: none;
 }
 
 a:focus-visible {
-  outline: calc(.125rem*var(--mantine-scale)) solid var(--mantine-primary-color-filled);
-  outline-offset: calc(.125rem*var(--mantine-scale));
+  outline: calc(0.125rem * var(--mantine-scale)) solid var(--mantine-primary-color-filled);
+  outline-offset: calc(0.125rem * var(--mantine-scale));
 }
