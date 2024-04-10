@@ -1,18 +1,19 @@
-import { ReactNode } from 'react'
 import { Drawer } from '@mantine/core'
 import { IconLayoutSidebarRightCollapse } from '@tabler/icons-react'
+
+import { MainMenu } from './MainMenu'
 
 import classes from './Menu.module.css'
 
 interface IProps {
   isOpen: boolean
-  children: ReactNode
   handleCloseSidebar: () => void
 }
 
-export function SidebarMenu({ isOpen, children, handleCloseSidebar }: IProps) {
+export function SidebarMenu({ isOpen, handleCloseSidebar }: IProps) {
   return (
     <Drawer
+      classNames={{ header: 'mb-1', title: classes.title }}
       closeButtonProps={{
         icon: <IconLayoutSidebarRightCollapse size={32} stroke={1.5} />,
         className: classes.close,
@@ -24,7 +25,7 @@ export function SidebarMenu({ isOpen, children, handleCloseSidebar }: IProps) {
       radius={'md'}
       title={'menu główne'}
     >
-      {children}
+      <MainMenu />
     </Drawer>
   )
 }

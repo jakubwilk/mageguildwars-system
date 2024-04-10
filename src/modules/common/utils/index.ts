@@ -1,1 +1,1 @@
-export * from './variables.uitls.ts'
+export * from './shared.uitls.ts'

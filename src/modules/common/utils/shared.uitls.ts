@@ -4,8 +4,14 @@ export const loadEnvVariable = (name: string): string => {
 
 export enum routeEnum {
   HOME = '/',
+  USERS = '/users',
+  MEDALS = '/medals',
+  RULES = '/rules',
 }
 
 export const ROUTES = {
   home: () => '/',
+  users: () => '/users',
+  medals: () => '/medals',
+  rules: () => '/rules',
 }

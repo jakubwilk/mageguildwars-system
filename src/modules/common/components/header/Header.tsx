@@ -38,9 +38,7 @@ export function Header() {
           </ActionIcon>
         </Tooltip>
       </header>
-      <SidebarMenu handleCloseSidebar={handleCloseSidebar} isOpen={opened}>
-        <div>{'menu'}</div>
-      </SidebarMenu>
+      <SidebarMenu handleCloseSidebar={handleCloseSidebar} isOpen={opened} />
     </>
   )
 }

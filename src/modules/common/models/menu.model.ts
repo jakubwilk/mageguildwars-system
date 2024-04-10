@@ -1,7 +1,10 @@
+import { TablerIconsProps } from '@tabler/icons-react'
+
 export interface IMainMenuItem {
   id: number
   label: string
   text: string
-  IconComponent: JSX.Element
+  url: string
+  IconComponent: (props: TablerIconsProps) => JSX.Element
   isDisabled: boolean
 }

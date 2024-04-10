@@ -1,8 +1,59 @@
 .close {
-    color: var(--mantine-color-gray-7);
-    transition: color .1s ease-in-out;
+  color: var(--mantine-color-gray-7);
+  transition: color 0.1s ease-in-out;
 }
 
 .close:hover {
+  color: var(--mantine-color-white);
+}
+
+.title {
+  color: var(--mantine-color-dark-3);
+}
+
+.menuItem {
+  background-color: transparent;
+}
+
+.menuItem:hover,
+.menuItem:focus {
+  background-color: var(--mantine-color-dark-6);
+
+  & .menuItemTextMain {
     color: var(--mantine-color-white);
+  }
+  & .menuItemSubText {
+    color: var(--mantine-color-gray-3);
+  }
+}
+
+.menuItemIcon {
+  color: var(--mantine-primary-color-4);
+}
+
+.menuItemTextMain {
+  font-weight: var(--mgw-font-weight-semibold);
+  font-size: 1rem;
+  color: var(--mantine-color-gray-3);
+}
+
+.menuItemSubText {
+  font-weight: var(--mgw-font-weight-light);
+  font-size: 0.875rem;
+  color: var(--mantine-color-gray-6);
+}
+
+.menuItemActive {
+  background-color: var(--mantine-color-dark-6);
+
+  & .menuItemTextMain {
+    color: var(--mantine-color-white);
+  }
+  & .menuItemSubText {
+    color: var(--mantine-color-gray-3);
+  }
+}
+
+.menuItemDisabled {
+  opacity: 0.35;
 }

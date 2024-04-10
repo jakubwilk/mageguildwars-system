@@ -9,3 +9,4 @@ export * from './form/PasswordInputField.tsx'
 export * from './form/CheckboxInputField.tsx'
 
 export * from './menu/SidebarMenu.tsx'
+export * from './menu/MainMenu.tsx'
