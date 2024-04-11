@@ -1,27 +1,29 @@
-import { ReactNode } from 'react'
-import { Button as ButtonMantine, ButtonProps } from '@mantine/core'
+import { MouseEvent, ReactNode } from 'react'
+import { Button as ButtonMantine, ButtonProps, UnstyledButtonProps } from '@mantine/core'
 
 import '@mantine/core/styles/Button.css'
 
-interface IProps extends ButtonProps {
+type TButtonProps = ButtonProps & UnstyledButtonProps
+
+interface IProps extends TButtonProps {
   children: string | ReactNode
   type: 'button' | 'submit' | 'reset' | undefined
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void
   isFullWidth?: boolean
-  handleChange?: () => void
 }
 
 export function Button({
   children,
   type,
+  onClick,
   isFullWidth,
-  handleChange,
   variant = 'filled',
   ...restProps
 }: IProps) {
   return (
     <ButtonMantine
       fullWidth={isFullWidth}
-      onChange={handleChange}
+      onClick={onClick}
       type={type}
       variant={variant}
       {...restProps}
