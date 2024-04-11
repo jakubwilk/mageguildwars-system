@@ -12,11 +12,15 @@ import {
   TextInputField,
 } from '../../common/components'
 import { closeLoginModal } from '../../common/store'
+import { routeEnum } from '../../common/utils'
+import { useResource } from '../../resource/hooks'
 import { ILoginFormValues } from '../models'
 
 import classes from './Components.module.css'
 
 export function LoginForm() {
+  const { getResource } = useResource('COMMON')
+  const { getResource: getAuthResource } = useResource('AUTH')
   const dispatch = useDispatch()
   const form = useForm<ILoginFormValues>({
     mode: 'onBlur',
@@ -28,8 +32,10 @@ export function LoginForm() {
     },
     resolver: yupResolver(
       object({
-        login: string().email().required(),
-        password: string().required(),
+        login: string()
+          .email(getResource('FIELD_INCORRECT_EMAIL_TEXT'))
+          .required(getResource('FIELD_REQUIRED_TEXT')),
+        password: string().required(getResource('FIELD_REQUIRED_TEXT')),
         isRemember: boolean(),
       }),
     ),
@@ -46,20 +52,30 @@ export function LoginForm() {
 
   return (
     <FormProvider {...formValues}>
-      <form onSubmit={form.handleSubmit((val) => console.log('val', val))}>
+      <form noValidate onSubmit={form.handleSubmit((val) => console.log('val', val))}>
         <div className={'flex flex-col gap-4 mb-4'}>
-          <TextInputField label={'Adres email'} name={'login'} required />
-          <PasswordInputField label={'Hasło'} name={'password'} required />
+          <TextInputField
+            autoComplete={'off'}
+            label={getAuthResource('FIELD_EMAIL_LABEL')}
+            name={'login'}
+            required
+          />
+          <PasswordInputField
+            autoComplete={'off'}
+            label={getAuthResource('FIELD_PASSWORD_LABEL')}
+            name={'password'}
+            required
+          />
           <CheckboxInputField
             description={
               'Normalnie sesja użytkownika trzymana jest przez 2 dni, po zaznaczeniu czas ten zosrtanie wydłużony do 2 tygodni'
             }
-            label={'Zapamiętaj mnie'}
+            label={getAuthResource('FIELD_REMEMBER_ME_LABEL')}
             name={'isRemember'}
           />
         </div>
         <div className={'block text-center mb-6'}>
-          <Link className={classes.loginIssuesLink} to={''}>
+          <Link className={classes.loginIssuesLink} to={routeEnum.LOGIN_ISSUES}>
             {'Rozwiąż problemy z zalogowaniem się'}
           </Link>
         </div>

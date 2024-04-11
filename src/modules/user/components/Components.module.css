@@ -9,3 +9,41 @@
     z-index: 1000;
     min-height: calc(3.75rem * var(--mantine-scale));
 }
+
+.menuItem {
+    background-color: transparent;
+    height: auto !important;
+}
+
+.menuItem:hover,
+.menuItem:focus {
+    background-color: var(--mantine-color-dark-6) !important;
+
+    & .menuItemTextMain {
+        color: var(--mantine-color-white);
+    }
+    & .menuItemSubText {
+        color: var(--mantine-color-gray-3);
+    }
+}
+
+.menuItemLabel {
+    display: grid !important;
+    grid-template-columns: 24px 1fr;
+}
+
+.menuItemIcon {
+    color: var(--mantine-primary-color-4);
+}
+
+.menuItemTextMain {
+    font-weight: var(--mgw-font-weight-semibold);
+    font-size: 1rem;
+    color: var(--mantine-color-gray-3);
+}
+
+.menuItemSubText {
+    font-weight: var(--mgw-font-weight-light);
+    font-size: 0.875rem;
+    color: var(--mantine-color-gray-6);
+}
