@@ -4,9 +4,7 @@
 
 .label {
     margin-bottom: 0.3rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--mantine-color-dark-1);
+    color: var(--mantine-color-dark-2);
 }
 
 .description {

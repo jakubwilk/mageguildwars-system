@@ -1,0 +1,11 @@
+.title {
+    line-height: 1;
+    font-weight: var(--mgw-font-weight-regular);
+    color: var(--mantine-color-dark-3);
+    font-size: var(--mantine-font-size-md);
+    padding: var(--mantine-spacing-md);
+    padding-inline-end: calc(var(--mantine-spacing-md)) - calc(0.3125rem * var(--mantine-scale));
+    background-color: var(--mantine-color-body);
+    z-index: 1000;
+    min-height: calc(3.75rem * var(--mantine-scale));
+}

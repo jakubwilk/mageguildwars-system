@@ -33,6 +33,10 @@ select {
   text-decoration: none;
 }
 
+a {
+  color: var(--mantine-primary-color-4);
+}
+
 a:focus-visible {
   outline: calc(0.125rem * var(--mantine-scale)) solid var(--mantine-primary-color-filled);
   outline-offset: calc(0.125rem * var(--mantine-scale));

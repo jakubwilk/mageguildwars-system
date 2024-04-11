@@ -1,15 +1,26 @@
+import { useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { ActionIcon, Tooltip } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { IconLayoutSidebarRightExpand } from '@tabler/icons-react'
 
+import { useDispatch, useSelector } from '../../../../app/config'
+import { LoginForm } from '../../../auth/components'
+import { closeLoginModal } from '../../store'
 import { SidebarMenu } from '../menu/SidebarMenu.tsx'
+import { Modal } from '../modal/Modal.tsx'
 
 import classes from './Header.module.css'
 
 export function Header() {
   const [opened, { open: handleOpenSidebar, close: handleCloseSidebar }] =
     useDisclosure(false)
+  const dispatch = useDispatch()
+  const { isLoginOpen } = useSelector((state) => state.modal)
+
+  const handleCloseLoginModal = useCallback(() => {
+    dispatch(closeLoginModal())
+  }, [dispatch])
 
   return (
     <>
@@ -39,6 +50,9 @@ export function Header() {
         </Tooltip>
       </header>
       <SidebarMenu handleCloseSidebar={handleCloseSidebar} isOpen={opened} />
+      <Modal handleClose={handleCloseLoginModal} isOpen={isLoginOpen} title={'Logowanie'}>
+        <LoginForm />
+      </Modal>
     </>
   )
 }

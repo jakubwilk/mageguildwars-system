@@ -10,3 +10,7 @@ export * from './form/CheckboxInputField.tsx'
 
 export * from './menu/SidebarMenu.tsx'
 export * from './menu/MainMenu.tsx'
+
+export * from './content/Section.tsx'
+
+export * from './modal/Modal.tsx'
