@@ -1,11 +1,12 @@
 import { ReactNode } from 'react'
+import { Provider } from 'react-redux'
 import { ColorSchemeScript } from '@mantine/core'
 import { MantineProvider } from '@mantine/core'
 import dayjs from 'dayjs'
 
 import 'dayjs/locale/pl.js'
 
-import { theme } from './config'
+import { store, theme } from './config'
 
 import '@mantine/core/styles.layer.css'
 
@@ -24,8 +25,10 @@ export function AppWrapper({ children }: IProps) {
         forceColorScheme={'dark'}
         theme={theme}
       >
-        {children}
+        <Provider store={store}>{children}</Provider>
       </MantineProvider>
     </>
   )
 }
+
+// '04ffb1b3-e6da-45fb-96dd-ec7f2973bf89'
