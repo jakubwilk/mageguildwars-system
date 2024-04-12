@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { Text } from '@mantine/core'
 import { boolean, object, string } from 'yup'
 
 import { useDispatch } from '../../../app/config'
@@ -67,23 +68,24 @@ export function LoginForm() {
             required
           />
           <CheckboxInputField
-            description={
-              'Normalnie sesja użytkownika trzymana jest przez 2 dni, po zaznaczeniu czas ten zosrtanie wydłużony do 2 tygodni'
-            }
+            description={getAuthResource('FIELD_REMEMBER_ME_DESCRIPTION_TEXT')}
             label={getAuthResource('FIELD_REMEMBER_ME_LABEL')}
             name={'isRemember'}
           />
         </div>
-        <div className={'block text-center mb-6'}>
-          <Link className={classes.loginIssuesLink} to={routeEnum.LOGIN_ISSUES}>
-            {'Rozwiąż problemy z zalogowaniem się'}
-          </Link>
+        <div className={'flex justify-center mb-6'}>
+          <Text className={classes.loginIssuesText}>
+            {getAuthResource('LOGIN_ISSUES_TEXT')}
+            <Link className={classes.loginIssuesLink} to={routeEnum.LOGIN_ISSUES}>
+              {getAuthResource('LOGIN_ISSUES_LINK_TEXT')}
+            </Link>
+          </Text>
         </div>
         <div className={'w-full flex justify-end items-center gap-4'}>
           <Button onClick={handleCloseLoginModal} type={'button'} variant={'default'}>
-            {'Anuluj'}
+            {getResource('ACTION_CANCEL_TEXT')}
           </Button>
-          <Button type={'submit'}>{'Zaloguj się'}</Button>
+          <Button type={'submit'}>{getAuthResource('ACTION_LOGIN_TEXT')}</Button>
         </div>
       </form>
     </FormProvider>
