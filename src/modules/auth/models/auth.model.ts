@@ -8,4 +8,5 @@ export interface IRegisterFormValues {
   slug: string
   email: string
   password: string
+  repeatPassword: string
 }
