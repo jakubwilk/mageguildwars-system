@@ -5,6 +5,8 @@ import { useResource } from 'resource/hooks'
 import { UserSettingsTabEnum } from '../models'
 
 import { EditUserEmailForm } from './EditUserEmailForm'
+import { EditUserPasswordForm } from './EditUserPasswordForm'
+import { UserInformation } from './UserInformation'
 
 import classes from './Components.module.css'
 
@@ -23,7 +25,7 @@ export function SettingsModalContent() {
         zIndex={1000}
       />
       <Tabs
-        className={'relative'}
+        className={'relative mt-1'}
         defaultValue={tab}
         onChange={(value) => handleChangeTab(value as UserSettingsTabEnum)}
         radius={'md'}
@@ -47,9 +49,11 @@ export function SettingsModalContent() {
           <EditUserEmailForm setisVisible={setisVisible} />
         </Tabs.Panel>
         <Tabs.Panel value={UserSettingsTabEnum.CHANGE_PASSWORD}>
-          {'password form'}
+          <EditUserPasswordForm setisVisible={setisVisible} />
         </Tabs.Panel>
-        <Tabs.Panel value={UserSettingsTabEnum.INFORMATION}>{'information'}</Tabs.Panel>
+        <Tabs.Panel value={UserSettingsTabEnum.INFORMATION}>
+          <UserInformation />
+        </Tabs.Panel>
       </Tabs>
     </>
   )

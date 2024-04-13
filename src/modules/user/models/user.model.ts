@@ -8,3 +8,8 @@ export interface IChangeEmailFormValues {
   currentEmail: string
   newEmail: string
 }
+
+export interface IChangePasswordFormValues {
+  currentPassword: string
+  newPassword: string
+}
