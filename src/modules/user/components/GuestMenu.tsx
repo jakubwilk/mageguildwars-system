@@ -2,10 +2,9 @@ import { useCallback } from 'react'
 import { Button, Text } from '@mantine/core'
 import { IconDoorEnter, IconUserPlus } from '@tabler/icons-react'
 import clsx from 'clsx'
-
-import { useDispatch } from '../../../app/config'
-import { openLoginModal, openRegisterModal } from '../../common/store'
-import { useResource } from '../../resource/hooks'
+import { openLoginModal, openRegisterModal } from 'common/store'
+import { useDispatch } from 'config'
+import { useResource } from 'resource/hooks'
 
 import classes from './Components.module.css'
 

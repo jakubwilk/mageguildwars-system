@@ -1,7 +1,6 @@
 import { Drawer } from '@mantine/core'
 import { IconLayoutSidebarRightCollapse } from '@tabler/icons-react'
-
-import { GuestMenu, UserMenu } from '../../../user/components'
+import { GuestMenu, UserMenu } from 'user/components'
 
 import { MainMenu } from './MainMenu'
 

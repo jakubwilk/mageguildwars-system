@@ -1,6 +1,5 @@
 import clsx from 'clsx'
-
-import { Section } from '../../common/components'
+import { Section } from 'common/components'
 
 import classes from './Components.module.css'
 

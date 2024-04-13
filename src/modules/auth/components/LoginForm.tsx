@@ -3,18 +3,18 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Text } from '@mantine/core'
-import { boolean, object, string } from 'yup'
-
-import { useDispatch } from '../../../app/config'
 import {
   Button,
   CheckboxInputField,
   PasswordInputField,
   TextInputField,
-} from '../../common/components'
-import { closeLoginModal } from '../../common/store'
-import { routeEnum } from '../../common/utils'
-import { useResource } from '../../resource/hooks'
+} from 'common/components'
+import { closeLoginModal } from 'common/store'
+import { routeEnum } from 'common/utils'
+import { useDispatch } from 'config'
+import { useResource } from 'resource/hooks'
+import { boolean, object, string } from 'yup'
+
 import { ILoginFormValues } from '../models'
 
 import classes from './Components.module.css'
