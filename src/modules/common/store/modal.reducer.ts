@@ -3,11 +3,13 @@ import { createSlice } from '@reduxjs/toolkit'
 interface IModalReducer {
   isLoginOpen: boolean
   isRegisterOpen: boolean
+  isUserSettingsOpen: boolean
 }
 
 const initialState: IModalReducer = {
   isLoginOpen: false,
   isRegisterOpen: false,
+  isUserSettingsOpen: false,
 }
 
 export const modalReducer = createSlice({
@@ -20,16 +22,28 @@ export const modalReducer = createSlice({
     openRegisterModal: (state) => {
       state.isRegisterOpen = true
     },
+    openUserSettingsModal: (state) => {
+      state.isUserSettingsOpen = true
+    },
     closeLoginModal: (state) => {
       state.isLoginOpen = false
     },
     closeRegisterModal: (state) => {
       state.isRegisterOpen = false
     },
+    closeUserSettingsModal: (state) => {
+      state.isUserSettingsOpen = false
+    },
   },
 })
 
-export const { openLoginModal, closeLoginModal, openRegisterModal, closeRegisterModal } =
-  modalReducer.actions
+export const {
+  openLoginModal,
+  closeLoginModal,
+  openRegisterModal,
+  closeRegisterModal,
+  openUserSettingsModal,
+  closeUserSettingsModal,
+} = modalReducer.actions
 
 export default modalReducer.reducer

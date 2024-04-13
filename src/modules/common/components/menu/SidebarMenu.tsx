@@ -1,7 +1,7 @@
 import { Drawer } from '@mantine/core'
 import { IconLayoutSidebarRightCollapse } from '@tabler/icons-react'
 
-import { GuestMenu } from '../../../user/components'
+import { GuestMenu, UserMenu } from '../../../user/components'
 
 import { MainMenu } from './MainMenu'
 
@@ -29,6 +29,7 @@ export function SidebarMenu({ isOpen, handleCloseSidebar }: IProps) {
     >
       <MainMenu />
       <GuestMenu handleCloseSidebar={handleCloseSidebar} />
+      <UserMenu handleCloseSidebar={handleCloseSidebar} />
     </Drawer>
   )
 }
