@@ -7,9 +7,10 @@
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:react-hooks/recommended"
+    "plugin:react-hooks/recommended",
+    "plugin:react/recommended"
   ],
-  "ignorePatterns": ["dist"],
+  "ignorePatterns": ["dist", ".eslintrc"],
   "parser": "@typescript-eslint/parser",
   "plugins": ["react", "react-hooks" ,"prettier", "simple-import-sort", "react-refresh"],
   "rules": {
