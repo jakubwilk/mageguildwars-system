@@ -10,7 +10,14 @@ interface IProps extends TModalProps {
 
 export function Modal({ isOpen, handleClose, title, children, ...rest }: IProps) {
   return (
-    <MantineModal {...rest} onClose={handleClose} opened={isOpen} title={title}>
+    <MantineModal
+      {...rest}
+      classNames={{ content: 'p-2' }}
+      onClose={handleClose}
+      opened={isOpen}
+      radius={'md'}
+      title={title}
+    >
       {children}
     </MantineModal>
   )
