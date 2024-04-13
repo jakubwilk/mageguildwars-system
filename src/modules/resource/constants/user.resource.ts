@@ -12,6 +12,10 @@ export enum UserResourceEnum {
   MODAL_SETTINGS_CHANGE_EMAIL_TAB_TEXT = 'Zmiana adresu email',
   MODAL_SETTINGS_CHANGE_PASSWORD_TAB_TEXT = 'Zmiana hasła',
   MODAL_SETTINGS_INFORMATION_TAB_TEXT = 'Informacje o koncie',
+  MODAL_SETTINGS_CHANGE_EMAIL_NOTE_TEXT = 'Po zmianie adresu email, użytkownik zostanie wylogowany z aplikacji',
+  MODAL_SETTINGS_CHANGE_PASSWORD_NOTE_TEXT = 'Po zmianie hasła, użytkownik zostanie wylogowany z aplikacji',
   FIELD_CURRENT_EMAIL_LABEL = 'Obecny adres email',
   FIELD_NEW_EMAIL_LABEL = 'Nowy adres email',
+  FIELD_CURRENT_PASSWORD_LABEL = 'Obecne hasło',
+  FIELD_NEW_PASSWORD_LABEL = 'Nowe hasło',
 }

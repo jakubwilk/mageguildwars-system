@@ -6,4 +6,6 @@ export enum CommonResourceEnum {
   FIELD_INCORRECT_EMAIL_TEXT = 'Niepoprawny adres email',
   FIELD_INCORRECT_PASSWORD_TEXT = 'Niepoprawne hasło',
   FIELD_NOT_SAME_PASSWORD_TEXT = 'Hasło nie jest identyczne',
+  VALUE_YES_TEXT = 'Tak',
+  VALUE_NO_TEXT = 'Nie',
 }
