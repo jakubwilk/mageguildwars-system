@@ -51,3 +51,12 @@
     font-size: 0.875rem;
     color: var(--mantine-color-gray-6);
 }
+
+.tabItem {
+    font-size: 1rem;
+    color: var(--mantine-color-gray-5);
+
+    &[data-active] {
+        color: var(--mantine-color-white);
+    }
+}

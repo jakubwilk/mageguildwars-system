@@ -6,8 +6,9 @@ import { IconLayoutSidebarRightExpand } from '@tabler/icons-react'
 import { LoginForm, RegisterForm } from 'auth/components'
 import { useDispatch, useSelector } from 'config'
 import { useResource } from 'resource/hooks'
+import { SettingsModalContent } from 'user/components'
 
-import { closeLoginModal, closeRegisterModal } from '../../store'
+import { closeLoginModal, closeRegisterModal, closeUserSettingsModal } from '../../store'
 import { SidebarMenu } from '../menu/SidebarMenu.tsx'
 import { Modal } from '../modal/Modal.tsx'
 
@@ -15,10 +16,13 @@ import classes from './Header.module.css'
 
 export function Header() {
   const { getResource } = useResource('AUTH')
+  const { getResource: getUserResource } = useResource('USER')
   const [opened, { open: handleOpenSidebar, close: handleCloseSidebar }] =
     useDisclosure(false)
   const dispatch = useDispatch()
-  const { isLoginOpen, isRegisterOpen } = useSelector((state) => state.modal)
+  const { isLoginOpen, isRegisterOpen, isUserSettingsOpen } = useSelector(
+    (state) => state.modal,
+  )
 
   const handleCloseLoginModal = useCallback(() => {
     dispatch(closeLoginModal())
@@ -26,6 +30,10 @@ export function Header() {
 
   const handleCloseRegisterModal = useCallback(() => {
     dispatch(closeRegisterModal())
+  }, [dispatch])
+
+  const handleCloseUserSettingsModal = useCallback(() => {
+    dispatch(closeUserSettingsModal())
   }, [dispatch])
 
   return (
@@ -69,6 +77,14 @@ export function Header() {
         title={getResource('MODAL_REGISTER_TITLE_TEXT')}
       >
         <RegisterForm />
+      </Modal>
+      <Modal
+        handleClose={handleCloseUserSettingsModal}
+        isOpen={isUserSettingsOpen}
+        size={'lg'}
+        title={getUserResource('MENU_SETTINGS_TITLE_TEXT')}
+      >
+        <SettingsModalContent />
       </Modal>
     </>
   )

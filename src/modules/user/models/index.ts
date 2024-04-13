@@ -1,1 +1,2 @@
-export * from './user-menu.model'
+export * from './menu.model'
+export * from './user.model'
