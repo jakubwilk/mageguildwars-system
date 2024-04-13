@@ -17,3 +17,6 @@ export const ROUTES = {
   medals: () => '/medals',
   rules: () => '/rules',
 }
+
+export const DATE_FORMAT_WITH_TIME = 'DD MMM YYYY, HH:mm'
+export const DATE_FORMAT_WITH_NO_TIME = 'DD MMM YYYY'
