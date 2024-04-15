@@ -1,5 +1,6 @@
 import { Drawer } from '@mantine/core'
 import { IconLayoutSidebarRightCollapse } from '@tabler/icons-react'
+import { useResource } from 'resource/hooks'
 import { GuestMenu, UserMenu } from 'user/components'
 
 import { MainMenu } from './MainMenu'
@@ -12,6 +13,8 @@ interface IProps {
 }
 
 export function SidebarMenu({ isOpen, handleCloseSidebar }: IProps) {
+  const { getResource } = useResource('COMMON')
+
   return (
     <Drawer
       classNames={{ header: 'mb-1', title: classes.title }}
@@ -24,7 +27,7 @@ export function SidebarMenu({ isOpen, handleCloseSidebar }: IProps) {
       opened={isOpen}
       position={'right'}
       radius={'md'}
-      title={'menu główne'}
+      title={getResource('MENU_MAIN_TITLE')}
     >
       <MainMenu />
       <GuestMenu handleCloseSidebar={handleCloseSidebar} />
