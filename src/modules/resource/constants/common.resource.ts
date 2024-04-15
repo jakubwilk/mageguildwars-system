@@ -8,4 +8,5 @@ export enum CommonResourceEnum {
   FIELD_NOT_SAME_PASSWORD_TEXT = 'Hasło nie jest identyczne',
   VALUE_YES_TEXT = 'Tak',
   VALUE_NO_TEXT = 'Nie',
+  MENU_MAIN_TITLE = 'Menu główne',
 }
