@@ -1,18 +1,26 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi } from '@reduxjs/toolkit/query/react'
+import { axiosBaseQuery } from 'config'
 
 const authApi = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: '/v1' }),
+  baseQuery: axiosBaseQuery({ baseUrl: '/v1' }),
   endpoints: (builder) => ({
-    login: builder.query({
+    login: builder.mutation({
+      query: (data) => ({
+        url: 'login',
+        method: 'POST',
+        body: data,
+      }),
+    }),
+    register: builder.mutation({
       query: (data) => ({
         url: 'create',
-        method: 'POST',
+        method: 'PUT',
         body: data,
       }),
     }),
   }),
 })
 
-export const { useLoginQuery } = authApi
+export const { useLoginMutation, useRegisterMutation } = authApi
 
 export default authApi
