@@ -3,6 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Text } from '@mantine/core'
+import { useRegisterMutation } from 'auth/api'
 import { Button, PasswordInputField, TextInputField } from 'common/components'
 import { closeRegisterModal } from 'common/store'
 import { useDispatch } from 'config'
@@ -10,13 +11,14 @@ import { isEqual } from 'lodash'
 import { useResource } from 'resource/hooks'
 import { object, string } from 'yup'
 
-import { IRegisterFormValues } from '../models'
+import { IRegisterFormValues, IRegisterRequestValues } from '../models'
 
 import classes from './Components.module.css'
 
 export function RegisterForm() {
   const { getResource } = useResource('COMMON')
   const { getResource: getAuthResource } = useResource('AUTH')
+  const { mutate: createAccount, isPending } = useRegisterMutation()
   const dispatch = useDispatch()
   const form = useForm<IRegisterFormValues>({
     mode: 'onBlur',
@@ -57,6 +59,22 @@ export function RegisterForm() {
     [dispatch],
   )
 
+  const handleFormSubmit = useCallback(
+    (values: IRegisterFormValues) => {
+      const formData: IRegisterRequestValues = {
+        slug: values.slug,
+        email: values.email,
+        password: values.password,
+        group: 1,
+      }
+
+      createAccount(formData)
+    },
+    [createAccount],
+  )
+
+  console.log('isPending', isPending)
+
   useEffect(() => {
     form.clearErrors()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -64,7 +82,7 @@ export function RegisterForm() {
 
   return (
     <FormProvider {...formValues}>
-      <form noValidate onSubmit={form.handleSubmit((val) => console.log('val', val))}>
+      <form noValidate onSubmit={form.handleSubmit(handleFormSubmit)}>
         <div className={'flex flex-col gap-4 mb-4'}>
           <TextInputField
             autoComplete={'off'}

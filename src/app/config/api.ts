@@ -1,6 +1,5 @@
 import axios, { AxiosInstance } from 'axios'
-
-import { loadEnvVariable } from '../../modules/common/utils'
+import { loadEnvVariable } from 'common/utils'
 
 const instance: AxiosInstance = axios.create({
   baseURL: loadEnvVariable('VITE_API_URL'),

@@ -1,2 +1,2 @@
-export * from './auth'
-export { default as authApi } from './auth'
+export * from './useLoginMutation.ts'
+export * from './useRegisterMutation.ts'

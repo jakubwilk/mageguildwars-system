@@ -1,0 +1,4 @@
+export enum AuthApiKeysEnum {
+  CREATE_ACCOUNT = 'CREATE_ACCOUNT',
+  LOGIN_ACCOUNT = 'LOGIN_ACCOUNT',
+}

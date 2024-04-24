@@ -1,6 +1,5 @@
 export * from './theme.ts'
 export * from './router.tsx'
 export { default as api } from './api.ts'
-export { default as axiosBaseQuery } from './axios.query.ts'
 export * from './store.ts'
 export * from './hooks.ts'
