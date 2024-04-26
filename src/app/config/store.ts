@@ -1,11 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
-
-import { modalReducer } from '../../modules/common/store'
+import { modalReducer } from 'common/store'
+import { userReducer } from 'user/store'
 
 export const store = configureStore({
   reducer: {
     modal: modalReducer,
+    user: userReducer,
   },
 })
 

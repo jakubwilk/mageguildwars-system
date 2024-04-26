@@ -13,3 +13,12 @@ export interface IChangePasswordFormValues {
   currentPassword: string
   newPassword: string
 }
+
+export interface IAccount {
+  registerDate: Date
+  updateDate: Date
+  group: number
+  isBlocked: boolean
+  hasGameMasterPanel: boolean
+  canCreateNewCharacters: boolean
+}
