@@ -3,11 +3,10 @@ import { Provider } from 'react-redux'
 import { ColorSchemeScript } from '@mantine/core'
 import { MantineProvider } from '@mantine/core'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { store, theme } from 'config'
 import dayjs from 'dayjs'
 
 import 'dayjs/locale/pl.js'
-
-import { store, theme } from './config'
 
 import '@mantine/core/styles.layer.css'
 
