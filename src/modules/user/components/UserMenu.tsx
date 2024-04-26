@@ -1,10 +1,12 @@
 import { useCallback } from 'react'
 import { Button, Text } from '@mantine/core'
+import { notifications } from '@mantine/notifications'
 import { IconDoorExit, IconUserCog } from '@tabler/icons-react'
 import clsx from 'clsx'
 import { openUserSettingsModal } from 'common/store'
 import { useDispatch } from 'config'
 import { useResource } from 'resource/hooks'
+import { clearUser } from 'user/store'
 
 import classes from './Components.module.css'
 
@@ -18,6 +20,21 @@ export function UserMenu({ handleCloseSidebar }: IProps) {
 
   const handleOpenSettingsModal = useCallback(() => {
     dispatch(openUserSettingsModal())
+    handleCloseSidebar()
+  }, [dispatch, handleCloseSidebar])
+
+  const handleLogoutUser = useCallback(() => {
+    dispatch(clearUser())
+    notifications.show({
+      title: 'Sukces',
+      message: 'Użytkownik został wylogowany z aplikacji',
+      color: 'green',
+      position: 'bottom-right',
+      classNames: {
+        title: 'text-base',
+        description: 'text-base',
+      },
+    })
     handleCloseSidebar()
   }, [dispatch, handleCloseSidebar])
 
@@ -50,6 +67,7 @@ export function UserMenu({ handleCloseSidebar }: IProps) {
       <Button
         className={clsx('p-4 rounded-md', classes.menuItem)}
         classNames={{ label: classes.menuItemLabel }}
+        onClick={handleLogoutUser}
         variant={'transparent'}
       >
         <IconDoorExit className={classes.menuItemLogoutIcon} />

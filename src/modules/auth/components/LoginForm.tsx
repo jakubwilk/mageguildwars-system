@@ -3,6 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Text } from '@mantine/core'
+import { notifications } from '@mantine/notifications'
 import {
   Button,
   CheckboxInputField,
@@ -13,6 +14,7 @@ import { closeLoginModal } from 'common/store'
 import { routeEnum } from 'common/utils'
 import { useDispatch } from 'config'
 import { useResource } from 'resource/hooks'
+import { setUser } from 'user/store'
 import { boolean, object, string } from 'yup'
 
 import { ILoginFormValues } from '../models'
@@ -46,6 +48,36 @@ export function LoginForm() {
 
   const handleCloseLoginModal = useCallback(() => dispatch(closeLoginModal()), [dispatch])
 
+  const handleSubmitForm = useCallback(
+    (values: ILoginFormValues) => {
+      console.log('values', values)
+
+      const MOCK_USER = {
+        registerDate: new Date(),
+        updateDate: new Date(),
+        group: 3,
+        isBlocked: false,
+        hasGameMasterPanel: true,
+        canCreateNewCharacters: true,
+      }
+
+      dispatch(setUser(MOCK_USER))
+      // TODO: Wystawić oddzielnego hooka z notificationSuccess i notificationError
+      notifications.show({
+        title: 'Sukces',
+        message: 'Użytkownik został pomyślnie zalogowany do aplikacji',
+        color: 'green',
+        position: 'bottom-right',
+        classNames: {
+          title: 'text-base',
+          description: 'text-base',
+        },
+      })
+      handleCloseLoginModal()
+    },
+    [handleCloseLoginModal, dispatch],
+  )
+
   useEffect(() => {
     form.clearErrors()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -53,7 +85,7 @@ export function LoginForm() {
 
   return (
     <FormProvider {...formValues}>
-      <form noValidate onSubmit={form.handleSubmit((val) => console.log('val', val))}>
+      <form noValidate onSubmit={form.handleSubmit(handleSubmitForm)}>
         <div className={'flex flex-col gap-4 mb-4'}>
           <TextInputField
             autoComplete={'off'}

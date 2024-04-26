@@ -2,6 +2,7 @@ import { Drawer } from '@mantine/core'
 import { IconLayoutSidebarRightCollapse } from '@tabler/icons-react'
 import { useResource } from 'resource/hooks'
 import { GuestMenu, UserMenu } from 'user/components'
+import { useValidateUser } from 'user/hooks'
 
 import { MainMenu } from './MainMenu'
 
@@ -14,6 +15,7 @@ interface IProps {
 
 export function SidebarMenu({ isOpen, handleCloseSidebar }: IProps) {
   const { getResource } = useResource('COMMON')
+  const { isUserLogged } = useValidateUser()
 
   return (
     <Drawer
@@ -30,8 +32,11 @@ export function SidebarMenu({ isOpen, handleCloseSidebar }: IProps) {
       title={getResource('MENU_MAIN_TITLE')}
     >
       <MainMenu />
-      <GuestMenu handleCloseSidebar={handleCloseSidebar} />
-      <UserMenu handleCloseSidebar={handleCloseSidebar} />
+      {isUserLogged ? (
+        <UserMenu handleCloseSidebar={handleCloseSidebar} />
+      ) : (
+        <GuestMenu handleCloseSidebar={handleCloseSidebar} />
+      )}
     </Drawer>
   )
 }
