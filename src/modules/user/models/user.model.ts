@@ -22,3 +22,10 @@ export interface IAccount {
   hasGameMasterPanel: boolean
   canCreateNewCharacters: boolean
 }
+
+export enum UserGroupEnum {
+  BANNED = 0,
+  USER = 1,
+  OPERATOR = 2,
+  ROOT = 3,
+}

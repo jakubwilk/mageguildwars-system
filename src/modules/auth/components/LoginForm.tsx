@@ -24,6 +24,7 @@ import classes from './Components.module.css'
 export function LoginForm() {
   const { getResource } = useResource('COMMON')
   const { getResource: getAuthResource } = useResource('AUTH')
+  const { getResource: getNotificationResource } = useResource('NOTIFICATION')
   const dispatch = useDispatch()
   const { showNotificationSuccess } = useNotifications()
 
@@ -65,11 +66,13 @@ export function LoginForm() {
 
       dispatch(setUser(MOCK_USER))
       showNotificationSuccess({
-        message: 'Użytkownik został pomyślnie zalogowany do aplikacji',
+        message: getNotificationResource(
+          'NOTIFICATION_USER_LOGIN_SUCCESS_DESCRIPTION_TEXT',
+        ),
       })
       handleCloseLoginModal()
     },
-    [showNotificationSuccess, handleCloseLoginModal, dispatch],
+    [getNotificationResource, showNotificationSuccess, handleCloseLoginModal, dispatch],
   )
 
   useEffect(() => {

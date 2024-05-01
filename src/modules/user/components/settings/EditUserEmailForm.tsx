@@ -2,38 +2,38 @@ import { Dispatch, SetStateAction, useCallback, useMemo } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Text } from '@mantine/core'
-import { Button, PasswordInputField } from 'common/components'
+import { Button, TextInputField } from 'common/components'
 import { closeUserSettingsModal } from 'common/store'
 import { useDispatch } from 'config'
 import { useResource } from 'resource/hooks'
+import { IChangeEmailFormValues } from 'user/models'
 import { object, string } from 'yup'
 
-import { IChangePasswordFormValues } from '../models'
-
-import classes from './Components.module.css'
+import classes from './../Components.module.css'
 
 interface IProps {
   setisVisible: Dispatch<SetStateAction<boolean>>
 }
 
-export function EditUserPasswordForm({ setisVisible }: IProps) {
+export function EditUserEmailForm({ setisVisible }: IProps) {
   const { getResource } = useResource('COMMON')
   const { getResource: getUserResource } = useResource('USER')
-  const { getResource: getAuthResource } = useResource('AUTH')
   const dispatch = useDispatch()
-  const form = useForm<IChangePasswordFormValues>({
+  const form = useForm<IChangeEmailFormValues>({
     mode: 'onBlur',
     criteriaMode: 'all',
     defaultValues: {
-      currentPassword: '',
-      newPassword: '',
+      currentEmail: '',
+      newEmail: '',
     },
     resolver: yupResolver(
       object({
-        currentPassword: string()
-          .required(getResource('FIELD_REQUIRED_TEXT'))
-          .min(10, getResource('FIELD_INCORRECT_PASSWORD_TEXT')),
-        newPassword: string().required(getResource('FIELD_REQUIRED_TEXT')),
+        currentEmail: string()
+          .email(getResource('FIELD_INCORRECT_EMAIL_TEXT'))
+          .required(getResource('FIELD_REQUIRED_TEXT')),
+        newEmail: string()
+          .email(getResource('FIELD_INCORRECT_EMAIL_TEXT'))
+          .required(getResource('FIELD_REQUIRED_TEXT')),
       }),
     ),
   })
@@ -55,23 +55,22 @@ export function EditUserPasswordForm({ setisVisible }: IProps) {
         })}
       >
         <div className={'flex flex-col gap-4 mb-4'}>
-          <PasswordInputField
+          <TextInputField
             autoComplete={'off'}
-            label={getUserResource('FIELD_CURRENT_PASSWORD_LABEL')}
-            name={'currentPassword'}
+            label={getUserResource('FIELD_CURRENT_EMAIL_LABEL')}
+            name={'currentEmail'}
             required
           />
-          <PasswordInputField
+          <TextInputField
             autoComplete={'off'}
-            description={getAuthResource('FIELD_PASSWORD_DESCRIPTION_TEXT')}
-            label={getUserResource('FIELD_NEW_PASSWORD_LABEL')}
-            name={'newPassword'}
+            label={getUserResource('FIELD_NEW_EMAIL_LABEL')}
+            name={'newEmail'}
             required
           />
         </div>
         <div className={'flex justify-center mb-6'}>
           <Text className={classes.loginIssuesText}>
-            {getUserResource('MODAL_SETTINGS_CHANGE_PASSWORD_NOTE_TEXT')}
+            {getUserResource('MODAL_SETTINGS_CHANGE_EMAIL_NOTE_TEXT')}
           </Text>
         </div>
         <div className={'w-full flex justify-end items-center gap-4'}>

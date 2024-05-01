@@ -7,7 +7,7 @@ import { useResource } from 'resource/hooks'
 
 import 'dayjs/locale/pl'
 
-import classes from './Components.module.css'
+import classes from './../Components.module.css'
 
 interface IProps {
   label: string

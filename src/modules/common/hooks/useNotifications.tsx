@@ -25,7 +25,7 @@ export function useNotifications() {
       return notifications.show({
         ...config,
         color: 'green',
-        title: getResource('NOTIFICATION_SUCCESS_TITLE'),
+        title: getResource('NOTIFICATION_SUCCESS_TITLE_TEXT'),
         ...options,
       })
     },

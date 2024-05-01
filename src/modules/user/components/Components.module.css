@@ -27,6 +27,17 @@
     }
 }
 
+.menuItemActive {
+  background-color: var(--mantine-color-dark-6);
+
+  & .menuItemTextMain {
+    color: var(--mantine-color-white);
+  }
+  & .menuItemSubText {
+    color: var(--mantine-color-gray-3);
+  }
+}
+
 .menuItemLabel {
     display: grid !important;
     grid-template-columns: 24px 1fr;

@@ -1,14 +1,13 @@
 import { useCallback, useState } from 'react'
 import { LoadingOverlay, Tabs } from '@mantine/core'
 import { useResource } from 'resource/hooks'
-
-import { UserSettingsTabEnum } from '../models'
+import { UserSettingsTabEnum } from 'user/models'
 
 import { EditUserEmailForm } from './EditUserEmailForm'
 import { EditUserPasswordForm } from './EditUserPasswordForm'
 import { UserInformation } from './UserInformation'
 
-import classes from './Components.module.css'
+import classes from './../Components.module.css'
 
 export function SettingsModalContent() {
   const { getResource } = useResource('USER')

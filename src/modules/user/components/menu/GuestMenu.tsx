@@ -1,36 +1,30 @@
 import { useCallback } from 'react'
 import { Button, Text } from '@mantine/core'
-import { IconDoorExit, IconUserCog } from '@tabler/icons-react'
+import { IconDoorEnter, IconUserPlus } from '@tabler/icons-react'
 import clsx from 'clsx'
-import { useNotifications } from 'common/hooks'
-import { openUserSettingsModal } from 'common/store'
+import { openLoginModal, openRegisterModal } from 'common/store'
 import { useDispatch } from 'config'
 import { useResource } from 'resource/hooks'
-import { clearUser } from 'user/store'
 
-import classes from './Components.module.css'
+import classes from './../Components.module.css'
 
 interface IProps {
   handleCloseSidebar: () => void
 }
 
-export function UserMenu({ handleCloseSidebar }: IProps) {
+export function GuestMenu({ handleCloseSidebar }: IProps) {
   const { getResource } = useResource('USER')
   const dispatch = useDispatch()
-  const { showNotificationSuccess } = useNotifications()
 
-  const handleOpenSettingsModal = useCallback(() => {
-    dispatch(openUserSettingsModal())
+  const handleOpenLoginModal = useCallback(() => {
+    dispatch(openLoginModal())
     handleCloseSidebar()
   }, [dispatch, handleCloseSidebar])
 
-  const handleLogoutUser = useCallback(() => {
-    dispatch(clearUser())
-    showNotificationSuccess({
-      message: 'Użytkownik został wylogowany z aplikacji',
-    })
+  const handleOpenRegisterModal = useCallback(() => {
+    dispatch(openRegisterModal())
     handleCloseSidebar()
-  }, [showNotificationSuccess, dispatch, handleCloseSidebar])
+  }, [dispatch, handleCloseSidebar])
 
   return (
     <div className={'flex flex-col gap-2'}>
@@ -40,37 +34,37 @@ export function UserMenu({ handleCloseSidebar }: IProps) {
           classes.title,
         )}
       >
-        {getResource('MENU_USER_TITLE')}
+        {getResource('MENU_GUEST_TITLE')}
       </Text>
       <Button
         className={clsx('p-4 rounded-md', classes.menuItem)}
         classNames={{ label: classes.menuItemLabel }}
-        onClick={handleOpenSettingsModal}
+        onClick={handleOpenLoginModal}
         variant={'transparent'}
       >
-        <IconUserCog className={classes.menuItemIcon} />
+        <IconDoorEnter className={classes.menuItemIcon} />
         <div className={'flex text-left flex-col pl-3 text-wrap'}>
           <Text className={classes.menuItemTextMain}>
-            {getResource('MENU_SETTINGS_TITLE_TEXT')}
+            {getResource('MENU_LOGIN_TITLE_TEXT')}
           </Text>
           <Text className={clsx('lowercase', classes.menuItemSubText)}>
-            {getResource('MENU_SETTINGS_DESCRIPTION_TEXT')}
+            {getResource('MENU_LOGIN_DESCRIPTION_TEXT')}
           </Text>
         </div>
       </Button>
       <Button
         className={clsx('p-4 rounded-md', classes.menuItem)}
         classNames={{ label: classes.menuItemLabel }}
-        onClick={handleLogoutUser}
+        onClick={handleOpenRegisterModal}
         variant={'transparent'}
       >
-        <IconDoorExit className={classes.menuItemLogoutIcon} />
+        <IconUserPlus className={classes.menuItemIcon} />
         <div className={'flex text-left flex-col pl-3 text-wrap'}>
           <Text className={classes.menuItemTextMain}>
-            {getResource('MENU_LOGOUT_TITLE_TEXT')}
+            {getResource('MENU_REGISTER_TITLE_TEXT')}
           </Text>
           <Text className={clsx('lowercase', classes.menuItemSubText)}>
-            {getResource('MENU_LOGOUT_DESCRIPTION_TEXT')}
+            {getResource('MENU_REGISTER_DESCRIPTION_TEXT')}
           </Text>
         </div>
       </Button>
