@@ -1,8 +1,8 @@
 import { useCallback } from 'react'
 import { Button, Text } from '@mantine/core'
-import { notifications } from '@mantine/notifications'
 import { IconDoorExit, IconUserCog } from '@tabler/icons-react'
 import clsx from 'clsx'
+import { useNotifications } from 'common/hooks'
 import { openUserSettingsModal } from 'common/store'
 import { useDispatch } from 'config'
 import { useResource } from 'resource/hooks'
@@ -17,6 +17,7 @@ interface IProps {
 export function UserMenu({ handleCloseSidebar }: IProps) {
   const { getResource } = useResource('USER')
   const dispatch = useDispatch()
+  const { showNotificationSuccess } = useNotifications()
 
   const handleOpenSettingsModal = useCallback(() => {
     dispatch(openUserSettingsModal())
@@ -25,18 +26,11 @@ export function UserMenu({ handleCloseSidebar }: IProps) {
 
   const handleLogoutUser = useCallback(() => {
     dispatch(clearUser())
-    notifications.show({
-      title: 'Sukces',
+    showNotificationSuccess({
       message: 'Użytkownik został wylogowany z aplikacji',
-      color: 'green',
-      position: 'bottom-right',
-      classNames: {
-        title: 'text-base',
-        description: 'text-base',
-      },
     })
     handleCloseSidebar()
-  }, [dispatch, handleCloseSidebar])
+  }, [showNotificationSuccess, dispatch, handleCloseSidebar])
 
   return (
     <div className={'flex flex-col gap-2'}>

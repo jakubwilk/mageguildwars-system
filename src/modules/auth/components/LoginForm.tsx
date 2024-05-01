@@ -65,7 +65,6 @@ export function LoginForm() {
 
       dispatch(setUser(MOCK_USER))
       showNotificationSuccess({
-        title: 'Udało się',
         message: 'Użytkownik został pomyślnie zalogowany do aplikacji',
       })
       handleCloseLoginModal()
