@@ -56,8 +56,8 @@ export function LoginForm() {
       console.log('values', values)
 
       const MOCK_USER = {
-        registerDate: new Date(),
-        updateDate: new Date(),
+        registerDate: new Date().toISOString(),
+        updateDate: new Date().toISOString(),
         group: 3,
         isBlocked: false,
         hasGameMasterPanel: true,
@@ -105,7 +105,10 @@ export function LoginForm() {
         <div className={'flex justify-center mb-6'}>
           <Text className={classes.loginIssuesText}>
             {getAuthResource('LOGIN_ISSUES_TEXT')}
-            <Link className={classes.loginIssuesLink} to={routeEnum.LOGIN_ISSUES}>
+            <Link
+              className={classes.loginIssuesLink}
+              to={routeEnum.LOGIN_ISSUES as string}
+            >
               {getAuthResource('LOGIN_ISSUES_LINK_TEXT')}
             </Link>
           </Text>

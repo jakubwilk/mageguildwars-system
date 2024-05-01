@@ -79,7 +79,8 @@ export function UserMenu({ handleCloseSidebar }: IProps) {
               isActive ? classes.menuItemActive : classes.menuItem,
             )
           }
-          to={routeEnum.ROOT_PANEL}
+          onClick={handleCloseSidebar}
+          to={routeEnum.ROOT_PANEL as string}
         >
           <IconWorldCog className={classes.menuItemIcon} width={36} />
           <div className={'flex flex-col ml-3'}>

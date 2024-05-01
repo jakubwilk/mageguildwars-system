@@ -38,7 +38,7 @@ export function GuestMenu({ handleCloseSidebar }: IProps) {
       </Text>
       <Button
         className={clsx('p-4 rounded-md', classes.menuItem)}
-        classNames={{ label: classes.menuItemLabel }}
+        classNames={{ label: classes.menuItemLabel, inner: 'justify-start' }}
         onClick={handleOpenLoginModal}
         variant={'transparent'}
       >
@@ -54,7 +54,7 @@ export function GuestMenu({ handleCloseSidebar }: IProps) {
       </Button>
       <Button
         className={clsx('p-4 rounded-md', classes.menuItem)}
-        classNames={{ label: classes.menuItemLabel }}
+        classNames={{ label: classes.menuItemLabel, inner: 'justify-start' }}
         onClick={handleOpenRegisterModal}
         variant={'transparent'}
       >
