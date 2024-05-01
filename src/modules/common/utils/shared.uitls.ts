@@ -4,6 +4,7 @@ export const loadEnvVariable = (name: string): string => {
 
 export enum routeEnum {
   HOME = '/',
+  ROOT_PANEL = '/rcp',
   LOGIN_ISSUES = '/login-issues',
   USERS = '/users',
   MEDALS = '/medals',
@@ -12,6 +13,7 @@ export enum routeEnum {
 
 export const ROUTES = {
   home: () => '/',
+  rootPanel: () => '/rcp',
   loginIssues: () => '/login-issues',
   users: () => '/users',
   medals: () => '/medals',
