@@ -5,7 +5,7 @@ import { IconDoorExit, IconUserCog, IconWorldCog } from '@tabler/icons-react'
 import clsx from 'clsx'
 import { useNotifications } from 'common/hooks'
 import { openUserSettingsModal } from 'common/store'
-import { routeEnum } from 'common/utils'
+import { routeKeys } from 'common/utils'
 import { useDispatch, useSelector } from 'config'
 import { isEqual } from 'lodash'
 import { useResource } from 'resource/hooks'
@@ -80,7 +80,7 @@ export function UserMenu({ handleCloseSidebar }: IProps) {
             )
           }
           onClick={handleCloseSidebar}
-          to={routeEnum.ROOT_PANEL as string}
+          to={routeKeys.ROOT_PANEL}
         >
           <IconWorldCog className={classes.menuItemIcon} width={36} />
           <div className={'flex flex-col ml-3'}>

@@ -11,7 +11,7 @@ import {
 } from 'common/components'
 import { useNotifications } from 'common/hooks'
 import { closeLoginModal } from 'common/store'
-import { routeEnum } from 'common/utils'
+import { routeKeys } from 'common/utils'
 import { useDispatch } from 'config'
 import { useResource } from 'resource/hooks'
 import { setUser } from 'user/store'
@@ -105,10 +105,7 @@ export function LoginForm() {
         <div className={'flex justify-center mb-6'}>
           <Text className={classes.loginIssuesText}>
             {getAuthResource('LOGIN_ISSUES_TEXT')}
-            <Link
-              className={classes.loginIssuesLink}
-              to={routeEnum.LOGIN_ISSUES as string}
-            >
+            <Link className={classes.loginIssuesLink} to={routeKeys.LOGIN_ISSUES}>
               {getAuthResource('LOGIN_ISSUES_LINK_TEXT')}
             </Link>
           </Text>

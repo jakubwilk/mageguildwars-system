@@ -4,7 +4,7 @@ import { IconBook2, IconHome, IconMedal, IconUsers } from '@tabler/icons-react'
 import clsx from 'clsx'
 
 import { IMainMenuItem } from '../../models'
-import { routeEnum } from '../../utils'
+import { routeKeys } from '../../utils'
 
 import classes from './Menu.module.css'
 
@@ -13,7 +13,7 @@ const MAIN_MENU: IMainMenuItem[] = [
     id: 1,
     label: 'Strona główna',
     text: 'Wróć na stronę główną',
-    url: routeEnum.HOME,
+    url: routeKeys.HOME,
     IconComponent: IconHome,
     isDisabled: false,
   },
@@ -21,7 +21,7 @@ const MAIN_MENU: IMainMenuItem[] = [
     id: 2,
     label: 'Użytkownicy',
     text: 'Przejrzyj listę aktywnych magów',
-    url: routeEnum.USERS,
+    url: routeKeys.USERS,
     IconComponent: IconUsers,
     isDisabled: true,
   },
@@ -29,7 +29,7 @@ const MAIN_MENU: IMainMenuItem[] = [
     id: 3,
     label: 'Osiągnięcia',
     text: 'Lista wszystkich osiągnięć możliwych do zdobycia',
-    url: routeEnum.MEDALS,
+    url: routeKeys.MEDALS,
     IconComponent: IconMedal,
     isDisabled: true,
   },
@@ -37,7 +37,7 @@ const MAIN_MENU: IMainMenuItem[] = [
     id: 4,
     label: 'Regulaminy',
     text: 'Polityka prywatności i zasady korzystania z serwisu',
-    url: routeEnum.RULES,
+    url: routeKeys.RULES,
     IconComponent: IconBook2,
     isDisabled: true,
   },

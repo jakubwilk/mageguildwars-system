@@ -2,13 +2,13 @@ export const loadEnvVariable = (name: string): string => {
   return import.meta.env[name] || ''
 }
 
-export enum routeEnum {
-  HOME = '/',
-  ROOT_PANEL = import.meta.env['VITE_ADMIN_PANEL_URL'] || '/',
-  LOGIN_ISSUES = '/login-issues',
-  USERS = '/users',
-  MEDALS = '/medals',
-  RULES = '/rules',
+export const routeKeys = {
+  HOME: '/',
+  ROOT_PANEL: import.meta.env['VITE_ADMIN_PANEL_URL'] || '/',
+  LOGIN_ISSUES: '/login-issues',
+  USERS: '/users',
+  MEDALS: '/medals',
+  RULES: '/rules',
 }
 
 export const ROUTES = {
