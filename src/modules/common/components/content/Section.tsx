@@ -6,7 +6,7 @@ import classes from './Content.module.css'
 
 interface IProps {
   children: ReactNode
-  title: string
+  title?: string
   className?: string
 }
 
@@ -15,9 +15,11 @@ export function Section({ children, title, className }: IProps) {
     <section
       className={clsx('w-full h-full p-4 md:p-8 rounded-xl', classes.section, className)}
     >
-      <Title className={clsx('mb-4 md:mb-8', classes.title)} order={2}>
-        {title}
-      </Title>
+      {title && (
+        <Title className={clsx('mb-4 md:mb-8', classes.title)} order={2}>
+          {title}
+        </Title>
+      )}
       {children}
     </section>
   )
