@@ -1,8 +1,11 @@
 import { useCallback, useMemo } from 'react'
 import { NotificationData, notifications } from '@mantine/notifications'
 import { INotificationConfig } from 'common/models'
+import { useResource } from 'resource/hooks'
 
 export function useNotifications() {
+  const { getResource } = useResource('NOTIFICATION')
+
   const config: NotificationData = useMemo(
     () => ({
       title: '',
@@ -20,19 +23,20 @@ export function useNotifications() {
   const showNotificationSuccess = useCallback(
     (options: INotificationConfig) => {
       return notifications.show({
-        color: 'green',
         ...config,
+        color: 'green',
+        title: getResource('NOTIFICATION_SUCCESS_TITLE'),
         ...options,
       })
     },
-    [config],
+    [config, getResource],
   )
 
   const showNotificationError = useCallback(
     (options: INotificationConfig) => {
       return notifications.show({
-        color: 'red',
         ...config,
+        color: 'red',
         ...options,
       })
     },
@@ -42,9 +46,9 @@ export function useNotifications() {
   const showNotificationInfo = useCallback(
     (options: INotificationConfig) => {
       return notifications.show({
+        ...config,
         color: 'blue',
         timeout: 10000,
-        ...config,
         ...options,
       })
     },
