@@ -9,6 +9,8 @@ export enum UserResourceEnum {
   MENU_LOGOUT_DESCRIPTION_TEXT = 'Zakończ przygodę do czasu następnego logowania',
   MENU_GUEST_TITLE = 'Menu gościa',
   MENU_USER_TITLE = 'Menu użytkownika',
+  MENU_ROOT_PANEL_TITLE_TEXT = 'Panel administratora',
+  MENU_ROOT_PANEL_DESCRIPTION_TEXT = 'Przejdź do panelu zarządzania aplikacją z poziomu głównego administratora',
   MODAL_SETTINGS_CHANGE_EMAIL_TAB_TEXT = 'Zmiana adresu email',
   MODAL_SETTINGS_CHANGE_PASSWORD_TAB_TEXT = 'Zmiana hasła',
   MODAL_SETTINGS_INFORMATION_TAB_TEXT = 'Informacje o koncie',
