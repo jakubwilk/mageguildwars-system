@@ -5,6 +5,8 @@ export const loadEnvVariable = (name: string): string => {
 export const routeKeys = {
   HOME: '/',
   ROOT_PANEL: import.meta.env['VITE_ADMIN_PANEL_URL'] || '/',
+  ROOT_PANEL_USERS: '/users',
+  ROOT_PANEL_AREAS: '/areas',
   LOGIN_ISSUES: '/login-issues',
   USERS: '/users',
   MEDALS: '/medals',
@@ -14,6 +16,8 @@ export const routeKeys = {
 export const ROUTES = {
   home: () => '/',
   rootPanel: () => import.meta.env['VITE_ADMIN_PANEL_URL'] || '/',
+  rootPanelUsers: () => '/users',
+  rootPanelAreas: () => '/areas',
   loginIssues: () => '/login-issues',
   users: () => '/users',
   medals: () => '/medals',
