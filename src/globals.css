@@ -32,6 +32,12 @@
   background-color: var(--mantine-color-violet-5);
 }
 
+*::selection,
+*::-webkit-selection {
+  background-color: var(--mantine-primary-color-9);
+  color: var(--mantine-color-white);
+}
+
 body {
   background-color: var(--mantine-color-dark-7);
 }
