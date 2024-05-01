@@ -15,6 +15,7 @@ export default defineConfig({
     alias: {
       config: path.resolve('src/app/config/'),
       pages: path.resolve('src/app/pages/'),
+      administration: path.resolve('src/modules/administration/'),
       auth: path.resolve('src/modules/auth/'),
       common: path.resolve('src/modules/common/'),
       home: path.resolve('src/modules/home/'),

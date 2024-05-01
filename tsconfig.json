@@ -24,6 +24,7 @@
     "paths": {
       "config": ["src/app/config/"],
       "pages": ["src/app/pages/"],
+      "administration": ["src/modules/administration/*"],
       "auth/*": ["src/modules/auth/*"],
       "common/*": ["src/modules/common/*"],
       "home/*": ["src/modules/home/*"],
