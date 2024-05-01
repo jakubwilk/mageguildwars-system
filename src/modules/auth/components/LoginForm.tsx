@@ -3,13 +3,13 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Text } from '@mantine/core'
-import { notifications } from '@mantine/notifications'
 import {
   Button,
   CheckboxInputField,
   PasswordInputField,
   TextInputField,
 } from 'common/components'
+import { useNotifications } from 'common/hooks'
 import { closeLoginModal } from 'common/store'
 import { routeEnum } from 'common/utils'
 import { useDispatch } from 'config'
@@ -25,6 +25,8 @@ export function LoginForm() {
   const { getResource } = useResource('COMMON')
   const { getResource: getAuthResource } = useResource('AUTH')
   const dispatch = useDispatch()
+  const { showNotificationSuccess } = useNotifications()
+
   const form = useForm<ILoginFormValues>({
     mode: 'onBlur',
     criteriaMode: 'all',
@@ -62,20 +64,13 @@ export function LoginForm() {
       }
 
       dispatch(setUser(MOCK_USER))
-      // TODO: Wystawić oddzielnego hooka z notificationSuccess i notificationError
-      notifications.show({
-        title: 'Sukces',
+      showNotificationSuccess({
+        title: 'Udało się',
         message: 'Użytkownik został pomyślnie zalogowany do aplikacji',
-        color: 'green',
-        position: 'bottom-right',
-        classNames: {
-          title: 'text-base',
-          description: 'text-base',
-        },
       })
       handleCloseLoginModal()
     },
-    [handleCloseLoginModal, dispatch],
+    [showNotificationSuccess, handleCloseLoginModal, dispatch],
   )
 
   useEffect(() => {
