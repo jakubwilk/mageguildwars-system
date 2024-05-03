@@ -23,6 +23,7 @@
 
     "paths": {
       "config": ["src/app/config/"],
+      "locales/*": ["src/app/locales/*"],
       "pages": ["src/app/pages/"],
       "administration/*": ["src/modules/administration/*"],
       "auth/*": ["src/modules/auth/*"],

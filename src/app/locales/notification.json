@@ -1,0 +1,13 @@
+{
+  "title": {
+    "success": "Udało się",
+    "error": "Niepowodzenie",
+    "info": "Uwaga"
+  },
+  "message": {
+    "success": {
+      "login": "Użytkownik został pomyślnie zalogowany do aplikacji",
+      "logout": "Użytkownik został pomyślnie wylogowany z aplikacji"
+    }
+  }
+}

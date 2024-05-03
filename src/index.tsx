@@ -1,6 +1,8 @@
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 
+import './app/config/i18n'
+
 import { App } from './app/App'
 import { AppWrapper } from './app/AppWrapper'
 

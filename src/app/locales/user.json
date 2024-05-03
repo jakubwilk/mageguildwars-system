@@ -1,0 +1,41 @@
+{
+  "menu": {
+    "quest": "Menu gościa",
+    "user": "Menu użytkownika",
+    "login": "Logowanie",
+    "login-description": "Zaloguj się na konto by kontynuować rozgrywkę",
+    "register": "Rejestracja",
+    "register-description": "Załóż konto i rozpocznij przygodę w świecie magii",
+    "settings": "Edytuj dane",
+    "settings-descriptipn": "Zmień swoje hasło oraz adres email, z których korzystasz przy logowaniu",
+    "logout": "Wyloguj",
+    "logout-description": "Zakończ przygodę do czasu następnego logowania",
+    "root": "Panel administratora",
+    "root-description": "Przejdź do panelu zarządzania aplikacją z poziomu głównego administratora"
+  },
+  "modal": {
+    "tab": {
+      "email": "Zmiana adresu email",
+      "password": "Zmiana hasła",
+      "info": "Informacje o koncie"
+    },
+    "text": {
+      "email": "Po zmianie adresu email, użytkownik zostanie wylogowany z aplikacji",
+      "password": "Po zmianie hasła, użytkownik zostanie wylogowany z aplikacji"
+    }
+  },
+  "field": {
+    "email": "Obecny adres email",
+    "email-new": "Nowy adres email",
+    "password": "Obecne hasło",
+    "password-new": "Nowe hasło"
+  },
+  "value": {
+    "register": "Data rejestracji: ",
+    "update": "Data ostatniej aktualizacji: ",
+    "active": "Czy konto użytkownika posiada blokadę aktywacyjną: ",
+    "group": "Grupa: ",
+    "game-master-panel": "Czy użytkownik ma dostęp do panelu MG: ",
+    "create-new-characters": "Czy użytkownik może tworzyć nowe postacie: "
+  }
+}

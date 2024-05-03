@@ -14,6 +14,7 @@ export default defineConfig({
   resolve: {
     alias: {
       config: path.resolve('src/app/config/'),
+      locales: path.resolve('src/app/locales/'),
       pages: path.resolve('src/app/pages/'),
       administration: path.resolve('src/modules/administration/'),
       auth: path.resolve('src/modules/auth/'),
