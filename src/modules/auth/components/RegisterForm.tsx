@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Text } from '@mantine/core'
@@ -8,7 +9,6 @@ import { Button, PasswordInputField, TextInputField } from 'common/components'
 import { closeRegisterModal } from 'common/store'
 import { useDispatch } from 'config'
 import { isEqual } from 'lodash'
-import { useResource } from 'resource/hooks'
 import { object, string } from 'yup'
 
 import { IRegisterFormValues, IRegisterRequestValues } from '../models'
@@ -16,9 +16,8 @@ import { IRegisterFormValues, IRegisterRequestValues } from '../models'
 import classes from './Components.module.css'
 
 export function RegisterForm() {
-  const { getResource } = useResource('COMMON')
-  const { getResource: getAuthResource } = useResource('AUTH')
-  const { mutate: createAccount, isPending } = useRegisterMutation()
+  const { t } = useTranslation()
+  const { mutate: createAccount } = useRegisterMutation()
   const dispatch = useDispatch()
   const form = useForm<IRegisterFormValues>({
     mode: 'onBlur',
@@ -31,18 +30,18 @@ export function RegisterForm() {
     },
     resolver: yupResolver(
       object({
-        slug: string().required(getResource('FIELD_REQUIRED_TEXT')),
+        slug: string().required(t('common:validation.field-required')),
         email: string()
-          .email(getResource('FIELD_INCORRECT_EMAIL_TEXT'))
-          .required(getResource('FIELD_REQUIRED_TEXT')),
+          .email(t('common:validation.field-email'))
+          .required(t('common:validation.field-required')),
         password: string()
-          .required(getResource('FIELD_REQUIRED_TEXT'))
-          .min(10, getResource('FIELD_INCORRECT_PASSWORD_TEXT')),
+          .required(t('common:validation.field-required'))
+          .min(10, t('common:validation.field-password')),
         repeatPassword: string()
-          .required(getResource('FIELD_REQUIRED_TEXT'))
+          .required(t('common:validation.field-required'))
           .test(
             'checkIfPasswordsAreTheSame',
-            getResource('FIELD_NOT_SAME_PASSWORD_TEXT'),
+            t('common:validation.field-password-repeat'),
             function (value, context) {
               const passwordValue = context.parent.password
               return isEqual(value, passwordValue)
@@ -73,8 +72,6 @@ export function RegisterForm() {
     [createAccount],
   )
 
-  console.log('isPending', isPending)
-
   useEffect(() => {
     form.clearErrors()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -86,45 +83,45 @@ export function RegisterForm() {
         <div className={'flex flex-col gap-4 mb-4'}>
           <TextInputField
             autoComplete={'off'}
-            description={getAuthResource('FIELD_SLUG_DESCRIPTION_TEXT')}
-            label={getAuthResource('FIELD_SLUG_LABEL')}
+            description={t('auth:field.slug-description')}
+            label={t('auth:field.slug-label')}
             name={'slug'}
             required
           />
           <TextInputField
             autoComplete={'off'}
-            description={getAuthResource('FIELD_EMAIL_DESCRIPTION_TEXT')}
-            label={getAuthResource('FIELD_EMAIL_LABEL')}
+            description={t('auth:field.email-description')}
+            label={t('auth:field.email-label')}
             name={'email'}
             required
           />
           <PasswordInputField
             autoComplete={'off'}
-            description={getAuthResource('FIELD_PASSWORD_DESCRIPTION_TEXT')}
-            label={getAuthResource('FIELD_PASSWORD_LABEL')}
+            description={t('auth:field.password-description')}
+            label={t('auth:field.password-label')}
             name={'password'}
             required
           />
           <PasswordInputField
             autoComplete={'off'}
-            label={getAuthResource('FIELD_REPEAT_PASSWORD_LABEL')}
+            label={t('auth:field.password-repeat-label')}
             name={'repeatPassword'}
             required
           />
         </div>
         <div className={'flex text-center justify-center mb-6'}>
           <Text className={classes.loginIssuesText}>
-            {getAuthResource('REGISTER_RULES_AGREEMENT_TEXT')}
+            {t('auth:text.register-rules-agreement')}
             <Link className={classes.loginIssuesLink} to={'/'}>
-              {getAuthResource('REGISTER_RULES_AGREEMENT_LINK_TEXT')}
+              {t('auth:text.register-rules-agreement-link')}
             </Link>
           </Text>
         </div>
         <div className={'w-full flex justify-end items-center gap-4'}>
           <Button onClick={handleCloseRegisterModal} type={'button'} variant={'default'}>
-            {getResource('ACTION_CANCEL_TEXT')}
+            {t('common:action.cancel')}
           </Button>
-          <Button type={'submit'}>{getAuthResource('ACTION_REGISTER_TEXT')}</Button>
+          <Button type={'submit'}>{t('auth:action.register-text')}</Button>
         </div>
       </form>
     </FormProvider>

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Text } from '@mantine/core'
@@ -13,7 +14,6 @@ import { useNotifications } from 'common/hooks'
 import { closeLoginModal } from 'common/store'
 import { routeKeys } from 'common/utils'
 import { useDispatch } from 'config'
-import { useResource } from 'resource/hooks'
 import { setUser } from 'user/store'
 import { boolean, object, string } from 'yup'
 
@@ -22,9 +22,7 @@ import { ILoginFormValues } from '../models'
 import classes from './Components.module.css'
 
 export function LoginForm() {
-  const { getResource } = useResource('COMMON')
-  const { getResource: getAuthResource } = useResource('AUTH')
-  const { getResource: getNotificationResource } = useResource('NOTIFICATION')
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const { showNotificationSuccess } = useNotifications()
 
@@ -39,9 +37,9 @@ export function LoginForm() {
     resolver: yupResolver(
       object({
         login: string()
-          .email(getResource('FIELD_INCORRECT_EMAIL_TEXT'))
-          .required(getResource('FIELD_REQUIRED_TEXT')),
-        password: string().required(getResource('FIELD_REQUIRED_TEXT')),
+          .email(t('common:validation.field-email'))
+          .required(t('common:validation.field-required')),
+        password: string().required(t('common:validation.field-required')),
         isRemember: boolean(),
       }),
     ),
@@ -66,13 +64,11 @@ export function LoginForm() {
 
       dispatch(setUser(MOCK_USER))
       showNotificationSuccess({
-        message: getNotificationResource(
-          'NOTIFICATION_USER_LOGIN_SUCCESS_DESCRIPTION_TEXT',
-        ),
+        message: t('notification:message.success.login'),
       })
       handleCloseLoginModal()
     },
-    [getNotificationResource, showNotificationSuccess, handleCloseLoginModal, dispatch],
+    [showNotificationSuccess, handleCloseLoginModal, dispatch, t],
   )
 
   useEffect(() => {
@@ -86,35 +82,35 @@ export function LoginForm() {
         <div className={'flex flex-col gap-4 mb-4'}>
           <TextInputField
             autoComplete={'off'}
-            label={getAuthResource('FIELD_EMAIL_LABEL')}
+            label={t('auth:field.email-label')}
             name={'login'}
             required
           />
           <PasswordInputField
             autoComplete={'off'}
-            label={getAuthResource('FIELD_PASSWORD_LABEL')}
+            label={t('auth:field.password-label')}
             name={'password'}
             required
           />
           <CheckboxInputField
-            description={getAuthResource('FIELD_REMEMBER_ME_DESCRIPTION_TEXT')}
-            label={getAuthResource('FIELD_REMEMBER_ME_LABEL')}
+            description={t('auth:field.remember-description')}
+            label={t('auth:field.remember-label')}
             name={'isRemember'}
           />
         </div>
         <div className={'flex justify-center mb-6'}>
           <Text className={classes.loginIssuesText}>
-            {getAuthResource('LOGIN_ISSUES_TEXT')}
+            {t('auth:text.login-issues')}
             <Link className={classes.loginIssuesLink} to={routeKeys.LOGIN_ISSUES}>
-              {getAuthResource('LOGIN_ISSUES_LINK_TEXT')}
+              {t('auth:text.login-issues-link')}
             </Link>
           </Text>
         </div>
         <div className={'w-full flex justify-end items-center gap-4'}>
           <Button onClick={handleCloseLoginModal} type={'button'} variant={'default'}>
-            {getResource('ACTION_CANCEL_TEXT')}
+            {t('common:action.cancel')}
           </Button>
-          <Button type={'submit'}>{getAuthResource('ACTION_LOGIN_TEXT')}</Button>
+          <Button type={'submit'}>{t('auth:action.login-text')}</Button>
         </div>
       </form>
     </FormProvider>
