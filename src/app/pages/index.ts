@@ -1,2 +1,3 @@
 export * from './HomePage.tsx'
-export * from './RootPage.tsx'
+export * from './DashboardPage.tsx'
+export * from './DashboardUsersPage.tsx'
