@@ -1,4 +1,4 @@
-import { Badge, List, rem, ThemeIcon } from '@mantine/core'
+import { Badge, List, rem, Text, ThemeIcon } from '@mantine/core'
 import { TablerIconsProps } from '@tabler/icons-react'
 import clsx from 'clsx'
 import dayjs from 'dayjs'
@@ -12,8 +12,9 @@ import classes from './../Components.module.css'
 interface IProps {
   label: string
   value: string | Date | boolean
-  IconComponent: (props: TablerIconsProps) => JSX.Element
+  IconComponent?: (props: TablerIconsProps) => JSX.Element
   badgeColor: string
+  hasSmallLabel?: boolean
 }
 
 export function UserInformationItem({
@@ -21,6 +22,7 @@ export function UserInformationItem({
   value,
   IconComponent,
   badgeColor = 'gray',
+  hasSmallLabel,
 }: IProps) {
   const { getResource } = useResource('COMMON')
 
@@ -42,13 +44,17 @@ export function UserInformationItem({
 
   return (
     <List.Item
-      icon={
-        <ThemeIcon radius={'xl'} size={24}>
-          <IconComponent style={{ width: rem(16), height: rem(16) }} />
-        </ThemeIcon>
-      }
+      {...(IconComponent && {
+        icon: (
+          <ThemeIcon radius={'xl'} size={24}>
+            <IconComponent style={{ width: rem(16), height: rem(16) }} />
+          </ThemeIcon>
+        ),
+      })}
     >
-      {label}
+      <Text className={clsx('inline-block', hasSmallLabel ? classes.badgeLabel : '')}>
+        {label}
+      </Text>
       <Badge
         className={clsx('ml-2', classes.badge)}
         color={badgeColor}

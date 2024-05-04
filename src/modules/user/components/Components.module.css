@@ -1,30 +1,31 @@
 .title {
-    line-height: 1;
-    font-weight: var(--mgw-font-weight-regular);
-    color: var(--mantine-color-dark-3);
-    font-size: var(--mantine-font-size-md);
-    padding: var(--mantine-spacing-md);
-    padding-inline-end: calc(var(--mantine-spacing-md)) - calc(0.3125rem * var(--mantine-scale));
-    background-color: var(--mantine-color-body);
-    z-index: 1000;
-    min-height: calc(3.75rem * var(--mantine-scale));
+  line-height: 1;
+  font-weight: var(--mgw-font-weight-regular);
+  color: var(--mantine-color-dark-3);
+  font-size: var(--mantine-font-size-md);
+  padding: var(--mantine-spacing-md);
+  padding-inline-end: calc(var(--mantine-spacing-md)) -
+    calc(0.3125rem * var(--mantine-scale));
+  background-color: var(--mantine-color-body);
+  z-index: 1000;
+  min-height: calc(3.75rem * var(--mantine-scale));
 }
 
 .menuItem {
-    background-color: transparent;
-    height: auto !important;
+  background-color: transparent;
+  height: auto !important;
 }
 
 .menuItem:hover,
 .menuItem:focus {
-    background-color: var(--mantine-color-dark-6) !important;
+  background-color: var(--mantine-color-dark-6) !important;
 
-    & .menuItemTextMain {
-        color: var(--mantine-color-white);
-    }
-    & .menuItemSubText {
-        color: var(--mantine-color-gray-3);
-    }
+  & .menuItemTextMain {
+    color: var(--mantine-color-white);
+  }
+  & .menuItemSubText {
+    color: var(--mantine-color-gray-3);
+  }
 }
 
 .menuItemActive {
@@ -39,39 +40,44 @@
 }
 
 .menuItemLabel {
-    display: grid !important;
-    grid-template-columns: 24px 1fr;
+  display: grid !important;
+  grid-template-columns: 24px 1fr;
 }
 
 .menuItemIcon {
-    color: var(--mantine-primary-color-4);
+  color: var(--mantine-primary-color-4);
 }
 
 .menuItemLogoutIcon {
-    color: var(--mantine-color-red-4);
+  color: var(--mantine-color-red-4);
 }
 
 .menuItemTextMain {
-    font-weight: var(--mgw-font-weight-semibold);
-    font-size: 1rem;
-    color: var(--mantine-color-gray-3);
+  font-weight: var(--mgw-font-weight-semibold);
+  font-size: 1rem;
+  color: var(--mantine-color-gray-3);
 }
 
 .menuItemSubText {
-    font-weight: var(--mgw-font-weight-light);
-    font-size: 0.875rem;
-    color: var(--mantine-color-gray-6);
+  font-weight: var(--mgw-font-weight-light);
+  font-size: 0.875rem;
+  color: var(--mantine-color-gray-6);
 }
 
 .tabItem {
-    font-size: 1rem;
-    color: var(--mantine-color-gray-5);
+  font-size: 1rem;
+  color: var(--mantine-color-gray-5);
 
-    &[data-active] {
-        color: var(--mantine-color-white);
-    }
+  &[data-active] {
+    color: var(--mantine-color-white);
+  }
 }
 
 .badge {
-    font-weight: var(--mgw-font-weight-light) !important;
+  font-weight: var(--mgw-font-weight-light) !important;
+}
+
+.badgeLabel {
+  font-size: 0.9rem;
+  color: var(--mantine-color-dark-2);
 }
