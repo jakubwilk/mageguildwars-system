@@ -9,8 +9,8 @@ interface IUsersReducer {
 const initialState: IUsersReducer = {
   users: [],
   filters: {
-    page: 0,
-    size: 20,
+    page: 1,
+    size: 10,
   },
 }
 
@@ -19,6 +19,7 @@ export const usersReducer = createSlice({
   initialState,
   reducers: {
     setFilters: (state, action) => {
+      console.log('action', action)
       state.filters = {
         ...state.filters,
         ...action.payload,
