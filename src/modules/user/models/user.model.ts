@@ -29,3 +29,29 @@ export enum UserGroupEnum {
   OPERATOR = 2,
   ROOT = 3,
 }
+
+export interface IUsersListItem {
+  id: number
+  slug: string
+  registerDate: Date
+  group: UserGroupEnum
+  isBlocked: boolean
+  isBanned: boolean
+  characters: number
+}
+
+export interface IUsersListRequest {
+  slug?: string
+  registerDate?: Date
+  group?: UserGroupEnum
+  isBlocked?: boolean
+  isBanned?: boolean
+  page: number
+  size: number
+  sort?: string
+}
+
+export interface IUsers {
+  users: IUsersListItem[]
+  filters: IUsersListRequest
+}
