@@ -1,11 +1,6 @@
-import { useCallback } from 'react'
-import { Badge, Card, Group, List, Text } from '@mantine/core'
 import { UserGroupEnum } from 'user/models'
-import { userBooleanColor, userGroupColor, userGroupName } from 'user/utils'
 
-import { UserInformationItem } from '../settings'
-
-import classes from './../Components.module.css'
+import { ListItem } from './ListItem'
 
 export function UsersList() {
   const data: Array<{
@@ -109,58 +104,14 @@ export function UsersList() {
     },
   ]
 
-  const getBooleanColor = useCallback(
-    (value: boolean) => userBooleanColor.get(value) || '',
-    [],
-  )
-
   return (
     <section
       className={
         'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 col-span-12 row-span-3 lg:row-span-2 lg:col-span-9'
       }
     >
-      {data.map(({ id, slug, registerDate, group, characters, isBlocked, isBanned }) => (
-        <Card key={id} padding={'lg'} radius={'md'}>
-          <Group className={'w-full gap-4'} justify={'space-between'}>
-            <Text>{slug}</Text>
-            <Badge
-              className={classes.badge}
-              color={userGroupColor.get(group)}
-              radius={'sm'}
-              size={'lg'}
-              variant={'light'}
-            >
-              {userGroupName.get(group)}
-            </Badge>
-          </Group>
-          <List center className={'mt-4 list-none'} size={'sm'} spacing={'xs'}>
-            <UserInformationItem
-              badgeColor={'gray'}
-              hasSmallLabel
-              label={'Data rejestracji: '}
-              value={registerDate}
-            />
-            <UserInformationItem
-              badgeColor={getBooleanColor(isBlocked)}
-              hasSmallLabel
-              label={'Konto nieaktywowane: '}
-              value={isBlocked}
-            />
-            <UserInformationItem
-              badgeColor={getBooleanColor(isBanned)}
-              hasSmallLabel
-              label={'Konto zbanowane: '}
-              value={isBanned}
-            />
-            <UserInformationItem
-              badgeColor={'gray'}
-              hasSmallLabel
-              label={'Ilość postaci: '}
-              value={characters.toString()}
-            />
-          </List>
-        </Card>
+      {data.map((item) => (
+        <ListItem item={item} key={item.id} />
       ))}
     </section>
   )
