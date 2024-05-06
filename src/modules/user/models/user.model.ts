@@ -40,7 +40,7 @@ export interface IUsersListItem {
   characters: number
 }
 
-export interface IUsersListRequest {
+export interface IAccountsListRequest {
   slug?: string
   registerDate?: Date
   group?: UserGroupEnum
@@ -52,6 +52,10 @@ export interface IUsersListRequest {
 }
 
 export interface IUsers {
-  users: IUsersListItem[]
-  filters: IUsersListRequest
+  filters: IAccountsListRequest
+}
+
+export enum UsersTabEnum {
+  ACCOUNTS = 'ACCOUNTS',
+  CHARACTERS = 'CHARACTERS',
 }
