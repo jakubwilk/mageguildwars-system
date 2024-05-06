@@ -1,5 +1,5 @@
-import { UsersList } from 'user/components'
+import { TabsWrapper } from 'user/components'
 
 export function UsersPage() {
-  return <UsersList />
+  return <TabsWrapper />
 }
