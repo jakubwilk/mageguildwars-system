@@ -2,6 +2,7 @@ import { ReactNode } from 'react'
 import { Provider } from 'react-redux'
 import { ColorSchemeScript } from '@mantine/core'
 import { MantineProvider } from '@mantine/core'
+import { DatesProvider } from '@mantine/dates'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { store, theme } from 'config'
 import dayjs from 'dayjs'
@@ -27,7 +28,9 @@ export function AppWrapper({ children }: IProps) {
         forceColorScheme={'dark'}
         theme={theme}
       >
-        <Provider store={store}>{children}</Provider>
+        <DatesProvider settings={{ locale: 'pl' }}>
+          <Provider store={store}>{children}</Provider>
+        </DatesProvider>
       </MantineProvider>
     </QueryClientProvider>
   )
