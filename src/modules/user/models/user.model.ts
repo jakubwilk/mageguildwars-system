@@ -42,8 +42,8 @@ export interface IUsersListItem {
 
 export interface IAccountsListRequest {
   slug?: string
-  registerDate?: Date
-  group?: UserGroupEnum
+  registerDate?: Date | null
+  group?: UserGroupEnum | null
   isBlocked?: boolean
   isBanned?: boolean
   page: number

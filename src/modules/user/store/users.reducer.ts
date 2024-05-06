@@ -1,15 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { IAccountsListRequest } from 'user/models'
+import { DEFAULT_USERS_FILTERS } from 'user/utils'
 
 interface IUsersReducer {
   accountsFilters: IAccountsListRequest
 }
 
 const initialState: IUsersReducer = {
-  accountsFilters: {
-    page: 1,
-    size: 10,
-  },
+  accountsFilters: DEFAULT_USERS_FILTERS,
 }
 
 export const usersReducer = createSlice({
@@ -24,10 +22,7 @@ export const usersReducer = createSlice({
       }
     },
     clearAccountsFilters: (state) => {
-      state.accountsFilters = {
-        page: 1,
-        size: 10,
-      }
+      state.accountsFilters = DEFAULT_USERS_FILTERS
     },
   },
 })
