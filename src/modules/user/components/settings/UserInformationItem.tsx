@@ -1,5 +1,6 @@
+import { ForwardRefExoticComponent, RefAttributes } from 'react'
 import { Badge, List, rem, Text, ThemeIcon } from '@mantine/core'
-import { TablerIconsProps } from '@tabler/icons-react'
+import { Icon, IconProps } from '@tabler/icons-react'
 import clsx from 'clsx'
 import dayjs from 'dayjs'
 import { isBoolean, isDate, isString } from 'lodash'
@@ -12,7 +13,7 @@ import classes from './../Components.module.css'
 interface IProps {
   label: string
   value: string | Date | boolean
-  IconComponent?: (props: TablerIconsProps) => JSX.Element
+  IconComponent?: ForwardRefExoticComponent<Omit<IconProps, 'ref'> & RefAttributes<Icon>>
   badgeColor: string
   hasSmallLabel?: boolean
 }
