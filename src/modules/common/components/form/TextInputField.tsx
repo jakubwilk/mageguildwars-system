@@ -21,12 +21,12 @@ export function TextInputField({
   isControlled = true,
   ...restProps
 }: IProps) {
-  const { control } = useFormContext()
+  const formContext = useFormContext()
 
-  if (isControlled) {
+  if (isControlled && formContext) {
     return (
       <Controller
-        control={control}
+        control={formContext.control}
         name={name}
         render={({ field: { name, value, onBlur, onChange }, fieldState: { error } }) => (
           <TextInput

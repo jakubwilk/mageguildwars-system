@@ -13,6 +13,13 @@ export const userBooleanColor = new Map([
   [false, 'blue'],
 ])
 
+export const userGroupName = new Map([
+  [UserGroupEnum.BANNED, 'Zbanowany'],
+  [UserGroupEnum.USER, 'Użytkownik'],
+  [UserGroupEnum.OPERATOR, 'Operator'],
+  [UserGroupEnum.ROOT, 'Administrator'],
+])
+
 export const DEFAULT_USERS_FILTERS: IAccountsListRequest = {
   page: 1,
   size: 10,
@@ -27,17 +34,17 @@ export const USER_GROUP_OPTIONS: ISelectOption[] = [
     value: UserGroupEnum.BANNED,
   },
   {
-    id: 1,
+    id: 2,
     label: 'Użytkownik',
     value: UserGroupEnum.USER,
   },
   {
-    id: 1,
+    id: 3,
     label: 'Operator',
     value: UserGroupEnum.OPERATOR,
   },
   {
-    id: 1,
+    id: 4,
     label: 'Administrator',
     value: UserGroupEnum.ROOT,
   },
@@ -48,5 +55,5 @@ export const ACCOUNT_SORT_OPTIONS: ISelectOption[] = [
   { id: 2, label: 'Data rejestracji', value: 'registerDate' },
   { id: 3, label: 'Grupa', value: 'group' },
   { id: 4, label: 'Czy konto jest aktywne', value: 'isBlocked' },
-  { id: 4, label: 'Czy konto jest zbanowane', value: 'isBanned' },
+  { id: 5, label: 'Czy konto jest zbanowane', value: 'isBanned' },
 ]

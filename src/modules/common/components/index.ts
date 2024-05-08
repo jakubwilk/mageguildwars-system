@@ -7,6 +7,7 @@ export * from './form/Button.tsx'
 export * from './form/TextInputField.tsx'
 export * from './form/PasswordInputField.tsx'
 export * from './form/CheckboxInputField.tsx'
+export * from './form/SelectInputField.tsx'
 
 export * from './menu/SidebarMenu.tsx'
 export * from './menu/MainMenu.tsx'
