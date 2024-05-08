@@ -1,6 +1,11 @@
 import { useState } from 'react'
-import { DateInput } from '@mantine/dates'
-import { Button, Section, SelectInputField, TextInputField } from 'common/components'
+import {
+  Button,
+  DateInputField,
+  Section,
+  SelectInputField,
+  TextInputField,
+} from 'common/components'
 import { BOOLEAN_SELECT_OPTIONS, SORT_SELECT_OPTIONS } from 'common/utils'
 import { IAccountsListRequest } from 'user/models'
 import {
@@ -17,18 +22,21 @@ export function AccountsFilters() {
       <div className={'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'}>
         <TextInputField
           className={'col-span-full lg:col-span-1'}
+          handleChange={(value) => setFilters({ ...filters, slug: value })}
+          isControlled={false}
           label={'Nazwa powiązana'}
           name={'slug'}
-          onChange={(event) =>
-            setFilters({ ...filters, slug: event.currentTarget.value })
-          }
           value={filters.slug}
         />
-        <DateInput
+        <DateInputField
           className={'col-span-full md:col-span-1'}
           clearable
+          handleChange={(value) =>
+            setFilters({ ...filters, registerDate: value as Date })
+          }
+          isControlled={false}
           label={'Data rejestracji'}
-          onChange={(value) => setFilters({ ...filters, registerDate: value as Date })}
+          name={'registerDate'}
           value={filters.registerDate}
         />
         <SelectInputField
@@ -39,6 +47,7 @@ export function AccountsFilters() {
               group: value as number,
             })
           }
+          isControlled={false}
           label={'Grupa'}
           name={'group'}
           options={USER_GROUP_OPTIONS}
@@ -54,6 +63,7 @@ export function AccountsFilters() {
               isBlocked: value as boolean,
             })
           }
+          isControlled={false}
           label={'Czy konto wymaga aktywacji?'}
           name={'isBlocked'}
           options={BOOLEAN_SELECT_OPTIONS}
@@ -67,6 +77,7 @@ export function AccountsFilters() {
               isBanned: value as boolean,
             })
           }
+          isControlled={false}
           label={'Czy konto jest zbanowane?'}
           name={'isBanned'}
           options={BOOLEAN_SELECT_OPTIONS}
@@ -82,6 +93,7 @@ export function AccountsFilters() {
               sortBy: value as string,
             })
           }
+          isControlled={false}
           label={'Sortowanie po'}
           name={'sortBy'}
           options={ACCOUNT_SORT_OPTIONS}
@@ -95,6 +107,7 @@ export function AccountsFilters() {
               sort: value as string,
             })
           }
+          isControlled={false}
           label={'Sortowanie w kolejności'}
           name={'sort'}
           options={SORT_SELECT_OPTIONS}

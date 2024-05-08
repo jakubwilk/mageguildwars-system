@@ -1,19 +1,18 @@
 import { Controller, useFormContext } from 'react-hook-form'
-import { TextInput, TextInputProps } from '@mantine/core'
+import { DateInput, DateInputProps } from '@mantine/dates'
 import { isNil } from 'lodash'
 
-import '@mantine/core/styles/Input.css'
 import classes from './Form.module.css'
 
-interface IProps extends TextInputProps {
-  value?: string
+interface IProps extends DateInputProps {
+  value?: Date
   name: string
   error?: string
-  handleChange?: (value: string) => void
+  handleChange?: (value: Date) => void
   isControlled?: boolean
 }
 
-export function TextInputField({
+export function DateInputField({
   value,
   name,
   error,
@@ -30,11 +29,8 @@ export function TextInputField({
       <Controller
         control={formContext.control}
         name={name}
-        render={({
-          field: { name, value = '', onBlur, onChange },
-          fieldState: { error },
-        }) => (
-          <TextInput
+        render={({ field: { name, value, onBlur, onChange }, fieldState: { error } }) => (
+          <DateInput
             classNames={{
               root: classes.root,
               label: classes.label,
@@ -44,13 +40,12 @@ export function TextInputField({
             label={label}
             name={name}
             onBlur={onBlur}
-            onChange={(event) => {
+            onChange={(value) => {
               if (handleChange) {
-                const { value } = event.currentTarget
-                handleChange(value)
+                handleChange(value as Date)
               }
 
-              onChange(event)
+              onChange(value)
             }}
             {...(!isNil(value) && { value })}
             {...(!isNil(error) && { error: error.message })}
@@ -62,7 +57,7 @@ export function TextInputField({
   }
 
   return (
-    <TextInput
+    <DateInput
       classNames={{
         root: classes.root,
         label: classes.label,
@@ -71,14 +66,14 @@ export function TextInputField({
       description={description}
       label={label}
       name={name}
-      onChange={(event) => {
+      onChange={(value) => {
         if (handleChange) {
-          const { value } = event.target
-          handleChange(value)
+          handleChange(value as Date)
         }
       }}
-      value={value === undefined ? '' : value}
-      {...(!isNil(error) && { error })}
+      value={value !== undefined ? value : null}
+      {...(!isNil(error) && { error: error })}
+      {...restProps}
     />
   )
 }
