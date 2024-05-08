@@ -25,6 +25,27 @@ const MENU_LINKS = [
     description:
       'Dodaj, edytuj lub usuń główną lokację, w której będą znajdować się mniejsze wątki',
   },
+  {
+    id: 'root-panel-magic',
+    link: routeKeys.ROOT_PANEL_MAGIC,
+    label: 'Magie',
+    description:
+      'Przejdź do spisu wszystkich magii, dodawaj nowe lub edytuj i usuwaj istniejące',
+  },
+  {
+    id: 'root-panel-spells',
+    link: routeKeys.ROOT_PANEL_SPELLS,
+    label: 'Zaklęcia',
+    description:
+      'Lista dostepnych wszystkich zaklęć startowych oraz tych utworzonych przez Graczy',
+  },
+  {
+    id: 'root-panel-skills',
+    link: routeKeys.ROOT_PANEL_SKILLS,
+    label: 'Umiejętności',
+    description:
+      'Przejdź do spisu umiejętności, gdzie można dodawać nowe zdolności albo edytować i usuwać już istniejące',
+  },
 ]
 
 export function SideMenu() {
