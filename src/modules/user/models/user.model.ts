@@ -48,11 +48,8 @@ export interface IAccountsListRequest {
   isBanned?: boolean
   page: number
   size: number
-  sort?: string
-}
-
-export interface IUsers {
-  filters: IAccountsListRequest
+  sort: string
+  sortBy: string
 }
 
 export enum UsersTabEnum {

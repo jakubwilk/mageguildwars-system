@@ -1,3 +1,5 @@
+import { ISelectOption } from 'common/models'
+
 export const loadEnvVariable = (name: string): string => {
   return import.meta.env[name] || ''
 }
@@ -28,3 +30,29 @@ export const ROUTES = {
 
 export const DATE_FORMAT_WITH_TIME = 'DD MMM YYYY, HH:mm'
 export const DATE_FORMAT_WITH_NO_TIME = 'DD MMM YYYY'
+
+export const BOOLEAN_SELECT_OPTIONS: ISelectOption[] = [
+  {
+    id: 1,
+    label: 'Tak',
+    value: true,
+  },
+  {
+    id: 2,
+    label: 'Nie',
+    value: false,
+  },
+]
+
+export const SORT_SELECT_OPTIONS: ISelectOption[] = [
+  {
+    id: 1,
+    label: 'Rosnąco',
+    value: 'asc',
+  },
+  {
+    id: 2,
+    label: 'Malejąco',
+    value: 'desc',
+  },
+]
