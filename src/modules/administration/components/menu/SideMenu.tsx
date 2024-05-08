@@ -21,9 +21,8 @@ const MENU_LINKS = [
   {
     id: 'root-panel-ares',
     link: routeKeys.ROOT_PANEL_AREAS,
-    label: 'Państwa i Królestwa',
-    description:
-      'Dodaj, edytuj lub usuń główną lokację, w której będą znajdować się mniejsze wątki',
+    label: 'Królestwa i lokacje',
+    description: 'Dodaj, edytuj lub usuń lokację',
   },
   {
     id: 'root-panel-magic',

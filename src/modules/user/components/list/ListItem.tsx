@@ -1,5 +1,12 @@
 import { useCallback } from 'react'
-import { Badge, Card, Group, List, Text } from '@mantine/core'
+import { ActionIcon, Badge, Card, Group, List, Text, Tooltip } from '@mantine/core'
+import {
+  IconAlertCircle,
+  IconAlertCircleOff,
+  IconCheck,
+  IconPencil,
+  IconTrash,
+} from '@tabler/icons-react'
 import { IUsersListItem } from 'user/models'
 import { userBooleanColor, userGroupColor, userGroupName } from 'user/utils'
 
@@ -59,6 +66,39 @@ export function ListItem({ item }: IProps) {
           value={characters.toString()}
         />
       </List>
+      <div className={'flex justify-end items-center mt-4 gap-4'}>
+        {isBlocked && (
+          <Tooltip color={'dark'} label={'Aktywuj'} position={'bottom'}>
+            <ActionIcon variant={'default'}>
+              <IconCheck stroke={1.5} style={{ width: '70%', height: '70%' }} />
+            </ActionIcon>
+          </Tooltip>
+        )}
+        {isBanned && !isBlocked && (
+          <Tooltip color={'dark'} label={'Odbanuj'} position={'bottom'}>
+            <ActionIcon variant={'default'}>
+              <IconAlertCircleOff stroke={1.5} style={{ width: '70%', height: '70%' }} />
+            </ActionIcon>
+          </Tooltip>
+        )}
+        {!isBlocked && !isBanned && (
+          <Tooltip color={'dark'} label={'Zbanuj'} position={'bottom'}>
+            <ActionIcon variant={'default'}>
+              <IconAlertCircle stroke={1.5} style={{ width: '70%', height: '70%' }} />
+            </ActionIcon>
+          </Tooltip>
+        )}
+        <Tooltip color={'dark'} label={'Edytuj'} position={'bottom'}>
+          <ActionIcon variant={'default'}>
+            <IconPencil stroke={1.5} style={{ width: '70%', height: '70%' }} />
+          </ActionIcon>
+        </Tooltip>
+        <Tooltip color={'dark'} label={'Usuń'} position={'bottom'}>
+          <ActionIcon variant={'default'}>
+            <IconTrash stroke={1.5} style={{ width: '70%', height: '70%' }} />
+          </ActionIcon>
+        </Tooltip>
+      </div>
     </Card>
   )
 }
