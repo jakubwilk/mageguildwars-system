@@ -15,7 +15,6 @@ export const usersReducer = createSlice({
   initialState,
   reducers: {
     setAccountsFilters: (state, action) => {
-      console.log('action', action)
       state.accountsFilters = {
         ...state.accountsFilters,
         ...action.payload,

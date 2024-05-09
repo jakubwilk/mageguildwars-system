@@ -53,12 +53,12 @@ export function ListItem({ item }: IProps) {
   )
 
   const handleToggleEditModal = useCallback(
-    () => setIsEditModalOpen(isEditModalOpen),
+    () => setIsEditModalOpen(!isEditModalOpen),
     [isEditModalOpen],
   )
 
   const handleToggleDeleteModal = useCallback(
-    () => setIsDeleteModalOpen(isDeleteModalOpen),
+    () => setIsDeleteModalOpen(!isDeleteModalOpen),
     [isDeleteModalOpen],
   )
 
@@ -144,12 +144,14 @@ export function ListItem({ item }: IProps) {
         <ActiveAccountModal
           handleClose={handleToggleActiveModal}
           isOpen={isActiveModalOpen}
+          slug={slug}
         />
       )}
       {isBanModalOpen && (
         <BanOrUnbanAccountModal
           handleClose={handleToggleBanModal}
           isOpen={isBanModalOpen}
+          slug={slug}
         />
       )}
       {isUnbanModalOpen && (
@@ -157,15 +159,21 @@ export function ListItem({ item }: IProps) {
           handleClose={handleToggleUnbanModal}
           hasBan
           isOpen={isUnbanModalOpen}
+          slug={slug}
         />
       )}
       {isEditModalOpen && (
-        <EditAccountModal handleClose={handleToggleEditModal} isOpen={isEditModalOpen} />
+        <EditAccountModal
+          handleClose={handleToggleEditModal}
+          isOpen={isEditModalOpen}
+          slug={slug}
+        />
       )}
       {isDeleteModalOpen && (
         <DeleteAccountModal
           handleClose={handleToggleDeleteModal}
           isOpen={isDeleteModalOpen}
+          slug={slug}
         />
       )}
     </>

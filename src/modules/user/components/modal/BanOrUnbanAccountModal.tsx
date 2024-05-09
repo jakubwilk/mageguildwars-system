@@ -1,12 +1,18 @@
 import { Modal } from 'common/components'
 
 interface IProps {
+  slug: string
   hasBan?: boolean
   isOpen: boolean
   handleClose: () => void
 }
 
-export function BanOrUnbanAccountModal({ hasBan = false, isOpen, handleClose }: IProps) {
+export function BanOrUnbanAccountModal({
+  slug,
+  hasBan = false,
+  isOpen,
+  handleClose,
+}: IProps) {
   return (
     <Modal
       handleClose={handleClose}

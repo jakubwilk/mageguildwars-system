@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import {
   Button,
   DateInputField,
@@ -7,7 +7,9 @@ import {
   TextInputField,
 } from 'common/components'
 import { BOOLEAN_SELECT_OPTIONS, SORT_SELECT_OPTIONS } from 'common/utils'
+import { useDispatch } from 'config'
 import { IAccountsListRequest } from 'user/models'
+import { clearAccountsFilters, setAccountsFilters } from 'user/store'
 import {
   ACCOUNT_SORT_OPTIONS,
   DEFAULT_USERS_FILTERS,
@@ -15,7 +17,18 @@ import {
 } from 'user/utils'
 
 export function AccountsFilters() {
+  const dispatch = useDispatch()
   const [filters, setFilters] = useState<IAccountsListRequest>(DEFAULT_USERS_FILTERS)
+
+  const updateFilters = useCallback(
+    () => dispatch(setAccountsFilters(filters)),
+    [dispatch, filters],
+  )
+
+  const clearFilters = useCallback(() => {
+    setFilters(DEFAULT_USERS_FILTERS)
+    dispatch(clearAccountsFilters())
+  }, [dispatch])
 
   return (
     <Section className={'flex flex-col gap-4 mb-4'}>
@@ -115,12 +128,12 @@ export function AccountsFilters() {
         />
       </div>
       <div className={'flex items-center justify-end gap-4'}>
-        <Button onClick={() => console.log('filters', filters)} type={'button'}>
+        <Button onClick={updateFilters} type={'button'}>
           {'Wyszukaj'}
         </Button>
         <Button
           className={'font-normal'}
-          onClick={() => setFilters(DEFAULT_USERS_FILTERS)}
+          onClick={clearFilters}
           type={'button'}
           variant={'default'}
         >

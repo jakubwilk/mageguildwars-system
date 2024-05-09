@@ -81,3 +81,12 @@
   font-size: 0.9rem;
   color: var(--mantine-color-dark-2);
 }
+
+.modalText {
+  font-weight: var(--mgw-font-weight-light);
+  color: var(--mantine-color-dark-1);
+}
+
+.modalInfoText {
+  font-size: 0.8rem;
+}
