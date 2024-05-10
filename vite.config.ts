@@ -20,7 +20,6 @@ export default defineConfig({
       auth: path.resolve('src/modules/auth/'),
       common: path.resolve('src/modules/common/'),
       home: path.resolve('src/modules/home/'),
-      resource: path.resolve('src/modules/resource/'),
       user: path.resolve('src/modules/user/'),
     },
   },
