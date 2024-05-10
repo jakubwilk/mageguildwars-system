@@ -1,6 +1,6 @@
 {
   "menu": {
-    "quest": "Menu gościa",
+    "guest": "Menu gościa",
     "user": "Menu użytkownika",
     "login": "Logowanie",
     "login-description": "Zaloguj się na konto by kontynuować rozgrywkę",
