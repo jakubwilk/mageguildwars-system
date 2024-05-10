@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { LoadingOverlay, Tabs } from '@mantine/core'
-import { useResource } from 'resource/hooks'
 import { UserSettingsTabEnum } from 'user/models'
 
 import { EditUserEmailForm } from './EditUserEmailForm'
@@ -10,7 +10,7 @@ import { UserInformation } from './UserInformation'
 import classes from './../Components.module.css'
 
 export function SettingsModalContent() {
-  const { getResource } = useResource('USER')
+  const { t } = useTranslation()
   const [tab, setTab] = useState<UserSettingsTabEnum>(UserSettingsTabEnum.CHANGE_EMAIL)
   const [isVisible, setisVisible] = useState(false)
 
@@ -32,16 +32,16 @@ export function SettingsModalContent() {
       >
         <Tabs.List className={'gap-4 mb-4'}>
           <Tabs.Tab className={classes.tabItem} value={UserSettingsTabEnum.CHANGE_EMAIL}>
-            {getResource('MODAL_SETTINGS_CHANGE_EMAIL_TAB_TEXT')}
+            {t('user:modal.tab.email')}
           </Tabs.Tab>
           <Tabs.Tab
             className={classes.tabItem}
             value={UserSettingsTabEnum.CHANGE_PASSWORD}
           >
-            {getResource('MODAL_SETTINGS_CHANGE_PASSWORD_TAB_TEXT')}
+            {t('user:modal.tab.password')}
           </Tabs.Tab>
           <Tabs.Tab className={classes.tabItem} value={UserSettingsTabEnum.INFORMATION}>
-            {getResource('MODAL_SETTINGS_INFORMATION_TAB_TEXT')}
+            {t('user:modal.tab.info')}
           </Tabs.Tab>
         </Tabs.List>
         <Tabs.Panel value={UserSettingsTabEnum.CHANGE_EMAIL}>

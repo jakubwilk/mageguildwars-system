@@ -1,10 +1,10 @@
 import { ForwardRefExoticComponent, RefAttributes } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Badge, List, rem, Text, ThemeIcon } from '@mantine/core'
 import { Icon, IconProps } from '@tabler/icons-react'
 import clsx from 'clsx'
 import dayjs from 'dayjs'
 import { isBoolean, isDate, isString } from 'lodash'
-import { useResource } from 'resource/hooks'
 
 import 'dayjs/locale/pl'
 
@@ -25,7 +25,7 @@ export function UserInformationItem({
   badgeColor = 'gray',
   hasSmallLabel,
 }: IProps) {
-  const { getResource } = useResource('COMMON')
+  const { t } = useTranslation()
 
   const renderBadgeValue = (value: string | Date | boolean): string => {
     if (isDate(value)) {
@@ -33,7 +33,7 @@ export function UserInformationItem({
     }
 
     if (isBoolean(value)) {
-      return value ? getResource('VALUE_YES_TEXT') : getResource('VALUE_NO_TEXT')
+      return value ? t('common:value.yes') : t('common:value.no')
     }
 
     if (isString(value)) {

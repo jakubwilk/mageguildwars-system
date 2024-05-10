@@ -1,10 +1,10 @@
 import { useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Button, Text } from '@mantine/core'
 import { IconDoorEnter, IconUserPlus } from '@tabler/icons-react'
 import clsx from 'clsx'
 import { openLoginModal, openRegisterModal } from 'common/store'
 import { useDispatch } from 'config'
-import { useResource } from 'resource/hooks'
 
 import classes from './../Components.module.css'
 
@@ -13,7 +13,7 @@ interface IProps {
 }
 
 export function GuestMenu({ handleCloseSidebar }: IProps) {
-  const { getResource } = useResource('USER')
+  const { t } = useTranslation()
   const dispatch = useDispatch()
 
   const handleOpenLoginModal = useCallback(() => {
@@ -34,7 +34,7 @@ export function GuestMenu({ handleCloseSidebar }: IProps) {
           classes.title,
         )}
       >
-        {getResource('MENU_GUEST_TITLE')}
+        {t('user:menu.guest')}
       </Text>
       <Button
         className={clsx('p-4 rounded-md', classes.menuItem)}
@@ -44,11 +44,9 @@ export function GuestMenu({ handleCloseSidebar }: IProps) {
       >
         <IconDoorEnter className={classes.menuItemIcon} />
         <div className={'flex text-left flex-col pl-3 text-wrap'}>
-          <Text className={classes.menuItemTextMain}>
-            {getResource('MENU_LOGIN_TITLE_TEXT')}
-          </Text>
+          <Text className={classes.menuItemTextMain}>{t('user:menu.login')}</Text>
           <Text className={clsx('lowercase', classes.menuItemSubText)}>
-            {getResource('MENU_LOGIN_DESCRIPTION_TEXT')}
+            {t('user:menu.login-description')}
           </Text>
         </div>
       </Button>
@@ -60,11 +58,9 @@ export function GuestMenu({ handleCloseSidebar }: IProps) {
       >
         <IconUserPlus className={classes.menuItemIcon} />
         <div className={'flex text-left flex-col pl-3 text-wrap'}>
-          <Text className={classes.menuItemTextMain}>
-            {getResource('MENU_REGISTER_TITLE_TEXT')}
-          </Text>
+          <Text className={classes.menuItemTextMain}>{t('user:menu.register')}</Text>
           <Text className={clsx('lowercase', classes.menuItemSubText)}>
-            {getResource('MENU_REGISTER_DESCRIPTION_TEXT')}
+            {t('user:menu.register-description')}
           </Text>
         </div>
       </Button>

@@ -1,11 +1,11 @@
 import { Dispatch, SetStateAction, useCallback, useMemo } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Text } from '@mantine/core'
 import { Button, PasswordInputField } from 'common/components'
 import { closeUserSettingsModal } from 'common/store'
 import { useDispatch } from 'config'
-import { useResource } from 'resource/hooks'
 import { IChangePasswordFormValues } from 'user/models'
 import { object, string } from 'yup'
 
@@ -16,9 +16,7 @@ interface IProps {
 }
 
 export function EditUserPasswordForm({ setisVisible }: IProps) {
-  const { getResource } = useResource('COMMON')
-  const { getResource: getUserResource } = useResource('USER')
-  const { getResource: getAuthResource } = useResource('AUTH')
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const form = useForm<IChangePasswordFormValues>({
     mode: 'onBlur',
@@ -30,9 +28,9 @@ export function EditUserPasswordForm({ setisVisible }: IProps) {
     resolver: yupResolver(
       object({
         currentPassword: string()
-          .required(getResource('FIELD_REQUIRED_TEXT'))
-          .min(10, getResource('FIELD_INCORRECT_PASSWORD_TEXT')),
-        newPassword: string().required(getResource('FIELD_REQUIRED_TEXT')),
+          .required(t('common:validation.field-required'))
+          .min(10, t('common:validation.field-password')),
+        newPassword: string().required(t('common:validation.field-required')),
       }),
     ),
   })
@@ -56,22 +54,20 @@ export function EditUserPasswordForm({ setisVisible }: IProps) {
         <div className={'flex flex-col gap-4 mb-4'}>
           <PasswordInputField
             autoComplete={'off'}
-            label={getUserResource('FIELD_CURRENT_PASSWORD_LABEL')}
+            label={t('user:field.password')}
             name={'currentPassword'}
             required
           />
           <PasswordInputField
             autoComplete={'off'}
-            description={getAuthResource('FIELD_PASSWORD_DESCRIPTION_TEXT')}
-            label={getUserResource('FIELD_NEW_PASSWORD_LABEL')}
+            description={t('auth:field.password-description')}
+            label={t('user:field.password-new')}
             name={'newPassword'}
             required
           />
         </div>
         <div className={'flex justify-center mb-6'}>
-          <Text className={classes.loginIssuesText}>
-            {getUserResource('MODAL_SETTINGS_CHANGE_PASSWORD_NOTE_TEXT')}
-          </Text>
+          <Text className={classes.loginIssuesText}>{t('user:modal.text.password')}</Text>
         </div>
         <div className={'w-full flex justify-end items-center gap-4'}>
           <Button
@@ -79,9 +75,9 @@ export function EditUserPasswordForm({ setisVisible }: IProps) {
             type={'button'}
             variant={'default'}
           >
-            {getResource('ACTION_CLOSE_TEXT')}
+            {t('common:action.close')}
           </Button>
-          <Button type={'submit'}>{getResource('ACTION_SAVE_TEXT')}</Button>
+          <Button type={'submit'}>{t('common:action.save')}</Button>
         </div>
       </form>
     </FormProvider>

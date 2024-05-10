@@ -1,11 +1,11 @@
 import { useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { ActionIcon, Tooltip } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { IconLayoutSidebarRightExpand } from '@tabler/icons-react'
 import { LoginForm, RegisterForm } from 'auth/components'
 import { useDispatch, useSelector } from 'config'
-import { useResource } from 'resource/hooks'
 import { SettingsModalContent } from 'user/components'
 
 import { closeLoginModal, closeRegisterModal, closeUserSettingsModal } from '../../store'
@@ -15,8 +15,7 @@ import { Modal } from '../modal/Modal.tsx'
 import classes from './Header.module.css'
 
 export function Header() {
-  const { getResource } = useResource('AUTH')
-  const { getResource: getUserResource } = useResource('USER')
+  const { t } = useTranslation()
   const [opened, { open: handleOpenSidebar, close: handleCloseSidebar }] =
     useDisclosure(false)
   const dispatch = useDispatch()
@@ -67,14 +66,14 @@ export function Header() {
       <Modal
         handleClose={handleCloseLoginModal}
         isOpen={isLoginOpen}
-        title={getResource('MODAL_LOGIN_TITLE_TEXT')}
+        title={t('auth:modal.login-title')}
       >
         <LoginForm />
       </Modal>
       <Modal
         handleClose={handleCloseRegisterModal}
         isOpen={isRegisterOpen}
-        title={getResource('MODAL_REGISTER_TITLE_TEXT')}
+        title={t('auth:modal.register-title')}
       >
         <RegisterForm />
       </Modal>
@@ -82,7 +81,7 @@ export function Header() {
         handleClose={handleCloseUserSettingsModal}
         isOpen={isUserSettingsOpen}
         size={'lg'}
-        title={getUserResource('MENU_SETTINGS_TITLE_TEXT')}
+        title={t('auth:modal.settings-title')}
       >
         <SettingsModalContent />
       </Modal>

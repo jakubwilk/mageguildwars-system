@@ -1,10 +1,10 @@
 import { useCallback, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { NotificationData, notifications } from '@mantine/notifications'
 import { INotificationConfig } from 'common/models'
-import { useResource } from 'resource/hooks'
 
 export function useNotifications() {
-  const { getResource } = useResource('NOTIFICATION')
+  const { t } = useTranslation()
 
   const config: NotificationData = useMemo(
     () => ({
@@ -25,11 +25,11 @@ export function useNotifications() {
       return notifications.show({
         ...config,
         color: 'green',
-        title: getResource('NOTIFICATION_SUCCESS_TITLE_TEXT'),
+        title: t('notification:title.success'),
         ...options,
       })
     },
-    [config, getResource],
+    [config, t],
   )
 
   const showNotificationError = useCallback(
@@ -37,10 +37,11 @@ export function useNotifications() {
       return notifications.show({
         ...config,
         color: 'red',
+        title: t('notification:title.error'),
         ...options,
       })
     },
-    [config],
+    [config, t],
   )
 
   const showNotificationInfo = useCallback(
@@ -48,11 +49,12 @@ export function useNotifications() {
       return notifications.show({
         ...config,
         color: 'blue',
+        title: t('notification:title.info'),
         timeout: 10000,
         ...options,
       })
     },
-    [config],
+    [config, t],
   )
 
   return { showNotificationSuccess, showNotificationError, showNotificationInfo }

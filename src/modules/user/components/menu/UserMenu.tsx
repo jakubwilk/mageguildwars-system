@@ -1,4 +1,5 @@
 import { useCallback, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { NavLink } from 'react-router-dom'
 import { Button, Text } from '@mantine/core'
 import { IconDoorExit, IconUserCog, IconWorldCog } from '@tabler/icons-react'
@@ -8,7 +9,6 @@ import { openUserSettingsModal } from 'common/store'
 import { routeKeys } from 'common/utils'
 import { useDispatch, useSelector } from 'config'
 import { isEqual } from 'lodash'
-import { useResource } from 'resource/hooks'
 import { UserGroupEnum } from 'user/models'
 import { clearUser } from 'user/store'
 
@@ -19,8 +19,7 @@ interface IProps {
 }
 
 export function UserMenu({ handleCloseSidebar }: IProps) {
-  const { getResource } = useResource('USER')
-  const { getResource: getNotificationResource } = useResource('NOTIFICATION')
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const { account } = useSelector((state) => state.user)
   const { showNotificationSuccess } = useNotifications()
@@ -33,12 +32,10 @@ export function UserMenu({ handleCloseSidebar }: IProps) {
   const handleLogoutUser = useCallback(() => {
     dispatch(clearUser())
     showNotificationSuccess({
-      message: getNotificationResource(
-        'NOTIFICATION_USER_LOGOUT_SUCCESS_DESCRIPTION_TEXT',
-      ),
+      message: t('notification:message.success.logout'),
     })
     handleCloseSidebar()
-  }, [dispatch, showNotificationSuccess, getNotificationResource, handleCloseSidebar])
+  }, [dispatch, showNotificationSuccess, t, handleCloseSidebar])
 
   const isRoot = useMemo(
     () => account && isEqual(account.group, UserGroupEnum.ROOT),
@@ -53,7 +50,7 @@ export function UserMenu({ handleCloseSidebar }: IProps) {
           classes.title,
         )}
       >
-        {getResource('MENU_USER_TITLE')}
+        {t('user:menu.user')}
       </Text>
       <Button
         className={clsx('p-4 rounded-md', classes.menuItem)}
@@ -63,11 +60,9 @@ export function UserMenu({ handleCloseSidebar }: IProps) {
       >
         <IconUserCog className={classes.menuItemIcon} />
         <div className={'flex text-left flex-col pl-3 text-wrap'}>
-          <Text className={classes.menuItemTextMain}>
-            {getResource('MENU_SETTINGS_TITLE_TEXT')}
-          </Text>
+          <Text className={classes.menuItemTextMain}>{t('user:menu.settings')}</Text>
           <Text className={clsx('lowercase', classes.menuItemSubText)}>
-            {getResource('MENU_SETTINGS_DESCRIPTION_TEXT')}
+            {t('user:menu.settings-description')}
           </Text>
         </div>
       </Button>
@@ -84,11 +79,9 @@ export function UserMenu({ handleCloseSidebar }: IProps) {
         >
           <IconWorldCog className={classes.menuItemIcon} width={36} />
           <div className={'flex flex-col ml-3'}>
-            <Text className={classes.menuItemTextMain}>
-              {getResource('MENU_ROOT_PANEL_TITLE_TEXT')}
-            </Text>
+            <Text className={classes.menuItemTextMain}>{t('user:menu.root')}</Text>
             <Text className={clsx('lowercase', classes.menuItemSubText)}>
-              {getResource('MENU_ROOT_PANEL_DESCRIPTION_TEXT')}
+              {t('user:menu.root-description')}
             </Text>
           </div>
         </NavLink>
@@ -101,11 +94,9 @@ export function UserMenu({ handleCloseSidebar }: IProps) {
       >
         <IconDoorExit className={classes.menuItemLogoutIcon} />
         <div className={'flex text-left flex-col pl-3 text-wrap'}>
-          <Text className={classes.menuItemTextMain}>
-            {getResource('MENU_LOGOUT_TITLE_TEXT')}
-          </Text>
+          <Text className={classes.menuItemTextMain}>{t('user:menu.logout')}</Text>
           <Text className={clsx('lowercase', classes.menuItemSubText)}>
-            {getResource('MENU_LOGOUT_DESCRIPTION_TEXT')}
+            {t('user:menu.logout-description')}
           </Text>
         </div>
       </Button>

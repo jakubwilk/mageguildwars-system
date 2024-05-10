@@ -1,6 +1,6 @@
+import { useTranslation } from 'react-i18next'
 import { Drawer } from '@mantine/core'
 import { IconLayoutSidebarRightCollapse } from '@tabler/icons-react'
-import { useResource } from 'resource/hooks'
 import { GuestMenu, UserMenu } from 'user/components'
 import { useValidateUser } from 'user/hooks'
 
@@ -14,7 +14,7 @@ interface IProps {
 }
 
 export function SidebarMenu({ isOpen, handleCloseSidebar }: IProps) {
-  const { getResource } = useResource('COMMON')
+  const { t } = useTranslation()
   const { isUserLogged } = useValidateUser()
 
   return (
@@ -29,7 +29,7 @@ export function SidebarMenu({ isOpen, handleCloseSidebar }: IProps) {
       opened={isOpen}
       position={'right'}
       radius={'md'}
-      title={getResource('MENU_MAIN_TITLE')}
+      title={t('common:menu.title')}
     >
       <MainMenu />
       {isUserLogged ? (

@@ -1,11 +1,11 @@
 import { Dispatch, SetStateAction, useCallback, useMemo } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Text } from '@mantine/core'
 import { Button, TextInputField } from 'common/components'
 import { closeUserSettingsModal } from 'common/store'
 import { useDispatch } from 'config'
-import { useResource } from 'resource/hooks'
 import { IChangeEmailFormValues } from 'user/models'
 import { object, string } from 'yup'
 
@@ -16,8 +16,7 @@ interface IProps {
 }
 
 export function EditUserEmailForm({ setisVisible }: IProps) {
-  const { getResource } = useResource('COMMON')
-  const { getResource: getUserResource } = useResource('USER')
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const form = useForm<IChangeEmailFormValues>({
     mode: 'onBlur',
@@ -29,11 +28,11 @@ export function EditUserEmailForm({ setisVisible }: IProps) {
     resolver: yupResolver(
       object({
         currentEmail: string()
-          .email(getResource('FIELD_INCORRECT_EMAIL_TEXT'))
-          .required(getResource('FIELD_REQUIRED_TEXT')),
+          .email(t('common:validation.field-email'))
+          .required(t('common:validation.field-required')),
         newEmail: string()
-          .email(getResource('FIELD_INCORRECT_EMAIL_TEXT'))
-          .required(getResource('FIELD_REQUIRED_TEXT')),
+          .email(t('common:validation.field-email'))
+          .required(t('common:validation.field-required')),
       }),
     ),
   })
@@ -57,21 +56,19 @@ export function EditUserEmailForm({ setisVisible }: IProps) {
         <div className={'flex flex-col gap-4 mb-4'}>
           <TextInputField
             autoComplete={'off'}
-            label={getUserResource('FIELD_CURRENT_EMAIL_LABEL')}
+            label={t('user:field.email')}
             name={'currentEmail'}
             required
           />
           <TextInputField
             autoComplete={'off'}
-            label={getUserResource('FIELD_NEW_EMAIL_LABEL')}
+            label={t('user:field.email-new')}
             name={'newEmail'}
             required
           />
         </div>
         <div className={'flex justify-center mb-6'}>
-          <Text className={classes.loginIssuesText}>
-            {getUserResource('MODAL_SETTINGS_CHANGE_EMAIL_NOTE_TEXT')}
-          </Text>
+          <Text className={classes.loginIssuesText}>{t('user:modal.text.email')}</Text>
         </div>
         <div className={'w-full flex justify-end items-center gap-4'}>
           <Button
@@ -79,9 +76,9 @@ export function EditUserEmailForm({ setisVisible }: IProps) {
             type={'button'}
             variant={'default'}
           >
-            {getResource('ACTION_CLOSE_TEXT')}
+            {t('common:action.cancel')}
           </Button>
-          <Button type={'submit'}>{getResource('ACTION_SAVE_TEXT')}</Button>
+          <Button type={'submit'}>{t('common:active.save')}</Button>
         </div>
       </form>
     </FormProvider>
