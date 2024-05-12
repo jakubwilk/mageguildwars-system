@@ -38,6 +38,7 @@ export interface IUsersListItem {
   isBlocked: boolean
   isBanned: boolean
   characters: number
+  limit: number
 }
 
 export interface IAccountsListRequest {

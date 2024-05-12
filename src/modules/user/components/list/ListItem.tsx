@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { ActionIcon, Badge, Card, Group, List, Text, Tooltip } from '@mantine/core'
 import {
   IconAlertCircle,
@@ -25,7 +26,8 @@ interface IProps {
 }
 
 export function ListItem({ item }: IProps) {
-  const { id, slug, registerDate, group, isBlocked, isBanned, characters } = item
+  const { t } = useTranslation()
+  const { id, slug, registerDate, group, isBlocked, isBanned, characters, limit } = item
   const [isActiveModalOpen, setIsActiveModalOpen] = useState(false)
   const [isBanModalOpen, setIsBanModalOpen] = useState(false)
   const [isUnbanModalOpen, setIsUnbanModalOpen] = useState(false)
@@ -81,26 +83,32 @@ export function ListItem({ item }: IProps) {
           <UserInformationItem
             badgeColor={'gray'}
             hasSmallLabel
-            label={'Data rejestracji: '}
+            label={t('user:list.account.register')}
             value={registerDate}
           />
           <UserInformationItem
             badgeColor={getBooleanColor(isBlocked)}
             hasSmallLabel
-            label={'Konto nieaktywowane: '}
+            label={t('user:list.account.update')}
             value={isBlocked}
           />
           <UserInformationItem
             badgeColor={getBooleanColor(isBanned)}
             hasSmallLabel
-            label={'Konto zbanowane: '}
+            label={t('user:list.account.banned')}
             value={isBanned}
           />
           <UserInformationItem
             badgeColor={'gray'}
             hasSmallLabel
-            label={'Ilość postaci: '}
+            label={t('user:list.account.characters')}
             value={characters.toString()}
+          />
+          <UserInformationItem
+            badgeColor={'gray'}
+            hasSmallLabel
+            label={t('user:list.account.limit')}
+            value={limit.toString()}
           />
         </List>
         <div className={'flex justify-end items-center mt-4 gap-2'}>

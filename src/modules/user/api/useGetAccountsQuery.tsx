@@ -18,6 +18,7 @@ const getAccounts = async (params: IAccountsListRequest) => {
       characters: 1,
       isBlocked: false,
       isBanned: false,
+      limit: 3,
     },
     {
       id: 2,
@@ -27,6 +28,7 @@ const getAccounts = async (params: IAccountsListRequest) => {
       characters: 0,
       isBlocked: false,
       isBanned: false,
+      limit: 3,
     },
     {
       id: 3,
@@ -36,6 +38,7 @@ const getAccounts = async (params: IAccountsListRequest) => {
       characters: 3,
       isBlocked: true,
       isBanned: false,
+      limit: 3,
     },
     {
       id: 4,
@@ -45,6 +48,7 @@ const getAccounts = async (params: IAccountsListRequest) => {
       characters: 4,
       isBlocked: false,
       isBanned: true,
+      limit: 3,
     },
     {
       id: 5,
@@ -54,6 +58,7 @@ const getAccounts = async (params: IAccountsListRequest) => {
       characters: 0,
       isBlocked: false,
       isBanned: false,
+      limit: 3,
     },
     {
       id: 6,
@@ -63,6 +68,7 @@ const getAccounts = async (params: IAccountsListRequest) => {
       characters: 3,
       isBlocked: true,
       isBanned: false,
+      limit: 3,
     },
     {
       id: 7,
@@ -72,6 +78,7 @@ const getAccounts = async (params: IAccountsListRequest) => {
       characters: 4,
       isBlocked: false,
       isBanned: true,
+      limit: 3,
     },
     {
       id: 8,
@@ -81,6 +88,7 @@ const getAccounts = async (params: IAccountsListRequest) => {
       characters: 0,
       isBlocked: false,
       isBanned: false,
+      limit: 3,
     },
     {
       id: 9,
@@ -90,6 +98,7 @@ const getAccounts = async (params: IAccountsListRequest) => {
       characters: 3,
       isBlocked: true,
       isBanned: false,
+      limit: 3,
     },
     {
       id: 10,
@@ -99,6 +108,7 @@ const getAccounts = async (params: IAccountsListRequest) => {
       characters: 4,
       isBlocked: false,
       isBanned: true,
+      limit: 3,
     },
     {
       id: 11,
@@ -108,6 +118,7 @@ const getAccounts = async (params: IAccountsListRequest) => {
       characters: 3,
       isBlocked: true,
       isBanned: false,
+      limit: 3,
     },
     {
       id: 12,
@@ -117,6 +128,7 @@ const getAccounts = async (params: IAccountsListRequest) => {
       characters: 4,
       isBlocked: false,
       isBanned: true,
+      limit: 3,
     },
   ]
 

@@ -1,3 +1,5 @@
+import { UserGroupEnum } from 'user/models'
+
 export interface ILoginFormValues {
   login: string
   password: string
@@ -22,4 +24,13 @@ export interface ILoginRequestValues {
   login: string
   password: string
   isRemember: boolean
+}
+
+export interface IRegisterAdminFormValues {
+  slug: string
+  email: string
+  password: string
+  group: UserGroupEnum
+  limit: number
+  isActive: boolean
 }
