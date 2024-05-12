@@ -7,7 +7,7 @@
     "register": "Rejestracja",
     "register-description": "Załóż konto i rozpocznij przygodę w świecie magii",
     "settings": "Edytuj dane",
-    "settings-descriptipn": "Zmień swoje hasło oraz adres email, z których korzystasz przy logowaniu",
+    "settings-description": "Zmień swoje hasło oraz adres email, z których korzystasz przy logowaniu",
     "logout": "Wyloguj",
     "logout-description": "Zakończ przygodę do czasu następnego logowania",
     "root": "Panel administratora",
@@ -37,5 +37,14 @@
     "group": "Grupa: ",
     "game-master-panel": "Czy użytkownik ma dostęp do panelu MG: ",
     "create-new-characters": "Czy użytkownik może tworzyć nowe postacie: "
+  },
+  "list": {
+    "account": {
+      "register": "Data rejestracji: ",
+      "update": "Konto nieaktywne: ",
+      "banned": "Konto zbanowane: ",
+      "characters": "Ilość postaci: ",
+      "limit": "Limit postaci: "
+    }
   }
 }
