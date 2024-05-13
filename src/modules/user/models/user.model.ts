@@ -33,6 +33,7 @@ export enum UserGroupEnum {
 export interface IUsersListItem {
   id: number
   slug: string
+  email: string
   registerDate: Date
   group: UserGroupEnum
   isBlocked: boolean

@@ -26,7 +26,16 @@ export interface ILoginRequestValues {
   isRemember: boolean
 }
 
-export interface IRegisterAdminFormValues {
+export interface IEditUserAdminFormValues {
+  slug: string
+  email: string
+  password?: string
+  group: UserGroupEnum
+  limit: number
+  isActive: boolean
+}
+
+export interface ICreateUserAdminFormValues {
   slug: string
   email: string
   password: string
