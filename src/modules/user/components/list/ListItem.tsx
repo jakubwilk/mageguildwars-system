@@ -71,12 +71,12 @@ export function ListItem({ item }: IProps) {
           <Text>{slug}</Text>
           <Badge
             className={classes.badge}
-            color={userGroupColor.get(group)}
+            color={userGroupColor.get(group.value as number)}
             radius={'sm'}
             size={'lg'}
             variant={'light'}
           >
-            {userGroupName.get(group)}
+            {userGroupName.get(group.value as number)}
           </Badge>
         </Group>
         <List center className={'mt-4 list-none'} size={'sm'} spacing={'xs'}>

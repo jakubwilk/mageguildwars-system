@@ -90,3 +90,14 @@
 .modalInfoText {
   font-size: 0.8rem;
 }
+
+.usersTabItemLight {
+  &[data-active] {
+    background: var(--mantine-color-violet-light, var(--mantine-primary-color-filled));
+    border: var(
+      calc(0.0625rem * var(--mantine-scale)) solid transparent,
+      calc(0.0625rem * var(--mantine-scale)) solid transparent
+    );
+    color: var(--mantine-color-violet-light-color, var(--mantine-color-white));
+  }
+}
