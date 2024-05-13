@@ -13,6 +13,7 @@ const getAccounts = async (params: IAccountsListRequest) => {
     {
       id: 1,
       slug: 'mgw-vincent',
+      email: 'vini@mageguildwars.pl',
       registerDate: new Date(),
       group: UserGroupEnum.ROOT,
       characters: 1,
@@ -23,6 +24,7 @@ const getAccounts = async (params: IAccountsListRequest) => {
     {
       id: 2,
       slug: 'mgw-nihil',
+      email: 'nihil@mageguildwars.pl',
       registerDate: new Date(),
       group: UserGroupEnum.USER,
       characters: 0,
@@ -33,6 +35,7 @@ const getAccounts = async (params: IAccountsListRequest) => {
     {
       id: 3,
       slug: 'mgw-mahiro',
+      email: 'mahiro@mageguildwars.pl',
       registerDate: new Date(),
       group: UserGroupEnum.USER,
       characters: 3,
@@ -43,6 +46,7 @@ const getAccounts = async (params: IAccountsListRequest) => {
     {
       id: 4,
       slug: 'mgw-orochi',
+      email: 'orochi@mageguildwars.pl',
       registerDate: new Date(),
       group: UserGroupEnum.OPERATOR,
       characters: 4,
@@ -53,6 +57,7 @@ const getAccounts = async (params: IAccountsListRequest) => {
     {
       id: 5,
       slug: 'mgw-nihil',
+      email: '',
       registerDate: new Date(),
       group: UserGroupEnum.USER,
       characters: 0,
@@ -63,6 +68,7 @@ const getAccounts = async (params: IAccountsListRequest) => {
     {
       id: 6,
       slug: 'mgw-mahiro',
+      email: '',
       registerDate: new Date(),
       group: UserGroupEnum.USER,
       characters: 3,
@@ -73,6 +79,7 @@ const getAccounts = async (params: IAccountsListRequest) => {
     {
       id: 7,
       slug: 'mgw-orochi',
+      email: '',
       registerDate: new Date(),
       group: UserGroupEnum.OPERATOR,
       characters: 4,
@@ -83,6 +90,7 @@ const getAccounts = async (params: IAccountsListRequest) => {
     {
       id: 8,
       slug: 'mgw-nihil',
+      email: '',
       registerDate: new Date(),
       group: UserGroupEnum.USER,
       characters: 0,
@@ -93,6 +101,7 @@ const getAccounts = async (params: IAccountsListRequest) => {
     {
       id: 9,
       slug: 'mgw-mahiro',
+      email: '',
       registerDate: new Date(),
       group: UserGroupEnum.USER,
       characters: 3,
@@ -103,6 +112,7 @@ const getAccounts = async (params: IAccountsListRequest) => {
     {
       id: 10,
       slug: 'mgw-orochi',
+      email: '',
       registerDate: new Date(),
       group: UserGroupEnum.OPERATOR,
       characters: 4,
@@ -113,6 +123,7 @@ const getAccounts = async (params: IAccountsListRequest) => {
     {
       id: 11,
       slug: 'mgw-mahiro',
+      email: '',
       registerDate: new Date(),
       group: UserGroupEnum.USER,
       characters: 3,
@@ -123,6 +134,7 @@ const getAccounts = async (params: IAccountsListRequest) => {
     {
       id: 12,
       slug: 'mgw-orochi',
+      email: '',
       registerDate: new Date(),
       group: UserGroupEnum.OPERATOR,
       characters: 4,
