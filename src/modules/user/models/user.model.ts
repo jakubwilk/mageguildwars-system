@@ -1,3 +1,5 @@
+import { ISelectOption } from 'common/models'
+
 export enum UserSettingsTabEnum {
   CHANGE_PASSWORD = 'CHANGE_PASSWORD',
   CHANGE_EMAIL = 'CHANGE_EMAIL',
@@ -35,7 +37,7 @@ export interface IUsersListItem {
   slug: string
   email: string
   registerDate: Date
-  group: UserGroupEnum
+  group: ISelectOption
   isBlocked: boolean
   isBanned: boolean
   characters: number

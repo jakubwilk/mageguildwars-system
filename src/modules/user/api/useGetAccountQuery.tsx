@@ -9,7 +9,11 @@ const getAccount = async (slug: string) => {
     slug: 'mgw-vincent',
     email: 'vini@mageguildwars.pl',
     registerDate: new Date(),
-    group: UserGroupEnum.ROOT,
+    group: {
+      id: 1,
+      label: 'Administrator',
+      value: UserGroupEnum.ROOT,
+    },
     characters: 1,
     limit: 3,
     isBlocked: false,

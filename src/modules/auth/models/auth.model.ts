@@ -29,7 +29,6 @@ export interface ILoginRequestValues {
 export interface IEditUserAdminFormValues {
   slug: string
   email: string
-  password?: string
   group: UserGroupEnum
   limit: number
   isActive: boolean

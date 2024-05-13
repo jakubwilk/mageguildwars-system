@@ -1,6 +1,13 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
-import { Combobox, Input, InputBase, Text, useCombobox } from '@mantine/core'
+import {
+  Combobox,
+  ComboboxProps,
+  Input,
+  InputBase,
+  Text,
+  useCombobox,
+} from '@mantine/core'
 import { ISelectOption } from 'common/models'
 import { isNil } from 'lodash'
 
@@ -10,7 +17,7 @@ import classes from './Form.module.css'
 
 type TFormValue = string | number | boolean | undefined
 
-interface IProps {
+interface IProps extends ComboboxProps {
   name: string
   value?: TFormValue
   description?: string
@@ -20,6 +27,8 @@ interface IProps {
   options: ISelectOption[]
   handleChange?: (value: TFormValue) => void
   isControlled?: boolean
+  isRequired?: boolean
+  isDisabled?: boolean
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -33,11 +42,15 @@ export function SelectInputField({
   options,
   handleChange,
   isControlled = true,
+  isRequired,
+  isDisabled,
 }: IProps) {
   const formContext = useFormContext()
 
   const [selectedOption, setSelectedOption] = useState<TFormValue>(undefined)
   const combobox = useCombobox({ onDropdownClose: () => combobox.resetSelectedOption() })
+
+  console.log('selectedOption', selectedOption)
 
   const pickedOption = useMemo(() => {
     if (selectedOption !== undefined) {
@@ -100,11 +113,13 @@ export function SelectInputField({
                   component={'button'}
                   description={description}
                   {...(!isNil(error) && { error: error.message })}
+                  disabled={isDisabled}
                   label={label}
                   multiline
                   name={name}
                   onClick={() => combobox.toggleDropdown()}
                   pointer
+                  required={isRequired}
                   rightSection={<Combobox.Chevron />}
                   rightSectionPointerEvents={'none'}
                   type={'button'}
