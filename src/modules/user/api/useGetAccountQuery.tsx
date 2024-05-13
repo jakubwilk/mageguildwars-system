@@ -2,8 +2,8 @@ import { useQuery } from '@tanstack/react-query'
 import { TQueryOptions } from 'common/models'
 import { ApiKeysEnum, IUsersListItem, UserGroupEnum } from 'user/models'
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getAccount = async (slug: string) => {
+  console.log('useGetAccountQuery::slug', slug)
   const data: IUsersListItem = await {
     id: 1,
     slug: 'mgw-vincent',

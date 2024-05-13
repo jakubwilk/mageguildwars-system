@@ -6,6 +6,7 @@ import {
   SelectInputField,
   TextInputField,
 } from 'common/components'
+import { ISelectOption } from 'common/models'
 import { BOOLEAN_SELECT_OPTIONS, SORT_SELECT_OPTIONS } from 'common/utils'
 import { useDispatch } from 'config'
 import { IAccountsListRequest } from 'user/models'
@@ -54,10 +55,10 @@ export function AccountsFilters() {
         />
         <SelectInputField
           className={'col-span-full md:col-span-1'}
-          handleChange={(value) =>
+          handleChange={(option) =>
             setFilters({
               ...filters,
-              group: value as number,
+              group: (option as ISelectOption).value as number,
             })
           }
           isControlled={false}

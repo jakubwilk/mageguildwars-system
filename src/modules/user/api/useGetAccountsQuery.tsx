@@ -7,8 +7,8 @@ import {
   UserGroupEnum,
 } from 'user/models'
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getAccounts = async (params: IAccountsListRequest) => {
+  console.log('useGetAccountsQuery::params', params)
   const data: IUsersListItem[] = await [
     {
       id: 1,

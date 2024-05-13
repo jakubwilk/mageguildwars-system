@@ -2,8 +2,8 @@ import { useMutation } from '@tanstack/react-query'
 import { TMutationOptions } from 'common/models'
 import { ApiKeysEnum } from 'user/models'
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const activateAccount = async (slug: string) => {
+  console.log('useActivateAccountMutation::slug', slug)
   const data: boolean = await true
 
   return data
