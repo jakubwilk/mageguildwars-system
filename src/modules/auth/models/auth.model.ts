@@ -1,4 +1,4 @@
-import { UserGroupEnum } from 'user/models'
+import { ISelectOption } from 'common/models'
 
 export interface ILoginFormValues {
   login: string
@@ -29,7 +29,7 @@ export interface ILoginRequestValues {
 export interface IEditUserAdminFormValues {
   slug: string
   email: string
-  group: UserGroupEnum
+  group: ISelectOption
   limit: number
   isActive: boolean
 }
@@ -38,7 +38,7 @@ export interface ICreateUserAdminFormValues {
   slug: string
   email: string
   password: string
-  group: UserGroupEnum
+  group: ISelectOption
   limit: number
   isActive: boolean
 }

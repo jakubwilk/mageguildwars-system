@@ -15,7 +15,7 @@ import {
 import { useGetAccountQuery } from 'user/api'
 import { UserGroupEnum } from 'user/models'
 import { USER_GROUP_OPTIONS } from 'user/utils'
-import { boolean, number, object, string } from 'yup'
+import { boolean, mixed, number, object, string } from 'yup'
 
 interface IProps {
   slug?: string
@@ -37,10 +37,15 @@ export function EditAccountModal({ slug, isEdit, isOpen, handleClose }: IProps) 
       slug: '',
       email: '',
       ...(isEdit && { password: '' }),
-      group: UserGroupEnum.USER,
+      group: {
+        id: 1,
+        label: 'Użytkownik',
+        value: UserGroupEnum.USER,
+      },
       limit: 3,
       isActive: false,
     },
+    // @ts-expect-error // Issue with typed schema for RHF and enum
     resolver: yupResolver(
       object({
         slug: string().required(t('common:validation.field-required')),
@@ -52,7 +57,13 @@ export function EditAccountModal({ slug, isEdit, isOpen, handleClose }: IProps) 
             .required(t('common:validation.field-required'))
             .min(10, t('common:validation.field-password')),
         }),
-        group: number().required(t('common:validation.field-required')),
+        group: object({
+          id: number().required(t('common:validation.field-required')),
+          label: string().required(t('common:validation.field-required')),
+          value: mixed<UserGroupEnum>()
+            .oneOf(Object.values(UserGroupEnum) as number[])
+            .required(t('common:validation.field-required')),
+        }),
         limit: number().required(t('common:validation.field-required')),
         isActive: boolean().required(t('common:validation.field-required')),
       }),
@@ -65,7 +76,7 @@ export function EditAccountModal({ slug, isEdit, isOpen, handleClose }: IProps) 
     if (data) {
       form.reset({
         ...data,
-        group: data.group.value as number,
+        group: data.group,
         isActive: !data.isBlocked,
       })
     }
@@ -73,8 +84,6 @@ export function EditAccountModal({ slug, isEdit, isOpen, handleClose }: IProps) 
     form.clearErrors()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data])
-
-  console.log('form', form.getValues())
 
   return (
     <Modal
@@ -104,14 +113,16 @@ export function EditAccountModal({ slug, isEdit, isOpen, handleClose }: IProps) 
               name={'email'}
               required
             />
-            <PasswordInputField
-              autoComplete={'off'}
-              description={t('auth:field.password-description')}
-              disabled={isFetching}
-              label={t('auth:field.password-label')}
-              name={'password'}
-              required={!isEdit}
-            />
+            {!isEdit && (
+              <PasswordInputField
+                autoComplete={'off'}
+                description={t('auth:field.password-description')}
+                disabled={isFetching}
+                label={t('auth:field.password-label')}
+                name={'password'}
+                required
+              />
+            )}
             <SelectInputField
               isDisabled={isFetching}
               isRequired

@@ -19,19 +19,18 @@ type TFormValue = string | number | boolean | undefined
 
 interface IProps extends ComboboxProps {
   name: string
-  value?: TFormValue
+  value?: ISelectOption
   description?: string
   className?: string
   error?: string
   label: string
   options: ISelectOption[]
-  handleChange?: (value: TFormValue) => void
+  handleChange?: (value: ISelectOption | undefined) => void
   isControlled?: boolean
   isRequired?: boolean
   isDisabled?: boolean
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function SelectInputField({
   name,
   value,
@@ -47,14 +46,14 @@ export function SelectInputField({
 }: IProps) {
   const formContext = useFormContext()
 
-  const [selectedOption, setSelectedOption] = useState<TFormValue>(undefined)
+  const [selectedOption, setSelectedOption] = useState<ISelectOption | undefined>(
+    undefined,
+  )
   const combobox = useCombobox({ onDropdownClose: () => combobox.resetSelectedOption() })
-
-  console.log('selectedOption', selectedOption)
 
   const pickedOption = useMemo(() => {
     if (selectedOption !== undefined) {
-      return options.find((item) => item.value === selectedOption)
+      return options.find((item) => item.value === selectedOption.value)
     }
 
     return undefined
@@ -71,8 +70,13 @@ export function SelectInputField({
     [options],
   )
 
+  const getSelectedOption = useCallback(
+    (value: TFormValue) => options.find((item) => item.value === value),
+    [options],
+  )
+
   const handleOptionSubmit = useCallback(
-    (value: TFormValue) => {
+    (value: ISelectOption | undefined) => {
       setSelectedOption(value)
       handleChange?.(value)
       combobox.closeDropdown()
@@ -97,8 +101,10 @@ export function SelectInputField({
           render={({ field: { name, value, onChange }, fieldState: { error } }) => (
             <Combobox
               onOptionSubmit={(val) => {
-                handleOptionSubmit(val)
-                onChange(val)
+                const option = getSelectedOption(val)
+
+                handleOptionSubmit(option)
+                onChange(option)
               }}
               store={combobox}
               withinPortal={false}
@@ -143,7 +149,15 @@ export function SelectInputField({
 
   return (
     <div className={className}>
-      <Combobox onOptionSubmit={handleOptionSubmit} store={combobox} withinPortal={false}>
+      <Combobox
+        onOptionSubmit={(val) => {
+          const option = getSelectedOption(val)
+
+          handleOptionSubmit(option)
+        }}
+        store={combobox}
+        withinPortal={false}
+      >
         <Combobox.Target>
           <InputBase
             classNames={{
