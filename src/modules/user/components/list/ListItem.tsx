@@ -173,6 +173,7 @@ export function ListItem({ item }: IProps) {
       {isEditModalOpen && (
         <EditAccountModal
           handleClose={handleToggleEditModal}
+          isEdit
           isOpen={isEditModalOpen}
           slug={slug}
         />
