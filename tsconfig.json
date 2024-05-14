@@ -29,7 +29,8 @@
       "auth/*": ["src/modules/auth/*"],
       "common/*": ["src/modules/common/*"],
       "home/*": ["src/modules/home/*"],
-      "user/*": ["src/modules/user/*"]
+      "user/*": ["src/modules/user/*"],
+      "magic/*": ["src/modules/magic/*"]
     }
   },
   "include": ["src"],

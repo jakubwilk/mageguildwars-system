@@ -21,6 +21,7 @@ export default defineConfig({
       common: path.resolve('src/modules/common/'),
       home: path.resolve('src/modules/home/'),
       user: path.resolve('src/modules/user/'),
+      magic: path.resolve('src/modules/magic/'),
     },
   },
   build: {
