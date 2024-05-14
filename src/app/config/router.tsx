@@ -1,32 +1,20 @@
 import { createBrowserRouter } from 'react-router-dom'
-
-import { Root } from '../../modules/common/layout'
-import { AuthPage, EditUserPage, HomePage } from '../pages'
+import { RootPage } from 'administration/pages'
+import { RootLayout } from 'common/layout'
+import { routeKeys } from 'common/utils'
+import { DashboardPage, DashboardUsersPage, HomePage } from 'pages'
 
 export const APP_ROUTER = createBrowserRouter([
   {
-    element: <Root />,
+    element: <RootLayout />,
     children: [
+      { element: <HomePage />, path: routeKeys.HOME },
       {
-        path: '/',
-        element: <HomePage />,
-      },
-      {
-        path: '/settings',
-        element: <EditUserPage />,
-      },
-    ],
-  },
-  {
-    element: <Root isAuthPage />,
-    children: [
-      {
-        path: '/login',
-        element: <AuthPage isLogin />,
-      },
-      {
-        path: '/create-account',
-        element: <AuthPage />,
+        element: <RootPage />,
+        children: [
+          { element: <DashboardPage />, path: routeKeys.ROOT_PANEL },
+          { element: <DashboardUsersPage />, path: routeKeys.ROOT_PANEL_USERS },
+        ],
       },
     ],
   },

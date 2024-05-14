@@ -1,21 +1,24 @@
 .root {
-    width: 100%;
+  width: 100%;
 }
 
 .label {
-    margin-bottom: 0.3rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--mantine-color-dark-1);
+  margin-bottom: 0.3rem;
+  color: var(--mantine-color-dark-2);
 }
 
 .description {
-    display: block;
-    font-size: 0.8rem;
-    line-height: 1.1rem;
-    padding-bottom: 0.3rem;
+  display: block;
+  font-size: 0.8rem;
+  line-height: 1.1rem;
+  padding-bottom: 0.3rem;
 }
 
 .checkboxDescription {
-    margin-left: 0.8rem;
+  margin-left: 0.8rem;
+}
+
+.selectOptionText {
+  line-height: var(--input-line-height);
+  font-size: var(--input-fz, var(--input-fz, var(--mantine-font-size-sm)));
 }

@@ -1,4 +1,3 @@
-export * from './AuthPage.tsx'
-export * from './UserPage.tsx'
 export * from './HomePage.tsx'
-export * from './EditUserPage.tsx'
+export * from './DashboardPage.tsx'
+export * from './DashboardUsersPage.tsx'

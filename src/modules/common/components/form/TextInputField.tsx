@@ -6,6 +6,7 @@ import '@mantine/core/styles/Input.css'
 import classes from './Form.module.css'
 
 interface IProps extends TextInputProps {
+  value?: string
   name: string
   error?: string
   handleChange?: (value: string) => void
@@ -13,6 +14,7 @@ interface IProps extends TextInputProps {
 }
 
 export function TextInputField({
+  value,
   name,
   error,
   label,
@@ -21,14 +23,17 @@ export function TextInputField({
   isControlled = true,
   ...restProps
 }: IProps) {
-  const { control } = useFormContext()
+  const formContext = useFormContext()
 
-  if (isControlled) {
+  if (isControlled && formContext) {
     return (
       <Controller
-        control={control}
+        control={formContext.control}
         name={name}
-        render={({ field: { name, value, onBlur, onChange }, fieldState: { error } }) => (
+        render={({
+          field: { name, value = '', onBlur, onChange },
+          fieldState: { error },
+        }) => (
           <TextInput
             classNames={{
               root: classes.root,
@@ -41,7 +46,7 @@ export function TextInputField({
             onBlur={onBlur}
             onChange={(event) => {
               if (handleChange) {
-                const { value } = event.target
+                const { value } = event.currentTarget
                 handleChange(value)
               }
 
@@ -72,8 +77,8 @@ export function TextInputField({
           handleChange(value)
         }
       }}
+      value={value === undefined ? '' : value}
       {...(!isNil(error) && { error })}
-      {...restProps}
     />
   )
 }

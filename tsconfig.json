@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
     "target": "ES2020",
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
@@ -18,7 +19,18 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    "paths": {
+      "config": ["src/app/config/"],
+      "locales/*": ["src/app/locales/*"],
+      "pages": ["src/app/pages/"],
+      "administration/*": ["src/modules/administration/*"],
+      "auth/*": ["src/modules/auth/*"],
+      "common/*": ["src/modules/common/*"],
+      "home/*": ["src/modules/home/*"],
+      "user/*": ["src/modules/user/*"]
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

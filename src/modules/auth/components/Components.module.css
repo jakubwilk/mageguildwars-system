@@ -1,0 +1,9 @@
+.loginIssuesText {
+    font-size: 0.875rem;
+}
+
+.loginIssuesLink {
+    &:hover {
+        color: var(--mantine-color-violet-5);
+    }
+}

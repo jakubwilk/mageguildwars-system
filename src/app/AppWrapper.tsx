@@ -1,16 +1,17 @@
 import { ReactNode } from 'react'
+import { Provider } from 'react-redux'
 import { ColorSchemeScript } from '@mantine/core'
 import { MantineProvider } from '@mantine/core'
+import { DatesProvider } from '@mantine/dates'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { store, theme } from 'config'
 import dayjs from 'dayjs'
 
 import 'dayjs/locale/pl.js'
 
-import { UserProvider } from '../modules/user/context'
-
-import { theme } from './config'
-
 import '@mantine/core/styles.layer.css'
+
+dayjs.locale('pl')
 
 const queryClient = new QueryClient()
 
@@ -22,17 +23,17 @@ interface IProps {
 
 export function AppWrapper({ children }: IProps) {
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <ColorSchemeScript />
-      <QueryClientProvider client={queryClient}>
-        <MantineProvider
-          defaultColorScheme={'dark'}
-          forceColorScheme={'dark'}
-          theme={theme}
-        >
-          <UserProvider>{children}</UserProvider>
-        </MantineProvider>
-      </QueryClientProvider>
-    </>
+      <MantineProvider
+        defaultColorScheme={'dark'}
+        forceColorScheme={'dark'}
+        theme={theme}
+      >
+        <DatesProvider settings={{ locale: 'pl' }}>
+          <Provider store={store}>{children}</Provider>
+        </DatesProvider>
+      </MantineProvider>
+    </QueryClientProvider>
   )
 }
