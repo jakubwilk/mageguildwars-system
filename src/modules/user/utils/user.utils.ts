@@ -1,5 +1,5 @@
 import { ISelectOption } from 'common/models'
-import { IAccountsListRequest, UserGroupEnum } from 'user/models'
+import { IAccountsListFilters, UserGroupEnum } from 'user/models'
 
 export const userGroupColor = new Map([
   [0, 'dark'],
@@ -20,11 +20,19 @@ export const userGroupName = new Map([
   [UserGroupEnum.ROOT, 'Administrator'],
 ])
 
-export const DEFAULT_USERS_FILTERS: IAccountsListRequest = {
+export const DEFAULT_USERS_FILTERS: IAccountsListFilters = {
   page: 1,
   size: 10,
-  sort: 'asc',
-  sortBy: 'registerDate',
+  sort: {
+    id: 1,
+    label: 'Rosnąco',
+    value: 'asc',
+  },
+  sortBy: {
+    id: 1,
+    label: 'Data rejestracji',
+    value: 'registerDate',
+  },
 }
 
 export const USER_GROUP_OPTIONS: ISelectOption[] = [

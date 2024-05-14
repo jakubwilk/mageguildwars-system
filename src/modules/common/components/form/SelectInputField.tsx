@@ -17,7 +17,7 @@ import classes from './Form.module.css'
 
 type TFormValue = string | number | boolean | undefined
 
-interface IProps extends ComboboxProps {
+interface IProps extends Omit<ComboboxProps, 'value'> {
   name: string
   value?: ISelectOption
   description?: string

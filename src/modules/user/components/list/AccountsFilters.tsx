@@ -9,7 +9,7 @@ import {
 import { ISelectOption } from 'common/models'
 import { BOOLEAN_SELECT_OPTIONS, SORT_SELECT_OPTIONS } from 'common/utils'
 import { useDispatch } from 'config'
-import { IAccountsListRequest } from 'user/models'
+import { IAccountsListFilters } from 'user/models'
 import { clearAccountsFilters, setAccountsFilters } from 'user/store'
 import {
   ACCOUNT_SORT_OPTIONS,
@@ -19,7 +19,7 @@ import {
 
 export function AccountsFilters() {
   const dispatch = useDispatch()
-  const [filters, setFilters] = useState<IAccountsListRequest>(DEFAULT_USERS_FILTERS)
+  const [filters, setFilters] = useState<IAccountsListFilters>(DEFAULT_USERS_FILTERS)
 
   const updateFilters = useCallback(
     () => dispatch(setAccountsFilters(filters)),
@@ -58,7 +58,7 @@ export function AccountsFilters() {
           handleChange={(option) =>
             setFilters({
               ...filters,
-              group: (option as ISelectOption).value as number,
+              group: option,
             })
           }
           isControlled={false}
@@ -74,7 +74,7 @@ export function AccountsFilters() {
           handleChange={(value) =>
             setFilters({
               ...filters,
-              isBlocked: value as boolean,
+              isBlocked: value,
             })
           }
           isControlled={false}
@@ -88,7 +88,7 @@ export function AccountsFilters() {
           handleChange={(value) =>
             setFilters({
               ...filters,
-              isBanned: value as boolean,
+              isBanned: value,
             })
           }
           isControlled={false}
@@ -104,7 +104,7 @@ export function AccountsFilters() {
           handleChange={(value) =>
             setFilters({
               ...filters,
-              sortBy: value as string,
+              sortBy: value as ISelectOption,
             })
           }
           isControlled={false}
@@ -118,7 +118,7 @@ export function AccountsFilters() {
           handleChange={(value) =>
             setFilters({
               ...filters,
-              sort: value as string,
+              sort: value as ISelectOption,
             })
           }
           isControlled={false}

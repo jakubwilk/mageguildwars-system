@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { IAccountsListRequest } from 'user/models'
+import { IAccountsListFilters } from 'user/models'
 import { DEFAULT_USERS_FILTERS } from 'user/utils'
 
 interface IUsersReducer {
-  accountsFilters: IAccountsListRequest
+  accountsFilters: IAccountsListFilters
 }
 
 const initialState: IUsersReducer = {

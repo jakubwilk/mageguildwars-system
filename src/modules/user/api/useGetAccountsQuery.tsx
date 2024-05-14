@@ -2,12 +2,12 @@ import { useQuery } from '@tanstack/react-query'
 import { TQueryOptions } from 'common/models'
 import {
   ApiKeysEnum,
-  IAccountsListRequest,
+  IAccountsListFilters,
   IUsersListItem,
   UserGroupEnum,
 } from 'user/models'
 
-const getAccounts = async (params: IAccountsListRequest) => {
+const getAccounts = async (params: IAccountsListFilters) => {
   console.log('useGetAccountsQuery::params', params)
   const data: IUsersListItem[] = await [
     {
@@ -91,7 +91,7 @@ const getAccounts = async (params: IAccountsListRequest) => {
 }
 
 export function useGetAccountsQuery(
-  params: IAccountsListRequest,
+  params: IAccountsListFilters,
   options: TQueryOptions<IUsersListItem[]> = {},
 ) {
   return useQuery({

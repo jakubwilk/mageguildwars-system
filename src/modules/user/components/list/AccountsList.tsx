@@ -14,6 +14,7 @@ import { Pagination } from './Pagination'
 export function AccountsList() {
   const dispatch = useDispatch()
   const { accountsFilters } = useSelector((state) => state.users)
+
   const { data, isFetching } = useGetAccountsQuery(accountsFilters)
   const [isCreateAccountModalOpen, setIsCreateAccountModalOpen] = useState(false)
 

@@ -44,6 +44,18 @@ export interface IUsersListItem {
   limit: number
 }
 
+export interface IAccountsListFilters {
+  slug?: string
+  registerDate?: Date | undefined
+  group?: ISelectOption
+  isBlocked?: ISelectOption
+  isBanned?: ISelectOption
+  page: number
+  size: number
+  sort: ISelectOption
+  sortBy: ISelectOption
+}
+
 export interface IAccountsListRequest {
   slug?: string
   registerDate?: Date | undefined
