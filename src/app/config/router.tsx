@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import { RootPage } from 'administration/pages'
 import { RootLayout } from 'common/layout'
 import { routeKeys } from 'common/utils'
-import { DashboardPage, DashboardUsersPage, HomePage } from 'pages'
+import { DashboardMagicPage, DashboardPage, DashboardUsersPage, HomePage } from 'pages'
 
 export const APP_ROUTER = createBrowserRouter([
   {
@@ -14,6 +14,7 @@ export const APP_ROUTER = createBrowserRouter([
         children: [
           { element: <DashboardPage />, path: routeKeys.ROOT_PANEL },
           { element: <DashboardUsersPage />, path: routeKeys.ROOT_PANEL_USERS },
+          { element: <DashboardMagicPage />, path: routeKeys.ROOT_PANEL_MAGIC },
         ],
       },
     ],
