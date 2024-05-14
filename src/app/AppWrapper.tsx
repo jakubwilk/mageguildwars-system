@@ -35,5 +35,3 @@ export function AppWrapper({ children }: IProps) {
     </QueryClientProvider>
   )
 }
-
-// '04ffb1b3-e6da-45fb-96dd-ec7f2973bf89'
