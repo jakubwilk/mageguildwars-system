@@ -15,6 +15,8 @@ dayjs.locale('pl')
 
 const queryClient = new QueryClient()
 
+dayjs.locale('pl')
+
 interface IProps {
   children: ReactNode
 }
