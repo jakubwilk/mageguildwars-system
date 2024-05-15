@@ -36,7 +36,7 @@ export function AccountsList() {
   }, [dispatch])
 
   return (
-    <div>
+    <>
       <AccountsFilters />
       {data && !isFetching ? (
         <>
@@ -73,6 +73,6 @@ export function AccountsList() {
           isOpen={isCreateAccountModalOpen}
         />
       )}
-    </div>
+    </>
   )
 }
