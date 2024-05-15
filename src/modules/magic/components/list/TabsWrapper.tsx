@@ -1,6 +1,8 @@
 import { Tabs } from '@mantine/core'
 import { MagicTabEnum } from 'magic/models'
 
+import { DefaultMagicList } from './DefaultMagicList'
+
 import classes from './../Components.module.css'
 
 export function TabsWrapper() {
@@ -22,7 +24,7 @@ export function TabsWrapper() {
         </Tabs.Tab>
       </Tabs.List>
       <Tabs.Panel value={MagicTabEnum.SYSTEM}>
-        <div>{'systemowe'}</div>
+        <DefaultMagicList />
       </Tabs.Panel>
       <Tabs.Panel value={MagicTabEnum.USERS}>
         <div>{'użytkowe'}</div>
