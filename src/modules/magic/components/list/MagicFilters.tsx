@@ -50,6 +50,23 @@ export function MagicFilters() {
           ]}
           value={filters.author}
         />
+        <SelectInputField
+          className={'col-span-full md:col-span-1'}
+          handleChange={(value) =>
+            setFilters({
+              ...filters,
+              author: value,
+            })
+          }
+          isControlled={false}
+          label={'Kategoria'}
+          name={'category'}
+          options={[
+            { id: 1, label: 'Magie zwykłe', value: 'magic-normal' },
+            { id: 2, label: 'Magie legendarne', value: 'magic-legendary' },
+          ]}
+          value={filters.author}
+        />
       </div>
       <div className={'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'}>
         <DateInputField
