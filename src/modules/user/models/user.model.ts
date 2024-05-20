@@ -56,18 +56,6 @@ export interface IAccountsListFilters {
   sortBy: ISelectOption
 }
 
-export interface IAccountsListRequest {
-  slug?: string
-  registerDate?: Date | undefined
-  group?: UserGroupEnum | undefined
-  isBlocked?: boolean
-  isBanned?: boolean
-  page: number
-  size: number
-  sort: string
-  sortBy: string
-}
-
 export enum UsersTabEnum {
   ACCOUNTS = 'ACCOUNTS',
   CHARACTERS = 'CHARACTERS',

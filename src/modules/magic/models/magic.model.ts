@@ -8,6 +8,7 @@ export enum MagicTabEnum {
 export interface IMagicListItem {
   slug: string
   name: string
+  category: string
   imageUrl: string
   deescription: string
   createdAt: string
@@ -16,6 +17,7 @@ export interface IMagicListItem {
 
 export interface IMagicListFilters {
   slug?: string
+  category?: string
   createdDate?: Date
   updatedDate?: Date
   author?: ISelectOption
@@ -23,20 +25,4 @@ export interface IMagicListFilters {
   size: number
   sort: ISelectOption
   sortBy: ISelectOption
-}
-
-export interface IMagicListRequest {
-  slug?: string
-  createdAt?: Date
-  updatedAt?: Date
-  author?: string
-  page: number
-  size: number
-  sort: string
-  sortBy: string
-}
-
-export interface IMagicListResponse {
-  data: IMagicListItem[]
-  total: number
 }
