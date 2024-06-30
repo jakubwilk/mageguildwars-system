@@ -1,7 +1,0 @@
-export * from './footer'
-export * from './header'
-export * from './socials'
-export * from './form'
-export * from './menu'
-export * from './content'
-export * from './modal'
