@@ -1,0 +1,68 @@
+.textRoot {
+}
+
+.textLabel {
+  font-size: 0.875rem;
+  color: var(--mantine-color-dark-2);
+}
+
+.textRequired {
+}
+
+.textDescription {
+  font-size: 0.875rem;
+  color: var(--mantine-color-dark-1);
+}
+
+.textError {
+  color: var(--mantine-color-red-5);
+}
+
+.textInput {
+  border-color: var(--mantine-color-dark-1);
+  border-width: 2px;
+  color: var(--mantine-color-dark-5);
+
+  &:focus,
+  &:active,
+  &:focus-within {
+    border-color: var(--mgw-color-primary-light);
+  }
+
+  &[data-error='true'] {
+    border-color: var(--mantine-color-red-5);
+  }
+}
+
+.passwordVisibilityToggle {
+  color: var(--mantine-color-dark-2);
+}
+
+.checkboxInput {
+  border-color: var(--mantine-color-dark-1);
+  border-width: 2px;
+
+  &:focus,
+  &:active {
+    border-color: var(--mgw-color-primary-light);
+  }
+
+  &:checked {
+    background-color: var(--mgw-color-primary-light);
+    border-color: var(--mgw-color-primary-light);
+
+    & + svg {
+      color: var(--mantine-color-white);
+    }
+  }
+}
+
+.checkboxLabel {
+  font-size: 0.875rem;
+  color: var(--mantine-color-dark-2);
+}
+
+.checkboxDescription {
+  font-size: 0.875rem;
+  color: var(--mantine-color-dark-1);
+}

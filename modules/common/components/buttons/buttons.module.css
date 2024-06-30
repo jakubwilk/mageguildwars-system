@@ -1,0 +1,8 @@
+.buttonRoot {
+  background-color: var(--mgw-color-primary-main);
+
+  &:hover,
+  &:focus {
+    background-color: var(--mgw-color-primary-dark);
+  }
+}
