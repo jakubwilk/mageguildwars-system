@@ -19,7 +19,8 @@
     ],
     "paths": {
       "config/*": ["./config/*"],
-      "auth/*": ["./modules/auth/*"]
+      "auth/*": ["./modules/auth/*"],
+      "common/*": ["./modules/common/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

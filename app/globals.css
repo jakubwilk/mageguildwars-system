@@ -8,7 +8,7 @@
 :root {
   --mgw-color-primary-light: #624b6f;
   --mgw-color-primary-main: #3c2e43;
-  --mag-color-primary-dark: #261d2b;
+  --mgw-color-primary-dark: #261d2b;
 
   --mgw-color-primary-light-rgb: 98, 75, 111;
   --mgw-color-primary-main-rgb: 60, 46, 67;
@@ -27,4 +27,5 @@ html {
 body {
   min-height: 100%;
   background-color: var(--mantine-color-dark-8) !important;
+  font-size: 1rem;
 }
