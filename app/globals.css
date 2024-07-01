@@ -12,7 +12,11 @@
 
   --mgw-color-primary-light-rgb: 98, 75, 111;
   --mgw-color-primary-main-rgb: 60, 46, 67;
-  --mag-color-primary-dark-rgb: 38, 29, 43;
+  --mgw-color-primary-dark-rgb: 38, 29, 43;
+
+  --mgw-font-weighht-light: 300;
+  --mgw-font-weight-regular: 400;
+  --mgw-font-weight-bold: 600;
 }
 
 *::selection {

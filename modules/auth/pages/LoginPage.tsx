@@ -1,7 +1,11 @@
 'use client'
 
+import Link from 'next/link'
 import { Text, Title } from '@mantine/core'
 import { LoginForm } from 'auth/components'
+import clsx from 'clsx'
+
+import classes from './pages.module.css'
 
 export default function LoginPage() {
   return (
@@ -13,6 +17,16 @@ export default function LoginPage() {
             {'Konto'}
           </Text>
           <Title className={'uppercase text-gray-200 text-4xl'}>{'Rejestracja'}</Title>
+          <Text className={'mt-8'}>
+            {'Dołącz już teraz do świata pełnego magii i niebezpieczeństwa. Wzmocnij siły jednej z kilku oficjalnych'}
+            {'gildii lub podróżuj jako Samotnik, by któregoś dnia wspiąć się na szczyt z własną organizacją.'}
+          </Text>
+          <Link
+            className={clsx('inline-block mt-8 uppercase px-8 py-4 duration-100', classes.authButton)}
+            href={'/register'}
+          >
+            {'Utwórz konto'}
+          </Link>
         </header>
       </section>
     </main>
