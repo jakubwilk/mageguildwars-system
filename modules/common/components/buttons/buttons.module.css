@@ -6,3 +6,8 @@
     background-color: var(--mgw-color-primary-dark);
   }
 }
+
+.buttonLabel {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+}
