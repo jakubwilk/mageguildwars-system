@@ -9,17 +9,23 @@
 .recoveryPasswordLink {
   color: var(--mantine-color-dark-5);
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     color: var(--mgw-color-primary-light);
     text-decoration: none;
   }
+}
+
+.registerRulesText {
+  color: var(--mantine-color-dark-2);
 }
 
 .navigationLink {
   background-color: var(--mgw-color-primary-main);
   color: var(--mantine-color-white);
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background-color: var(--mantine-color-white);
     color: var(--mgw-color-primary-main);
   }

@@ -21,7 +21,7 @@ export default function LoginForm() {
         </header>
         <form className={'flex flex-col gap-4'}>
           <TextInputField description={'Wprowadź adres email użyty podczas rejestracji'} label={'Adres email'} />
-          <PasswordInputField label={'Hasło użytkownika'} />
+          <PasswordInputField label={'Hasło'} />
           <CheckboxField label={'Zapamiętaj przy następnych logowaniach'} />
           <div className={'flex items-center justify-between flex-col lg:flex-row mt-4 gap-4'}>
             <Button className={'w-full lg:w-[auto]'}>{'Zaloguj się'}</Button>
