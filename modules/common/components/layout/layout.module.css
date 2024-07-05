@@ -25,3 +25,21 @@
 .navbarButtonText {
     font-weight: var(--mgw-font-weight-bold);
 }
+
+.menuItem {
+    font-weight: var(--mgw-font-weight-bold);
+    color: var(--mantine-color-gray-5);
+
+    &:hover, &:focus {
+        color: var(--mgw-color-primary-main);
+    }
+}
+
+.menuItemActive {
+    color: var(--mantine-color-white);
+    background-color: var(--mgw-color-primary-main);
+
+    &:hover, &:focus {
+        color: var(--mantine-color-white);
+    }
+}

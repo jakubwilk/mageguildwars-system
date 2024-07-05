@@ -28,7 +28,7 @@ export default function LoginForm() {
             <div className={'flex items-center gap-2'}>
               <div className={'flex flex-col'}>
                 <Text className={classes.recoveryPasswordText}>{'Zapomniałeś hasła?'}</Text>
-                <Link className={clsx('underline duration-100', classes.recoveryPasswordLink)} href={'/reset-password'}>
+                <Link className={clsx('underline', classes.recoveryPasswordLink)} href={'/reset-password'}>
                   {'Odzyskaj hasło'}
                 </Link>
               </div>

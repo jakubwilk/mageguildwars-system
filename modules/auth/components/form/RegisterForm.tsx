@@ -34,7 +34,7 @@ export default function RegisterForm() {
             <Button className={'w-full lg:w-[auto]'}>{'Zarejestruj się'}</Button>
             <Text className={clsx('text-center lg:text-right', classes.registerRulesText)}>
               {'Rejestrując się na Mage Guild Wars akceptujesz'}
-              <Link className={clsx('ml-1 underline duration-100', classes.recoveryPasswordLink)} href={'/rules'}>
+              <Link className={clsx('ml-1 underline', classes.recoveryPasswordLink)} href={'/rules'}>
                 {'regulamin serwisu'}
               </Link>
             </Text>

@@ -22,10 +22,7 @@ export default function RegisterPage() {
               'Wróć do świata magii, by kontynuować przygodę wspinając się powoli na sam szczyt. Twoi towarzysze i gildia czekają na Ciebie.'
             }
           </Text>
-          <Link
-            className={clsx('inline-block mt-8 uppercase px-8 py-4 duration-100', classes.authButton)}
-            href={'/login'}
-          >
+          <Link className={clsx('inline-block mt-8 uppercase px-8 py-4', classes.authButton)} href={'/login'}>
             {'Zaloguj się'}
           </Link>
         </header>

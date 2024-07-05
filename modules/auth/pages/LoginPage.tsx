@@ -21,10 +21,7 @@ export default function LoginPage() {
             {'Dołącz już teraz do świata pełnego magii i niebezpieczeństwa. Wzmocnij siły jednej z kilku oficjalnych'}
             {'gildii lub podróżuj jako Samotnik, by któregoś dnia wspiąć się na szczyt z własną organizacją.'}
           </Text>
-          <Link
-            className={clsx('inline-block mt-8 uppercase px-8 py-4 duration-100', classes.authButton)}
-            href={'/register'}
-          >
+          <Link className={clsx('inline-block mt-8 uppercase px-8 py-4', classes.authButton)} href={'/register'}>
             {'Utwórz konto'}
           </Link>
         </header>

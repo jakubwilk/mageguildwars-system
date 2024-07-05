@@ -11,10 +11,7 @@ export default function Navigation() {
   return (
     <div className={'relative w-full flex justify-start'}>
       <Tooltip color={'dark'} label={'Wróć do strony głównej'} position={'right'}>
-        <Link
-          className={clsx('h-[50px] w-[50px] flex items-center justify-center duration-100', classes.navigationLink)}
-          href={'/'}
-        >
+        <Link className={clsx('h-[50px] w-[50px] flex items-center justify-center', classes.navigationLink)} href={'/'}>
           <IconChevronLeft />
         </Link>
       </Tooltip>

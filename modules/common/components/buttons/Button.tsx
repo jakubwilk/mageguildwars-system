@@ -32,7 +32,7 @@ export default function Button({
     <MantineButton
       autoContrast={hasAutoContrast}
       classNames={{
-        root: clsx('duration-100 px-8 py-4 h-[auto]', isPrimary ? classes.buttonRoot : ''),
+        root: clsx('px-8 py-4 h-[auto]', isPrimary ? classes.buttonRoot : ''),
         label: clsx('uppercase tracking-wide', classes.buttonLabel)
       }}
       disabled={isDisabled}
