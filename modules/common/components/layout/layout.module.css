@@ -48,8 +48,22 @@
   }
 }
 
+.navbarAccountButtonActive {
+  background-color: var(--mgw-color-primary-main) !important;
+
+  & svg,
+  & p {
+    color: var(--mantine-color-white) !important;
+  }
+}
+
 .navbarButtonText {
   font-weight: var(--mgw-font-weight-bold);
+
+  & svg,
+  & p {
+    color: var(--mantine-color-white);
+  }
 }
 
 .menuItem {

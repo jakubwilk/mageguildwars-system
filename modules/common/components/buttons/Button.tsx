@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { MouseEvent, ReactNode } from 'react'
 import { Button as MantineButton, ButtonProps } from '@mantine/core'
 import clsx from 'clsx'
 import { Omit } from 'lodash'
@@ -14,6 +14,7 @@ export interface IButtonProps extends TMantineButtonProps {
   isFullWidth?: boolean
   isLoading?: boolean
   isPrimary?: boolean
+  handleClick?: (event: MouseEvent<HTMLButtonElement>) => void
 }
 
 export default function Button({
@@ -26,6 +27,7 @@ export default function Button({
   isFullWidth,
   isLoading,
   isPrimary = true,
+  handleClick,
   ...rest
 }: IButtonProps) {
   return (
@@ -38,6 +40,7 @@ export default function Button({
       disabled={isDisabled}
       fullWidth={isFullWidth}
       loading={isLoading}
+      onClick={handleClick}
       radius={radius}
       size={size}
       variant={variant}
