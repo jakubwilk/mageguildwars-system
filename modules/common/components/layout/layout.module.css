@@ -1,45 +1,73 @@
 .headerRoot {
-    background-image: url('/home.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  background-image: url('/home.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .navbarButton {
+  background-color: transparent;
+  border-radius: 0;
+  padding: 0;
+
+  & svg,
+  & p {
+    color: var(--mantine-color-gray-5);
+  }
+
+  &:hover,
+  &:focus {
     background-color: transparent;
-    border-radius: 0;
 
-    & svg, & p {
-        color: var(--mantine-color-gray-5)
+    & svg,
+    & p {
+      color: var(--mgw-color-primary-main);
     }
+  }
+}
 
-    &:hover, &:focus {
-        background-color: transparent;
+.navbarAccountButton {
+  background-color: transparent;
+  border-radius: 0;
+  padding-left: 1.35rem;
+  padding-right: 1.35rem;
 
-        & svg, & p {
-            color: var(--mgw-color-primary-main);
-        }
+  & svg,
+  & p {
+    color: var(--mantine-color-gray-5);
+  }
+
+  &:hover,
+  &:focus {
+    background-color: transparent;
+
+    & svg,
+    & p {
+      color: var(--mgw-color-primary-main);
     }
+  }
 }
 
 .navbarButtonText {
-    font-weight: var(--mgw-font-weight-bold);
+  font-weight: var(--mgw-font-weight-bold);
 }
 
 .menuItem {
-    font-weight: var(--mgw-font-weight-bold);
-    color: var(--mantine-color-gray-5);
+  font-weight: var(--mgw-font-weight-bold);
+  color: var(--mantine-color-gray-5);
 
-    &:hover, &:focus {
-        color: var(--mgw-color-primary-main);
-    }
+  &:hover,
+  &:focus {
+    color: var(--mgw-color-primary-main);
+  }
 }
 
 .menuItemActive {
-    color: var(--mantine-color-white);
-    background-color: var(--mgw-color-primary-main);
+  color: var(--mantine-color-white);
+  background-color: var(--mgw-color-primary-main);
 
-    &:hover, &:focus {
-        color: var(--mantine-color-white);
-    }
+  &:hover,
+  &:focus {
+    color: var(--mantine-color-white);
+  }
 }

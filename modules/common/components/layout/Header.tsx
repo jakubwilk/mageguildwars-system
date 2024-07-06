@@ -9,9 +9,9 @@ import classes from './layout.module.css'
 
 export default function Header() {
   return (
-    <section className={clsx('w-full h-full px-4 md:px-8', classes.headerRoot)}>
+    <section className={clsx('w-full h-full max-h-[70vh] px-4 md:px-8', classes.headerRoot)}>
       <div className={'container mx-auto'}>
-        <header className={'min-h-full py-12 md:py-0 md:min-h-[calc(100vh-80px)] flex items-center justify-center'}>
+        <header className={'min-h-full py-12 md:py-0 md:min-h-[70vh] flex items-center justify-center'}>
           <Tooltip color={'dark'} label={'Strona główna Mage Guild Wars'} position={'bottom'}>
             <Link className={'inline-block'} href={'/'}>
               <Image
