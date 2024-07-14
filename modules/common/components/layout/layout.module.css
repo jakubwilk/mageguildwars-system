@@ -12,7 +12,7 @@
 
   & svg,
   & p {
-    color: var(--mantine-color-gray-5);
+    color: var(--mantine-color-gray-6);
   }
 
   &:hover,
@@ -23,37 +23,6 @@
     & p {
       color: var(--mgw-color-primary-main);
     }
-  }
-}
-
-.navbarAccountButton {
-  background-color: transparent;
-  border-radius: 0;
-  padding-left: 1.35rem;
-  padding-right: 1.35rem;
-
-  & svg,
-  & p {
-    color: var(--mantine-color-gray-5);
-  }
-
-  &:hover,
-  &:focus {
-    background-color: transparent;
-
-    & svg,
-    & p {
-      color: var(--mgw-color-primary-main);
-    }
-  }
-}
-
-.navbarAccountButtonActive {
-  background-color: var(--mgw-color-primary-main) !important;
-
-  & svg,
-  & p {
-    color: var(--mantine-color-white) !important;
   }
 }
 
@@ -68,7 +37,7 @@
 
 .menuItem {
   font-weight: var(--mgw-font-weight-bold);
-  color: var(--mantine-color-gray-5);
+  color: var(--mantine-color-gray-6);
 
   &:hover,
   &:focus {
