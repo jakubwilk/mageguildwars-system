@@ -37,3 +37,14 @@
     color: var(--mantine-color-white);
   }
 }
+
+.menuUserLink {
+  font-weight: var(--mgw-font-weight-bold);
+  color: var(--mantine-color-gray-6);
+
+  &:hover,
+  &:focus {
+    background-color: var(--mgw-color-primary-main);
+    color: var(--mantine-color-white);
+  }
+}
