@@ -1,12 +1,19 @@
 'use client'
 
 import { useMemo } from 'react'
-import { Control, Controller, FieldValues } from 'react-hook-form'
+import { Control, Controller } from 'react-hook-form'
+import { Barlow } from 'next/font/google'
 import { PasswordInput, PasswordInputProps } from '@mantine/core'
 import clsx from 'clsx'
 import { Omit } from 'lodash'
 
 import classes from './controls.module.css'
+
+const barlow = Barlow({
+  subsets: ['latin-ext'],
+  weight: ['400'],
+  style: ['normal']
+})
 
 type TMantinePasswordInputProps = Omit<
   PasswordInputProps,
@@ -15,7 +22,8 @@ type TMantinePasswordInputProps = Omit<
 
 export interface IPasswordInputFieldProps extends TMantinePasswordInputProps {
   error?: string
-  control?: Control<FieldValues>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  control?: Control<any>
   isDefaultVisible?: boolean
   isVisible?: boolean
   isDisabled?: boolean
@@ -78,8 +86,8 @@ export default function PasswordInputField({
     label: clsx('uppercase mb-1', classes.textLabel),
     required: classes.textRequired,
     description: clsx(' mb-2', classes.textDescription),
-    error: classes.textError,
-    input: clsx('p-4 bg-transparent', classes.textInput),
+    error: clsx('text-sm', classes.textError),
+    input: clsx('p-4 bg-transparent', classes.textInput, barlow.className),
     visibilityToggle: classes.passwordVisibilityToggle
   }
 

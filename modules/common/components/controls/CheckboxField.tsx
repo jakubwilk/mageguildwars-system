@@ -1,7 +1,7 @@
 'use client'
 
 import { useMemo } from 'react'
-import { Control, Controller, FieldValues } from 'react-hook-form'
+import { Control, Controller } from 'react-hook-form'
 import { Checkbox, CheckboxProps } from '@mantine/core'
 import clsx from 'clsx'
 import { Omit } from 'lodash'
@@ -11,7 +11,8 @@ import classes from './controls.module.css'
 type TMantineCheckboxProps = Omit<CheckboxProps, 'checked' | 'autoContrast' | 'indeterminate'>
 
 interface ICheckboxFieldProps extends TMantineCheckboxProps {
-  control?: Control<FieldValues>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  control?: Control<any>
   isChecked?: boolean
   hasAutoContrast?: boolean
   hasIndeterminate?: boolean
