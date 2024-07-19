@@ -14,6 +14,7 @@ export interface IButtonProps extends TMantineButtonProps {
   isFullWidth?: boolean
   isLoading?: boolean
   isPrimary?: boolean
+  isSubmit?: boolean
   handleClick?: (event: MouseEvent<HTMLButtonElement>) => void
 }
 
@@ -27,6 +28,7 @@ export default function Button({
   isFullWidth,
   isLoading,
   isPrimary = true,
+  isSubmit = false,
   handleClick,
   ...rest
 }: IButtonProps) {
@@ -43,6 +45,7 @@ export default function Button({
       onClick={handleClick}
       radius={radius}
       size={size}
+      type={isSubmit ? 'submit' : 'button'}
       variant={variant}
       {...rest}
     >
