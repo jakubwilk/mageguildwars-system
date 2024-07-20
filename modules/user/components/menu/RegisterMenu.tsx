@@ -2,6 +2,7 @@
 
 import { Barlow } from 'next/font/google'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Avatar, Divider, Text } from '@mantine/core'
 import { IconDoorExit, IconPlus } from '@tabler/icons-react'
 import clsx from 'clsx'
@@ -17,11 +18,18 @@ const barlow = Barlow({
 })
 
 export default function RegisterMenu() {
+  const pathname = usePathname()
+
   return (
     <nav className={'flex flex-col'}>
       {USER_MAIN_MENU.map(({ id, label, title, href, IconComponent }) => (
         <Link
-          className={clsx('flex items-center gap-2 p-4 uppercase', classes.menuUserLink, barlow.className)}
+          className={clsx(
+            'flex items-center gap-2 p-4 uppercase',
+            classes.menuUserLink,
+            barlow.className,
+            pathname.includes(href) ? classes.menuUserLinkActive : ''
+          )}
           href={href}
           key={id}
           title={title}

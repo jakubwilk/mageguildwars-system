@@ -52,6 +52,11 @@
   }
 }
 
+.menuUserLinkActive {
+  background-color: var(--mgw-color-primary-main);
+  color: var(--mantine-color-white);
+}
+
 .menuUserLinkLogout {
   color: var(--mantine-color-gray-1);
   background-color: var(--mantine-color-red-6);
