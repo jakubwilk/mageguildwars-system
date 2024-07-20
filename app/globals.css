@@ -24,6 +24,18 @@
   color: var(--mantine-color-white);
 }
 
+::-webkit-scrollbar {
+  width: 10px
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--mgw-color-primary-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--mgw-color-primary-main);
+}
+
 html {
   height: 100%;
 }
