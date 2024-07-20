@@ -19,7 +19,7 @@ const barlow = Barlow({
 export default function RegisterMenu() {
   return (
     <nav className={'flex flex-col'}>
-      {USER_MAIN_MENU.map(({ id, label, title, href, IconComponent, isDisabled, isGameMaster, isModeratorOrAdmin }) => (
+      {USER_MAIN_MENU.map(({ id, label, title, href, IconComponent }) => (
         <Link
           className={clsx('flex items-center gap-2 p-4 uppercase', classes.menuUserLink, barlow.className)}
           href={href}
