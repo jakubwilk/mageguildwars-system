@@ -21,6 +21,7 @@
       "config/*": ["./config/*"],
       "auth/*": ["./modules/auth/*"],
       "common/*": ["./modules/common/*"],
+      "admin/*": ["./modules/admin/*"],
       "user/*": ["./modules/user/*"]
     }
   },
