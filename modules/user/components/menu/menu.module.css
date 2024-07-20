@@ -1,3 +1,7 @@
+.menuDrawerTitle {
+  color: var(--mantine-color-gray-6);
+}
+
 .menuAccountButton {
   background-color: transparent;
   border-radius: 0;
@@ -39,7 +43,6 @@
 }
 
 .menuUserLink {
-  font-weight: var(--mgw-font-weight-bold);
   color: var(--mantine-color-gray-6);
 
   &:hover,
@@ -47,4 +50,59 @@
     background-color: var(--mgw-color-primary-main);
     color: var(--mantine-color-white);
   }
+}
+
+.menuUserLinkLogout {
+  color: var(--mantine-color-gray-1);
+  background-color: var(--mantine-color-red-6);
+
+  &:hover,
+  &:focus {
+    background-color: var(--mantine-color-red-8);
+    color: var(--mantine-color-white);
+  }
+}
+
+.menuUserLinkSubText {
+  font-weight: var(--mgw-font-weight-regular);
+}
+
+.menuUserLinkSubTextFairyTail {
+  color: var(--mantine-color-orange-5)
+}
+
+.menuUserLinkSubTextLamiaScale {
+  color: var(--mantine-color-lime-5)
+}
+
+.menuUserLinkSubTextSabertooth {
+  color: var(--mantine-color-yellow-5)
+}
+
+.menuUserLinkSubTextGrimoireHeart {
+  color: var(--mantine-color-red-5)
+}
+
+.menuUserLinkSubTextRavenTail {
+  color: var(--mantine-color-blue-5)
+}
+
+.menuUserLinkSubTextPhantomLord {
+  color: var(--mantine-color-violet-5)
+}
+
+.menuUserLinkSubTextPhantomLord {
+  color: var(--mantine-color-violet-5)
+}
+
+.menuUserLinkSubTextOutsider {
+  color: var(--mantine-color-pink-5)
+}
+
+.menuUserLinkSubTextMagicCouncil {
+  color: var(--mantine-color-cyan-5)
+}
+
+.menuUserLinkIcon {
+  font-weight: var(--mgw-font-weighht-light);
 }
