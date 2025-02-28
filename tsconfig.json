@@ -19,7 +19,8 @@
       }
     ],
     "paths": {
-      "config": ["./src/config/index.ts"]
+      "config": ["./src/config/index.ts"],
+      "common/*": ["./src/modules/common/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
