@@ -5,8 +5,8 @@ import { Topbar } from 'common/layout'
 import { theme } from 'config'
 
 import '@mantine/core/styles.layer.css'
-import '@mantine/notifications/styles.layer.css'
-import '@mantine/dates/styles.layer.css'
+import '@mantine/notifications/styles.css'
+import '@mantine/dates/styles.css'
 import './globals.css'
 
 const geistSans = Geist({
@@ -40,7 +40,7 @@ export default function RootLayout({
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <MantineProvider theme={theme} defaultColorScheme={'dark'} forceColorScheme={'dark'}>
-          <Topbar />
+          <Topbar userNavigation={<div>{'user'}</div>} />
           {children}
         </MantineProvider>
       </body>
