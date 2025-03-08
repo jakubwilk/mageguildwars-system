@@ -1,5 +1,6 @@
 .homeButton {
   background-color: transparent;
+  color: var(--mantine-color-gray-4);
 
   &:hover {
     color: var(--mantine-color-blue-6);

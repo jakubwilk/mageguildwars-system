@@ -1,15 +1,24 @@
+'use client'
+
+import { ReactNode } from 'react'
 import Link from 'next/link'
 import { Button, Text } from '@mantine/core'
 import { IconHome } from '@tabler/icons-react'
 import { clsx } from 'common/utils'
 
+import { MenuWrapper } from './menu'
+
 import classes from './layout.module.css'
 
-export default function Topbar() {
+interface IProps {
+  userNavigation: ReactNode
+}
+
+export default function Topbar({ userNavigation }: IProps) {
   return (
-    <header className={'fixed bottom-0 left-0 z-50 w-full lg:top-0'}>
+    <header className={'fixed bottom-0 left-0 z-50 w-full lg:sticky lg:top-0'}>
       <div className={'bg-zinc-900 p-4 flex items-center justify-around gap-4 lg:justify-between'}>
-        <div>{'menu'}</div>
+        <MenuWrapper />
         <Button
           component={Link}
           href={'/'}
@@ -18,9 +27,9 @@ export default function Topbar() {
           classNames={{ label: 'flex flex-col gap-2' }}
         >
           <IconHome size={36} stroke={1.5} />
-          <Text className={'uppercase text-xs'}>{'Strona Główna'}</Text>
+          <Text className={'hidden uppercase text-xs md:block'}>{'Strona Główna'}</Text>
         </Button>
-        <div>{'user'}</div>
+        {userNavigation}
       </div>
     </header>
   )
