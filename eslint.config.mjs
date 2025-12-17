@@ -1,46 +1,49 @@
-import { dirname } from 'path'
-import { fileURLToPath } from 'url'
-import { FlatCompat } from '@eslint/eslintrc'
-import prettier from 'eslint-plugin-prettier'
-import simpleImportSort from 'eslint-plugin-simple-import-sort'
+import { defineConfig, globalIgnores } from 'eslint/config'
+import nextVitals from 'eslint-config-next/core-web-vitals'
+import nextTs from 'eslint-config-next/typescript'
+import prettierConfig from 'eslint-config-prettier'
+import prettierPlugin from 'eslint-plugin-prettier'
+import reactPlugin from 'eslint-plugin-react'
+import reactHooksPlugin from 'eslint-plugin-react-hooks'
+import reactRefreshPlugin from 'eslint-plugin-react-refresh'
+import simpleImportSortPlugin from 'eslint-plugin-simple-import-sort'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-})
-
-const eslintConfig = [
-  ...compat.extends('next/core-web-vitals', 'next/typescript'),
+const eslintConfig = defineConfig([
+  ...nextVitals,
+  ...nextTs,
+  // Override default ignores of eslint-config-next.
+  globalIgnores([
+    // Default ignores of eslint-config-next:
+    '.next/**',
+    'out/**',
+    'build/**',
+    'next-env.d.ts',
+  ]),
   {
-    files: ['**/*.ts', '**/*.tsx'],
     plugins: {
-      prettier,
-      'simple-import-sort': simpleImportSort,
+      prettier: prettierPlugin,
+      react: reactPlugin,
+      'react-hooks': reactHooksPlugin,
+      'react-refresh': reactRefreshPlugin,
+      'simple-import-sort': simpleImportSortPlugin,
     },
     rules: {
-      strict: ['error', 'global'],
+      ...prettierConfig.rules,
       'prettier/prettier': 'error',
-      'react/jsx-curly-brace-presence': [2, 'always'],
+      'react/react-in-jsx-scope': 'off',
+      'react/prop-types': 'off',
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
-      'simple-import-sort/imports': [
-        'error',
-        {
-          groups: [
-            // Config from https://dev.to/julioxavierr/sorting-your-imports-with-eslint-3ped
-            ['^react', '^next', '^@?\\w'],
-            ['^(@|components)(/.*|$)'],
-            ['^\\u0000'],
-            ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
-            ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
-            ['^.+\\.?(css)$'],
-          ],
-        },
-      ],
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+      'simple-import-sort/imports': 'error',
+      'simple-import-sort/exports': 'error',
+    },
+    settings: {
+      react: {
+        version: 'detect',
+      },
     },
   },
-]
+])
 
 export default eslintConfig

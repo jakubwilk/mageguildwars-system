@@ -1,7 +1,0 @@
-.headerMenuItem {
-  background-color: var(--mantine-color-gray-9);
-
-  &:hover {
-    transform: scale(1.15);
-  }
-}
